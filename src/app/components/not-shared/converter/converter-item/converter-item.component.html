@@ -1,8 +1,8 @@
 <div class="grid grid-cols-12 w-full justify-end items-center gap-3">
     <div class="flex items-center justify-start col-span-1 md:col-span-3">
         @if (currencyItem()?.shortedName !== 'IRT') {
-            <a class="duration-300 ease-in w-full leading-5 hidden md:block text-dark dark:text-white rtl text-xs rounded-md py-1.5 text-center px-4 hover:bg-light-text3 hover:dark:bg-dark-border2" [routerLink]="['/', currencyItem()?.slugText]">قیمت {{ currencyItem()?.title }}</a>
-            <a class="duration-300 ease-in block md:hidden text-dark dark:text-white rtl text-lg px-2 rounded-md text-center hover:bg-light-text3 hover:dark:bg-dark-border2" [routerLink]="['/', currencyItem()?.slugText]"><i class="bi bi-three-dots-vertical"></i></a>
+            <a class="duration-300 ease-in w-full leading-5 hidden md:block text-dark dark:text-white rtl text-xs rounded-md py-1.5 text-center px-4 hover:bg-light-text3 hover:dark:bg-dark-border2" [routerLink]="['/', groupName()!, currencyItem()?.slugText]">قیمت {{ currencyItem()?.title }}</a>
+            <a class="duration-300 ease-in block md:hidden text-dark dark:text-white rtl text-lg px-2 rounded-md text-center hover:bg-light-text3 hover:dark:bg-dark-border2" [routerLink]="['/', groupName()!, currencyItem()?.slugText]"><i class="bi bi-three-dots-vertical"></i></a>
         }
     </div>
 

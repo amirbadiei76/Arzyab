@@ -16,6 +16,6 @@ export class SearchItemComponent {
   }
 
   onSelectItem() {
-    this.itemSelected.emit(this.item!.slugText)
+    this.itemSelected.emit(`${this.item!.groupName.toLowerCase() + '/' + this.item!.slugText}`)
   }
 }

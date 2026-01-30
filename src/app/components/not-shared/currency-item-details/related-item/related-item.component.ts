@@ -16,7 +16,7 @@ export class RelatedItemComponent {
   constructor (private router: Router) {}
 
   selectItem () {
-    this.router.navigate(['/', this.item?.slugText])
+    this.router.navigate(['/', this.item?.groupName.toLowerCase(), this.item?.slugText])
     window.scrollTo(0, 0)
   }
 }

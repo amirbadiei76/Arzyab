@@ -1,4 +1,4 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, computed, input, signal } from '@angular/core';
 import { CurrencyItem } from '../../../../interfaces/data.types';
 import { RouterLink } from '@angular/router';
 
@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
 })
 export class ConverterItemComponent {
   currencyItem = input<CurrencyItem>();
+  groupName = computed(() => this.currencyItem()?.groupName.toLowerCase())
 
   constructor () {
 

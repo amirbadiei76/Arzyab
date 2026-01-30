@@ -52,7 +52,7 @@ export class CurrencyItemComponent {
 
   onSelectItem() {
     this.itemSelected.emit(this.currencyItem!.id)
-    this.router.navigate([`/${this.currencyItem!.slugText}`])
+    this.router.navigate([`/${this.currencyItem!.groupName.toLowerCase()}/${this.currencyItem!.slugText}`])
     window.scrollTo(0, 0)
   }
 
