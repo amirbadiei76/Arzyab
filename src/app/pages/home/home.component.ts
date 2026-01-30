@@ -8,7 +8,6 @@ import { Meta, Title } from '@angular/platform-browser';
 import { combineLatest, fromEvent, Observable, of, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, switchMap, takeUntil } from 'rxjs/operators'
 import { RequestArrayService } from '../../services/request-array.service';
-import { EmptyItemComponent } from '../../components/not-shared/home/empty-item/empty-item.component';
 import { HomeStateService } from '../../services/home-state.service';
 import { NotificationService } from '../../services/notification.service';
 
@@ -137,7 +136,6 @@ export class HomeComponent {
   private currentCategory$ = toObservable(this.currentCategory);
   private currentSubCategory$ = toObservable(this.currentSubCategory);
   private textToFilter$ = toObservable(this.textToFilter);
-  private itemToRemove$ = toObservable(this.itemToRemove)
 
   lastCategory: WritableSignal<string> = signal(this.categories[0].title);
   categoryScrollValue: WritableSignal<number> = signal(0);
@@ -349,10 +347,10 @@ export class HomeComponent {
   setCurrentCategory (title: string = currency_title, subCategory: string = filter_overview, element: HTMLDivElement | undefined = undefined) {
     this.currentCategory.set(title)
     this.lastHomeState.setCategory(title)
+    
     if (element) {
       this.moveCategoryHighlight(element);
     }
-
 
     switch(title) {
       case favories_title:
@@ -574,8 +572,11 @@ export class HomeComponent {
   }
 
   ngAfterViewInit () {
-    if (typeof window !== 'undefined') {
+    if (typeof document !== 'undefined') {
       this.syncHighlightAfterScroll()
+    }
+    
+    if (typeof window !== 'undefined') {
       
       fromEvent(window, 'click')
       .pipe(
