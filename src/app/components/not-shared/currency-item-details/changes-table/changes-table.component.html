@@ -16,7 +16,7 @@
                     @if (currentItem()?.faGroupName === 'بازارهای ارزی') {
                         <td class="table-item-base {{(currentItem()?.rialChangeState === 'low') ? 'text-light-red-text dark:text-dark-red-text' : 'text-light-green-text dark:text-dark-green-text'}}">{{(currentItem()?.rialChangeState === 'low') ? '-' : '+'}}{{currentItem()?.lastPriceInfo?.dp}}%</td>
                         <td class="table-item-base dark:text-light-text4 text-dark-text4">{{currentItem()?.lastPriceInfo?.p}}</td>
-                    }
+                    } 
                     @else {
                         @if (currentUnit() === 0) {
                             <td class="table-item-base {{(currentItem()?.rialChangeState === 'low') ? 'text-light-red-text dark:text-dark-red-text' : 'text-light-green-text dark:text-dark-green-text'}}">{{(currentItem()?.rialChangeState === 'low') ? '-' : '+'}}{{currentItem()?.rialChanges}}%</td>
