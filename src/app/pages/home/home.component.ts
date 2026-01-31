@@ -254,7 +254,7 @@ export class HomeComponent {
   constructor(private title: Title, private meta: Meta) {
     this.setCurrentCategory(this.lastHomeState.currentCategory, this.lastHomeState.currentSubCategory);
 
-    if (typeof window !== 'undefined') { 
+    if (typeof window !== 'undefined') {
       this.syncHighlightAfterScroll()
 
       window.onbeforeunload = () => {
@@ -538,6 +538,7 @@ export class HomeComponent {
     });
 
     if (typeof window !== 'undefined') {
+      this.syncHighlightAfterScroll()
 
       fromEvent(window, 'resize')
       .pipe(
@@ -572,11 +573,9 @@ export class HomeComponent {
   }
 
   ngAfterViewInit () {
-    if (typeof document !== 'undefined') {
-      this.syncHighlightAfterScroll()
-    }
     
     if (typeof window !== 'undefined') {
+      this.syncHighlightAfterScroll()
       
       fromEvent(window, 'click')
       .pipe(
