@@ -31,8 +31,8 @@
                 </tr>
                 @for (range of ranges(); track range.days) {
                     <tr class="w-full flex flex-1 border-b py-1 border-b-light-border2 dark:border-b-dark-border2">
-                        <td class="table-item-base {{(range?.direction === 'low') ? 'text-light-red-text dark:text-dark-red-text' : 'text-light-green-text dark:text-dark-green-text'}}">{{ (range?.direction === 'low') ? '-' : '+' }}{{ range.percent }}%</td>
-                        <td class="table-item-base dark:text-light-text4 text-dark-text4">{{ range.avg }}</td>
+                        <td class="table-item-base {{(range?.direction === 'low') ? 'text-light-red-text dark:text-dark-red-text' : 'text-light-green-text dark:text-dark-green-text'}}">{{ (range?.direction === 'low') ? '-' : '+' }}{{ range.percent ? range.percent : '0' }}%</td>
+                        <td class="table-item-base dark:text-light-text4 text-dark-text4">{{ range.avg ? range.avg : '-' }}</td>
                         <td class="table-item-base dark:text-white text-dark rtl">{{ range.days }} روز</td>
                     </tr>
                 }

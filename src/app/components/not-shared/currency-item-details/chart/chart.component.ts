@@ -222,6 +222,7 @@ export class ChartComponent {
 
   applyPreset(data: RawData[], state: ChartState): RawData[] {
     const ranged = this.filterByRange(data, state.range);
+    if (!ranged) return []
     return this.aggregateCandles(ranged, state.interval);
   }
 
@@ -246,7 +247,6 @@ export class ChartComponent {
   parseData(rawData: RawData[]): { candles: CandleData[], volumes: VolumeData[], lineVolumes: VolumeData[] } {
     const sortedData = rawData?.sort((a, b) => new Date(a.ts).getTime() - new Date(b.ts).getTime());
     const groupedData = this.applyPreset(sortedData, this.state())
-
 
     const uniqueMap = new Map();
     groupedData?.forEach(item => {
@@ -595,6 +595,7 @@ export class ChartComponent {
         const lastPrice = this.candlestickSeries?.data().at(dataLength! - 1) as CandleData;
         const lastVolume = this.volumeSeries?.data().at(dataLength! - 1) as VolumeData;
 
+        if (dataLength === 0) return;
         this.currentPrice.set(this.formatPrice(lastPrice.close));
         const change = ((lastPrice.close - lastPrice.open) / lastPrice.open) * 100;
         this.priceChange.set(`(${change >= 0 ? '+' : ''}${change.toFixed(2)})%`);
