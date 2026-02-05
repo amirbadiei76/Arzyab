@@ -310,7 +310,7 @@ export class CurrencyItemDetailsComponent {
     if (!navigator.share) {
       navigator.clipboard.writeText(this.pageTitle.getTitle() + '\n' + url);
       this.notificationService.show('آدرس صفحه در کلیپ بورد ذخیره شد')
-      return;
+      return; 
     }
 
     navigator.share({ title: this.pageTitle.getTitle(), url: url })
