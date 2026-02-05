@@ -308,12 +308,12 @@ export class CurrencyItemDetailsComponent {
     const url = window.location.href;
 
     if (!navigator.share) {
-      navigator.clipboard.writeText(document.title + '\n' + url);
+      navigator.clipboard.writeText(this.pageTitle.getTitle() + '\n' + url);
       this.notificationService.show('آدرس صفحه در کلیپ بورد ذخیره شد')
       return;
     }
 
-    navigator.share({ title: document.title, url: url })
+    navigator.share({ title: this.pageTitle.getTitle(), url: url })
       .catch(() => console.warn("Share dialog dismissed"));
   }
 
