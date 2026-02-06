@@ -313,7 +313,7 @@ export class CurrencyItemDetailsComponent {
       return; 
     }
 
-    navigator.share({ title: this.pageTitle.getTitle(), url: url })
+    navigator.share({ title: this.pageTitle.getTitle(), text: this.pageTitle.getTitle() + '\n' + url })
       .catch(() => console.warn("Share dialog dismissed"));
   }
 
