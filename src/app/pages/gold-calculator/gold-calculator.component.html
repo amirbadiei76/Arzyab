@@ -140,6 +140,7 @@
                                     (input)="onWageInputChange($event)"
                                     type="text"
                                     commafyNumber
+                                    [allowDecimal]="true"
                                     class="input-base rtl"
                                 >
                             }
@@ -171,6 +172,7 @@
                                 (input)="onTaxInputChange($event)"
                                 type="text"
                                 commafyNumber
+                                [allowDecimal]="true"
                                 class="input-base rtl"
                             >
                         }
@@ -201,6 +203,7 @@
                                 (input)="onProfitInputChange($event)"
                                 type="text"
                                 commafyNumber
+                                [allowDecimal]="true"
                                 class="input-base rtl"
                             >
                         }
@@ -260,7 +263,7 @@
                                 commafyNumber
                                 (input)="onWeightInputChange($event)"
                                 type="text"
-                                commafyNumber class="input-base rtl"
+                                class="input-base rtl"
                             >
                         }
                     </div>
@@ -343,9 +346,6 @@
                     <app-converter-item class="w-full z-[1] {{ $index != 2 ? 'mb-1' : 'mb-0' }}" [currencyItem]="item" />
                 }
             }
-            <!-- <app-converter-item-skeleton class="w-full mb-1 z-[4] {{ gram18Value() ? 'hidden' : 'block' }}" /> -->
-            <!-- <app-converter-item-skeleton class="w-full mb-1 z-[4] {{ gram18Value() ? 'hidden' : 'block' }}" /> -->
-            <!-- <app-converter-item-skeleton class="w-full z-[4] {{ gram18Value() ? 'hidden' : 'block' }}" /> -->
         </div>
             
     </div>

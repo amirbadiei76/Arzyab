@@ -1,4 +1,4 @@
-import { DestroyRef, Directive, ElementRef, HostListener, inject } from '@angular/core';
+import { DestroyRef, Directive, ElementRef, HostListener, inject, Input } from '@angular/core';
 import { fromEvent } from 'rxjs';
 
 @Directive({
@@ -6,8 +6,11 @@ import { fromEvent } from 'rxjs';
   standalone: true,
 })
 export class CommafyNumberDirective {
-  private el = inject(ElementRef<HTMLInputElement>);
+  @Input() allowDecimal = false;
+
   private isComposing = false;
+
+  constructor(private el: ElementRef<HTMLInputElement>) {}
 
   @HostListener('compositionstart')
   onCompositionStart() {
@@ -29,18 +32,38 @@ export class CommafyNumberDirective {
   private format() {
     const input = this.el.nativeElement;
     const cursor = input.selectionStart ?? 0;
+    const original = input.value;
 
-    const normalized = this.normalizeDigits(input.value);
-    const raw = normalized.replace(/\D+/g, '');
+    let value = this.normalizeDigits(original);
 
-    if (!raw) {
-      input.value = '';
-      return;
+    if (this.allowDecimal) {
+      value = value.replace(/[^0-9.]/g, '');
+    } else {
+      value = value.replace(/\D+/g, '');
     }
 
-    const formatted = raw.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    let integerPart = value;
+    let decimalPart: string | undefined;
 
-    const diff = formatted.length - input.value.length;
+    if (this.allowDecimal) {
+      const parts = value.split('.');
+
+      if (parts.length > 1) {
+        integerPart = parts[0];
+        decimalPart = parts.slice(1).join('');
+      }
+    }
+
+    const formattedInt = integerPart
+      ? integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      : '';
+
+    const formatted =
+      this.allowDecimal && decimalPart !== undefined
+        ? `${formattedInt}.${decimalPart}`
+        : formattedInt;
+
+    const diff = formatted.length - original.length;
 
     input.value = formatted;
     input.setSelectionRange(cursor + diff, cursor + diff);
@@ -60,5 +83,4 @@ export class CommafyNumberDirective {
       return d;
     });
   }
-
 }
