@@ -203,7 +203,7 @@
                                 (input)="onProfitInputChange($event)"
                                 type="text"
                                 commafyNumber
-                                [allowDecimal]="true"
+                                [allowDecimal]="profitType() !== 0"
                                 class="input-base rtl"
                             >
                         }
