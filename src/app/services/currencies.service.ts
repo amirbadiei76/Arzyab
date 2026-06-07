@@ -14,7 +14,7 @@ export class CurrenciesService {
   }
 
   getAllCurrencies () {
-    const url = "https://call1.tgju.org/ajax.json";
+    const url = "https://call2.tgju.org/ajax.json";
     return this.http.get<Currencies>(url).pipe(retry({ count: Infinity }))
   }
 
