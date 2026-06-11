@@ -40,6 +40,8 @@ export class ConverterComponent {
   toTextToFilter = signal('');
   toTextToFilter$ = toObservable(this.toTextToFilter)
 
+  isSwaped = signal(false);
+
   irItem: CurrencyItem = {
     title: 'تومان ایران',
     shortedName: 'IRT',
@@ -101,8 +103,8 @@ export class ConverterComponent {
       this.mainCurrencyListWithIR$
     ]).pipe(
       map(([list1, list2]) => ({
-        first: list1,
-        second: list2
+        first: this.isSwaped() ? list2 : list1,
+        second: this.isSwaped() ? list1 : list2
       }))
     ),
 
@@ -111,8 +113,8 @@ export class ConverterComponent {
       this.requestArray.cryptoList
     ]).pipe(
       map(([list1, list2]) => ({
-        first: list1,
-        second: list2
+        first: this.isSwaped() ? list2 : list1,
+        second: this.isSwaped() ? list1 : list2
       }))
     ),
 
@@ -121,8 +123,8 @@ export class ConverterComponent {
       this.requestArray.cryptoList
     ]).pipe(
       map(([mainList, cryptoList]) => ({
-        first: cryptoList,
-        second: mainList
+        first: this.isSwaped() ? mainList : cryptoList,
+        second: this.isSwaped() ? cryptoList : mainList
       }))
     )
   };
@@ -238,8 +240,14 @@ export class ConverterComponent {
       const from = first?.[1];
       const to = second?.[this.currencyType() === 2 ? 1 : 0];
 
-      this.fromItemSubject.next(from);
-      this.toItemSubject.next(to);
+        if (this.isSwaped()) {
+          this.fromItemSubject.next(to);
+          this.toItemSubject.next(from);
+        }
+        else {
+          this.fromItemSubject.next(from);
+          this.toItemSubject.next(to);
+        }
     })
   );
   
@@ -342,13 +350,15 @@ export class ConverterComponent {
     this.toDropdownOpen.update((opened) => !opened)
   }
 
-  swipeCurrencies () {
+  swapCurrencies () {
     combineLatest([this.fromItem$, this.toItem$])
     .pipe(take(1))
     .subscribe(([from, to]) => {
       this.fromItemSubject.next(to);
       this.toItemSubject.next(from);
     });
+
+    this.isSwaped.set(!this.isSwaped())
   }
 
   onSelectFromItem (slug: string) {

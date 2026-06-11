@@ -98,7 +98,6 @@ export class RequestArrayService {
 
             if (msg.type === 'update') {
                 const data: Currencies = msg.payload;
-                console.log(data)
                 this.mainDataSubject?.next(data);
                 this.setupAllCurrentData(data.current)
             }

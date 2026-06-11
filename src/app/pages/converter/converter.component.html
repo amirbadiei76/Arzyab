@@ -88,7 +88,7 @@
               </div>
 
               <div class="relative h-full py-2">
-                <button [disabled]="currencyType() == 2" (click)="swipeCurrencies()" class="px-2 h-full py-1 {{ currencyType() == 2 ? 'opacity-30' : 'opacity-100' }} disabled:pointer-events-none not-disabled:hover:cursor-pointer md:rotate-0 rotate-90 not-disabled:hover:bg-light-text3 not-disabled:hover:dark:bg-dark-border2 rounded-md text-dark-text3 dark:text-light-text3">
+                <button [disabled]="currencyType() == 2" (click)="swapCurrencies()" class="px-2 h-full py-1 {{ currencyType() == 2 ? 'opacity-30' : 'opacity-100' }} disabled:pointer-events-none not-disabled:hover:cursor-pointer md:rotate-0 rotate-90 not-disabled:hover:bg-light-text3 not-disabled:hover:dark:bg-dark-border2 rounded-md text-dark-text3 dark:text-light-text3">
                   <i class="bi bi-arrow-left-right"></i>
                 </button>
 
