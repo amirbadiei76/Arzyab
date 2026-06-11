@@ -313,8 +313,8 @@ export class HomeComponent {
     const highlight = this.categoryHighlightLine.nativeElement;
     const container = this.scrollViewCategory.nativeElement;
 
-    if (highlight.classList.contains('sm:-translate-x-23')) highlight.classList.remove('sm:-translate-x-23')
-    if (highlight.classList.contains('-translate-x-20.25')) highlight.classList.remove('-translate-x-20.25')
+    if (highlight.classList.contains('sm:translate-x-[-95.8188px]')) highlight.classList.remove('sm:translate-x-[-95.8188px]')
+    if (highlight.classList.contains('translate-x-[-81.05px]')) highlight.classList.remove('translate-x-[-81.05px]')
 
     const elRect = element.getBoundingClientRect();
     const containerRect = container.getBoundingClientRect();
