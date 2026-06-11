@@ -16,7 +16,7 @@
             <button (click)="changeCurrentType(0)" class="related-type-button {{ currentType() === 0 ? 'border text-sorting-green-light dark:text-sorting-green-dark border-green-btn bg-white dark:bg-dark-border2' : 'dark:text-white text-light-text2' }}">پر سودها</button>
         </div>
     </div>
-    <div class="flex flex-col gap-4 w-full">
+    <div class="flex flex-col gap-2.5 w-full">
         @if (currentList()) {
             @for (item of currentList(); track item.id) {
                 <app-related-item class="w-full" [item]="item" [index]="$index" [currentUnit]="currentSupportCurrencyId()" />

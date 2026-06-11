@@ -1,4 +1,18 @@
-<div (click)="onSelectItem()" class="flex items-center justify-end gap-2 hover:cursor-pointer">
-    <p class="text-sm text-dark-text text-right dark:text-light-text">{{item?.title}}</p>
-    <img draggable="false" loading="lazy" decoding="auto" class="rounded-full object-cover w-8 h-8" src={{item?.img}} alt={{item?.title}}>
-</div>
+@if (isSearch) {
+    <a
+        [routerLink]="['/', item!.groupName.toLowerCase(), item!.slugText]"
+        (click)="onSelectItem()"
+        class="block"
+    >
+        <article class="flex items-center justify-end gap-2 hover:cursor-pointer">
+            <p class="text-sm text-dark-text text-right dark:text-light-text">{{item?.title}}</p>
+            <img draggable="false" loading="lazy" decoding="auto" class="rounded-full object-cover w-8 h-8" src={{item?.img}} alt={{item?.title}}>
+        </article>
+    </a>
+}
+@else {
+    <article (click)="onSelectItem()" class="flex items-center justify-end gap-2 hover:cursor-pointer">
+        <p class="text-sm text-dark-text text-right dark:text-light-text">{{item?.title}}</p>
+        <img draggable="false" loading="lazy" decoding="auto" class="rounded-full object-cover w-8 h-8" src={{item?.img}} alt={{item?.title}}>
+    </article>
+}

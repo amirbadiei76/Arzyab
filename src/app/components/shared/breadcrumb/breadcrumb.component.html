@@ -10,12 +10,12 @@
                 <ng-container *ngIf="!last && item.link; else currentPage">
                     <a
                         [routerLink]="item.link"
-                        class="text-dark-text4 dark:text-light-text4 transition-colors duration-300"
+                        class="text-dark-text4 dark:text-light-text4 smooth-transition transition-colors"
                     >{{ item.title }}</a>
                 </ng-container>
         
                 <ng-template #currentPage>
-                    <span class="text-dark-text dark:text-white transition-colors duration-300">{{ item.title }}</span>
+                    <span class="text-dark-text dark:text-white smooth-transition transition-colors">{{ item.title }}</span>
                 </ng-template>
             </li>
         </ol>
@@ -27,7 +27,7 @@
         >
             <span class="skeleton-base z-0 h-fit leading-5">item title title</span>
             <span class="mx-2 text-dark-text4 dark:text-light-text4">&lt;</span>
-            <span class="text-dark-text4 dark:text-light-text4 transition-colors duration-300">صفحه اصلی</span>
+            <span class="text-dark-text4 dark:text-light-text4 smooth-transition transition-colors">صفحه اصلی</span>
         </li>
     </ol>
 </nav>

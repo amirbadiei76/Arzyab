@@ -215,6 +215,10 @@ html[data-mode="system"] .theme-icon-system { display: block !important; }
     @apply text-dark-text dark:text-light-text text-2xl hover:cursor-pointer hover:text-green-btn dark:hover:text-popup-border-green-light duration-300 ease-in-out
 }
 
+@utility smooth-transition {
+    @apply transition-all duration-300 ease-in-out
+}
+
 @utility dropdown-button-base {
     @apply w-full flex justify-between items-center
     px-5 py-3.5 rounded-lg border not-focus:border-dark-text2 not-focus:dark:border-light-text2 outline-0

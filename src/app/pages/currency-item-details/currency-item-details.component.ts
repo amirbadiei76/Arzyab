@@ -290,7 +290,7 @@ export class CurrencyItemDetailsComponent {
   onItemSelect(slug: string) {
     this.inputBlur()
     this.textToFilter.set('')
-    this.router.navigate([`/${slug}`])
+    // this.router.navigate([`/${slug}`])
     window.scrollTo(0, 0)
   }
 

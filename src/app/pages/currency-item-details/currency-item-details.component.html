@@ -6,7 +6,7 @@
                 <app-breadcrumb [items]="breadCrumbItems" />
             }
             <div class="w-full flex justify-between items-center gap-2">
-                <button (click)="sharePage()" class="flex justify-center items-center text-xs md:text-sm transition text-dark-text dark:text-light-text duration-300 ease-out gap-2 h-12 hover:cursor-pointer rounded-semi px-2 border-transparent bg-light-border2 dark:bg-dark-border border hover:border-light-text2 hover:dark:border-dark-text2">
+                <button (click)="sharePage()" class="flex justify-center items-center text-xs md:text-sm transition text-dark-text dark:text-light-text smooth-transition ease-out gap-2 h-12 hover:cursor-pointer rounded-semi px-2 border-transparent bg-light-border2 dark:bg-dark-border border hover:border-light-text2 hover:dark:border-dark-text2">
                     <i class="bi bi-share-fill"></i>
                     اشتراک
                 </button>
@@ -22,7 +22,7 @@
                             [value]="textToFilter()"
                             (focus)="inputFocus()"
                             (input)="filterList($event)"
-                            class="rtl transition duration-300 ease-out pl-[2.5rem] peer pr-[2.7rem] rounded-semi outline-none border-transparent bg-light-border2 dark:bg-dark-border border focus:border-green-btn hover:not-focus:border-light-text2 hover:not-focus:dark:border-dark-text2 h-full text-dark-text dark:text-light-text w-full text-right select-none"
+                            class="rtl transition smooth-transition ease-out pl-[2.5rem] peer pr-[2.7rem] rounded-semi outline-none border-transparent bg-light-border2 dark:bg-dark-border border focus:border-green-btn hover:not-focus:border-light-text2 hover:not-focus:dark:border-dark-text2 h-full text-dark-text dark:text-light-text w-full text-right select-none"
                             autocomplete="off"
                             autocorrect="off"
                             autocapitalize="off"
@@ -81,11 +81,11 @@
 
                 <div class="flex p-0 justify-between md:justify-start md:p-2 md:rounded-lg gap-0 md:gap-4 md:border md:border-light-text4 md:dark:border-dark-text4 my-2 w-full md:w-auto">
                     <div (click)="onChartTypeChange(1)" class="flex hover:cursor-pointer justify-center items-center py-2.5 md:py-0 flex-1/2 gap-2 md:gap-0 md:flex-auto md:border-b-0 border-b {{ currentChartType() === 1 ? 'border-b-green-btn text-green-btn' : 'border-b-dark-text4 text-dark-text4' }} ">
-                        <p class="block md:hidden text-sm font-normal duration-300 ease-in-out leading-[180%]">نمودار خطی</p>
+                        <p class="block md:hidden text-sm font-normal smooth-transition ease-in-out transition-all leading-[180%]">نمودار خطی</p>
                         <svg 
                             style="transform: scaleX(-1);"
                             viewBox="0 0 24 24"
-                            class="w-6 h-6 fill-none duration-300 ease-in-out {{ currentChartType() === 1 ? 'text-green-btn' : 'text-dark-text4' }}"
+                            class="w-6 h-6 fill-none smooth-transition ease-in-out {{ currentChartType() === 1 ? 'text-green-btn' : 'text-dark-text4' }}"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M3 9L9.65533 13.7538C9.85422 13.8959 10.1267 13.8733 10.2995 13.7005L13.7005 10.2995C13.8733 10.1267 14.1458 10.1041 14.3447 10.2462L21 15M6 21H18C19.6569 21 21 19.6569 21 18V6C21 4.34315 19.6569 3 18 3H6C4.34315 3 3 4.34315 3 6V18C3 19.6569 4.34315 21 6 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -93,12 +93,12 @@
                     </div>
 
                     <div (click)="onChartTypeChange(0)" class="flex hover:cursor-pointer justify-center items-center py-2.5 md:py-0 flex-1/2 gap-2 md:gap-0 md:flex-auto md:border-b-0 border-b {{ currentChartType() === 0 ? 'border-b-green-btn text-green-btn' : 'border-b-dark-text4 text-dark-text4' }}">
-                        <p class="block md:hidden text-sm duration-300 ease-in-out leading-[180%]">نمودار کندلی</p>
+                        <p class="block md:hidden text-sm smooth-transition ease-in-out leading-[180%]">نمودار کندلی</p>
                         <svg
                             viewBox="0 0 24 24"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
-                            class="w-6 h-6 fill-none duration-300 ease-in-out {{ currentChartType() === 0 ? 'text-green-btn' : 'text-dark-text4' }}"
+                            class="w-6 h-6 fill-none smooth-transition ease-in-out {{ currentChartType() === 0 ? 'text-green-btn' : 'text-dark-text4' }}"
                             >
                             <path d="M16 10V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M12 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

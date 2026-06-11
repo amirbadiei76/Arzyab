@@ -43,7 +43,7 @@
                   >
                     <i [class.rotate-180]="toDropdownOpen()" class="bi bi-chevron-down dropdown-arrow-base"></i>
                       @if (toItem$ | async; as to) {
-                        <app-search-item [item]="to" />
+                        <app-search-item [isSearch]="false" [item]="to" />
                       }
                   </button>
                 }
@@ -64,7 +64,7 @@
                               autocapitalize="off"
                               spellcheck="false"
                               (input)="filterToList($event)"
-                              class="rtl h-full focus:border-green-btn transition duration-300 ease-out pl-[0.8rem] pr-[2.7rem] rounded-semi outline-none bg-transparent border border-light-text2 dark:border-dark-text2 text-light-text2 dark:text-dark-text2 w-full text-right select-none"
+                              class="rtl h-full focus:border-green-btn transition smooth-transition ease-out pl-[0.8rem] pr-[2.7rem] rounded-semi outline-none bg-transparent border border-light-text2 dark:border-dark-text2 text-light-text2 dark:text-dark-text2 w-full text-right select-none"
                               placeholder="جستجو در {{ to.faGroupName }}" 
                             >
                           }
@@ -76,7 +76,7 @@
                             @for (toItem of toList; track toItem.id) {
                               @if (toItem.id !== from.id) {
                                 <li (click)="onSelectToItem(toItem?.slugText!)" class="py-1.5 z-[3] hover:cursor-pointer px-5 hover:bg-light-text3 hover:dark:bg-dark-border2">
-                                  <app-search-item class="z-[3]" [item]="toItem" />
+                                  <app-search-item [isSearch]="false" class="z-[3]" [item]="toItem" />
                                 </li>
                               }
                             }
@@ -93,7 +93,7 @@
                 </button>
 
                 <div class="group top-[-0.1rem] left-0 h-full flex justify-center items-start absolute  {{ currencyType() == 2 ? 'visible' : 'invisible' }} "> 
-                    <span class="z-[2] pointer-events-none group-hover:not-target:opacity-100 opacity-0 duration-300 flex bg-light-border dark:bg-dark-border absolute flex-col top-0 h-12 justify-center items-end w-45 top-speech-bubble">
+                    <span class="z-[2] pointer-events-none group-hover:not-target:opacity-100 opacity-0 smooth-transition flex bg-light-border dark:bg-dark-border absolute flex-col top-0 h-12 justify-center items-end w-45 top-speech-bubble">
                         <p class="rtl text-dark-text dark:text-light-text text-xs md:text-sm leading-4.5 md:leading-5">تبدیل فقط از ارز دیجیتال به ارز پشتیبانی می‌شود</p>
                     </span>
                     <i class="hover:cursor-pointer z-[2] bi bi-info-circle-fill text-2xs md:text-sm text-dark-text2 dark:text-light-text2 relative"></i>
@@ -111,7 +111,7 @@
                   >
                     <i [class.rotate-180]="fromDropdownOpen()" class="bi text-xs bi-chevron-down transition-transform"></i>
                       @if (fromItem$ | async; as from) {
-                        <app-search-item [item]="from" />
+                        <app-search-item [isSearch]="false" [item]="from" />
                       }
                   </button>
                 }
@@ -131,7 +131,7 @@
                             spellcheck="false"
                             type="text"
                             (input)="filterFromList($event)"
-                            class="rtl h-full focus:border-green-btn transition duration-300 ease-out pl-[0.8rem] pr-[2.7rem] rounded-semi outline-none bg-transparent border border-light-text2 dark:border-dark-text2 text-light-text2 dark:text-dark-text2 w-full text-right select-none"
+                            class="rtl h-full focus:border-green-btn transition smooth-transition ease-out pl-[0.8rem] pr-[2.7rem] rounded-semi outline-none bg-transparent border border-light-text2 dark:border-dark-text2 text-light-text2 dark:text-dark-text2 w-full text-right select-none"
                             placeholder="جستجو در {{ from.faGroupName }}"
                           >
                         }
@@ -143,7 +143,7 @@
                             @for (fromItem of fromList; track fromItem.id) {
                               @if (fromItem.id !== to.id) {
                                 <li (click)="onSelectFromItem(fromItem?.slugText!)" class="py-1.5 px-5 hover:cursor-pointer hover:bg-light-text3 hover:dark:bg-dark-border2">
-                                  <app-search-item [item]="fromItem" />
+                                  <app-search-item [isSearch]="false" [item]="fromItem" />
                                 </li>
                               }
                             }

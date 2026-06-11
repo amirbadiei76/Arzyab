@@ -4,13 +4,13 @@ import { CommonModule, NgIf } from '@angular/common';
 import { StarIconComponent } from '../../../shared/star-icon/star-icon.component';
 import { RequestArrayService } from '../../../../services/request-array.service';
 import { toman_unit } from '../../../../constants/Values';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { toObservable } from '@angular/core/rxjs-interop';
 
 
 @Component({
   selector: 'currency-item',
-  imports: [CommonModule, StarIconComponent, RouterModule],
+  imports: [CommonModule, StarIconComponent, RouterModule, RouterLink],
   templateUrl: './currency-item.component.html',
   styleUrl: './currency-item.component.css'
 })
@@ -52,7 +52,7 @@ export class CurrencyItemComponent {
 
   onSelectItem() {
     this.itemSelected.emit(this.currencyItem!.id)
-    this.router.navigate([`/${this.currencyItem!.groupName.toLowerCase()}/${this.currencyItem!.slugText}`])
+    // this.router.navigate([`/${this.currencyItem!.groupName.toLowerCase()}/${this.currencyItem!.slugText}`])
     window.scrollTo(0, 0)
   }
 

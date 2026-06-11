@@ -1,69 +1,79 @@
-<article (click)="onSelectItem()" class="min-h-[4.853rem] px-4 sm:px-0 sm:min-h-[5.8rem] relative w-full flex items-center bg-light2 dark:bg-dark2 border-b border-b-light-border dark:border-b-dark-border md:hover:bg-light-hover md:hover:dark:bg-dark-hover hover:cursor-pointer">
-    <div class="justify-start items-center gap-1.5 w-[20%] hidden md:flex leading-5 font-normal text-sm">
-        <i class="bi bi-caret-left-fill text-dark-text dark:text-white font-normal text-xs"></i>
-        <p class="text-dark-text3 dark:text-light-text3 font-normal text-nowrap line-clamp-1 md:text-xs lg:text-sm">اطلاعات بیشتر</p>
-    </div>
-    <div class="flex justify-start md:justify-center items-center gap-2 w-[15%]">
-        @if (currencyItem?.groupName === 'World_Market') {
-            <p class="font-normal text-xs leading-4.5 {{currencyItem?.lastPriceInfo?.dt === 'low' ? 'text-light-red-text dark:text-dark-red-text' : 'text-light-green-text dark:text-dark-green-text'}}">{{currencyItem?.lastPriceInfo?.dt === 'low' ? '-' : '+'}}{{currencyItem?.lastPriceInfo?.dp}}%</p>
-        }
-        @else {
-            <p class="font-normal text-xs leading-4.5 {{(showCurrencyId === 0 && currencyItem?.rialChangeState === 'low') || (showCurrencyId === 1 && currencyItem?.dollarChangeState === 'low') ? 'text-light-red-text dark:text-dark-red-text' : 'text-light-green-text dark:text-dark-green-text'}}">{{(showCurrencyId === 0 && currencyItem?.rialChangeState === 'low') || (showCurrencyId === 1 && currencyItem?.dollarChangeState === 'low') ? '-' : '+'}}{{showCurrencyId === 0 ? currencyItem?.rialChanges : currencyItem?.dollarChanges}}%</p>
-        }
-    </div>
-    <div class="flex flex-col items-end justify-center w-[25%] mr-1 relative">
-
-        @if (currencyItem?.groupName === 'World_Market') {
-            <p class="text-dark-text dark:text-light-text font-normal text-xs md:text-sm leading-4.5 md:leading-5">{{ currencyItem?.lastPriceInfo?.p }}</p>
-        }
-        @else {
-            <p class="text-dark-text dark:text-light-text font-normal text-xs md:text-sm leading-4.5 md:leading-5">{{showCurrencyId === 0 ? currencyItem?.tomanStringPrice : currencyItem?.dollarStringPrice }}</p>
-        }
-        <div class="flex justify-center items-center gap-2 relative ">
-             
-            @if (currencyItem?.poundAsk) {
-                <div class="group flex justify-center items-center relative"> 
-                    <div class="z-[8] pointer-events-none group-hover:not-target:opacity-100 opacity-0 duration-300 flex bg-light-border dark:bg-dark-border absolute flex-col bottom-[-0.8rem] h-12 justify-center items-end w-45 speech-bubble">
-                        <span class="rtl text-dark-text dark:text-light-text text-xs md:text-sm leading-4.5 md:leading-5">قیمت اصلی: {{currencyItem?.lastPriceInfo?.p}} پوند</span>
-                        <span class="rtl text-dark-text dark:text-light-text text-xs md:text-sm leading-4.5 md:leading-5">نرخ تبدیل: {{currencyItem?.poundAsk}}</span>
-                    </div>
-                    <i class="hover:cursor-pointer z-[8] mt-1 bi bi-info-circle-fill text-2xs md:text-sm text-dark-text2 dark:text-light-text2"></i>
-                </div>
+<a
+    [routerLink]="[
+        '/',
+        currencyItem?.groupName?.toLowerCase(),
+        currencyItem?.slugText
+    ]"
+    (click)="onSelectItem()"
+    class="block"
+>
+    <article (click)="onSelectItem()" class="min-h-[4.853rem] px-4 sm:px-0 sm:min-h-[5.8rem] relative w-full flex items-center bg-light2 dark:bg-dark2 border-b border-b-light-border dark:border-b-dark-border md:hover:bg-light-hover md:hover:dark:bg-dark-hover hover:cursor-pointer">
+        <div class="justify-start items-center gap-1.5 w-[20%] hidden md:flex leading-5 font-normal text-sm">
+            <i class="bi bi-caret-left-fill text-dark-text dark:text-white font-normal text-xs"></i>
+            <p class="text-dark-text3 dark:text-light-text3 font-normal text-nowrap line-clamp-1 md:text-xs lg:text-sm">اطلاعات بیشتر</p>
+        </div>
+        <div class="flex justify-start md:justify-center items-center gap-2 w-[15%]">
+            @if (currencyItem?.groupName === 'World_Market') {
+                <p class="font-normal text-xs leading-4.5 {{currencyItem?.lastPriceInfo?.dt === 'low' ? 'text-light-red-text dark:text-dark-red-text' : 'text-light-green-text dark:text-dark-green-text'}}">{{currencyItem?.lastPriceInfo?.dt === 'low' ? '-' : '+'}}{{currencyItem?.lastPriceInfo?.dp}}%</p>
             }
-            <p class="{{currencyItem?.groupName !== 'World_Market' ? 'visible' : 'invisible'}} text-dark-text2 dark:text-light-text2 font-normal font-yekan text-2xs leading-3 mt-1">{{showCurrencyId === 0 ? 'تومان' : 'دلار'}}</p>
+            @else {
+                <p class="font-normal text-xs leading-4.5 {{(showCurrencyId === 0 && currencyItem?.rialChangeState === 'low') || (showCurrencyId === 1 && currencyItem?.dollarChangeState === 'low') ? 'text-light-red-text dark:text-dark-red-text' : 'text-light-green-text dark:text-dark-green-text'}}">{{(showCurrencyId === 0 && currencyItem?.rialChangeState === 'low') || (showCurrencyId === 1 && currencyItem?.dollarChangeState === 'low') ? '-' : '+'}}{{showCurrencyId === 0 ? currencyItem?.rialChanges : currencyItem?.dollarChanges}}%</p>
+            }
         </div>
-    </div>
-    <div class="flex justify-end items-start gap-1.5 flex-1">
-        <div class="flex flex-1 justify-end pl-0.5 mt-1">
-            <div class="flex flex-col items-end justify-start">
-                <p class="text-dark-text2 dark:text-light-text2 order-2 sm:order-1 sm:text-dark sm:dark:text-light rtl w-full text-2xs leading-3 sm:text-sm sm:leading-5 font-bold text-ellipsis line-clamp-1">{{currencyItem?.title}}</p>
-                <p class="text-dark order-1 sm:order-2 mb-1 sm:mt-1 ml-1 dark:text-light sm:text-dark-text2 sm:dark:text-light-text2 font-normal text-xs leading-4.5 md:text-sm md:leading-5 text-ellipsis line-clamp-1 {{currencyItem?.filterName === 'سکه در بورس' ? 'text-right rtl': ''}}">{{currencyItem?.shortedName}}</p>
+        <div class="flex flex-col items-end justify-center w-[25%] mr-1 relative">
+
+            @if (currencyItem?.groupName === 'World_Market') {
+                <p class="text-dark-text dark:text-light-text font-normal text-xs md:text-sm leading-4.5 md:leading-5">{{ currencyItem?.lastPriceInfo?.p }}</p>
+            }
+            @else {
+                <p class="text-dark-text dark:text-light-text font-normal text-xs md:text-sm leading-4.5 md:leading-5">{{showCurrencyId === 0 ? currencyItem?.tomanStringPrice : currencyItem?.dollarStringPrice }}</p>
+            }
+            <div class="flex justify-center items-center gap-2 relative ">
+                
+                @if (currencyItem?.poundAsk) {
+                    <div class="group flex justify-center items-center relative"> 
+                        <div class="z-[8] pointer-events-none group-hover:not-target:opacity-100 opacity-0 smooth-transition flex bg-light-border dark:bg-dark-border absolute flex-col bottom-[-0.8rem] h-12 justify-center items-end w-45 speech-bubble">
+                            <span class="rtl text-dark-text dark:text-light-text text-xs md:text-sm leading-4.5 md:leading-5">قیمت اصلی: {{currencyItem?.lastPriceInfo?.p}} پوند</span>
+                            <span class="rtl text-dark-text dark:text-light-text text-xs md:text-sm leading-4.5 md:leading-5">نرخ تبدیل: {{currencyItem?.poundAsk}}</span>
+                        </div>
+                        <i class="hover:cursor-pointer z-[8] mt-1 bi bi-info-circle-fill text-2xs md:text-sm text-dark-text2 dark:text-light-text2"></i>
+                    </div>
+                }
+                <p class="{{currencyItem?.groupName !== 'World_Market' ? 'visible' : 'invisible'}} text-dark-text2 dark:text-light-text2 font-normal font-yekan text-2xs leading-3 mt-1">{{showCurrencyId === 0 ? 'تومان' : 'دلار'}}</p>
             </div>
         </div>
-        <div class="flex gap-0 md:gap-1.5 flex-row sm:flex-col md:flex-row">
-            <img draggable="false" loading="lazy" decoding="async" class="md:w-8 md:h-8 w-6 h-6 object-cover rounded-full mr-2 mt-1" src="{{currencyItem?.img}}" alt="{{currencyItem?.title}}">
-        
-            <div class="flex">
-                @if (currencyItem?.isFav) {
-                    <span class="w-6 h-7" (click)="removeFromFav($event)">
-                        <span class="w-6 h-7 flex justify-end items-center sm:items-end">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 24 24"
-                                class="w-4 h-4 fill-yellow-star"
-                            >
-                                <path
-                                    d="m13.73 3.51 1.76 3.52c.24.49.88.96 1.42 1.05l3.19.53c2.04.34 2.52 1.82 1.05 3.28l-2.48 2.48c-.42.42-.65 1.23-.52 1.81l.71 3.07c.56 2.43-.73 3.37-2.88 2.1l-2.99-1.77c-.54-.32-1.43-.32-1.98 0l-2.99 1.77c-2.14 1.27-3.44.32-2.88-2.1l.71-3.07c.13-.58-.1-1.39-.52-1.81l-2.48-2.48c-1.46-1.46-.99-2.94 1.05-3.28l3.19-.53c.53-.09 1.17-.56 1.41-1.05l1.76-3.52c.96-1.91 2.52-1.91 3.47 0">
-                                </path>
-                            </svg>
+        <div class="flex justify-end items-start gap-1.5 flex-1">
+            <div class="flex flex-1 justify-end pl-0.5 mt-1">
+                <div class="flex flex-col items-end justify-start">
+                    <p class="text-dark-text2 dark:text-light-text2 order-2 sm:order-1 sm:text-dark sm:dark:text-light rtl w-full text-2xs leading-3 sm:text-sm sm:leading-5 font-bold text-ellipsis line-clamp-1">{{currencyItem?.title}}</p>
+                    <p class="text-dark order-1 sm:order-2 mb-1 sm:mt-1 ml-1 dark:text-light sm:text-dark-text2 sm:dark:text-light-text2 font-normal text-xs leading-4.5 md:text-sm md:leading-5 text-ellipsis line-clamp-1 {{currencyItem?.filterName === 'سکه در بورس' ? 'text-right rtl': ''}}">{{currencyItem?.shortedName}}</p>
+                </div>
+            </div>
+            <div class="flex gap-0 md:gap-1.5 flex-row sm:flex-col md:flex-row">
+                <img draggable="false" loading="lazy" decoding="async" class="md:w-8 md:h-8 w-6 h-6 object-cover rounded-full mr-2 mt-1" src="{{currencyItem?.img}}" alt="{{currencyItem?.title}}">
+            
+                <div class="flex">
+                    @if (currencyItem?.isFav) {
+                        <span class="w-6 h-7" (click)="removeFromFav($event)">
+                            <span class="w-6 h-7 flex justify-end items-center sm:items-end">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 24 24"
+                                    class="w-4 h-4 fill-yellow-star"
+                                >
+                                    <path
+                                        d="m13.73 3.51 1.76 3.52c.24.49.88.96 1.42 1.05l3.19.53c2.04.34 2.52 1.82 1.05 3.28l-2.48 2.48c-.42.42-.65 1.23-.52 1.81l.71 3.07c.56 2.43-.73 3.37-2.88 2.1l-2.99-1.77c-.54-.32-1.43-.32-1.98 0l-2.99 1.77c-2.14 1.27-3.44.32-2.88-2.1l.71-3.07c.13-.58-.1-1.39-.52-1.81l-2.48-2.48c-1.46-1.46-.99-2.94 1.05-3.28l3.19-.53c.53-.09 1.17-.56 1.41-1.05l1.76-3.52c.96-1.91 2.52-1.91 3.47 0">
+                                    </path>
+                                </svg>
+                            </span>
                         </span>
-                    </span>
-                }
-                @else {
-                    <span class="w-6 h-7 flex justify-end items-center sm:items-end" (click)="addToFav($event)">
-                        <star-icon [selected]="false" class="w-4 h-4 text-dark dark:text-light" />
-                    </span>
-                }
+                    }
+                    @else {
+                        <span class="w-6 h-7 flex justify-end items-center sm:items-end" (click)="addToFav($event)">
+                            <star-icon [selected]="false" class="w-4 h-4 text-dark dark:text-light" />
+                        </span>
+                    }
+                </div>
             </div>
         </div>
-    </div>
-</article>
+    </article>
+</a>

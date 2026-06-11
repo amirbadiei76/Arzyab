@@ -1,5 +1,5 @@
 <div
-  class="fixed inset-0 bg-black/40 transition-opacity duration-300 z-[10]"
+  class="fixed inset-0 bg-black/40 smooth-transition transition-opacity z-[10]"
   [class.opacity-100]="open"
   [class.opacity-0]="!open"
   [class.pointer-events-auto]="open"
@@ -8,7 +8,7 @@
 </div>
 
 <nav
-  class="fixed text-end py-3.5 px-5 top-0 right-0 h-screen max-w-64 w-full bg-light-text dark:bg-dark-text transform transition-transform duration-300 z-[11]"
+  class="fixed text-end py-3.5 px-5 top-0 right-0 h-screen max-w-64 w-full bg-light-text dark:bg-dark-text smooth-transition transform transition-transform z-[11]"
   [class.translate-x-0]="open"
   [class.translate-x-full]="!open">
 
