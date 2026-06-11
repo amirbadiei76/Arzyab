@@ -55,11 +55,8 @@ export class RequestArrayService {
   }
 
     private handleVisibilityChange() {
-
         if (document.hidden) return;
-
-        console.log('Page became visible');
-
+        // console.log('Page became visible');
         this.forceReconnect();
 
     }
@@ -83,13 +80,13 @@ export class RequestArrayService {
         this.ws = new WebSocket(`wss://arzyab-backend.onrender.com/`);
 
         this.ws.onopen = (event) => {
-            console.log("Websocket connection Opened");
+            // console.log("Websocket connection Opened");
             this.startHeartbeat()
         };
 
         this.ws.onclose = (event) => {
             this.stopHeartbeat()!;
-            console.log("Websocket connection closed");
+            // console.log("Websocket connection closed");
 
             this.reconnectTimeout = window.setTimeout(() => {
                 this.connect();
