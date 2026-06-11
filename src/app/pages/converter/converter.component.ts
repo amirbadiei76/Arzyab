@@ -247,7 +247,7 @@ export class ConverterComponent {
         else {
           this.fromItemSubject.next(from);
           this.toItemSubject.next(to);
-        }
+        } 
     })
   );
   
