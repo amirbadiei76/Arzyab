@@ -44,38 +44,70 @@ export class RequestArrayService {
     prices$ = new BehaviorSubject<any>(null);
 
     private heartbeatTimer?: number;
+    private reconnectTimeout?: number;
 
   constructor(private currencyService: CurrenciesService, @Inject(PLATFORM_ID) private platformId: Object) {
     this.setupMainData();
-  }
 
-  connect () {
-    if (typeof window === 'undefined') return;
-
-    this.ws = new WebSocket(`wss://arzyab-backend.onrender.com/`);
-
-    this.ws.onopen = (event) => {
-        // console.log("Websocket connection Opened");
-        this.startHeartbeat()
-    };
-
-    this.ws.onclose = (event) => {
-        this.stopHeartbeat()!;
-        // console.log("Websocket connection closed");
-    };
-
-    this.ws.onmessage = (message) => {
-        const msg = JSON.parse(message.data) as ({type: string} & {payload: Currencies});
-
-        if (msg.type === 'update') {
-            const data: Currencies = msg.payload;
-            this.mainDataSubject?.next(data);
-            this.setupAllCurrentData(data.current)
-        }
-        else if (msg.type === 'pong') {}
+    if (isPlatformBrowser(this.platformId)) {
+        document.addEventListener('visibilitychange', this.handleVisibilityChange.bind(this));
     }
-    
   }
+
+    private handleVisibilityChange() {
+
+        if (document.hidden) return;
+
+        console.log('Page became visible');
+
+        this.forceReconnect();
+
+    }
+
+    private forceReconnect() {
+        this.stopHeartbeat();
+        if (this.ws && (this.ws.readyState === WebSocket.OPEN ||this.ws.readyState === WebSocket.CONNECTING)) {
+            this.ws.close();
+        }
+
+        this.connect();
+    }
+
+    connect () {
+        if (typeof window === 'undefined') return;
+
+        if (this.ws && (this.ws.readyState === WebSocket.OPEN || this.ws.readyState === WebSocket.CONNECTING)) {
+            return;
+        }
+
+        this.ws = new WebSocket(`wss://arzyab-backend.onrender.com/`);
+
+        this.ws.onopen = (event) => {
+            console.log("Websocket connection Opened");
+            this.startHeartbeat()
+        };
+
+        this.ws.onclose = (event) => {
+            this.stopHeartbeat()!;
+            console.log("Websocket connection closed");
+
+            this.reconnectTimeout = window.setTimeout(() => {
+                this.connect();
+            }, 3000);
+        };
+
+        this.ws.onmessage = (message) => {
+            const msg = JSON.parse(message.data) as ({type: string} & {payload: Currencies});
+
+            if (msg.type === 'update') {
+                const data: Currencies = msg.payload;
+                console.log(data)
+                this.mainDataSubject?.next(data);
+                this.setupAllCurrentData(data.current)
+            }
+            else if (msg.type === 'pong') {}
+        }
+    }
 
     startHeartbeat() {
         this.heartbeatTimer = window.setInterval(() => {
