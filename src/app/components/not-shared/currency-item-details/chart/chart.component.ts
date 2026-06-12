@@ -137,6 +137,7 @@ export class ChartComponent {
       if (this.presetChanged()) {
         this.chart?.timeScale().fitContent();
         this.chart?.priceScale('right').applyOptions({ autoScale: true })
+        this.presetChanged.set(false);
       }
     });
   }

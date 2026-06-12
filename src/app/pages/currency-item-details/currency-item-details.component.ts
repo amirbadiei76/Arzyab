@@ -233,7 +233,6 @@ export class CurrencyItemDetailsComponent {
         };
       }
 
-      // پوند به دلار
       const max = poundToDollar(last.h, currentValue!);
       const min = poundToDollar(last.l, currentValue!);
       const cur = poundToDollar(last.p, currentValue!);
@@ -290,7 +289,6 @@ export class CurrencyItemDetailsComponent {
   onItemSelect(slug: string) {
     this.inputBlur()
     this.textToFilter.set('')
-    // this.router.navigate([`/${slug}`])
     window.scrollTo(0, 0)
   }
 

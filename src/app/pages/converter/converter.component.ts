@@ -237,17 +237,11 @@ export class ConverterComponent {
     withLatestFrom(this.currencyType$),
     map(([{ first, second }]) => {
 
-      const from = first?.[1];
-      const to = second?.[this.currencyType() === 2 ? 1 : 0];
-
-        if (this.isSwaped()) {
-          this.fromItemSubject.next(to);
-          this.toItemSubject.next(from);
-        }
-        else {
-          this.fromItemSubject.next(from);
-          this.toItemSubject.next(to);
-        } 
+        const from = first?.[1];
+        const to = second?.[this.currencyType() === 2 ? 1 : 0];
+        
+        this.fromItemSubject.next(this.isSwaped() ? to : from);
+        this.toItemSubject.next(this.isSwaped() ? from : to);
     })
   );
   

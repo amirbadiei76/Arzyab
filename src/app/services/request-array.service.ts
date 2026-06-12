@@ -81,16 +81,29 @@ export class RequestArrayService {
 
         this.ws.onopen = (event) => {
             // console.log("Websocket connection Opened");
+            if (this.reconnectTimeout) {
+                clearTimeout(this.reconnectTimeout);
+                this.reconnectTimeout = undefined;
+            }
+
             this.startHeartbeat()
         };
 
         this.ws.onclose = (event) => {
             this.stopHeartbeat()!;
             // console.log("Websocket connection closed");
+            if (this.reconnectTimeout) {
+                clearTimeout(this.reconnectTimeout);
+            }
 
             this.reconnectTimeout = window.setTimeout(() => {
                 this.connect();
             }, 3000);
+        };
+
+        this.ws.onerror = (error) => {
+            // console.error('WebSocket Error', error);
+            this.ws?.close();
         };
 
         this.ws.onmessage = (message) => {
