@@ -225,7 +225,7 @@ html[data-mode="system"] .theme-icon-system { display: block !important; }
     text-dark-text dark:text-light-text
     hover:bg-light-text hover:dark:bg-dark-text
     text-sm font-medium hover:cursor-pointer
-    focus:border-green-btn
+    focus:border-green-btn smooth-transition
 }
 
 @utility dropdown-arrow-base {
@@ -245,7 +245,7 @@ html[data-mode="system"] .theme-icon-system { display: block !important; }
 }
 
 @utility dropdown-single-item-base {
-    @apply w-full text-right px-4 py-2.5 hover:bg-light-text3 hover:dark:bg-dark-border2 hover:cursor-pointer
+    @apply w-full text-right px-4 py-2.5 hover:bg-light-text3 hover:dark:bg-dark-border2 hover:cursor-pointer smooth-transition
 }
 
 @utility input-unit-base {

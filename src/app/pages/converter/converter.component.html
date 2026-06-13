@@ -75,7 +75,7 @@
                           @if (fromItem$ | async; as from) {
                             @for (toItem of toList; track toItem.id) {
                               @if (toItem.id !== from.id) {
-                                <li (click)="onSelectToItem(toItem?.slugText!)" class="py-1.5 z-[3] hover:cursor-pointer px-5 hover:bg-light-text3 hover:dark:bg-dark-border2">
+                                <li (click)="onSelectToItem(toItem?.slugText!)" class="py-1.5 z-[3] hover:cursor-pointer px-5 hover:bg-light-text3 hover:dark:bg-dark-border2 smooth-transition">
                                   <app-search-item [isSearch]="false" class="z-[3]" [item]="toItem" />
                                 </li>
                               }
@@ -142,7 +142,7 @@
                           @if (toItem$ | async; as to) {
                             @for (fromItem of fromList; track fromItem.id) {
                               @if (fromItem.id !== to.id) {
-                                <li (click)="onSelectFromItem(fromItem?.slugText!)" class="py-1.5 px-5 hover:cursor-pointer hover:bg-light-text3 hover:dark:bg-dark-border2">
+                                <li (click)="onSelectFromItem(fromItem?.slugText!)" class="py-1.5 px-5 hover:cursor-pointer hover:bg-light-text3 hover:dark:bg-dark-border2 smooth-transition">
                                   <app-search-item [isSearch]="false" [item]="fromItem" />
                                 </li>
                               }
