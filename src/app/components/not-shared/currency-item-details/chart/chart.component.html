@@ -2,7 +2,7 @@
   
     <div #toggleFrameBtn class="{{ historyData() ? 'flex flex-row-reverse' : 'hidden' }} gap-4 relative justify-between px-5 py-3 border-b border-light-text3 dark:border-dark-text3">
 
-      <button (click)="toggleTimeFrame()" class="hover:cursor-pointer lg:hidden text-dark-text3 dark:text-light-text3 hover:text-dark hover:dark:text-light smooth-transition text-xs md:text-sm flex items-center justify-center gap-2">
+      <button (click)="toggleTimeFrame()" class="hover:cursor-pointer lg:hidden text-dark-text3 dark:text-light-text3 hover:text-dark hover:dark:text-light active:text-dark active:dark:text-light smooth-transition text-xs md:text-sm flex items-center justify-center gap-2">
         <span>تغییر بازه (تقویمی)</span>
         <i [class.rotate-180]="timeFramePanelOpened()" class="bi bi-chevron-down transition-transform"></i>
       </button>
@@ -11,7 +11,7 @@
         @for (p of presets; track p.label) {
           <button
             appTooltip="{{ p.title }}"
-            class="rtl rounded-md px-2 py-0.5 {{ isPresetActive(p) ? 'bg-light-border dark:bg-dark-border' : '' }} hover:cursor-pointer text-sm text-dark-text3 dark:text-light-text3 hover:text-dark hover:dark:text-light smooth-transition"
+            class="rtl rounded-md px-2 py-0.5 {{ isPresetActive(p) ? 'bg-light-border dark:bg-dark-border' : '' }} hover:cursor-pointer text-sm text-dark-text3 dark:text-light-text3 hover:text-dark hover:dark:text-light active:text-dark active:dark:text-light smooth-transition"
             (click)="selectPreset(p)">
             {{ p.label }}
           </button>
@@ -19,14 +19,14 @@
       </div>
       
       <button
-        class="hover:cursor-pointer text-dark-text3 dark:text-light-text3 hover:text-dark hover:dark:text-light smooth-transition text-xs md:text-sm flex lg:hidden items-center justify-center gap-2" (click)="resetToRaw()">
+        class="hover:cursor-pointer text-dark-text3 dark:text-light-text3 hover:text-dark hover:dark:text-light active:text-dark active:dark:text-light smooth-transition text-xs md:text-sm flex lg:hidden items-center justify-center gap-2" (click)="resetToRaw()">
         <i class="bi bi-arrow-counterclockwise text-lg"></i>
         نمودار پیشفرض
       </button>
       
       <button
         appTooltip="نمودار پیشفرض"
-        class="hover:cursor-pointer text-dark-text3 dark:text-light-text3 hover:text-dark hover:dark:text-light smooth-transition text-xs md:text-sm hidden lg:flex items-center justify-center gap-2" (click)="resetToRaw()">
+        class="hover:cursor-pointer text-dark-text3 dark:text-light-text3 hover:text-dark hover:dark:text-light active:text-dark active:dark:text-light smooth-transition text-xs md:text-sm hidden lg:flex items-center justify-center gap-2" (click)="resetToRaw()">
         <i class="bi bi-arrow-counterclockwise text-lg"></i>
       </button>
     </div>
@@ -86,7 +86,7 @@
         <div class="flex flex-col gap-2 py-2">
           @for (p of presets; track p.label) {
             <button
-              class="rtl px-2 hover:cursor-pointer text-sm text-dark-text3 dark:text-light-text3 hover:text-dark hover:dark:text-light smooth-transition"
+              class="rtl px-2 hover:cursor-pointer text-sm text-dark-text3 dark:text-light-text3 hover:text-dark hover:dark:text-light active:text-dark active:dark:text-light smooth-transition"
               (click)="selectPreset(p)">
               {{ p.title }}
             </button>

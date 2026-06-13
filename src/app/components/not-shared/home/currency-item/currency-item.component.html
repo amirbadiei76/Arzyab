@@ -7,7 +7,7 @@
     (click)="onSelectItem()"
     class="block"
 >
-    <article (click)="onSelectItem()" class="min-h-[4.853rem] px-4 sm:px-0 sm:min-h-[5.8rem] relative w-full flex items-center bg-light2 dark:bg-dark2 border-b border-b-light-border dark:border-b-dark-border md:hover:bg-light-hover md:hover:dark:bg-dark-hover hover:cursor-pointer">
+    <article (click)="onSelectItem()" class="min-h-[4.853rem] px-4 sm:px-0 sm:min-h-[5.8rem] relative w-full flex items-center bg-light2 dark:bg-dark2 border-b border-b-light-border dark:border-b-dark-border md:hover:bg-light-hover md:hover:dark:bg-dark-hover md:active:bg-light-hover md:active:dark:bg-dark-hover hover:cursor-pointer">
         <div class="justify-start items-center gap-1.5 w-[20%] hidden md:flex leading-5 font-normal text-sm">
             <i class="bi bi-caret-left-fill text-dark-text dark:text-white font-normal text-xs"></i>
             <p class="text-dark-text3 dark:text-light-text3 font-normal text-nowrap line-clamp-1 md:text-xs lg:text-sm">اطلاعات بیشتر</p>
@@ -32,7 +32,7 @@
                 
                 @if (currencyItem?.poundAsk) {
                     <div class="group flex justify-center items-center relative"> 
-                        <div class="z-[8] pointer-events-none group-hover:not-target:opacity-100 opacity-0 smooth-transition flex bg-light-border dark:bg-dark-border absolute flex-col bottom-[-0.8rem] h-12 justify-center items-end w-45 speech-bubble">
+                        <div class="z-[8] pointer-events-none group-hover:not-target:opacity-100 group-active:not-target:opacity-100 opacity-0 smooth-transition flex bg-light-border dark:bg-dark-border absolute flex-col bottom-[-0.8rem] h-12 justify-center items-end w-45 speech-bubble">
                             <span class="rtl text-dark-text dark:text-light-text text-xs md:text-sm leading-4.5 md:leading-5">قیمت اصلی: {{currencyItem?.lastPriceInfo?.p}} پوند</span>
                             <span class="rtl text-dark-text dark:text-light-text text-xs md:text-sm leading-4.5 md:leading-5">نرخ تبدیل: {{currencyItem?.poundAsk}}</span>
                         </div>

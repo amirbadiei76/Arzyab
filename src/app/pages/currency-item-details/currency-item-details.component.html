@@ -6,7 +6,7 @@
                 <app-breadcrumb [items]="breadCrumbItems" />
             }
             <div class="w-full flex justify-between items-center gap-2">
-                <button (click)="sharePage()" class="flex justify-center items-center text-xs md:text-sm transition text-dark-text dark:text-light-text smooth-transition ease-out gap-2 h-12 hover:cursor-pointer rounded-semi px-2 border-transparent bg-light-border2 dark:bg-dark-border border hover:border-light-text2 hover:dark:border-dark-text2">
+                <button (click)="sharePage()" class="flex justify-center items-center text-xs md:text-sm transition text-dark-text dark:text-light-text smooth-transition ease-out gap-2 h-12 hover:cursor-pointer rounded-semi px-2 border-transparent bg-light-border2 dark:bg-dark-border border hover:border-light-text2 hover:dark:border-dark-text2 active:border-light-text2 active:dark:border-dark-text2">
                     <i class="bi bi-share-fill"></i>
                     اشتراک
                 </button>
@@ -22,7 +22,7 @@
                             [value]="textToFilter()"
                             (focus)="inputFocus()"
                             (input)="filterList($event)"
-                            class="rtl transition smooth-transition ease-out pl-[2.5rem] peer pr-[2.7rem] rounded-semi outline-none border-transparent bg-light-border2 dark:bg-dark-border border focus:border-green-btn hover:not-focus:border-light-text2 hover:not-focus:dark:border-dark-text2 h-full text-dark-text dark:text-light-text w-full text-right select-none"
+                            class="rtl transition smooth-transition ease-out pl-[2.5rem] peer pr-[2.7rem] rounded-semi outline-none border-transparent bg-light-border2 dark:bg-dark-border border focus:border-green-btn hover:not-focus:border-light-text2 hover:not-focus:dark:border-dark-text2 active:not-focus:border-light-text2 active:not-focus:dark:border-dark-text2 h-full text-dark-text dark:text-light-text w-full text-right select-none"
                             autocomplete="off"
                             autocorrect="off"
                             autocapitalize="off"

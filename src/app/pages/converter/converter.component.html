@@ -75,7 +75,7 @@
                           @if (fromItem$ | async; as from) {
                             @for (toItem of toList; track toItem.id) {
                               @if (toItem.id !== from.id) {
-                                <li (click)="onSelectToItem(toItem?.slugText!)" class="py-1.5 z-[3] hover:cursor-pointer px-5 hover:bg-light-text3 hover:dark:bg-dark-border2 smooth-transition">
+                                <li (click)="onSelectToItem(toItem?.slugText!)" class="py-1.5 z-[3] hover:cursor-pointer px-5 hover:bg-light-text3 hover:dark:bg-dark-border2 active:bg-light-text3 active:dark:bg-dark-border2 smooth-transition">
                                   <app-search-item [isSearch]="false" class="z-[3]" [item]="toItem" />
                                 </li>
                               }
@@ -88,12 +88,12 @@
               </div>
 
               <div class="relative h-full py-2">
-                <button [disabled]="currencyType() == 2" (click)="swapCurrencies()" class="px-2 h-full py-1 {{ currencyType() == 2 ? 'opacity-30' : 'opacity-100' }} disabled:pointer-events-none not-disabled:hover:cursor-pointer md:rotate-0 rotate-90 not-disabled:hover:bg-light-text3 not-disabled:hover:dark:bg-dark-border2 rounded-md text-dark-text3 dark:text-light-text3">
+                <button [disabled]="currencyType() == 2" (click)="swapCurrencies()" class="px-2 h-full py-1 {{ currencyType() == 2 ? 'opacity-30' : 'opacity-100' }} disabled:pointer-events-none not-disabled:hover:cursor-pointer md:rotate-0 rotate-90 not-disabled:hover:bg-light-text3 not-disabled:hover:dark:bg-dark-border2 not-disabled:active:bg-light-text3 not-disabled:active:dark:bg-dark-border2 rounded-md text-dark-text3 dark:text-light-text3">
                   <i class="bi bi-arrow-left-right"></i>
                 </button>
 
                 <div class="group top-[-0.1rem] left-0 h-full flex justify-center items-start absolute  {{ currencyType() == 2 ? 'visible' : 'invisible' }} "> 
-                    <span class="z-[2] pointer-events-none group-hover:not-target:opacity-100 opacity-0 smooth-transition flex bg-light-border dark:bg-dark-border absolute flex-col top-0 h-12 justify-center items-end w-45 top-speech-bubble">
+                    <span class="z-[2] pointer-events-none group-hover:not-target:opacity-100 group-active:not-target:opacity-100 opacity-0 smooth-transition flex bg-light-border dark:bg-dark-border absolute flex-col top-0 h-12 justify-center items-end w-45 top-speech-bubble">
                         <p class="rtl text-dark-text dark:text-light-text text-xs md:text-sm leading-4.5 md:leading-5">تبدیل فقط از ارز دیجیتال به ارز پشتیبانی می‌شود</p>
                     </span>
                     <i class="hover:cursor-pointer z-[2] bi bi-info-circle-fill text-2xs md:text-sm text-dark-text2 dark:text-light-text2 relative"></i>
@@ -142,7 +142,7 @@
                           @if (toItem$ | async; as to) {
                             @for (fromItem of fromList; track fromItem.id) {
                               @if (fromItem.id !== to.id) {
-                                <li (click)="onSelectFromItem(fromItem?.slugText!)" class="py-1.5 px-5 hover:cursor-pointer hover:bg-light-text3 hover:dark:bg-dark-border2 smooth-transition">
+                                <li (click)="onSelectFromItem(fromItem?.slugText!)" class="py-1.5 px-5 hover:cursor-pointer hover:bg-light-text3 hover:dark:bg-dark-border2 active:bg-light-text3 active:dark:bg-dark-border2 smooth-transition">
                                   <app-search-item [isSearch]="false" [item]="fromItem" />
                                 </li>
                               }

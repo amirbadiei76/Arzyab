@@ -3,7 +3,7 @@
     (click)="selectItem()"
     class="block"
 >
-    <article class="w-full justify-center flex-1 px-3 lg:px-0 lg:pt-1 pb-2 lg:pl-2 flex items-center hover:cursor-pointer lg:hover:bg-light-text3 lg:rounded-lg lg:hover:dark:bg-dark-text {{index !== 4 ? 'border-b border-light-border2 dark:border-dark-border2 lg:border-b-0' : ''}}">
+    <article class="w-full justify-center flex-1 px-3 lg:px-0 lg:pt-1 pb-2 lg:pl-2 flex items-center hover:cursor-pointer lg:rounded-lg lg:hover:bg-light-text3 lg:hover:dark:bg-dark-text lg:active:bg-light-text3 lg:active:dark:bg-dark-text {{index !== 4 ? 'border-b border-light-border2 dark:border-dark-border2 lg:border-b-0' : ''}}">
         <div class="flex flex-1 flex-col">
             <div class="flex w-full items-center justify-between">
                 @if (item?.faGroupName === 'بازارهای ارزی') {

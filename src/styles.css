@@ -208,11 +208,11 @@ html[data-mode="system"] .theme-icon-system { display: block !important; }
 }
 
 @utility menu-item-base {
-    @apply gap-2 flex h-full active:text-light-green-text active:dark:text-dark-green-text flex-nowrap text-nowrap text-sm text-dark-text dark:text-light-text md:hover:text-green-btn md:dark:hover:text-popup-border-green-light duration-300 ease-in-out
+    @apply gap-2 flex h-full active:text-light-green-text active:dark:text-dark-green-text flex-nowrap text-nowrap text-sm text-dark-text dark:text-light-text md:active:text-green-btn md:dark:active:text-popup-border-green-light md:hover:text-green-btn md:dark:hover:text-popup-border-green-light duration-300 ease-in-out
 }
 
 @utility menu-buttons-base {
-    @apply text-dark-text dark:text-light-text text-2xl hover:cursor-pointer hover:text-green-btn dark:hover:text-popup-border-green-light duration-300 ease-in-out
+    @apply text-dark-text dark:text-light-text text-2xl hover:cursor-pointer active:text-green-btn dark:active:text-popup-border-green-light hover:text-green-btn dark:hover:text-popup-border-green-light duration-300 ease-in-out
 }
 
 @utility smooth-transition {
@@ -224,6 +224,7 @@ html[data-mode="system"] .theme-icon-system { display: block !important; }
     px-5 py-3.5 rounded-lg border not-focus:border-dark-text2 not-focus:dark:border-light-text2 outline-0
     text-dark-text dark:text-light-text
     hover:bg-light-text hover:dark:bg-dark-text
+    active:bg-light-text active:dark:bg-dark-text
     text-sm font-medium hover:cursor-pointer
     focus:border-green-btn smooth-transition
 }
@@ -245,7 +246,7 @@ html[data-mode="system"] .theme-icon-system { display: block !important; }
 }
 
 @utility dropdown-single-item-base {
-    @apply w-full text-right px-4 py-2.5 hover:bg-light-text3 hover:dark:bg-dark-border2 hover:cursor-pointer smooth-transition
+    @apply w-full text-right px-4 py-2.5 active:bg-light-text3 active:dark:bg-dark-border2 active:cursor-pointer hover:bg-light-text3 hover:dark:bg-dark-border2 hover:cursor-pointer smooth-transition
 }
 
 @utility input-unit-base {
