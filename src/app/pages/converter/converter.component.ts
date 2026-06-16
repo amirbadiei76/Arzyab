@@ -230,22 +230,6 @@ export class ConverterComponent {
     shareReplay(1)
   );
 
-
-
-
-  /*
-  syncFromTo$ = this.dualList$.pipe(
-    withLatestFrom(this.currencyType$),
-    map(([{ first, second }]) => {
-
-        const from = first?.[1];
-        const to = second?.[this.currencyType() === 2 ? 1 : 0];
-        
-        this.fromItemSubject.next(from);
-        this.toItemSubject.next(to);
-    })
-  );
-  */
  syncFromTo$ = this.dualList$.pipe(
     map(({ first, second }) => {
 
@@ -370,21 +354,11 @@ export class ConverterComponent {
   }
 
   swapCurrencies () {
-    /*
-    combineLatest([this.fromItem$, this.toItem$])
-    .pipe(take(1))
-    .subscribe(([from, to]) => {
-      this.fromItemSubject.next(to);
-      this.toItemSubject.next(from);
-    });
-    */
     const fromId = this.fromItemId();
     const toId = this.toItemId();
 
     this.fromItemId.set(toId);
     this.toItemId.set(fromId);
-
-    // this.isSwaped.update(v => !v);
 
     this.syncFromTo$.pipe(take(1)).subscribe();
   }
