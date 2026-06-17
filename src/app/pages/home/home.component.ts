@@ -1,21 +1,27 @@
-import { Component, computed, effect, ElementRef, inject, signal, ViewChild, WritableSignal } from '@angular/core';
+import { afterNextRender, Component, computed, effect, ElementRef, inject, signal, ViewChild, WritableSignal } from '@angular/core';
 import { CurrencyItem } from '../../interfaces/data.types';
 import { CurrencyItemComponent } from '../../components/not-shared/home/currency-item/currency-item.component';
-import { base_metal_title, BASE_METALS_PREFIX, COIN_PREFIX, coin_title, COMMODITY_PREFIX, commodity_title, CRYPTO_PREFIX, crypto_title, currency_title, dollar_unit, favories_title, filter_agricultural_products, filter_animal_products, filter_coin_blubber, filter_coin_cash, filter_coin_exchange, filter_coin_retail, filter_crop_yields, filter_cryptocurrency, filter_etf, filter_global_base_metals, filter_global_ounces, filter_gold, filter_gold_vs_other, filter_main_currencies, filter_melted, filter_mesghal, filter_other_coins, filter_other_currencies, filter_overview, filter_pair_currencies, filter_silver, filter_us_base_metals, GOLD_PREFIX, gold_title, MAIN_CURRENCY_PREFIX, precious_metal_title, PRECIOUS_METALS_PREFIX, toman_unit, WORLD_MARKET_PREFIX, world_title } from '../../constants/Values';
+import { base_metal_title, BASE_METALS_PREFIX, COIN_PREFIX, coin_title, COMMODITY_PREFIX, commodity_title, CRYPTO_PREFIX, crypto_title, currency_title, dollar_unit, favories_title, favories_title_en, filter_agricultural_products, filter_agricultural_products_en, filter_animal_products, filter_animal_products_en, filter_coin_blubber, filter_coin_blubber_en, filter_coin_cash, filter_coin_cash_en, filter_coin_exchange, filter_coin_exchange_en, filter_coin_retail, filter_coin_retail_en, filter_crop_yields, filter_crop_yields_en, filter_cryptocurrency, filter_etf, filter_etf_en, filter_global_base_metals, filter_global_base_metals_en, filter_global_ounces, filter_global_ounces_en, filter_gold, filter_gold_en, filter_gold_vs_other, filter_gold_vs_other_en, filter_main_currencies, filter_main_currencies_en, filter_melted, filter_melted_en, filter_mesghal, filter_mesghal_en, filter_other_coins, filter_other_coins_en, filter_other_currencies, filter_other_currencies_en, filter_overview, filter_overview_en, filter_pair_currencies, filter_silver, filter_silver_en, filter_us_base_metals, filter_us_base_metals_en, GOLD_PREFIX, gold_title, MAIN_CURRENCY_PREFIX, precious_metal_title, PRECIOUS_METALS_PREFIX, toman_unit, WORLD_MARKET_PREFIX, world_title } from '../../constants/Values';
 import { StarIconComponent } from '../../components/shared/star-icon/star-icon.component';
 import { CommonModule, NgIf } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
 import { combineLatest, fromEvent, Observable, of, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map, switchMap, takeUntil } from 'rxjs/operators'
+import { debounceTime, distinctUntilChanged, filter, map, switchMap, take, takeUntil } from 'rxjs/operators'
 import { RequestArrayService } from '../../services/request-array.service';
 import { HomeStateService } from '../../services/home-state.service';
 import { NotificationService } from '../../services/notification.service';
 
 import { toObservable } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 enum SortingType {
   Ascending, Descending, None
+}
+
+interface SubtitleType {
+  fa: string,
+  en: string
 }
 
 @Component({
@@ -29,11 +35,13 @@ export class HomeComponent {
   reqestClass? = inject(RequestArrayService);
   lastHomeState = inject(HomeStateService);
   notificationService = inject(NotificationService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   categories = [
     {
       title: favories_title,
-      enTitle: favories_title,
+      enTitle: favories_title_en,
       subtitles: [
 
       ]
@@ -42,75 +50,75 @@ export class HomeComponent {
       title: currency_title,
       enTitle: MAIN_CURRENCY_PREFIX,
       subtitles: [
-        filter_overview,
-        filter_main_currencies,
-        filter_other_currencies
+        {fa: filter_overview, en: filter_overview_en},
+        {fa: filter_main_currencies, en: filter_main_currencies_en},
+        {fa: filter_other_currencies, en: filter_other_currencies_en}
       ] 
     },
     {
       title: gold_title,
       enTitle: GOLD_PREFIX,
       subtitles: [
-        filter_overview,
-        filter_gold,
-        filter_silver,
-        filter_mesghal,
-        filter_melted,
-        filter_etf
+        {fa: filter_overview, en: filter_overview_en},
+        {fa: filter_gold, en: filter_gold_en},
+        {fa: filter_silver, en: filter_silver_en},
+        {fa: filter_mesghal, en: filter_mesghal_en},
+        {fa: filter_melted, en: filter_melted_en},
+        {fa: filter_etf, en: filter_etf_en}
       ]
     },
     {
       title: coin_title,
       enTitle: COIN_PREFIX,
       subtitles: [
-        filter_overview,
-        filter_coin_cash,
-        filter_coin_retail,
-        filter_coin_blubber,
-        filter_coin_exchange,
-        filter_other_coins
+        {fa: filter_overview, en: filter_overview_en},
+        {fa: filter_coin_cash, en: filter_coin_cash_en},
+        {fa: filter_coin_retail, en: filter_coin_retail_en},
+        {fa: filter_coin_blubber, en: filter_coin_blubber_en},
+        {fa: filter_coin_exchange, en: filter_coin_exchange_en},
+        {fa: filter_other_coins, en: filter_other_coins_en}
       ]
     },
     {
       title: crypto_title,
       enTitle: CRYPTO_PREFIX,
       subtitles: [
-        filter_overview,
+        {fa: filter_overview, en: filter_overview_en},
       ]
     },
     {
       title: world_title,
       enTitle: WORLD_MARKET_PREFIX,
       subtitles: [
-        filter_overview,
+        {fa: filter_overview, en: filter_overview_en},
       ]
     },
     {
       title: precious_metal_title,
       enTitle: PRECIOUS_METALS_PREFIX,
       subtitles: [
-        filter_overview,
-        filter_global_ounces,
-        filter_gold_vs_other
+        {fa: filter_overview, en: filter_overview_en},
+        {fa: filter_global_ounces, en: filter_global_ounces_en},
+        {fa: filter_gold_vs_other, en: filter_gold_vs_other_en}
       ]
     },
     {
       title: base_metal_title,
       enTitle: BASE_METALS_PREFIX,
       subtitles: [
-        filter_overview,
-        filter_global_base_metals,
-        filter_us_base_metals
+        {fa: filter_overview, en: filter_overview_en},
+        {fa: filter_global_base_metals, en: filter_global_base_metals_en},
+        {fa: filter_us_base_metals, en: filter_us_base_metals_en}
       ]
     },
     {
       title: commodity_title,
       enTitle: COMMODITY_PREFIX,
       subtitles: [
-        filter_overview,
-        filter_agricultural_products,
-        filter_crop_yields,
-        filter_animal_products
+        {fa: filter_overview, en: filter_overview_en},
+        {fa: filter_agricultural_products, en: filter_agricultural_products_en},
+        {fa: filter_crop_yields, en: filter_crop_yields_en},
+        {fa: filter_animal_products, en: filter_animal_products_en}
       ]
     }
 
@@ -131,7 +139,7 @@ export class HomeComponent {
   textToFilter = signal('')
   itemToRemove = signal<string>('')
   currentCategory: WritableSignal<string> = signal(this.categories[0].title)
-  currentSubCategory: WritableSignal<string> = signal(filter_overview);
+  currentSubCategory: WritableSignal<string> = signal(filter_overview_en);
 
   private currentCategory$ = toObservable(this.currentCategory);
   private currentSubCategory$ = toObservable(this.currentSubCategory);
@@ -205,7 +213,7 @@ export class HomeComponent {
       )
     ),
     map(({ list, subCategory }) => {
-      const filteredList = (subCategory !== filter_overview) ? [...list].filter(item => item.filterName == subCategory) : list;
+      const filteredList = (subCategory !== filter_overview_en) ? [...list].filter(item => item.filterNameEn == subCategory) : list;
       return filteredList
     })
   )
@@ -225,7 +233,7 @@ export class HomeComponent {
       )
     ),
     map(({ list, titleSort, priceSort, change24hSort, subCategory, textToFilter }) => {
-      const groupedList = (subCategory !== filter_overview) ? [...list].filter(item => item.filterName == subCategory) : list;
+      const groupedList = (subCategory !== filter_overview_en) ? [...list].filter(item => item.filterNameEn == subCategory) : list;
 
       const trimedText = textToFilter.trim()
       const filteredList = trimedText ? [...groupedList].filter(item => item.title.toLowerCase().includes(trimedText) || item.shortedName?.toLowerCase().includes(trimedText)) : groupedList;
@@ -252,10 +260,27 @@ export class HomeComponent {
   });
 
   constructor(private title: Title, private meta: Meta) {
-    this.setCurrentCategory(this.lastHomeState.currentCategory, this.lastHomeState.currentSubCategory);
+    this.route.queryParamMap.pipe(take(1))
+      .subscribe(params => {
+        const cat = params.get('cat');
+        const sub = params.get('sub');
+
+        if (cat) {
+          const category = this.categories.find(c => c.enTitle.toLowerCase() === cat);
+
+          if (category) {
+            this.setCurrentCategory(
+              category.title,
+              sub || filter_overview_en
+            );
+            return;
+          }
+        }
+
+        this.setCurrentCategory(this.lastHomeState.currentCategory, this.lastHomeState.currentSubCategory);
+      });
 
     if (typeof window !== 'undefined') {
-      this.syncHighlightAfterScroll()
 
       window.onbeforeunload = () => {
         window.scrollTo(0, 0)  
@@ -275,7 +300,6 @@ export class HomeComponent {
       this.checkSubCategoryScrollPosition();
       this.checkCategoryScrollPosition();
     })
-
   }
 
 
@@ -344,7 +368,7 @@ export class HomeComponent {
 
 
 
-  setCurrentCategory (title: string = currency_title, subCategory: string = filter_overview, element: HTMLDivElement | undefined = undefined) {
+  setCurrentCategory (title: string = currency_title, subCategory: string = filter_overview_en, element: HTMLDivElement | undefined = undefined) {
     this.currentCategory.set(title)
     this.lastHomeState.setCategory(title)
     
@@ -404,6 +428,22 @@ export class HomeComponent {
     this.checkAllSnapScrollPositions()
   }
 
+  private updateUrl() {
+    const categoryObj = this.categories.find(x => x.title === this.currentCategory());
+    
+    this.router.navigate(
+      [],
+      {
+        replaceUrl: true,
+        queryParams: {
+          cat: categoryObj?.enTitle.toLowerCase(),
+          sub: this.currentSubCategory()
+        }
+      }
+    );
+
+  }
+
   onFavAddItem = (id: string) => {
     this.notificationService.show('با موفقیت به دیده بان اضافه شد')
   }
@@ -433,23 +473,48 @@ export class HomeComponent {
   }
 
   canShowSupportedCurrencyToggle () {
-    return this.currentCategory() !== world_title && (this.currentCategory() !== favories_title || (this.currentSubCategory() !== filter_overview && this.currentSubCategory() !== filter_pair_currencies))
+    return this.currentCategory() !== world_title && (this.currentCategory() !== favories_title || (this.currentSubCategory() !== filter_overview_en && this.currentSubCategory() !== filter_pair_currencies))
   }
 
 
   initializeFavFilters() {
-    const favSubCategoryList: string[] = [filter_overview]
+    const favSubCategoryList: SubtitleType[] = [{fa: filter_overview, en: filter_overview_en}]
     this.reqestClass?.favList.subscribe((items) => {
-      items.forEach((item) => {
-        if (!favSubCategoryList.includes(item.filterName)) favSubCategoryList.push(item.filterName)
-      })
+      items.forEach(item => {
+        const exists = favSubCategoryList.some(x => x.en === item.filterNameEn);
+        if (!exists) {
+          favSubCategoryList.push({
+            fa: item.filterName,
+            en: item.filterNameEn
+          });
+        }
+
+      });
     })
     this.categories[0].subtitles = favSubCategoryList;
   }
 
   filterByCategory (name: string) {
+    const currentCategoryObj = this.categories.find(x => x.title === this.currentCategory());
+    this.router.navigate(
+      [],
+      {
+        queryParams: {
+          cat: currentCategoryObj?.enTitle.toLowerCase(),
+          sub: name
+        },
+        queryParamsHandling: null
+      }
+    );
+
     this.currentSubCategory.set(name);
     this.lastHomeState.setSubCategory(name);
+
+    this.updateUrl();
+  }
+
+  getCategoryByEnTitle(cat: string) {
+    return this.categories.find(x => x.enTitle.toLowerCase() === cat.toLowerCase());
   }
 
   filterList(event: Event) {
@@ -537,6 +602,19 @@ export class HomeComponent {
       content: 'قیمت لحظه‌ای ارز، طلا، سکه، ارز دیجیتال، فلزات گرانبها، فلزات پایه و بازار کالاها در ارزیاب؛ مرجع دقیق و به‌روز قیمت بازارها.'
     });
 
+    this.route.queryParamMap.subscribe(params => {
+      const cat = params.get('cat');
+      const sub = params.get('sub');
+
+      if (!cat) return;
+
+      const category = this.categories.find(c => c.enTitle.toLowerCase() === cat);
+
+      if (!category) return;
+
+      this.setCurrentCategory(category.title, sub || filter_overview_en);
+    });
+
     if (typeof window !== 'undefined') {
       this.syncHighlightAfterScroll()
 
@@ -565,6 +643,11 @@ export class HomeComponent {
       }
     }
     
+  }
+
+  changecategory (title: string = currency_title, subCategory: string = filter_overview_en, element: HTMLDivElement | undefined = undefined) {
+    this.setCurrentCategory(title, subCategory, element)
+    this.updateUrl();
   }
 
   ngOnDestroy(): void {
@@ -596,8 +679,7 @@ export class HomeComponent {
       })
       
     }
-    this.checkAllSnapScrollPositions()
-    this.filterByCategory(this.currentSubCategory())
+    this.checkAllSnapScrollPositions();
   }
 
   checkAllSnapScrollPositions () {

@@ -588,6 +588,7 @@ export interface CurrencyItem {
     lastPriceInfo?: Price;
     title: string;
     filterName: string;
+    filterNameEn: string;
     mainTitle?: string;
     unit?: string;
     shortedName?: string;

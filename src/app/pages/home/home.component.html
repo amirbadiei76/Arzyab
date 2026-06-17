@@ -9,7 +9,7 @@
                             <div class="flex flex-col justify-center items-center relative">
                                 <span
                                     [attr.data-active-category]="item.title === currentCategory()"
-                                    (click)="setCurrentCategory(item.title, 'همه', tabElement)"
+                                    (click)="changecategory(item.title, 'all', tabElement)"
                                     class="py-4  {{ item.title === currentCategory() ? 'text-dark dark:text-light' : 'text-dark-text2 dark:text-light-text2'}} hover:cursor-pointer flex items-center justify-center {{ item.title === 'دیده بان' ? 'gap-2.5' : '' }}">
                                     @if (item.title === 'دیده بان') {
                                         <div class="w-4 h-4">
@@ -85,8 +85,11 @@
     
             <div #scrollViewSubCategory (scroll)="onScrollEventHandler()" class="scroll-hide w-full overflow-x-scroll scroll-smooth scroll-snap-x text-right whitespace-nowrap">
                 <div class="inline-block scroll-hide w-full">
-                    @for (item of currentSubCategoryList(); track item) {
-                        <p (click)="filterByCategory(item)" class="{{item === currentSubCategory() ? 'bg-light-highlight dark:bg-dark-highlight rounded-md text-dark-text3 dark:text-light-text3' : 'text-dark-text2 dark:text-light-text2' }} text-center align-middle inline-block pt-[0.2rem] pb-[0.4rem] px-[0.3rem] ml-[0.6rem] mb-[0.3rem] hover:cursor-pointer text-xs leading-4.5 sm:leading-5 font-medium sm:text-sm">{{item}}</p>
+                    @for (item of currentSubCategoryList(); track item.en) {
+                        <p
+                            (click)="filterByCategory(item.en)"
+                            class="{{item.en === currentSubCategory() ? 'bg-light-highlight dark:bg-dark-highlight rounded-md text-dark-text3 dark:text-light-text3' : 'text-dark-text2 dark:text-light-text2' }} text-center align-middle inline-block pt-[0.2rem] pb-[0.4rem] px-[0.3rem] ml-[0.6rem] mb-[0.3rem] hover:cursor-pointer text-xs leading-4.5 sm:leading-5 font-medium sm:text-sm">
+                        {{item.fa}}</p>
                     }
                 </div>
             </div>

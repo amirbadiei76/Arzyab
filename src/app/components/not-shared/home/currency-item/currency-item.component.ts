@@ -39,13 +39,15 @@ export class CurrencyItemComponent {
   }
 
   addToFav(event: MouseEvent) {
-    event.stopPropagation()
+    event.preventDefault();
+    event.stopPropagation();
     this.requestArray?.addToFavorite(this.currencyItem!)
     this.favAdded.emit(this.currencyItem!.id)
   }
 
   removeFromFav(event: MouseEvent) {
-    event.stopPropagation()
+    event.preventDefault();
+    event.stopPropagation();
     this.requestArray?.removeFromFavorite(this.currencyItem?.id!)
     this.favRemoved.emit(this.currencyItem!.id)
   }

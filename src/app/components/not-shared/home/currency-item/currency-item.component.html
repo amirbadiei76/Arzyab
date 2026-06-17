@@ -7,13 +7,13 @@
     (click)="onSelectItem()"
     class="block"
 >
-    <article (click)="onSelectItem()" class="min-h-[4.853rem] px-4 sm:px-0 sm:min-h-[5.8rem] relative w-full flex items-center bg-light2 dark:bg-dark2 border-b border-b-light-border dark:border-b-dark-border md:hover:bg-light-hover md:hover:dark:bg-dark-hover md:active:bg-light-hover md:active:dark:bg-dark-hover hover:cursor-pointer">
+    <article class="min-h-[4.853rem] px-4 sm:px-0 sm:min-h-[5.8rem] relative w-full flex items-center bg-light2 dark:bg-dark2 border-b border-b-light-border dark:border-b-dark-border md:hover:bg-light-hover md:hover:dark:bg-dark-hover md:active:bg-light-hover md:active:dark:bg-dark-hover hover:cursor-pointer">
         <div class="justify-start items-center gap-1.5 w-[20%] hidden md:flex leading-5 font-normal text-sm">
             <i class="bi bi-caret-left-fill text-dark-text dark:text-white font-normal text-xs"></i>
             <p class="text-dark-text3 dark:text-light-text3 font-normal text-nowrap line-clamp-1 md:text-xs lg:text-sm">اطلاعات بیشتر</p>
         </div>
         <div class="flex justify-start md:justify-center items-center gap-2 w-[15%]">
-            @if (currencyItem?.groupName === 'World_Market') {
+            @if (currencyItem?.groupName === 'World-Market') {
                 <p class="font-normal text-xs leading-4.5 {{currencyItem?.lastPriceInfo?.dt === 'low' ? 'text-light-red-text dark:text-dark-red-text' : 'text-light-green-text dark:text-dark-green-text'}}">{{currencyItem?.lastPriceInfo?.dt === 'low' ? '-' : '+'}}{{currencyItem?.lastPriceInfo?.dp}}%</p>
             }
             @else {
@@ -22,7 +22,7 @@
         </div>
         <div class="flex flex-col items-end justify-center w-[25%] mr-1 relative">
 
-            @if (currencyItem?.groupName === 'World_Market') {
+            @if (currencyItem?.groupName === 'World-Market') {
                 <p class="text-dark-text dark:text-light-text font-normal text-xs md:text-sm leading-4.5 md:leading-5">{{ currencyItem?.lastPriceInfo?.p }}</p>
             }
             @else {
@@ -39,7 +39,7 @@
                         <i class="hover:cursor-pointer z-[8] mt-1 bi bi-info-circle-fill text-2xs md:text-sm text-dark-text2 dark:text-light-text2"></i>
                     </div>
                 }
-                <p class="{{currencyItem?.groupName !== 'World_Market' ? 'visible' : 'invisible'}} text-dark-text2 dark:text-light-text2 font-normal font-yekan text-2xs leading-3 mt-1">{{showCurrencyId === 0 ? 'تومان' : 'دلار'}}</p>
+                <p class="{{currencyItem?.groupName !== 'World-Market' ? 'visible' : 'invisible'}} text-dark-text2 dark:text-light-text2 font-normal font-yekan text-2xs leading-3 mt-1">{{showCurrencyId === 0 ? 'تومان' : 'دلار'}}</p>
             </div>
         </div>
         <div class="flex justify-end items-start gap-1.5 flex-1">
@@ -54,8 +54,8 @@
             
                 <div class="flex">
                     @if (currencyItem?.isFav) {
-                        <span class="w-6 h-7" (click)="removeFromFav($event)">
-                            <span class="w-6 h-7 flex justify-end items-center sm:items-end">
+                        <button class="w-6 h-7" (click)="removeFromFav($event)">
+                            <span class="w-6 h-7 outline-0 flex justify-end items-center sm:items-end hover:cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                     fill="none" viewBox="0 0 24 24"
                                     class="w-4 h-4 fill-yellow-star"
@@ -65,12 +65,12 @@
                                     </path>
                                 </svg>
                             </span>
-                        </span>
+                        </button>
                     }
                     @else {
-                        <span class="w-6 h-7 flex justify-end items-center sm:items-end" (click)="addToFav($event)">
+                        <button role="button" class="w-6 h-7 outline-0 flex justify-end items-center sm:items-end hover:cursor-pointer" (click)="addToFav($event)">
                             <star-icon [selected]="false" class="w-4 h-4 text-dark dark:text-light" />
-                        </span>
+                        </button>
                     }
                 </div>
             </div>

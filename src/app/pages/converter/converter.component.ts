@@ -2,7 +2,7 @@ import { Component, ElementRef, inject, signal, ViewChild } from '@angular/core'
 import { RequestArrayService } from '../../services/request-array.service';
 import { CurrencyItem } from '../../interfaces/data.types';
 import { Meta } from '@angular/platform-browser';
-import { currency_title, filter_main_currencies, MAIN_CURRENCY_PREFIX } from '../../constants/Values';
+import { currency_title, filter_main_currencies, filter_main_currencies_en, MAIN_CURRENCY_PREFIX } from '../../constants/Values';
 import { SearchItemComponent } from '../../components/shared/search-item/search-item.component';
 import { FormsModule } from '@angular/forms';
 import { CommafyNumberDirective } from '../../directives/commafy-number.directive';
@@ -45,6 +45,7 @@ export class ConverterComponent {
     shortedName: 'IRT',
     groupName: MAIN_CURRENCY_PREFIX,
     filterName: filter_main_currencies,
+    filterNameEn: filter_main_currencies_en,
     faGroupName: currency_title,
     historyCallInfo: undefined,
     id: "200",

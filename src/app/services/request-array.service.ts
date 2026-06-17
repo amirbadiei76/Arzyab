@@ -1,9 +1,11 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { CurrenciesService } from './currencies.service';
 import { Currencies, CurrencyItem, Current } from '../interfaces/data.types';
-import { base_metal_title, BASE_METALS_PREFIX, COIN_PREFIX, coin_title, COMMODITY_PREFIX, commodity_title, CRYPTO_PREFIX, crypto_title, currency_title, dollar_unit, filter_agricultural_products, filter_animal_products, filter_coin_blubber, filter_coin_cash, filter_coin_exchange, filter_coin_retail, filter_crop_yields, filter_cryptocurrency, filter_etf, filter_global_base_metals, filter_global_ounces, filter_gold, filter_gold_vs_other, filter_main_currencies, filter_melted, filter_mesghal, filter_other_coins, filter_other_currencies, filter_pair_currencies, filter_silver, filter_us_base_metals, GOLD_PREFIX, gold_title, MAIN_CURRENCY_PREFIX, pound_unit, precious_metal_title, PRECIOUS_METALS_PREFIX, toman_unit, WORLD_MARKET_PREFIX, world_title } from '../constants/Values';
+import { base_metal_title, BASE_METALS_PREFIX, COIN_PREFIX, coin_title, COMMODITY_PREFIX, commodity_title, CRYPTO_PREFIX, crypto_title, currency_title, dollar_unit, filter_agricultural_products, filter_animal_products, filter_coin_blubber, filter_coin_cash, filter_coin_exchange, filter_coin_retail, filter_crop_yields, filter_cryptocurrency, filter_etf, filter_global_base_metals, filter_global_ounces, filter_gold, filter_gold_vs_other, filter_main_currencies,
+    filter_melted, filter_mesghal, filter_other_coins, filter_other_currencies, filter_pair_currencies, filter_silver, filter_us_base_metals, GOLD_PREFIX, gold_title, MAIN_CURRENCY_PREFIX, pound_unit, precious_metal_title, PRECIOUS_METALS_PREFIX, toman_unit, filter_main_currencies_en, world_title, filter_other_currencies_en, filter_cryptocurrency_en, filter_pair_currencies_en, WORLD_MARKET_PREFIX, filter_coin_cash_en, filter_coin_retail_en, filter_coin_blubber_en,
+    filter_coin_exchange_en, filter_other_coins_en, filter_gold_en, filter_silver_en, filter_mesghal_en, filter_melted_en, filter_etf_en, filter_global_ounces_en, filter_gold_vs_other_en, filter_global_base_metals_en, filter_us_base_metals_en, filter_agricultural_products_en, filter_crop_yields_en, filter_animal_products_en} from '../constants/Values';
 import { commafy, priceToNumber, trimDecimal, valueToDollarChanges, valueToRialChanges } from '../utils/CurrencyConverter';
-import { BehaviorSubject, combineLatest, forkJoin, from, map, Observable, Subject, timer } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
@@ -349,6 +351,7 @@ export class RequestArrayService {
         title: "دلار آمریکا",
         shortedName: "USD",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/us.svg',
@@ -360,6 +363,7 @@ export class RequestArrayService {
         title: "یورو",
         shortedName: "EUR",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/eu.svg'
@@ -371,6 +375,7 @@ export class RequestArrayService {
         title: "درهم امارات",
         shortedName: "AED",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/ae.svg'
@@ -382,6 +387,7 @@ export class RequestArrayService {
         title: "پوند انگلیس",
         shortedName: "GBP",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/gb.svg'
@@ -393,6 +399,7 @@ export class RequestArrayService {
         title: "لیر ترکیه",
         shortedName: "TRY",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/tr.svg'
@@ -404,6 +411,7 @@ export class RequestArrayService {
         title: "فرانک سوییس",
         shortedName: "CHF",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/ch.svg'
@@ -415,6 +423,7 @@ export class RequestArrayService {
         title: "یوان چین",
         shortedName: "CNY",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/cn.svg'
@@ -426,6 +435,7 @@ export class RequestArrayService {
         title: "ین ژاپن (100 ین)",
         shortedName: "JPY",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/jp.svg'
@@ -437,6 +447,7 @@ export class RequestArrayService {
         title: "وون کره جنوبی",
         shortedName: "KRW",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/kr.svg'
@@ -448,6 +459,7 @@ export class RequestArrayService {
         title: "دلار کانادا",
         shortedName: "CAD",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/ca.svg'
@@ -459,6 +471,7 @@ export class RequestArrayService {
         title: "دلار استرالیا",
         shortedName: "AUD",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/au.svg'
@@ -470,6 +483,7 @@ export class RequestArrayService {
         title: "دلار نیوزلند",
         shortedName: "NZD",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/nz.svg'
@@ -481,6 +495,7 @@ export class RequestArrayService {
         title: "دلار سنگاپور",
         shortedName: "SGD",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/sg.svg'
@@ -492,6 +507,7 @@ export class RequestArrayService {
         title: "روپیه هند",
         shortedName: "INR",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/in.svg'
@@ -503,6 +519,7 @@ export class RequestArrayService {
         title: "روپیه پاکستان",
         shortedName: "PKR",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/pk.svg'
@@ -514,6 +531,7 @@ export class RequestArrayService {
         title: "دینار عراق",
         shortedName: "IQD",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/iq.svg'
@@ -525,6 +543,7 @@ export class RequestArrayService {
         title: "پوند سوریه",
         shortedName: "SYP",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/sy.svg'
@@ -536,6 +555,7 @@ export class RequestArrayService {
         title: "افغانی افغانستان",
         shortedName: "AFN",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/af.svg'
@@ -547,6 +567,7 @@ export class RequestArrayService {
         title: "کرون دانمارک",
         shortedName: "DKK",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/dk.svg'
@@ -558,6 +579,7 @@ export class RequestArrayService {
         title: "کرون سوئد",
         shortedName: "SEK",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/se.svg'
@@ -569,6 +591,7 @@ export class RequestArrayService {
         title: "کرون نروژ",
         shortedName: "NOK",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/no.svg'
@@ -580,6 +603,7 @@ export class RequestArrayService {
         title: "ريال عربستان",
         shortedName: "SAR",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/sa.svg'
@@ -591,6 +615,7 @@ export class RequestArrayService {
         title: "ريال قطر",
         shortedName: "QAR",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/qa.svg'
@@ -602,6 +627,7 @@ export class RequestArrayService {
         title: "ريال عمان",
         shortedName: "OMR",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/om.svg'
@@ -613,6 +639,7 @@ export class RequestArrayService {
         title: "دینار کویت",
         shortedName: "KWD",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/kw.svg'
@@ -624,6 +651,7 @@ export class RequestArrayService {
         title: "دینار بحرین",
         shortedName: "BHD",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/bh.svg'
@@ -635,6 +663,7 @@ export class RequestArrayService {
         title: "رینگیت مالزی",
         shortedName: "MYR",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/my.svg'
@@ -646,6 +675,7 @@ export class RequestArrayService {
         title: "بات تایلند",
         shortedName: "THB",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/th.svg'
@@ -657,6 +687,7 @@ export class RequestArrayService {
         title: "دلار هنگ کنگ",
         shortedName: "HKD",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/hk.svg'
@@ -668,6 +699,7 @@ export class RequestArrayService {
         title: "روبل روسیه",
         shortedName: "RUB",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/ru.svg'
@@ -679,6 +711,7 @@ export class RequestArrayService {
         title: "منات آذربایجان",
         shortedName: "AZN",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/az.svg'
@@ -690,6 +723,7 @@ export class RequestArrayService {
         title: "درام ارمنستان",
         shortedName: "AMD",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/am.svg'
@@ -701,6 +735,7 @@ export class RequestArrayService {
         title: "لاری گرجستان",
         shortedName: "GEL",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/ge.svg'
@@ -712,6 +747,7 @@ export class RequestArrayService {
         title: "سوم قرقیزستان",
         shortedName: "KGS",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/kg.svg'
@@ -723,6 +759,7 @@ export class RequestArrayService {
         title: "سامانی تاجیکستان",
         shortedName: "TJS",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/tj.svg'
@@ -734,6 +771,7 @@ export class RequestArrayService {
         title: "منات ترکمنستان",
         shortedName: "TMT",
         filterName: filter_main_currencies,
+        filterNameEn: filter_main_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/tm.svg'
@@ -749,6 +787,7 @@ export class RequestArrayService {
         title: "لک آلبانی",
         shortedName: "ALL",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/al.svg'
@@ -760,6 +799,7 @@ export class RequestArrayService {
         title: "دلار باربادوس",
         shortedName: "BBD",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/bb.svg'
@@ -771,6 +811,7 @@ export class RequestArrayService {
         title: "تاکا بنگلادش",
         shortedName: "BDT",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/bd.svg'
@@ -782,6 +823,7 @@ export class RequestArrayService {
         title: "لو بلغارستان",
         shortedName: "BGN",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/bg.svg'
@@ -793,6 +835,7 @@ export class RequestArrayService {
         title: "فرانک بوروندی",
         shortedName: "BIF",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/bi.svg'
@@ -804,6 +847,7 @@ export class RequestArrayService {
         title: "دلار بورونئی",
         shortedName: "BHD",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/bn.svg'
@@ -815,6 +859,7 @@ export class RequestArrayService {
         title: "دلار باهاماس",
         shortedName: "BSD",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/bs.svg'
@@ -826,6 +871,7 @@ export class RequestArrayService {
         title: "پوله بوتسوانا",
         shortedName: "BWP",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/bw.svg'
@@ -837,6 +883,7 @@ export class RequestArrayService {
         title: "روبل بلاروس",
         shortedName: "BYN",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/by.svg'
@@ -848,6 +895,7 @@ export class RequestArrayService {
         title: "دلار بلیز",
         shortedName: "BZD",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/bz.svg'
@@ -859,6 +907,7 @@ export class RequestArrayService {
         title: "پزوی کوبا",
         shortedName: "CUP",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/cu.svg'
@@ -870,6 +919,7 @@ export class RequestArrayService {
         title: "کرون چک",
         shortedName: "CZK",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/cz.svg'
@@ -881,6 +931,7 @@ export class RequestArrayService {
         title: "فرانک جیبوتی",
         shortedName: "DJF",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/dj.svg'
@@ -892,6 +943,7 @@ export class RequestArrayService {
         title: "پزوی دومینیکن",
         shortedName: "DOP",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/do.svg'
@@ -903,6 +955,7 @@ export class RequestArrayService {
         title: "دینار الجزایر",
         shortedName: "DZD",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/dz.svg'
@@ -914,6 +967,7 @@ export class RequestArrayService {
         title: "بیر اتیوپی",
         shortedName: "ETB",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/et.svg'
@@ -925,6 +979,7 @@ export class RequestArrayService {
         title: "فرانک گینه",
         shortedName: "GNF",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/gn.svg'
@@ -936,6 +991,7 @@ export class RequestArrayService {
         title: "گواتزال گواتمالا",
         shortedName: "GTQ",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/gt.svg'
@@ -947,6 +1003,7 @@ export class RequestArrayService {
         title: "دلار گویان",
         shortedName: "GYD",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/gy.svg'
@@ -958,6 +1015,7 @@ export class RequestArrayService {
         title: "لمپیرا هندوراس",
         shortedName: "HNL",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/hn.svg'
@@ -969,6 +1027,7 @@ export class RequestArrayService {
         title: "کونا (یورو) کرواسی",
         shortedName: "HRK",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/hr.svg'
@@ -980,6 +1039,7 @@ export class RequestArrayService {
         title: "گورده هائیتی",
         shortedName: "HTG",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/ht.svg'
@@ -991,6 +1051,7 @@ export class RequestArrayService {
         title: "کرونا ایسلند",
         shortedName: "ISK",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/is.svg'
@@ -1002,6 +1063,7 @@ export class RequestArrayService {
         title: "دلار جامائیکا",
         shortedName: "JMD",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/jm.svg'
@@ -1013,6 +1075,7 @@ export class RequestArrayService {
         title: "شیلینگ کنیا",
         shortedName: "KES",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/ke.svg'
@@ -1024,6 +1087,7 @@ export class RequestArrayService {
         title: "ریل کامبوج",
         shortedName: "KHR",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/kh.svg'
@@ -1035,6 +1099,7 @@ export class RequestArrayService {
         title: "فرانک کومور",
         shortedName: "KMF",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/km.svg'
@@ -1046,6 +1111,7 @@ export class RequestArrayService {
         title: "تنگه قزاقستان",
         shortedName: "KZT",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/kz.svg'
@@ -1057,6 +1123,7 @@ export class RequestArrayService {
         title: "کیپ لائوس",
         shortedName: "LAK",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/la.svg'
@@ -1068,6 +1135,7 @@ export class RequestArrayService {
         title: "پوند لبنان",
         shortedName: "LBP",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/lb.svg'
@@ -1079,6 +1147,7 @@ export class RequestArrayService {
         title: "روپیه سریلانکا",
         shortedName: "LKR",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/lk.svg'
@@ -1090,6 +1159,7 @@ export class RequestArrayService {
         title: "دلار لیبریا",
         shortedName: "LRD",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/lr.svg'
@@ -1101,6 +1171,7 @@ export class RequestArrayService {
         title: "لوتی لسوتو",
         shortedName: "LSL",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/ls.svg'
@@ -1112,6 +1183,7 @@ export class RequestArrayService {
         title: "دینار لیبی",
         shortedName: "LYD",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/ly.svg'
@@ -1123,6 +1195,7 @@ export class RequestArrayService {
         title: "درهم مراکش",
         shortedName: "MAD",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/ma.svg'
@@ -1134,6 +1207,7 @@ export class RequestArrayService {
         title: "آریاری ماداگاسکار",
         shortedName: "MGA",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/mg.svg'
@@ -1145,6 +1219,7 @@ export class RequestArrayService {
         title: "دینار مقدونیه",
         shortedName: "MKD",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/mk.svg'
@@ -1156,6 +1231,7 @@ export class RequestArrayService {
         title: "کیات میانمار",
         shortedName: "MMK",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/mm.svg'
@@ -1167,6 +1243,7 @@ export class RequestArrayService {
         title: "پاتاکا ماکائو",
         shortedName: "MOP",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/mo.svg'
@@ -1178,6 +1255,7 @@ export class RequestArrayService {
         title: "روپیه موریس",
         shortedName: "MUR",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/mu.svg'
@@ -1189,6 +1267,7 @@ export class RequestArrayService {
         title: "روفیا مالدیو",
         shortedName: "MVR",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/mv.svg'
@@ -1200,6 +1279,7 @@ export class RequestArrayService {
         title: "کواچا مالاوی",
         shortedName: "MWK",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/mw.svg'
@@ -1211,6 +1291,7 @@ export class RequestArrayService {
         title: "متیکال موزامبیک",
         shortedName: "MZN",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/mz.svg'
@@ -1222,6 +1303,7 @@ export class RequestArrayService {
         title: "دلار نامیبیا",
         shortedName: "NAD",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/na.svg'
@@ -1233,6 +1315,7 @@ export class RequestArrayService {
         title: "نیرا نیجریه",
         shortedName: "NGN",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/ng.svg'
@@ -1244,6 +1327,7 @@ export class RequestArrayService {
         title: "روپیه نپال",
         shortedName: "NPR",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/np.svg'
@@ -1255,6 +1339,7 @@ export class RequestArrayService {
         title: "بالبوآ پاناما",
         shortedName: "PAB",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/pa.svg'
@@ -1266,6 +1351,7 @@ export class RequestArrayService {
         title: "کینا پاپوا گینه نو",
         shortedName: "PGK",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/pg.svg'
@@ -1277,6 +1363,7 @@ export class RequestArrayService {
         title: "پزوی فیلیپین",
         shortedName: "PHP",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/ph.svg'
@@ -1288,6 +1375,7 @@ export class RequestArrayService {
         title: "لئو رومانی",
         shortedName: "RON",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/ro.svg'
@@ -1299,6 +1387,7 @@ export class RequestArrayService {
         title: "دینار صربستان",
         shortedName: "RSD",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/rs.svg'
@@ -1310,6 +1399,7 @@ export class RequestArrayService {
         title: "فرانک رواندا",
         shortedName: "RWF",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/rw.svg'
@@ -1321,6 +1411,7 @@ export class RequestArrayService {
         title: "روپیه سیشل",
         shortedName: "SCR",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/sc.svg'
@@ -1332,6 +1423,7 @@ export class RequestArrayService {
         title: "پوند سودان",
         shortedName: "SDG",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/sd.svg'
@@ -1343,6 +1435,7 @@ export class RequestArrayService {
         title: "پوند سینت هلینا",
         shortedName: "SHP",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/sh.svg'
@@ -1354,6 +1447,7 @@ export class RequestArrayService {
         title: "شیلینگ سومالی",
         shortedName: "SOS",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/so.svg'
@@ -1365,6 +1459,7 @@ export class RequestArrayService {
         title: "کولون السالوادور",
         shortedName: "SVC",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/sv.svg'
@@ -1376,6 +1471,7 @@ export class RequestArrayService {
         title: "لیلانگی سوازیلند",
         shortedName: "SZL",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/sz.svg'
@@ -1387,6 +1483,7 @@ export class RequestArrayService {
         title: "دینار تونس",
         shortedName: "TND",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/tn.svg'
@@ -1398,6 +1495,7 @@ export class RequestArrayService {
         title: "دلار ترینیداد و توباگو",
         shortedName: "TTD",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/tt.svg'
@@ -1409,6 +1507,7 @@ export class RequestArrayService {
         title: "شیلینگ تانزانیا",
         shortedName: "TZS",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/tz.svg'
@@ -1420,6 +1519,7 @@ export class RequestArrayService {
         title: "شیلینگ اوگاندا",
         shortedName: "UGX",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/ug.svg'
@@ -1431,6 +1531,7 @@ export class RequestArrayService {
         title: "ريال یمن",
         shortedName: "YER",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/ye.svg'
@@ -1442,6 +1543,7 @@ export class RequestArrayService {
         title: "کواچا زامبیا",
         shortedName: "ZMW",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/zm.svg'
@@ -1453,6 +1555,7 @@ export class RequestArrayService {
         title: "سدی غنا",
         shortedName: "GHS",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/gh.svg'
@@ -1464,6 +1567,7 @@ export class RequestArrayService {
         title: "سول پرو",
         shortedName: "PEN",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/pe.svg'
@@ -1475,6 +1579,7 @@ export class RequestArrayService {
         title: "پزوی شیلی",
         shortedName: "CLP",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/cl.svg'
@@ -1486,6 +1591,7 @@ export class RequestArrayService {
         title: "پوند مصر",
         shortedName: "EGP",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/eg.svg'
@@ -1497,6 +1603,7 @@ export class RequestArrayService {
         title: "پزوی مکزیک",
         shortedName: "MXN",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/mx.svg'
@@ -1508,6 +1615,7 @@ export class RequestArrayService {
         title: "دینار اردن",
         shortedName: "JOD",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/jo.svg'
@@ -1519,6 +1627,7 @@ export class RequestArrayService {
         title: "رئال برزیل",
         shortedName: "BRL",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/br.svg'
@@ -1530,6 +1639,7 @@ export class RequestArrayService {
         title: "پزوی اوروگوئه",
         shortedName: "UYU",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/uy.svg'
@@ -1541,6 +1651,7 @@ export class RequestArrayService {
         title: "پزوی کلمبیا",
         shortedName: "COP",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/co.svg'
@@ -1552,6 +1663,7 @@ export class RequestArrayService {
         title: "زلوتی لهستان",
         shortedName: "PLN",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/pl.svg'
@@ -1563,6 +1675,7 @@ export class RequestArrayService {
         title: "پزوی آرژانتین",
         shortedName: "ARS",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/ar.svg'
@@ -1574,6 +1687,7 @@ export class RequestArrayService {
         title: "دلار جزایر کیمن",
         shortedName: "KYD",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/ky.svg'
@@ -1585,6 +1699,7 @@ export class RequestArrayService {
         title: "فورینت مجارستان",
         shortedName: "HUF",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/hu.svg'
@@ -1596,6 +1711,7 @@ export class RequestArrayService {
         title: "گورانی پاراکوئه",
         shortedName: "PYG",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/py.svg'
@@ -1607,6 +1723,7 @@ export class RequestArrayService {
         title: "هریونیا اوکراین",
         shortedName: "UAH",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/ua.svg'
@@ -1618,6 +1735,7 @@ export class RequestArrayService {
         title: "رند آفریقای جنوبی",
         shortedName: "ZAR",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/za.svg'
@@ -1629,6 +1747,7 @@ export class RequestArrayService {
         title: "کوردوبا نیکاراگوئه",
         shortedName: "NIO",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/ni.svg'
@@ -1640,6 +1759,7 @@ export class RequestArrayService {
         title: "دلار فیجی",
         shortedName: "FJD",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/fj.svg'
@@ -1651,6 +1771,7 @@ export class RequestArrayService {
         title: "دلار تایوان",
         shortedName: "TWD",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/tw.svg'
@@ -1662,6 +1783,7 @@ export class RequestArrayService {
         title: "سوم ازبکستان (10000)",
         shortedName: "UZS",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/uz.svg'
@@ -1673,6 +1795,7 @@ export class RequestArrayService {
         title: "روپیه اندونزی",
         shortedName: "IDR",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/id.svg'
@@ -1684,6 +1807,7 @@ export class RequestArrayService {
         title: "فرانک آفریقای غربی",
         shortedName: "XOF",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/za.svg'
@@ -1695,6 +1819,7 @@ export class RequestArrayService {
         title: "فرانک اقیانوسیه",
         shortedName: "XPF",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/pf.svg'
@@ -1706,6 +1831,7 @@ export class RequestArrayService {
         title: "دونگ ویتنام",
         shortedName: "VND",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/vn.svg'
@@ -1717,6 +1843,7 @@ export class RequestArrayService {
         title: "دلاسی گامبیا",
         shortedName: "GMD",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/gm.svg'
@@ -1728,6 +1855,7 @@ export class RequestArrayService {
         title: "فرانک آفریقای مرکزی",
         shortedName: "XAF",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/cf.svg'
@@ -1739,6 +1867,7 @@ export class RequestArrayService {
         title: "وانواتو واتو",
         shortedName: "VUV",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/vu.svg'
@@ -1750,6 +1879,7 @@ export class RequestArrayService {
         title: "اوگویا موریتانا",
         shortedName: "MRO",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/mr.svg'
@@ -1761,6 +1891,7 @@ export class RequestArrayService {
         title: "آنتیل گیلدر هلند",
         shortedName: "ANG",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/ang.svg'
@@ -1772,6 +1903,7 @@ export class RequestArrayService {
         title: "دوبرا سائوتومه و پرنسیپ",
         shortedName: "STD",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/st.svg'
@@ -1783,6 +1915,7 @@ export class RequestArrayService {
         title: "دلار کارائیب شرقی",
         shortedName: "XCD",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/zw.svg'
@@ -1794,6 +1927,7 @@ export class RequestArrayService {
         title: "مارک بوسنی و هرزگوین",
         shortedName: "BAM",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/ba.svg'
@@ -1805,6 +1939,7 @@ export class RequestArrayService {
         title: "نگولتروم بوتان",
         shortedName: "BTN",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/bt.svg'
@@ -1816,6 +1951,7 @@ export class RequestArrayService {
         title: "فرانک کنگو",
         shortedName: "CDF",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/cd.svg'
@@ -1827,6 +1963,7 @@ export class RequestArrayService {
         title: "کولون کاستاریکا",
         shortedName: "CRC",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/cr.svg'
@@ -1838,6 +1975,7 @@ export class RequestArrayService {
         title: "اسکودوی کیپ ورد",
         shortedName: "CVE",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/cv.svg'
@@ -1849,6 +1987,7 @@ export class RequestArrayService {
         title: "دلار برمودا",
         shortedName: "BMD",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/bm.svg'
@@ -1860,6 +1999,7 @@ export class RequestArrayService {
         title: "فلورین آروبا",
         shortedName: "AWG",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/aw.svg'
@@ -1871,6 +2011,7 @@ export class RequestArrayService {
         title: "لئون سیرالئون",
         shortedName: "SLL",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/sl.svg'
@@ -1882,6 +2023,7 @@ export class RequestArrayService {
         title: "بولیوار ونزوئلا",
         shortedName: "VEF",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/ve.svg'
@@ -1893,6 +2035,7 @@ export class RequestArrayService {
         title: "پوند (یورو) قبرس",
         shortedName: "CYP",
         filterName: filter_other_currencies,
+        filterNameEn: filter_other_currencies_en,
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
         img: '/assets/images/country-flags/cy.svg'
@@ -1903,7 +2046,7 @@ export class RequestArrayService {
   }
 
   private setupCryptoList(current: Current) {
-    const cryptoList = []
+    const cryptoList: CurrencyItem[] = []
     
     cryptoList.push({
         id: "1000141",
@@ -1912,6 +2055,7 @@ export class RequestArrayService {
         title: "بیت کوین",
         shortedName: "BTC",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/btc.svg'
@@ -1923,6 +2067,7 @@ export class RequestArrayService {
         title: "اتریوم",
         shortedName: "ETH",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/eth.svg'
@@ -1934,6 +2079,7 @@ export class RequestArrayService {
         title: "تتر",
         shortedName: "USDT",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/usdt.svg'
@@ -1945,6 +2091,7 @@ export class RequestArrayService {
         title: "بایننس کوین",
         shortedName: "BNB",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/bnb.svg'
@@ -1956,6 +2103,7 @@ export class RequestArrayService {
         title: "سولانا",
         shortedName: "SOL",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/sol.svg'
@@ -1967,6 +2115,7 @@ export class RequestArrayService {
         title: "یو اس دی کوین",
         shortedName: "USDC",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/usdc.svg'
@@ -1978,6 +2127,7 @@ export class RequestArrayService {
         title: "ریپل",
         shortedName: "XRP",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/xrp.svg'
@@ -1989,6 +2139,7 @@ export class RequestArrayService {
         title: "کاردانو",
         shortedName: "ADA",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/ada.svg'
@@ -2000,6 +2151,7 @@ export class RequestArrayService {
         title: "دوج کوین",
         shortedName: "DOGE",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/doge.svg'
@@ -2011,6 +2163,7 @@ export class RequestArrayService {
         title: "آوالانچ",
         shortedName: "AVAX",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/avax.svg'
@@ -2022,6 +2175,7 @@ export class RequestArrayService {
         title: "شیبا اینو",
         shortedName: "SHIB",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/shiba_inu2.webp'
@@ -2033,6 +2187,7 @@ export class RequestArrayService {
         title: "پولکا دات",
         shortedName: "DOT",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/dot.svg'
@@ -2044,6 +2199,7 @@ export class RequestArrayService {
         title: "ترون",
         shortedName: "TRX",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/trx.svg'
@@ -2055,6 +2211,7 @@ export class RequestArrayService {
         title: "بیت کوین کش",
         shortedName: "BCH",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/bch.svg'
@@ -2066,6 +2223,7 @@ export class RequestArrayService {
         title: "یونی سواپ",
         shortedName: "UNI",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/uni.svg'
@@ -2077,6 +2235,7 @@ export class RequestArrayService {
         title: "لایت کوین",
         shortedName: "LTC",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/ltc.svg'
@@ -2088,6 +2247,7 @@ export class RequestArrayService {
         title: "فایل کوین",
         shortedName: "FIL",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/fil.svg'
@@ -2099,6 +2259,7 @@ export class RequestArrayService {
         title: "اتم (کازماز)",
         shortedName: "ATOM",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/atom.svg'
@@ -2110,6 +2271,7 @@ export class RequestArrayService {
         title: "اتریوم کلاسیک",
         shortedName: "ETC",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/etc.svg'
@@ -2121,6 +2283,7 @@ export class RequestArrayService {
         title: "استلار",
         shortedName: "XLM",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/xlm.svg'
@@ -2132,6 +2295,7 @@ export class RequestArrayService {
         title: "فانتوم",
         shortedName: "FTM",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/ftm.webp'
@@ -2143,6 +2307,7 @@ export class RequestArrayService {
         title: "الروند",
         shortedName: "EGLD",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/egld.webp'
@@ -2154,6 +2319,7 @@ export class RequestArrayService {
         title: "میکر",
         shortedName: "MKR",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/mkr.svg'
@@ -2165,6 +2331,7 @@ export class RequestArrayService {
         title: "ایوس",
         shortedName: "EOS",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/eos.svg'
@@ -2176,6 +2343,7 @@ export class RequestArrayService {
         title: "بیت تورنت",
         shortedName: "BTT",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/btt.svg'
@@ -2187,6 +2355,7 @@ export class RequestArrayService {
         title: "فلو",
         shortedName: "FLOW",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/flow.webp'
@@ -2198,6 +2367,7 @@ export class RequestArrayService {
         title: "گالا",
         shortedName: "GALA",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/gala.webp'
@@ -2209,6 +2379,7 @@ export class RequestArrayService {
         title: "د سندباکس",
         shortedName: "SAND",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/sand.svg'
@@ -2220,6 +2391,7 @@ export class RequestArrayService {
         title: "پنکیک سواپ",
         shortedName: "CAKE",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/cakeswap.webp'
@@ -2231,6 +2403,7 @@ export class RequestArrayService {
         title: "دش",
         shortedName: "DASH",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/dash.svg'
@@ -2242,6 +2415,7 @@ export class RequestArrayService {
         title: "مونرو",
         shortedName: "XMR",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/xmr.svg'
@@ -2253,6 +2427,7 @@ export class RequestArrayService {
         title: "چین لینک (بلاک چین)",
         shortedName: "LINK",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/link.svg'
@@ -2264,6 +2439,7 @@ export class RequestArrayService {
         title: "کاشا",
         shortedName: "CAS",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/cashaa.webp'
@@ -2275,6 +2451,7 @@ export class RequestArrayService {
         title: "تزوس",
         shortedName: "XTZ",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/xtz.svg'
@@ -2286,6 +2463,7 @@ export class RequestArrayService {
         title: "لوپرینگ",
         shortedName: "LRC",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/lrc.svg'
@@ -2297,6 +2475,7 @@ export class RequestArrayService {
         title: "دیکرید",
         shortedName: "DCR",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/dcr.svg'
@@ -2308,6 +2487,7 @@ export class RequestArrayService {
         title: "ویوز",
         shortedName: "WAVES",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/waves.svg'
@@ -2319,6 +2499,7 @@ export class RequestArrayService {
         title: "زد کش",
         shortedName: "ZEC",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/zec.svg'
@@ -2330,6 +2511,7 @@ export class RequestArrayService {
         title: "نیو اکونومی",
         shortedName: "XEM",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/link.svg'
@@ -2341,6 +2523,7 @@ export class RequestArrayService {
         title: "نئو",
         shortedName: "NEO",
         filterName: filter_cryptocurrency,
+        filterNameEn: filter_cryptocurrency_en,
         groupName: CRYPTO_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/crypto-icons/neo.svg'
@@ -2350,8 +2533,7 @@ export class RequestArrayService {
   }
 
   private setupWorldMarketList(current: Current) {
-
-    const worldMarketList = []
+    const worldMarketList: CurrencyItem[] = []
 
     worldMarketList.push({
         id: "1000181",
@@ -2360,6 +2542,7 @@ export class RequestArrayService {
         title: "یورو / دلار آمریکا",
         shortedName: "EUR/USD Ask",
         filterName: filter_pair_currencies,
+        filterNameEn: filter_pair_currencies_en,
         groupName: WORLD_MARKET_PREFIX,
         img: '/assets/images/ask-flags/eu-usd.webp'
     });
@@ -2370,6 +2553,7 @@ export class RequestArrayService {
         title: "پوند انگلیس / دلار آمریکا",
         shortedName: "GBP/USD Ask",
         filterName: filter_pair_currencies,
+        filterNameEn: filter_pair_currencies_en,
         groupName: WORLD_MARKET_PREFIX,
         img: '/assets/images/ask-flags/gb-us.webp'
     });
@@ -2380,6 +2564,7 @@ export class RequestArrayService {
         title: "دلار آمریکا / ین ژاپن",
         shortedName: "USD/JPY Ask",
         filterName: filter_pair_currencies,
+        filterNameEn: filter_pair_currencies_en,
         groupName: WORLD_MARKET_PREFIX,
         img: '/assets/images/ask-flags/us-jp.webp'
     });
@@ -2390,6 +2575,7 @@ export class RequestArrayService {
         title: "دلار آمریکا / فرانک سوییس",
         shortedName: "USD/CHF Ask",
         filterName: filter_pair_currencies,
+        filterNameEn: filter_pair_currencies_en,
         groupName: WORLD_MARKET_PREFIX,
         img: '/assets/images/ask-flags/us-ch.webp'
     });
@@ -2400,6 +2586,7 @@ export class RequestArrayService {
         title: "دلار استرالیا / دلار آمریکا",
         shortedName: "AUD/USD Ask",
         filterName: filter_pair_currencies,
+        filterNameEn: filter_pair_currencies_en,
         groupName: WORLD_MARKET_PREFIX,
         img: '/assets/images/ask-flags/au-us.webp'
     });
@@ -2410,6 +2597,7 @@ export class RequestArrayService {
         title: "دلار آمریکا / دلار کانادا",
         shortedName: "USD/CAD Ask",
         filterName: filter_pair_currencies,
+        filterNameEn: filter_pair_currencies_en,
         groupName: WORLD_MARKET_PREFIX,
         img: '/assets/images/ask-flags/us-ca.webp'
     });
@@ -2420,6 +2608,7 @@ export class RequestArrayService {
         title: "دلار آمریکا / دلار نیوزلند",
         shortedName: "USD/NZD Ask",
         filterName: filter_pair_currencies,
+        filterNameEn: filter_pair_currencies_en,
         groupName: WORLD_MARKET_PREFIX,
         img: '/assets/images/ask-flags/us-nz.webp'
     });
@@ -2430,6 +2619,7 @@ export class RequestArrayService {
         title: "دلار آمریکا / لیر ترکیه",
         shortedName: "USD/TRY Ask",
         filterName: filter_pair_currencies,
+        filterNameEn: filter_pair_currencies_en,
         groupName: WORLD_MARKET_PREFIX,
         img: '/assets/images/ask-flags/us-tr.webp'
     });
@@ -2440,6 +2630,7 @@ export class RequestArrayService {
         title: "دلار آمریکا / کرون سوئد",
         shortedName: "USD/SEK Ask",
         filterName: filter_pair_currencies,
+        filterNameEn: filter_pair_currencies_en,
         groupName: WORLD_MARKET_PREFIX,
         img: '/assets/images/ask-flags/us-se.webp'
     });
@@ -2450,6 +2641,7 @@ export class RequestArrayService {
         title: "دلار آمریکا / ريال عربستان",
         shortedName: "USD/SAR Ask",
         filterName: filter_pair_currencies,
+        filterNameEn: filter_pair_currencies_en,
         groupName: WORLD_MARKET_PREFIX,
         img: '/assets/images/ask-flags/us-sa.webp'
     });
@@ -2460,6 +2652,7 @@ export class RequestArrayService {
         title: "دلار آمریکا / وون کره جنوبی",
         shortedName: "USD/KRW Ask",
         filterName: filter_pair_currencies,
+        filterNameEn: filter_pair_currencies_en,
         groupName: WORLD_MARKET_PREFIX,
         img: '/assets/images/ask-flags/us-kr.webp'
     });
@@ -2470,6 +2663,7 @@ export class RequestArrayService {
         title: "دلار آمریکا / یوان چین",
         shortedName: "USD/CNY Ask",
         filterName: filter_pair_currencies,
+        filterNameEn: filter_pair_currencies_en,
         groupName: WORLD_MARKET_PREFIX,
         img: '/assets/images/ask-flags/us-cn.webp'
     });
@@ -2478,7 +2672,7 @@ export class RequestArrayService {
   }
 
   private setupCoinList(current: Current) {
-    const coinList = []
+    const coinList: CurrencyItem[] = []
 
     // coins
     coinList.push({
@@ -2488,6 +2682,7 @@ export class RequestArrayService {
         title: "سکه امامی",
         shortedName: "Imami Coin",
         filterName: filter_coin_cash,
+        filterNameEn: filter_coin_cash_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2499,6 +2694,7 @@ export class RequestArrayService {
         title: "سکه بهار آزادی",
         shortedName: "Bahar Coin",
         filterName: filter_coin_cash,
+        filterNameEn: filter_coin_cash_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2510,6 +2706,7 @@ export class RequestArrayService {
         title: "نیم سکه",
         shortedName: "Half Coin",
         filterName: filter_coin_cash,
+        filterNameEn: filter_coin_cash_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2521,6 +2718,7 @@ export class RequestArrayService {
         title: "ربع سکه",
         shortedName: "Quarter Coin",
         filterName: filter_coin_cash,
+        filterNameEn: filter_coin_cash_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2532,6 +2730,7 @@ export class RequestArrayService {
         title: "سکه گرمی",
         shortedName: "Gram Coin",
         filterName: filter_coin_cash,
+        filterNameEn: filter_coin_cash_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2546,6 +2745,7 @@ export class RequestArrayService {
         title: "سکه امامی تک فروشی",
         shortedName: "Retail Imami Coin",
         filterName: filter_coin_retail,
+        filterNameEn: filter_coin_retail_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2557,6 +2757,7 @@ export class RequestArrayService {
         title: "سکه بهار آزادی تک فروشی",
         shortedName: "Retail Bahar Coin",
         filterName: filter_coin_retail,
+        filterNameEn: filter_coin_retail_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2568,6 +2769,7 @@ export class RequestArrayService {
         title: "نیم سکه تک فروشی",
         shortedName: "Retail Half Coin",
         filterName: filter_coin_retail,
+        filterNameEn: filter_coin_retail_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2579,6 +2781,7 @@ export class RequestArrayService {
         title: "ربع سکه تک فروشی",
         shortedName: "Retail Quarter Coin",
         filterName: filter_coin_retail,
+        filterNameEn: filter_coin_retail_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2590,6 +2793,7 @@ export class RequestArrayService {
         title: "سکه گرمی تک فروشی",
         shortedName: "Retail Gram Coin",
         filterName: filter_coin_retail,
+        filterNameEn: filter_coin_retail_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2604,6 +2808,7 @@ export class RequestArrayService {
         title: "حباب سکه امامی",
         shortedName: "Coin Blubber",
         filterName: filter_coin_blubber,
+        filterNameEn: filter_coin_blubber_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2615,6 +2820,7 @@ export class RequestArrayService {
         title: "حباب سکه بهار آزادی",
         shortedName: "Imami Coin Blubber",
         filterName: filter_coin_blubber,
+        filterNameEn: filter_coin_blubber_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2626,6 +2832,7 @@ export class RequestArrayService {
         title: "حباب نیم سکه",
         shortedName: "Half Coin Blubber",
         filterName: filter_coin_blubber,
+        filterNameEn: filter_coin_blubber_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2637,6 +2844,7 @@ export class RequestArrayService {
         title: "حباب ربع سکه",
         shortedName: "Quarter Coin Blubber",
         filterName: filter_coin_blubber,
+        filterNameEn: filter_coin_blubber_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2648,6 +2856,7 @@ export class RequestArrayService {
         title: "ارزش واقعی سکه",
         shortedName: "Quarter Coin Blubber",
         filterName: filter_coin_blubber,
+        filterNameEn: filter_coin_blubber_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2662,6 +2871,7 @@ export class RequestArrayService {
         title: "تمام سکه بانک صادرات",
         shortedName: "تمام سکه طرح جدید 0310 صادرات",
         filterName: filter_coin_exchange,
+        filterNameEn: filter_coin_exchange_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2673,6 +2883,7 @@ export class RequestArrayService {
         title: "تمام سکه بانک ملت",
         shortedName: "تمام سکه طرح جدید 0211 ملت",
         filterName: filter_coin_exchange,
+        filterNameEn: filter_coin_exchange_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2684,6 +2895,7 @@ export class RequestArrayService {
         title: "تمام سکه بانک رفاه",
         shortedName: "تمام سکه طرح جدید 0312 رفاه",
         filterName: filter_coin_exchange,
+        filterNameEn: filter_coin_exchange_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2695,6 +2907,7 @@ export class RequestArrayService {
         title: "تمام سکه بانک آینده",
         shortedName: "تمام سکه طرح جدید 0411 آینده",
         filterName: filter_coin_exchange,
+        filterNameEn: filter_coin_exchange_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2706,6 +2919,7 @@ export class RequestArrayService {
         title: "تمام سکه بانک سامان",
         shortedName: "تمام سکه طرح جدید 0412 سامان",
         filterName: filter_coin_exchange,
+        filterNameEn: filter_coin_exchange_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2717,6 +2931,7 @@ export class RequestArrayService {
         title: "تمام سکه بانک مرکزی",
         shortedName: "تمام سکه طرح جدید 001 مرکزی",
         filterName: filter_coin_exchange,
+        filterNameEn: filter_coin_exchange_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2731,6 +2946,7 @@ export class RequestArrayService {
         title: "تمام سکه (قبل 86)",
         shortedName: "Bahar Coin Down",
         filterName: filter_other_coins,
+        filterNameEn: filter_other_coins_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2742,6 +2958,7 @@ export class RequestArrayService {
         title: "نیم سکه (قبل 86)",
         shortedName: "Half Coin Down",
         filterName: filter_other_coins,
+        filterNameEn: filter_other_coins_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2753,6 +2970,7 @@ export class RequestArrayService {
         title: "ربع سکه (قبل 86)",
         shortedName: "Quarter Coin Down",
         filterName: filter_other_coins,
+        filterNameEn: filter_other_coins_en,
         groupName: COIN_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/sekee.webp'
@@ -2762,7 +2980,7 @@ export class RequestArrayService {
   }
 
   private setupGoldList(current: Current) {
-    const goldList = []
+    const goldList: CurrencyItem[] = []
 
     //  gold
     goldList.push({
@@ -2772,6 +2990,7 @@ export class RequestArrayService {
         title: "طلای 18 عیار / 750",
         shortedName: "Gram Gold 18",
         filterName: filter_gold,
+        filterNameEn: filter_gold_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/ingots2.webp'
@@ -2783,6 +3002,7 @@ export class RequestArrayService {
         title: "طلای 18 عیار / 740",
         shortedName: "Gold 740k",
         filterName: filter_gold,
+        filterNameEn: filter_gold_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/ingots2.webp'
@@ -2794,6 +3014,7 @@ export class RequestArrayService {
         title: "طلای 24 عیار",
         shortedName: "Gram Gold 24",
         filterName: filter_gold,
+        filterNameEn: filter_gold_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/ingots2.webp'
@@ -2805,6 +3026,7 @@ export class RequestArrayService {
         title: "طلای دست دوم",
         shortedName: "Gold Mini Size",
         filterName: filter_gold,
+        filterNameEn: filter_gold_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/ingots2.webp'
@@ -2819,6 +3041,7 @@ export class RequestArrayService {
         title: "گرم نقره 925",
         shortedName: "Silver 925",
         filterName: filter_silver,
+        filterNameEn: filter_silver_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/silver2.webp'
@@ -2830,6 +3053,7 @@ export class RequestArrayService {
         title: "گرم نقره 999",
         shortedName: "Silver 999",
         filterName: filter_silver,
+        filterNameEn: filter_silver_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/silver2.webp'
@@ -2844,6 +3068,7 @@ export class RequestArrayService {
         title: "مثقال طلا",
         shortedName: "Mesghal",
         filterName: filter_mesghal,
+        filterNameEn: filter_mesghal_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/bar2.webp'
@@ -2855,6 +3080,7 @@ export class RequestArrayService {
         title: "مثقال / بدون حباب",
         shortedName: "Mesghal / Global Gold",
         filterName: filter_mesghal,
+        filterNameEn: filter_mesghal_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/bar2.webp'
@@ -2866,6 +3092,7 @@ export class RequestArrayService {
         title: "حباب آبشده",
         shortedName: "Mesghal / Transfer",
         filterName: filter_mesghal,
+        filterNameEn: filter_mesghal_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/bar2.webp'
@@ -2877,6 +3104,7 @@ export class RequestArrayService {
         title: "مثقال / بر مبنای سکه",
         shortedName: "Mesghal / Coin base",
         filterName: filter_mesghal,
+        filterNameEn: filter_mesghal_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/bar2.webp'
@@ -2891,6 +3119,7 @@ export class RequestArrayService {
         title: "آبشده نقدی",
         shortedName: "Gold Futures",
         filterName: filter_melted,
+        filterNameEn: filter_melted_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/bar2.webp'
@@ -2902,6 +3131,7 @@ export class RequestArrayService {
         title: "آبشده بنکداری",
         shortedName: "Gold melted wholesale",
         filterName: filter_melted,
+        filterNameEn: filter_melted_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/bar2.webp'
@@ -2913,6 +3143,7 @@ export class RequestArrayService {
         title: "آبشده کمتر از کیلو",
         shortedName: "Gold melted under kilo",
         filterName: filter_melted,
+        filterNameEn: filter_melted_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/bar2.webp'
@@ -2928,6 +3159,7 @@ export class RequestArrayService {
         title: "صندوق طلای عیار",
         shortedName: "Ayar Gold ETF",
         filterName: filter_etf,
+        filterNameEn: filter_etf_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/treasure-chest2.webp'
@@ -2939,6 +3171,7 @@ export class RequestArrayService {
     //     title: "صندوق طلای لوتوس",
     //     shortedName: "Lotus Gold ETF",
     //     filterName: filter_etf,
+    //     filterNameEn: filter_etf_en,
     //     groupName: GOLD_PREFIX,
     //     unit: toman_unit,
     //     img: '/assets/images/coins/treasure-chest2.webp'
@@ -2950,6 +3183,7 @@ export class RequestArrayService {
         title: "صندوق طلای قیراط",
         shortedName: "Ghirat Gold ETF",
         filterName: filter_etf,
+        filterNameEn: filter_etf_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/treasure-chest2.webp'
@@ -2961,6 +3195,7 @@ export class RequestArrayService {
         title: "صندوق طلای زر",
         shortedName: "Zar Gold ETF",
         filterName: filter_etf,
+        filterNameEn: filter_etf_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/treasure-chest2.webp'
@@ -2972,6 +3207,7 @@ export class RequestArrayService {
         title: "صندوق طلای گوهر",
         shortedName: "Gohar Gold ETF",
         filterName: filter_etf,
+        filterNameEn: filter_etf_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/treasure-chest2.webp'
@@ -2983,6 +3219,7 @@ export class RequestArrayService {
         title: "صندوق طلای گنج",
         shortedName: "Ganj Gold ETF",
         filterName: filter_etf,
+        filterNameEn: filter_etf_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/treasure-chest2.webp'
@@ -2994,6 +3231,7 @@ export class RequestArrayService {
         title: "صندوق طلای نفیس",
         shortedName: "Nafis Gold ETF",
         filterName: filter_etf,
+        filterNameEn: filter_etf_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/treasure-chest2.webp'
@@ -3005,6 +3243,7 @@ export class RequestArrayService {
         title: "صندوق طلای نهال",
         shortedName: "Nahal Gold ETF",
         filterName: filter_etf,
+        filterNameEn: filter_etf_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/treasure-chest2.webp'
@@ -3016,6 +3255,7 @@ export class RequestArrayService {
         title: "صندوق طلای کهربا",
         shortedName: "Kahroba Gold ETF",
         filterName: filter_etf,
+        filterNameEn: filter_etf_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/treasure-chest2.webp'
@@ -3027,6 +3267,7 @@ export class RequestArrayService {
         title: "صندوق طلای زرفام",
         shortedName: "Zarfam Gold ETF",
         filterName: filter_etf,
+        filterNameEn: filter_etf_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/treasure-chest2.webp'
@@ -3038,6 +3279,7 @@ export class RequestArrayService {
         title: "صندوق طلای مثقال",
         shortedName: "Mesghal Gold ETF",
         filterName: filter_etf,
+        filterNameEn: filter_etf_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/treasure-chest2.webp'
@@ -3049,6 +3291,7 @@ export class RequestArrayService {
         title: "صندوق طلای آلتون",
         shortedName: "Alton Gold ETF",
         filterName: filter_etf,
+        filterNameEn: filter_etf_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/treasure-chest2.webp'
@@ -3060,6 +3303,7 @@ export class RequestArrayService {
         title: "صندوق طلای تابش",
         shortedName: "Tabesh Gold ETF",
         filterName: filter_etf,
+        filterNameEn: filter_etf_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/treasure-chest2.webp'
@@ -3071,6 +3315,7 @@ export class RequestArrayService {
         title: "صندوق طلای جواهر",
         shortedName: "Javaher Gold ETF",
         filterName: filter_etf,
+        filterNameEn: filter_etf_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/treasure-chest2.webp'
@@ -3082,6 +3327,7 @@ export class RequestArrayService {
         title: "صندوق طلای ناب",
         shortedName: "Naab Gold ETF",
         filterName: filter_etf,
+        filterNameEn: filter_etf_en,
         groupName: GOLD_PREFIX,
         unit: toman_unit,
         img: '/assets/images/coins/treasure-chest2.webp'
@@ -3092,7 +3338,7 @@ export class RequestArrayService {
   }
 
   private setupPreciousMetals(current: Current) {
-    const preciousMetalList = []
+    const preciousMetalList: CurrencyItem[] = []
 
     //  global ounces
     preciousMetalList.push({
@@ -3102,6 +3348,7 @@ export class RequestArrayService {
         title: "اونس طلا",
         shortedName: "Gold Ounce",
         filterName: filter_global_ounces,
+        filterNameEn: filter_global_ounces_en,
         groupName: PRECIOUS_METALS_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/coins/gold.webp'
@@ -3113,6 +3360,7 @@ export class RequestArrayService {
         title: "اونس نقره",
         shortedName: "Silver Ounce",
         filterName: filter_global_ounces,
+        filterNameEn: filter_global_ounces_en,
         groupName: PRECIOUS_METALS_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/coins/silver.webp'
@@ -3124,6 +3372,7 @@ export class RequestArrayService {
         title: "اونس پلاتین",
         shortedName: "Platinum Ounce",
         filterName: filter_global_ounces,
+        filterNameEn: filter_global_ounces_en,
         groupName: PRECIOUS_METALS_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/coins/platinum.webp'
@@ -3135,6 +3384,7 @@ export class RequestArrayService {
         title: "اونس پالادیوم",
         shortedName: "Palladium Ounce",
         filterName: filter_global_ounces,
+        filterNameEn: filter_global_ounces_en,
         groupName: PRECIOUS_METALS_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/coins/palladium.webp'
@@ -3149,6 +3399,7 @@ export class RequestArrayService {
         title: "برابری طلا / نقره",
         shortedName: "Gold / Silver Ratio",
         filterName: filter_gold_vs_other,
+        filterNameEn: filter_gold_vs_other_en,
         groupName: PRECIOUS_METALS_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/coins/coin-vs2.webp'
@@ -3160,6 +3411,7 @@ export class RequestArrayService {
         title: "برابری طلا / پلاتین",
         shortedName: "Gold / Platinum Ratio",
         filterName: filter_gold_vs_other,
+        filterNameEn: filter_gold_vs_other_en,
         groupName: PRECIOUS_METALS_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/coins/coin-vs2.webp'
@@ -3171,6 +3423,7 @@ export class RequestArrayService {
         title: "برابری طلا / پالادیوم",
         shortedName: "Gold / Palladium Ratio",
         filterName: filter_gold_vs_other,
+        filterNameEn: filter_gold_vs_other_en,
         groupName: PRECIOUS_METALS_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/coins/coin-vs2.webp'
@@ -3182,6 +3435,7 @@ export class RequestArrayService {
         title: "برابری طلا / نفت خام",
         shortedName: "Gold / Crude Oil Ratio",
         filterName: filter_gold_vs_other,
+        filterNameEn: filter_gold_vs_other_en,
         groupName: PRECIOUS_METALS_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/coins/coin-vs2.webp'
@@ -3193,6 +3447,7 @@ export class RequestArrayService {
         title: "برابری طلا / داوجونز",
         shortedName: "Gold / Dow Jones Ratio",
         filterName: filter_gold_vs_other,
+        filterNameEn: filter_gold_vs_other_en,
         groupName: PRECIOUS_METALS_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/coins/coin-vs2.webp'
@@ -3204,6 +3459,7 @@ export class RequestArrayService {
         title: "برابری طلا / شاخص استاندارد و پورز 500",
         shortedName: "Gold / SP 500 Ratio",
         filterName: filter_gold_vs_other,
+        filterNameEn: filter_gold_vs_other_en,
         groupName: PRECIOUS_METALS_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/coins/coin-vs2.webp'
@@ -3215,6 +3471,7 @@ export class RequestArrayService {
         title: "برابری طلا / شاخص بازارهای مالی (HUI)",
         shortedName: "Gold / HUI Index Ratio",
         filterName: filter_gold_vs_other,
+        filterNameEn: filter_gold_vs_other_en,
         groupName: PRECIOUS_METALS_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/coins/coin-vs2.webp'
@@ -3224,7 +3481,7 @@ export class RequestArrayService {
   }
 
   private setupBaseMetals(current: Current) {
-    const baseMetalList = []
+    const baseMetalList: CurrencyItem[] = []
 
     // global base
     baseMetalList.push({
@@ -3234,6 +3491,7 @@ export class RequestArrayService {
         title: "مس (آمریکا)",
         shortedName: "Copper (US)",
         filterName: filter_global_base_metals,
+        filterNameEn: filter_global_base_metals_en,
         groupName: BASE_METALS_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/metals/copper2.webp'
@@ -3245,6 +3503,7 @@ export class RequestArrayService {
         title: "مس (لندن)",
         shortedName: "Copper (London)",
         filterName: filter_global_base_metals,
+        filterNameEn: filter_global_base_metals_en,
         groupName: BASE_METALS_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/metals/copper2.webp'
@@ -3256,6 +3515,7 @@ export class RequestArrayService {
         title: "قلع",
         shortedName: "Tin",
         filterName: filter_global_base_metals,
+        filterNameEn: filter_global_base_metals_en,
         groupName: BASE_METALS_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/metals/tin2.webp'
@@ -3267,6 +3527,7 @@ export class RequestArrayService {
         title: "نیکل",
         shortedName: "Nickel",
         filterName: filter_global_base_metals,
+        filterNameEn: filter_global_base_metals_en,
         groupName: BASE_METALS_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/metals/nickel2.webp'
@@ -3278,6 +3539,7 @@ export class RequestArrayService {
         title: "سرب",
         shortedName: "Lead",
         filterName: filter_global_base_metals,
+        filterNameEn: filter_global_base_metals_en,
         groupName: BASE_METALS_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/metals/lead2.webp'
@@ -3289,6 +3551,7 @@ export class RequestArrayService {
         title: "روی",
         shortedName: "Zinc",
         filterName: filter_global_base_metals,
+        filterNameEn: filter_global_base_metals_en,
         groupName: BASE_METALS_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/metals/zinc2.webp'
@@ -3304,6 +3567,7 @@ export class RequestArrayService {
         title: "آلومینیوم",
         shortedName: "Aluminum",
         filterName: filter_us_base_metals,
+        filterNameEn: filter_us_base_metals_en,
         groupName: BASE_METALS_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/metals/aluminium2.webp'
@@ -3315,6 +3579,7 @@ export class RequestArrayService {
         title: "اورانیوم",
         shortedName: "Uranium",
         filterName: filter_us_base_metals,
+        filterNameEn: filter_us_base_metals_en,
         groupName: BASE_METALS_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/metals/uranium2.webp'
@@ -3326,6 +3591,7 @@ export class RequestArrayService {
         title: "فولاد",
         shortedName: "Steel",
         filterName: filter_us_base_metals,
+        filterNameEn: filter_us_base_metals_en,
         groupName: BASE_METALS_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/metals/iron2.webp'
@@ -3337,6 +3603,7 @@ export class RequestArrayService {
         title: "سنگ آهن 62%",
         shortedName: "Iron ore 62%",
         filterName: filter_us_base_metals,
+        filterNameEn: filter_us_base_metals_en,
         groupName: BASE_METALS_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/metals/iron2.webp'
@@ -3346,7 +3613,7 @@ export class RequestArrayService {
   }
 
   private setupCommodityMarket(current: Current) {
-    const commodityList = []
+    const commodityList: CurrencyItem[] = []
 
     // agricultural
     commodityList.push({
@@ -3356,6 +3623,7 @@ export class RequestArrayService {
         title: "گندم (آمریکا)",
         shortedName: "Wheat (US)",
         filterName: filter_agricultural_products,
+        filterNameEn: filter_agricultural_products_en,
         groupName: COMMODITY_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/commodity/wheat2.webp'
@@ -3367,6 +3635,7 @@ export class RequestArrayService {
         title: "گندم (لندن)",
         shortedName: "Wheat (London)",
         filterName: filter_agricultural_products,
+        filterNameEn: filter_agricultural_products_en,
         groupName: COMMODITY_PREFIX,
         unit: pound_unit,
         img: '/assets/images/commodity/wheat2.webp'
@@ -3378,6 +3647,7 @@ export class RequestArrayService {
         title: "ذرت",
         shortedName: "Corn",
         filterName: filter_agricultural_products,
+        filterNameEn: filter_agricultural_products_en,
         groupName: COMMODITY_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/commodity/corn.webp'
@@ -3389,6 +3659,7 @@ export class RequestArrayService {
         title: "جو",
         shortedName: "Oats",
         filterName: filter_agricultural_products,
+        filterNameEn: filter_agricultural_products_en,
         groupName: COMMODITY_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/commodity/oat.webp'
@@ -3400,6 +3671,7 @@ export class RequestArrayService {
         title: "برنج",
         shortedName: "Rough Rice",
         filterName: filter_agricultural_products,
+        filterNameEn: filter_agricultural_products_en,
         groupName: COMMODITY_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/commodity/rice-bowl.webp'
@@ -3411,6 +3683,7 @@ export class RequestArrayService {
         title: "سویا",
         shortedName: "Soybean",
         filterName: filter_agricultural_products,
+        filterNameEn: filter_agricultural_products_en,
         groupName: COMMODITY_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/commodity/soybean.webp'
@@ -3422,6 +3695,7 @@ export class RequestArrayService {
         title: "کنجاله سویا",
         shortedName: "Soybean Meal",
         filterName: filter_agricultural_products,
+        filterNameEn: filter_agricultural_products_en,
         groupName: COMMODITY_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/commodity/soybean-meal.webp'
@@ -3433,6 +3707,7 @@ export class RequestArrayService {
         title: "روغن سویا",
         shortedName: "Soybean Oil",
         filterName: filter_agricultural_products,
+        filterNameEn: filter_agricultural_products_en,
         groupName: COMMODITY_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/commodity/olives.webp'
@@ -3448,6 +3723,7 @@ export class RequestArrayService {
         title: "شکر (آمریکا)",
         shortedName: "Sugar (US)",
         filterName: filter_crop_yields,
+        filterNameEn: filter_crop_yields_en,
         groupName: COMMODITY_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/commodity/sugar.webp'
@@ -3459,6 +3735,7 @@ export class RequestArrayService {
         title: "شکر (لندن)",
         shortedName: "Sugar (London)",
         filterName: filter_crop_yields,
+        filterNameEn: filter_crop_yields_en,
         groupName: COMMODITY_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/commodity/sugar.webp'
@@ -3470,6 +3747,7 @@ export class RequestArrayService {
         title: "قهوه (آمریکا)",
         shortedName: "Coffee (US)",
         filterName: filter_crop_yields,
+        filterNameEn: filter_crop_yields_en,
         groupName: COMMODITY_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/commodity/coffee-seed.webp'
@@ -3481,6 +3759,7 @@ export class RequestArrayService {
         title: "قهوه (لندن)",
         shortedName: "Coffee (London)",
         filterName: filter_crop_yields,
+        filterNameEn: filter_crop_yields_en,
         groupName: COMMODITY_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/commodity/coffee-seed.webp'
@@ -3492,6 +3771,7 @@ export class RequestArrayService {
         title: "کاکائو (آمریکا)",
         shortedName: "Cocoa (US)",
         filterName: filter_crop_yields,
+        filterNameEn: filter_crop_yields_en,
         groupName: COMMODITY_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/commodity/cocoa.webp'
@@ -3503,6 +3783,7 @@ export class RequestArrayService {
         title: "کاکائو (لندن)",
         shortedName: "Cocoa (London)",
         filterName: filter_crop_yields,
+        filterNameEn: filter_crop_yields_en,
         groupName: COMMODITY_PREFIX,
         unit: pound_unit,
         img: '/assets/images/commodity/cocoa.webp'
@@ -3514,6 +3795,7 @@ export class RequestArrayService {
         title: "الوار",
         shortedName: "Lumber",
         filterName: filter_crop_yields,
+        filterNameEn: filter_crop_yields_en,
         groupName: COMMODITY_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/commodity/wood.webp'
@@ -3525,6 +3807,7 @@ export class RequestArrayService {
         title: "پنبه",
         shortedName: "Cotton",
         filterName: filter_crop_yields,
+        filterNameEn: filter_crop_yields_en,
         groupName: COMMODITY_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/commodity/cotton.webp'
@@ -3536,6 +3819,7 @@ export class RequestArrayService {
         title: "آب پرتقال",
         shortedName: "Orange Juice",
         filterName: filter_crop_yields,
+        filterNameEn: filter_crop_yields_en,
         groupName: COMMODITY_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/commodity/juice.webp'
@@ -3550,6 +3834,7 @@ export class RequestArrayService {
         title: "گوشت گاو (1 کیلوگرم)",
         shortedName: "Beef (1 Kilogram)",
         filterName: filter_animal_products,
+        filterNameEn: filter_animal_products_en,
         groupName: COMMODITY_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/commodity/meat.webp'
@@ -3561,6 +3846,7 @@ export class RequestArrayService {
         title: "فیدر گاو",
         shortedName: "Cattle feeder",
         filterName: filter_animal_products,
+        filterNameEn: filter_animal_products_en,
         groupName: COMMODITY_PREFIX,
         unit: dollar_unit,
         img: '/assets/images/commodity/cattle.webp'
