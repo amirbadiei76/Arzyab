@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-mobile-hamberger-menu',
@@ -11,8 +11,22 @@ export class MobileHambergerMenuComponent {
   @Input() open = false;
   @Output() close = new EventEmitter<void>();
 
+  private router = inject(Router)
+
   closeMenu() {
     this.close.emit();
+  }
+
+  isHomePage() {
+    return this.router.isActive(
+      '/',
+      {
+        paths: 'exact',
+        queryParams: 'ignored',
+        fragment: 'ignored',
+        matrixParams: 'ignored'
+      }
+    );
   }
 
 }

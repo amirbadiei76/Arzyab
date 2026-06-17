@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { ThemeService } from '../../../services/theme.service';
-import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -15,9 +15,23 @@ export class HeaderComponent {
   @Output() menuClick = new EventEmitter<void>();
   themeService: ThemeService;
 
+  private router = inject(Router)
+
   constructor (private theme: ThemeService) {
     this.themeService = theme;
     this.themeService.getStringTheme();
+  }
+
+  isHomePage() {
+    return this.router.isActive(
+      '/',
+      {
+        paths: 'exact',
+        queryParams: 'ignored',
+        fragment: 'ignored',
+        matrixParams: 'ignored'
+      }
+    );
   }
 
   ngOnInit() {
