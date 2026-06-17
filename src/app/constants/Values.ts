@@ -5,7 +5,7 @@ export const WORLD_MARKET_PREFIX = "World-Market";
 export const COIN_PREFIX = "Coin";
 export const GOLD_PREFIX = "Gold";
 export const PRECIOUS_METALS_PREFIX = "Precious-Metal";
-export const BASE_METALS_PREFIX = "Base_Metal";
+export const BASE_METALS_PREFIX = "Base-Metal";
 export const COMMODITY_PREFIX = "Commodity-Market";
 
 // main titles
