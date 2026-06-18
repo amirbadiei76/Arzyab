@@ -363,6 +363,7 @@ export class HomeComponent {
       if (activeEl) {
         this.moveCategoryHighlight(activeEl);
         this.scrollCategoryToCenter(activeEl);
+        this.moveCategoryHighlight(activeEl);
       }
     });
   }
