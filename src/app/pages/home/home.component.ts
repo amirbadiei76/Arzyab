@@ -371,10 +371,6 @@ export class HomeComponent {
   setCurrentCategory (title: string = currency_title, subCategory: string = filter_overview_en, element: HTMLDivElement | undefined = undefined) {
     this.currentCategory.set(title)
     this.lastHomeState.setCategory(title)
-    
-    if (element) {
-      this.moveCategoryHighlight(element);
-    }
 
     switch(title) {
       case favories_title:
@@ -426,6 +422,10 @@ export class HomeComponent {
     this.lastHomeState.setSubCategory(subCategory);
     this.scrollToStart();
     this.checkAllSnapScrollPositions()
+    
+    if (element) {
+      this.moveCategoryHighlight(element);
+    }
   }
 
   private updateUrl() {
