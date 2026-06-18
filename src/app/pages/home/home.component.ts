@@ -648,6 +648,7 @@ export class HomeComponent {
   changecategory (title: string = currency_title, subCategory: string = filter_overview_en, element: HTMLDivElement | undefined = undefined) {
     this.setCurrentCategory(title, subCategory, element)
     this.updateUrl();
+    afterNextRender(() => this.syncHighlightAfterScroll())
   }
 
   ngOnDestroy(): void {
