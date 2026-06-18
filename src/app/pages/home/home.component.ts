@@ -334,8 +334,6 @@ export class HomeComponent {
   moveCategoryHighlight(element: HTMLElement): void {
     if (!this.categoryHighlightLine || !this.scrollViewCategory) return;
 
-    console.log('time: ' + new Date().getTime() + ', move highlight');
-
     const highlight = this.categoryHighlightLine.nativeElement;
     const container = this.scrollViewCategory.nativeElement;
 
@@ -650,7 +648,6 @@ export class HomeComponent {
   changecategory (title: string = currency_title, subCategory: string = filter_overview_en, element: HTMLDivElement | undefined = undefined) {
     this.setCurrentCategory(title, subCategory, element)
     this.updateUrl();
-    afterNextRender(() => this.syncHighlightAfterScroll())
   }
 
   ngOnDestroy(): void {

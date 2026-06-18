@@ -8,9 +8,14 @@
                         <div #tabElement class="inline-block text-center align-middle ml-[0.7rem] sm:ml-4">
                             <div class="flex flex-col justify-center items-center relative">
                                 <span
-                                    [attr.data-active-category]="item.title === currentCategory()"
+                                    [attr.data-active-category]="item.title == currentCategory()"
                                     (click)="changecategory(item.title, 'all', tabElement)"
-                                    class="py-4  {{ item.title === currentCategory() ? 'text-dark dark:text-light' : 'text-dark-text2 dark:text-light-text2'}} hover:cursor-pointer flex items-center justify-center {{ item.title === 'دیده بان' ? 'gap-2.5' : '' }}">
+                                    [ngClass]="{
+                                            'text-dark dark:text-light': item.title == currentCategory(),
+                                            'text-dark-text2 dark:text-light-text2': item.title != currentCategory()
+                                        }"
+                                    class="py-4 hover:cursor-pointer flex items-center justify-center {{ item.title === 'دیده بان' ? 'gap-2.5' : '' }}">
+                                    
                                     @if (item.title === 'دیده بان') {
                                         <div class="w-4 h-4">
                                             <star-icon [selected]="item.title == currentCategory()" />
