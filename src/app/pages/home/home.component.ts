@@ -334,6 +334,9 @@ export class HomeComponent {
   moveCategoryHighlight(element: HTMLElement): void {
     if (!this.categoryHighlightLine || !this.scrollViewCategory) return;
 
+    console.log(this.scrollViewCategory);
+    console.log(this.categoryHighlightLine);
+
     const highlight = this.categoryHighlightLine.nativeElement;
     const container = this.scrollViewCategory.nativeElement;
 
@@ -342,6 +345,12 @@ export class HomeComponent {
 
     const elRect = element.getBoundingClientRect();
     const containerRect = container.getBoundingClientRect();
+
+    console.log({
+      elRect,
+      containerRect,
+      highlightWidth: highlight.offsetWidth
+    });
 
     const elementCenter = elRect.left + elRect.width / 2;
     const containerRight = containerRect.right;
@@ -360,6 +369,8 @@ export class HomeComponent {
         '[data-active-category="true"]'
       ) as HTMLElement | null;
 
+      console.log('activeEl', activeEl);
+
       if (activeEl) {
         this.moveCategoryHighlight(activeEl);
       }
@@ -371,6 +382,12 @@ export class HomeComponent {
   setCurrentCategory (title: string = currency_title, subCategory: string = filter_overview_en, element: HTMLDivElement | undefined = undefined) {
     this.currentCategory.set(title)
     this.lastHomeState.setCategory(title)
+
+    console.log('setCurrentCategory', title);
+    
+    if (element) {
+      this.moveCategoryHighlight(element);
+    }
 
     switch(title) {
       case favories_title:
@@ -422,10 +439,6 @@ export class HomeComponent {
     this.lastHomeState.setSubCategory(subCategory);
     this.scrollToStart();
     this.checkAllSnapScrollPositions()
-    
-    if (element) {
-      this.moveCategoryHighlight(element);
-    }
   }
 
   private updateUrl() {
@@ -616,6 +629,7 @@ export class HomeComponent {
     });
 
     if (typeof window !== 'undefined') {
+      console.log('ng on init')
       this.syncHighlightAfterScroll()
 
       fromEvent(window, 'resize')
@@ -658,6 +672,7 @@ export class HomeComponent {
   ngAfterViewInit () {
     
     if (typeof window !== 'undefined') {
+      console.log('ng after view init')
       this.syncHighlightAfterScroll()
       
       fromEvent(window, 'click')
