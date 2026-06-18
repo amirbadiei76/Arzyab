@@ -300,6 +300,8 @@ export class HomeComponent {
       this.checkSubCategoryScrollPosition();
       this.checkCategoryScrollPosition();
     })
+
+    afterNextRender(() => this.syncHighlightAfterScroll())
   }
 
 
