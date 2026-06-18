@@ -362,6 +362,7 @@ export class HomeComponent {
 
       if (activeEl) {
         this.moveCategoryHighlight(activeEl);
+        this.scrollCategoryToCenter(activeEl);
       }
     });
   }
@@ -648,6 +649,18 @@ export class HomeComponent {
   changecategory (title: string = currency_title, subCategory: string = filter_overview_en, element: HTMLDivElement | undefined = undefined) {
     this.setCurrentCategory(title, subCategory, element)
     this.updateUrl();
+
+     if (element) {
+      this.scrollCategoryToCenter(element);
+    }
+  }
+
+  private scrollCategoryToCenter(element: HTMLElement) {
+    element.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center'
+    });
   }
 
   ngOnDestroy(): void {
