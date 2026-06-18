@@ -300,8 +300,6 @@ export class HomeComponent {
       this.checkSubCategoryScrollPosition();
       this.checkCategoryScrollPosition();
     })
-
-    afterNextRender(() => this.syncHighlightAfterScroll())
   }
 
 
@@ -335,6 +333,8 @@ export class HomeComponent {
 
   moveCategoryHighlight(element: HTMLElement): void {
     if (!this.categoryHighlightLine || !this.scrollViewCategory) return;
+
+    console.log('time: ' + new Date().getTime() + ', move highlight');
 
     const highlight = this.categoryHighlightLine.nativeElement;
     const container = this.scrollViewCategory.nativeElement;
