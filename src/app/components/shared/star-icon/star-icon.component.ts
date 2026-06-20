@@ -8,5 +8,6 @@ import { Component, Input } from '@angular/core';
 })
 export class StarIconComponent {
   @Input() selected: boolean = false;
+  @Input() isFav?: boolean = false;
 
 }

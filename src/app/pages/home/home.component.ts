@@ -136,6 +136,7 @@ export class HomeComponent {
   ]
 
   
+  highlightReady = signal(false);
   textToFilter = signal('')
   itemToRemove = signal<string>('')
   currentCategory: WritableSignal<string> = signal(this.categories[0].title)
@@ -362,8 +363,6 @@ export class HomeComponent {
 
       if (activeEl) {
         this.moveCategoryHighlight(activeEl);
-        this.scrollCategoryToCenter(activeEl);
-        this.moveCategoryHighlight(activeEl);
       }
     });
   }
@@ -371,57 +370,41 @@ export class HomeComponent {
 
 
   setCurrentCategory (title: string = currency_title, subCategory: string = filter_overview_en, element: HTMLDivElement | undefined = undefined) {
+    const previousCategory = this.currentCategory();
+    const categoryChanged = previousCategory !== title;
+
     this.currentCategory.set(title)
     this.lastHomeState.setCategory(title)
     
     if (element) {
       this.moveCategoryHighlight(element);
+      this.scrollCategoryToCenter(element);
     }
 
     switch(title) {
       case favories_title:
         this.priceSortingText.set('قیمت');
         this.initializeFavFilters();
-        this.currentSupportCurrencyId = 0;
+        if (categoryChanged) this.currentSupportCurrencyId = 0;
         break;
 
       case currency_title:
-        this.priceSortingText.set('قیمت');
-        this.currentSupportCurrencyId = 0;
-        break;
-      
       case gold_title:
-        this.priceSortingText.set('قیمت');
-        this.currentSupportCurrencyId = 0;
-        break;
-
       case coin_title:
         this.priceSortingText.set('قیمت');
-        this.currentSupportCurrencyId = 0;
+        if (categoryChanged) this.currentSupportCurrencyId = 0;
         break;
-
-      case crypto_title:
-        this.priceSortingText.set('قیمت');
-        this.currentSupportCurrencyId = 1;
-        break;
-
+        
       case world_title:
         this.priceSortingText.set('نسبت');
         break;
 
+      case crypto_title:
       case precious_metal_title:
-        this.priceSortingText.set('قیمت');
-        this.currentSupportCurrencyId = 1;
-        break;
-
       case base_metal_title:
-        this.priceSortingText.set('قیمت');
-        this.currentSupportCurrencyId = 1;
-        break;
-
       case commodity_title:
         this.priceSortingText.set('قیمت');
-        this.currentSupportCurrencyId = 1;
+        if (categoryChanged) this.currentSupportCurrencyId = 1;
         break;
     }
     this.currentSubCategory.set(subCategory)
@@ -672,7 +655,21 @@ export class HomeComponent {
   ngAfterViewInit () {
     
     if (typeof window !== 'undefined') {
-      this.syncHighlightAfterScroll()
+      this.syncHighlightAfterScroll();
+
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => {
+          const activeEl = document.querySelector('[data-active-category="true"]') as HTMLElement | null; 
+
+          if (activeEl) {
+            this.moveCategoryHighlight(activeEl);
+            this.scrollCategoryToCenter(activeEl);
+            setTimeout(() => {
+              this.highlightReady.set(true);
+            }, 250);
+          }
+        });
+      }
       
       fromEvent(window, 'click')
       .pipe(

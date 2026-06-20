@@ -27,7 +27,11 @@
                         </div>
                     }
                 </div>
-                <div #categoryHighlightLine class="absolute translate-x-[-81.05px] sm:translate-x-[-95.8188px] bottom-0 bg-green-btn h-0.5 w-8 smooth-transition"></div>
+                <div
+                    #categoryHighlightLine
+                    class="absolute bottom-0 bg-green-btn h-0.5 w-8"
+                    [style.opacity]="highlightReady() ? 1 : 0"
+                    [style.transition]="highlightReady() ? 'transform 300ms ease-in-out' : 'none'"></div>
             </div>
             
             <div #rightCategoryArrow [class.hidden]="!showRightCategoryArrow()" id="rightCategoryArrow" class="absolute h-[110%] flex justify-end right-0 top-1/2 -translate-y-1/2 pt-[0.2rem] pb-[0.4rem] bg-light dark:bg-dark w-10 border-b border-b-light dark:border-b-dark">

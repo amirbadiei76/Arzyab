@@ -1,12 +1,11 @@
+
 <svg
     xmlns="http://www.w3.org/2000/svg"
-    fill="none"
     viewBox="0 0 24 24"
-    class="w-full h-full smooth-transition {{ selected ? 'stroke-dark dark:stroke-light' : 'stroke-light-text2 dark:stroke-dark-text2'}}"
-    color="currentColor"
+    class="w-full h-full smooth-transition {{ selected ? 'stroke-dark dark:stroke-light' : 'fill-none stroke-light-text2 dark:stroke-dark-text2' }} {{isFav ? 'fill-yellow-star' : ''}}" 
     >
     <path
-        stroke="currentColor"
+        [attr.stroke]="isFav ? 'none' : 'currentColor'"
         stroke-linecap="round"
         stroke-linejoin="round"
         stroke-width="1.5"

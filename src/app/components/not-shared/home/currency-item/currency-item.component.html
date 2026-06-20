@@ -52,7 +52,7 @@
             <div class="flex gap-0 md:gap-1.5 flex-row sm:flex-col md:flex-row">
                 <img draggable="false" loading="lazy" decoding="async" class="md:w-8 md:h-8 w-6 h-6 object-cover rounded-full mr-2 mt-1" src="{{currencyItem?.img}}" alt="{{currencyItem?.title}}">
             
-                <div class="flex">
+                <!-- <div class="flex">
                     @if (currencyItem?.isFav) {
                         <button class="w-6 h-7" (click)="removeFromFav($event)">
                             <span class="w-6 h-7 outline-0 flex justify-end items-center sm:items-end hover:cursor-pointer">
@@ -72,6 +72,15 @@
                             <star-icon [selected]="false" class="w-4 h-4 text-dark dark:text-light" />
                         </button>
                     }
+                </div> -->
+                <div class="flex">
+                    <button
+                        role="button"
+                        class="w-6 h-7 outline-0 flex justify-end items-center sm:items-end hover:cursor-pointer"
+                        (click)="currencyItem?.isFav ? removeFromFav($event) : addToFav($event)"
+                    >
+                        <star-icon [selected]="!!currencyItem?.isFav" [isFav]="!!currencyItem?.isFav" class="w-4 h-4 text-dark dark:text-light" />
+                    </button>
                 </div>
             </div>
         </div>
