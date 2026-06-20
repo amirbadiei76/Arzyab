@@ -358,7 +358,7 @@ export class HomeComponent {
     requestAnimationFrame(() => {
       const activeEl = document.querySelector(
         '[data-active-category="true"]'
-      ) as HTMLElement | null;
+      ) as HTMLElement | null; 
 
       if (activeEl) {
         this.moveCategoryHighlight(activeEl);
