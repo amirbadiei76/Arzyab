@@ -17,7 +17,4 @@ export class HomeStateService {
   setSubCategory(subCategory: string) {
     this.currentSubCategory = subCategory;
   }
-
-  
-  
 }

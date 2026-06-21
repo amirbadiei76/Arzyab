@@ -6,7 +6,7 @@ import { StarIconComponent } from '../../components/shared/star-icon/star-icon.c
 import { CommonModule, NgIf } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
 import { combineLatest, fromEvent, Observable, of, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map, switchMap, take, takeUntil } from 'rxjs/operators'
+import { debounceTime, distinctUntilChanged, filter, map, skip, switchMap, take, takeUntil } from 'rxjs/operators'
 import { RequestArrayService } from '../../services/request-array.service';
 import { HomeStateService } from '../../services/home-state.service';
 import { NotificationService } from '../../services/notification.service';
@@ -135,12 +135,14 @@ export class HomeComponent {
     }
   ]
 
-  
+  private initialCategoryTitle: string = this.resolveInitialCategoryTitle();
+  private initialSubCategory: string = this.resolveInitialSubCategory();
+  private initialSupportCurrencyId: number = this.getDefaultSupportCurrencyId(this.initialCategoryTitle);
   highlightReady = signal(false);
   textToFilter = signal('')
   itemToRemove = signal<string>('')
-  currentCategory: WritableSignal<string> = signal(this.categories[0].title)
-  currentSubCategory: WritableSignal<string> = signal(filter_overview_en);
+  currentCategory: WritableSignal<string> = signal(this.initialCategoryTitle)
+  currentSubCategory: WritableSignal<string> = signal(this.initialSubCategory);
 
   private currentCategory$ = toObservable(this.currentCategory);
   private currentSubCategory$ = toObservable(this.currentSubCategory);
@@ -169,8 +171,7 @@ export class HomeComponent {
   showRightCategoryArrow: WritableSignal<Boolean> = signal(true);
   showLeftCategoryArrow: WritableSignal<Boolean> = signal(true);
   selectedCategory: WritableSignal<String> = signal('');
-  currentSupportCurrencyId: number = 0;
-
+  currentSupportCurrencyId: WritableSignal<number> = signal(this.initialSupportCurrencyId);
   private scrollAmount: number = 70;
   
 
@@ -260,34 +261,14 @@ export class HomeComponent {
     );
   });
 
-  constructor(private title: Title, private meta: Meta) {
-    this.route.queryParamMap.pipe(take(1))
-      .subscribe(params => {
-        const cat = params.get('cat');
-        const sub = params.get('sub');
-
-        if (cat) {
-          const category = this.categories.find(c => c.enTitle.toLowerCase() === cat);
-
-          if (category) {
-            this.setCurrentCategory(
-              category.title,
-              sub || filter_overview_en
-            );
-            return;
-          }
-        }
-
-        this.setCurrentCategory(this.lastHomeState.currentCategory, this.lastHomeState.currentSubCategory);
-      });
+ constructor(private title: Title, private meta: Meta) {
+    this.applyCategorySideEffects(this.currentCategory());
 
     if (typeof window !== 'undefined') {
-
       window.onbeforeunload = () => {
         window.scrollTo(0, 0)  
       }
       window.scrollTo(0, 0)
-
 
       if (window.innerWidth <= 624) {
         this.change24hText.set('24h')
@@ -367,9 +348,7 @@ export class HomeComponent {
     });
   }
 
-
-
-  setCurrentCategory (title: string = currency_title, subCategory: string = filter_overview_en, element: HTMLDivElement | undefined = undefined) {
+ setCurrentCategory (title: string = currency_title, subCategory: string = filter_overview_en, element: HTMLDivElement | undefined = undefined) {
     const previousCategory = this.currentCategory();
     const categoryChanged = previousCategory !== title;
 
@@ -381,32 +360,12 @@ export class HomeComponent {
       this.scrollCategoryToCenter(element);
     }
 
-    switch(title) {
-      case favories_title:
-        this.priceSortingText.set('قیمت');
-        this.initializeFavFilters();
-        if (categoryChanged) this.currentSupportCurrencyId = 0;
-        break;
+    this.applyCategorySideEffects(title);
 
-      case currency_title:
-      case gold_title:
-      case coin_title:
-        this.priceSortingText.set('قیمت');
-        if (categoryChanged) this.currentSupportCurrencyId = 0;
-        break;
-        
-      case world_title:
-        this.priceSortingText.set('نسبت');
-        break;
-
-      case crypto_title:
-      case precious_metal_title:
-      case base_metal_title:
-      case commodity_title:
-        this.priceSortingText.set('قیمت');
-        if (categoryChanged) this.currentSupportCurrencyId = 1;
-        break;
+    if (categoryChanged) {
+      this.currentSupportCurrencyId.set(this.getDefaultSupportCurrencyId(title));
     }
+
     this.currentSubCategory.set(subCategory)
     this.lastHomeState.setSubCategory(subCategory);
     this.scrollToStart();
@@ -480,18 +439,6 @@ export class HomeComponent {
   }
 
   filterByCategory (name: string) {
-    const currentCategoryObj = this.categories.find(x => x.title === this.currentCategory());
-    this.router.navigate(
-      [],
-      {
-        queryParams: {
-          cat: currentCategoryObj?.enTitle.toLowerCase(),
-          sub: name
-        },
-        queryParamsHandling: null
-      }
-    );
-
     this.currentSubCategory.set(name);
     this.lastHomeState.setSubCategory(name);
 
@@ -505,6 +452,70 @@ export class HomeComponent {
   filterList(event: Event) {
     const textToFilter = (event.target as HTMLInputElement).value.toLowerCase()
     this.textToFilter.set(textToFilter || '')
+  }
+
+  private getQueryParam(name: string): string | null {
+    if (typeof window !== 'undefined' && window.location?.search) {
+        const params = new URLSearchParams(window.location.search);
+        const value = params.get(name);
+        if (value) return value;
+    }
+    return this.route.snapshot.queryParamMap.get(name);
+  }
+
+  private resolveInitialCategoryTitle(): string {
+    const cat = this.getQueryParam('cat');
+    if (cat) {
+        const category = this.categories.find(c => c.enTitle.toLowerCase() === cat.toLowerCase());
+        if (category) return category.title;
+    }
+    return this.lastHomeState.currentCategory;
+  }
+
+  private resolveInitialSubCategory(): string {
+    const sub = this.getQueryParam('sub');
+    return sub || this.lastHomeState.currentSubCategory;
+  }
+
+  private getDefaultSupportCurrencyId(category: string): number {
+    switch (category) {
+        case favories_title:
+        case currency_title:
+        case gold_title:
+        case coin_title:
+            return 0;
+        case world_title:
+        case crypto_title:
+        case precious_metal_title:
+        case base_metal_title:
+        case commodity_title:
+            return 1;
+        default:
+            return 0;
+    }
+  }
+
+  private applyCategorySideEffects(title: string): void {
+    switch (title) {
+      case favories_title:
+          this.initializeFavFilters();
+          this.priceSortingText.set('قیمت');
+          break;
+      case currency_title:
+      case gold_title:
+      case coin_title:
+          this.priceSortingText.set('قیمت');
+          break;
+      case world_title:
+          this.priceSortingText.set('نسبت');
+          break;
+      case crypto_title:
+      case precious_metal_title:
+      case base_metal_title:
+      case commodity_title:
+          this.priceSortingText.set('قیمت');
+          break;
+    }
   }
 
   changeTitleSortingType() {
@@ -587,17 +598,25 @@ export class HomeComponent {
       content: 'قیمت لحظه‌ای ارز، طلا، سکه، ارز دیجیتال، فلزات گرانبها، فلزات پایه و بازار کالاها در ارزیاب؛ مرجع دقیق و به‌روز قیمت بازارها.'
     });
 
-    this.route.queryParamMap.subscribe(params => {
-      const cat = params.get('cat');
-      const sub = params.get('sub');
+   this.route.queryParamMap.pipe(
+        takeUntil(this.destroySubject)
+    ).subscribe(params => {
+        const cat = params.get('cat');
+        const sub = params.get('sub');
 
-      if (!cat) return;
+        if (!cat) return;
 
-      const category = this.categories.find(c => c.enTitle.toLowerCase() === cat);
+        const category = this.categories.find(c => c.enTitle.toLowerCase() === cat.toLowerCase());
+        if (!category) return;
 
-      if (!category) return;
+        const resolvedSub = sub || filter_overview_en;
+      
+        // اگر مقدار با حالت فعلی یکسان است، کاری نکن (از تریگر تکراری/زائد جلوگیری می‌کند)
+        if (category.title === this.currentCategory() && resolvedSub === this.currentSubCategory()) {
+            return;
+        }
 
-      this.setCurrentCategory(category.title, sub || filter_overview_en);
+        this.setCurrentCategory(category.title, resolvedSub);
     });
 
     if (typeof window !== 'undefined') {

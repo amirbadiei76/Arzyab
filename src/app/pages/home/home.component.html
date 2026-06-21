@@ -51,9 +51,9 @@
             <div *ngIf="canShowSupportedCurrencyToggle()" class="overflow-hidden flex flex-row-reverse">
                 @for (currency of supportedCurrencies; track currency.id) {
                     <div
-                        (click)="currentSupportCurrencyId = currency.id"
-                        class="border {{ currency.id === 0 ? (currency.id === currentSupportCurrencyId ? 'border-green-btn rounded-r-semi' : 'border-l-0 rounded-r-semi border-dark-text2 dark:border-light-text2') : (currency.id === currentSupportCurrencyId ? 'border-green-btn rounded-l-semi' : 'border-r-0 rounded-l-semi border-dark-text2 dark:border-light-text2') }} sm:w-18 w-25 h-12 flex justify-center px-[0.25rem] items-center cursor-pointer">
-                        <p class="rtl {{ currency.id === currentSupportCurrencyId ? 'text-dark dark:text-light' : 'text-dark-text2 dark:text-light-text2' }} text-2xs sm:text-xs">{{currency.title}}</p>
+                        (click)="currentSupportCurrencyId.set(currency.id)"
+                        class="border {{ currency.id === 0 ? (currency.id === currentSupportCurrencyId() ? 'border-green-btn rounded-r-semi' : 'border-l-0 rounded-r-semi border-dark-text2 dark:border-light-text2') : (currency.id === currentSupportCurrencyId() ? 'border-green-btn rounded-l-semi' : 'border-r-0 rounded-l-semi border-dark-text2 dark:border-light-text2') }} sm:w-18 w-25 h-12 flex justify-center px-[0.25rem] items-center cursor-pointer">
+                        <p class="rtl {{ currency.id === currentSupportCurrencyId() ? 'text-dark dark:text-light' : 'text-dark-text2 dark:text-light-text2' }} text-2xs sm:text-xs">{{currency.title}}</p>
                     </div>
                 }
             </div>
@@ -143,7 +143,7 @@
                     @if (list2?.length !== 0) {
                         @for (item of list2; track item.id) {
                             <currency-item
-                                [showCurrencyId]="currentSupportCurrencyId"
+                                [showCurrencyId]="currentSupportCurrencyId()"
                                 [currencyItem]="item"
                                 (favRemoved)="onFavRemoveItem($event)"
                                 (favAdded)="onFavAddItem($event)"
