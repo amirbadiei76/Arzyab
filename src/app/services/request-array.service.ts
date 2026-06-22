@@ -1,4 +1,4 @@
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID, TransferState, makeStateKey } from '@angular/core';
 import { CurrenciesService } from './currencies.service';
 import { Currencies, CurrencyItem, Current } from '../interfaces/data.types';
 import { base_metal_title, BASE_METALS_PREFIX, COIN_PREFIX, coin_title, COMMODITY_PREFIX, commodity_title, CRYPTO_PREFIX, crypto_title, currency_title, dollar_unit, filter_agricultural_products, filter_animal_products, filter_coin_blubber, filter_coin_cash, filter_coin_exchange, filter_coin_retail, filter_crop_yields, filter_cryptocurrency, filter_etf, filter_global_base_metals, filter_global_ounces, filter_gold, filter_gold_vs_other, filter_main_currencies,
@@ -6,7 +6,9 @@ import { base_metal_title, BASE_METALS_PREFIX, COIN_PREFIX, coin_title, COMMODIT
     filter_coin_exchange_en, filter_other_coins_en, filter_gold_en, filter_silver_en, filter_mesghal_en, filter_melted_en, filter_etf_en, filter_global_ounces_en, filter_gold_vs_other_en, filter_global_base_metals_en, filter_us_base_metals_en, filter_agricultural_products_en, filter_crop_yields_en, filter_animal_products_en} from '../constants/Values';
 import { commafy, priceToNumber, trimDecimal, valueToDollarChanges, valueToRialChanges } from '../utils/CurrencyConverter';
 import { BehaviorSubject } from 'rxjs';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+
+const CURRENCIES_TRANSFER_KEY = makeStateKey<Currencies>('currencies-data');
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +50,11 @@ export class RequestArrayService {
     private heartbeatTimer?: number;
     private reconnectTimeout?: number;
 
-  constructor(private currencyService: CurrenciesService, @Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(
+    private currencyService: CurrenciesService,
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private transferState: TransferState) {
+
     this.setupMainData();
 
     if (isPlatformBrowser(this.platformId)) {
@@ -296,6 +302,7 @@ export class RequestArrayService {
     list.next(currentList)
   }
 
+  /*
   setupMainData() {
     if (isPlatformBrowser(this.platformId)) {
         this.connect();
@@ -309,6 +316,32 @@ export class RequestArrayService {
       this.setupAllCurrentData(data.current);
     })
   }
+  */
+ setupMainData() {
+    if (isPlatformBrowser(this.platformId)) {
+        if (this.transferState.hasKey(CURRENCIES_TRANSFER_KEY)) {
+            const transferredData = this.transferState.get(CURRENCIES_TRANSFER_KEY, null as unknown as Currencies);
+            
+            if (transferredData) {
+                this.mainDataSubject?.next(transferredData);
+                this.setupAllCurrentData(transferredData.current);
+            }
+
+            this.transferState.remove(CURRENCIES_TRANSFER_KEY);
+        }
+
+        this.connect();
+    }
+
+        this.currencyService.getAllCurrencies()
+        .subscribe((data: Currencies) => {
+            this.mainDataSubject?.next(data)
+            if (isPlatformServer(this.platformId)) {
+                this.transferState.set(CURRENCIES_TRANSFER_KEY, data);
+            }
+            this.setupAllCurrentData(data.current);
+        })
+    }
 
   setupAllCurrentData (current: Current) {
     this.setupMainCurrenciesList(current)
