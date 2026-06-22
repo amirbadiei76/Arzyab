@@ -261,6 +261,11 @@ html[data-mode="system"] .theme-icon-system { display: block !important; }
     @apply pointer-events-none duration-150 rounded-md text-transparent animate-pulse bg-light-border dark:bg-dark-border z-[2]
 }
 
+#header i {
+    width: 24px;
+    height: 24px;
+}
+
 .scroll-snap-x {
     scroll-snap-type: x mandatory;
     scroll-snap-align: center;
