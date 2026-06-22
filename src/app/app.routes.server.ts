@@ -4,7 +4,7 @@ import { RenderMode, ServerRoute } from '@angular/ssr';
 export const serverRoutes: ServerRoute[] = [
   {
     path: ':group/:title',
-    renderMode: RenderMode.Client
+    renderMode: RenderMode.Server
   },
   {
     path: '',
