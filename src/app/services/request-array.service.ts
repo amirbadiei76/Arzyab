@@ -5,7 +5,7 @@ import { base_metal_title, BASE_METALS_PREFIX, COIN_PREFIX, coin_title, COMMODIT
     filter_melted, filter_mesghal, filter_other_coins, filter_other_currencies, filter_pair_currencies, filter_silver, filter_us_base_metals, GOLD_PREFIX, gold_title, MAIN_CURRENCY_PREFIX, pound_unit, precious_metal_title, PRECIOUS_METALS_PREFIX, toman_unit, filter_main_currencies_en, world_title, filter_other_currencies_en, filter_cryptocurrency_en, filter_pair_currencies_en, WORLD_MARKET_PREFIX, filter_coin_cash_en, filter_coin_retail_en, filter_coin_blubber_en,
     filter_coin_exchange_en, filter_other_coins_en, filter_gold_en, filter_silver_en, filter_mesghal_en, filter_melted_en, filter_etf_en, filter_global_ounces_en, filter_gold_vs_other_en, filter_global_base_metals_en, filter_us_base_metals_en, filter_agricultural_products_en, filter_crop_yields_en, filter_animal_products_en} from '../constants/Values';
 import { commafy, priceToNumber, trimDecimal, valueToDollarChanges, valueToRialChanges } from '../utils/CurrencyConverter';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, catchError, of } from 'rxjs';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 const CURRENCIES_TRANSFER_KEY = makeStateKey<Currencies>('currencies-data');
@@ -49,6 +49,9 @@ export class RequestArrayService {
 
     private heartbeatTimer?: number;
     private reconnectTimeout?: number;
+
+    private isReadySubject = new BehaviorSubject<boolean>(false);
+    isReady$ = this.isReadySubject.asObservable();
 
   constructor(
     private currencyService: CurrenciesService,
@@ -321,26 +324,33 @@ export class RequestArrayService {
     if (isPlatformBrowser(this.platformId)) {
         if (this.transferState.hasKey(CURRENCIES_TRANSFER_KEY)) {
             const transferredData = this.transferState.get(CURRENCIES_TRANSFER_KEY, null as unknown as Currencies);
-            
             if (transferredData) {
                 this.mainDataSubject?.next(transferredData);
                 this.setupAllCurrentData(transferredData.current);
+                this.isReadySubject.next(true);
             }
-
             this.transferState.remove(CURRENCIES_TRANSFER_KEY);
         }
-
         this.connect();
     }
 
-        this.currencyService.getAllCurrencies()
-        .subscribe((data: Currencies) => {
-            this.mainDataSubject?.next(data)
-            if (isPlatformServer(this.platformId)) {
-                this.transferState.set(CURRENCIES_TRANSFER_KEY, data);
+    this.currencyService.getAllCurrencies()
+        .pipe(
+            catchError(err => {
+                console.error('Failed to load currencies:', err);
+                return of(null);
+            })
+        )
+        .subscribe((data) => {
+            if (data) {
+                this.mainDataSubject?.next(data);
+                if (isPlatformServer(this.platformId)) {
+                    this.transferState.set(CURRENCIES_TRANSFER_KEY, data);
+                }
+                this.setupAllCurrentData(data.current);
             }
-            this.setupAllCurrentData(data.current);
-        })
+            this.isReadySubject.next(true);
+        });
     }
 
   setupAllCurrentData (current: Current) {

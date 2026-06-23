@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Currencies, Price } from '../interfaces/data.types';
-import { retry } from 'rxjs';
+import { catchError, retry, throwError, timeout } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,14 @@ export class CurrenciesService {
 
   getAllCurrencies () {
     const url = "https://call2.tgju.org/ajax.json";
-    return this.http.get<Currencies>(url).pipe(retry({ count: Infinity }))
+    return this.http.get<Currencies>(url).pipe(
+      timeout(7000),
+      retry({ count: 2, delay: 1000 }),
+      catchError(err => {
+        console.error('getAllCurrencies failed:', err?.message ?? err);
+        return throwError(() => err);
+      })
+    );
   }
 
   //#region Currencies

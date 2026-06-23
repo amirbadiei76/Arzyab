@@ -33,12 +33,14 @@ export class CurrencyItemDetailsComponent {
   pageTitle = inject(Title)
 
   canShowItem = signal(true);
+  isLoading = signal(true);
 
   textToFilter = signal('');
   textToFilter$ = toObservable(this.textToFilter)
 
   currentSupportCurrencyId = signal(0)
   currentSupportCurrencyId$ = toObservable(this.currentSupportCurrencyId)
+
 
   title$ = this.route.params.pipe(
     map(params => params['title'] as string),
@@ -47,8 +49,12 @@ export class CurrencyItemDetailsComponent {
     shareReplay(1)
   );
 
-  currencyItem$ = this.title$.pipe(
-    switchMap(title =>
+  currencyItem$ = combineLatest([
+    this.title$,
+    this.requestArray.isReady$
+  ]).pipe(
+    filter(([, ready]) => ready === true),
+    switchMap(([title]) =>
       this.requestArray.allItemsList.pipe(
         map(items => items.find(item => item.slugText === title) ?? null)
       )
@@ -258,6 +264,7 @@ export class CurrencyItemDetailsComponent {
     this.currencyItem$
     .pipe(takeUntilDestroyed())
     .subscribe(item => {
+      this.isLoading.set(false);
       this.canShowItem.set(!!item);
     });
   }

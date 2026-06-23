@@ -32,7 +32,7 @@ interface SubtitleType {
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  reqestClass? = inject(RequestArrayService);
+  reqestClass = inject(RequestArrayService);
   lastHomeState = inject(HomeStateService);
   notificationService = inject(NotificationService);
   private route = inject(ActivatedRoute);
@@ -221,6 +221,7 @@ export class HomeComponent {
   )
   
   currentTempList2$ = combineLatest([
+    this.reqestClass.isReady$,
     this.currentCategory$,
     this.titleSorting$,
     this.priceSorting$,
@@ -229,7 +230,8 @@ export class HomeComponent {
     this.textToFilter$
     
   ]).pipe(
-    switchMap(([category, titleSort, priceSort, change24hSort, subCategory, textToFilter]) =>
+    filter(([ready]) => ready === true),
+    switchMap(([, category, titleSort, priceSort, change24hSort, subCategory, textToFilter]) =>
       (this.categoryStreamMap[category] ?? of([])).pipe(
         map(list => ({ list, titleSort, priceSort, change24hSort, subCategory, textToFilter }))
       )
