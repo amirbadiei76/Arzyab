@@ -26,7 +26,7 @@ export class CurrencyOverviewComponent {
     const type = this.currentType();
 
     if (!items.length) return [];
-
+ 
     const sorted = [...items].sort((a, b) => {
       const aVal = this.getChangeValue(a);
       const bVal = this.getChangeValue(b);
