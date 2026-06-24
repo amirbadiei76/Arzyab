@@ -74,21 +74,26 @@
                         </div>
                     </div>
                     <div class="relative w-full">
-                        @if (goldValueComputed$ | async; as goldValue) {
-                            <p class="input-unit-base">تومان</p>
-                            <input
-                                autocomplete="off"
-                                autocorrect="off"
-                                autocapitalize="off"
-                                spellcheck="false"
-                                maxlength="19"
-                                placeholder="0"
-                                [value]="goldValue"
-                                (input)="onGoldInputChange($event)"
-                                type="text"
-                                commafyNumber
-                                class="input-base rtl"
-                            >
+                        @if (requestClass.isReady$ | async) {
+                            @if (goldValueComputed$ | async; as goldValue) {
+                                <p class="input-unit-base">تومان</p>
+                                <input
+                                    autocomplete="off"
+                                    autocorrect="off"
+                                    autocapitalize="off"
+                                    spellcheck="false"
+                                    maxlength="19"
+                                    placeholder="0"
+                                    [value]="goldValue"
+                                    (input)="onGoldInputChange($event)"
+                                    type="text"
+                                    commafyNumber
+                                    class="input-base rtl"
+                                >
+                            }
+                        }
+                        @else {
+                            <span class="input-base w-full h-[49.6px] block skeleton-base z-0"></span>
                         }
                     </div>
                 </div>
@@ -292,27 +297,39 @@
                     </span>
                     <span class="w-full flex justify-start text-dark-text dark:text-light-text text-sm md:text-base gap-2 mb-1">
                         اجرت:&nbsp;
-                        @if (totalWageValue$ | async; as totalWageValue) {
-                            <p class="text-dark font-bold dark:text-light text-xs md:text-sm">{{ totalWageValue }}</p>
-                            <p class="text-dark-text4 dark:text-light-text4 text-xs md:text-sm">تومان</p>
+                        @if (requestClass.isReady$ | async) {
+                            @if (totalWageValue$ | async; as totalWageValue) {
+                                <p class="text-dark font-bold dark:text-light text-xs md:text-sm">{{ totalWageValue }}</p>
+                                <p class="text-dark-text4 dark:text-light-text4 text-xs md:text-sm">تومان</p>
+                            }
                         }
-                        <!-- <span class="text-xs md:text-sm skeleton-base {{ gram18Value() ? 'hidden' : 'block' }}">اجرت طلا</span> -->
+                        @else {
+                            <span class="text-xs md:text-sm skeleton-base block">اجرت طلا</span>
+                        }
                     </span>
                     <span class="w-full flex justify-start text-dark-text dark:text-light-text text-sm md:text-base gap-2 mb-1">
                         مالیات:&nbsp;
-                        @if (totalTaxValue$ | async; as totalTaxValue) {
-                            <p class="text-dark font-bold dark:text-light text-xs md:text-sm">{{ totalTaxValue }}</p>
-                            <p class="text-dark-text4 dark:text-light-text4 text-xs md:text-sm">تومان</p>
+                        @if (requestClass.isReady$ | async) {
+                            @if (totalTaxValue$ | async; as totalTaxValue) {
+                                <p class="text-dark font-bold dark:text-light text-xs md:text-sm">{{ totalTaxValue }}</p>
+                                <p class="text-dark-text4 dark:text-light-text4 text-xs md:text-sm">تومان</p>
+                            }
                         }
-                        <!-- <span class="text-xs md:text-sm skeleton-base {{ gram18Value() ? 'hidden' : 'block' }}">مالیات طلا</span> -->
+                        @else {
+                            <span class="text-xs md:text-sm skeleton-base block">مالیات طلا</span>
+                        }
                     </span>
                     <span class="w-full flex justify-start text-dark-text dark:text-light-text text-sm md:text-base gap-2 mb-1">
                         سود فروشنده:&nbsp;
-                        @if (totalProfitValue$ | async; as totalProfitValue) {
-                            <p class="text-dark font-bold dark:text-light text-xs md:text-sm">{{ totalProfitValue }}</p>
-                            <p class="text-dark-text4 dark:text-light-text4 text-xs md:text-sm">تومان</p>
+                        @if (requestClass.isReady$ | async) {
+                            @if (totalProfitValue$ | async; as totalProfitValue) {
+                                <p class="text-dark font-bold dark:text-light text-xs md:text-sm">{{ totalProfitValue }}</p>
+                                <p class="text-dark-text4 dark:text-light-text4 text-xs md:text-sm">تومان</p>
+                            }
                         }
-                        <!-- <span class="text-xs md:text-sm skeleton-base {{ gram18Value() ? 'hidden' : 'block' }}">سود فروشنده</span> -->
+                        @else {
+                            <span class="text-xs md:text-sm skeleton-base block">سود فروشنده</span>
+                        }
                     </span>
                 }
                 @else {
@@ -341,10 +358,17 @@
                 <p class="text-dark-text2 dark:text-light-text2 text-xs leaading-[180%] col-span-4 md:col-span-3">قیمت تومانی</p>
                 <p class="text-dark-text2 dark:text-light-text2 text-xs leaading-[180%] col-span-3">قیمت دلاری</p>
             </span>
-            @if (relatedItems$ | async; as relatedList) {
-                @for (item of relatedList; track $index) {
-                    <app-converter-item class="w-full z-[1] {{ $index != 2 ? 'mb-1' : 'mb-0' }}" [currencyItem]="item" />
+            @if (requestClass.isReady$ | async) {
+                @if (relatedItems$ | async; as relatedList) {
+                    @for (item of relatedList; track $index) {
+                        <app-converter-item class="w-full z-[1] {{ $index != 2 ? 'mb-1' : 'mb-0' }}" [currencyItem]="item" />
+                    }
                 }
+            }
+            @else {
+                <app-converter-item-skeleton class="w-full z-[1] mb-1" />
+                <app-converter-item-skeleton class="w-full z-[1] mb-1" />
+                <app-converter-item-skeleton class="w-full z-[1]" />
             }
         </div>
             

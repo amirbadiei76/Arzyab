@@ -9,6 +9,7 @@ import { caratToGram, commafy, gramToCarat, gramToMesghal, gramToOunce, gramToSu
 import { ConverterItemComponent } from '../../components/not-shared/converter/converter-item/converter-item.component';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
+import { ConverterItemSkeletonComponent } from '../../components/not-shared/converter/converter-item-skeleton/converter-item-skeleton.component';
 
 interface CalculatorType {
   id: number,
@@ -30,7 +31,7 @@ interface OunceTypes extends CalculatorType {
 
 @Component({
   selector: 'app-gold-calculator',
-  imports: [FormsModule, CommonModule, CommafyNumberDirective, ConverterItemComponent],
+  imports: [FormsModule, CommonModule, CommafyNumberDirective, ConverterItemComponent, ConverterItemSkeletonComponent],
   templateUrl: './gold-calculator.component.html',
   styleUrl: './gold-calculator.component.css'
 })
