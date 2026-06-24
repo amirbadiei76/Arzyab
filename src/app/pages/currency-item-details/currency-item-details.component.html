@@ -128,13 +128,13 @@
                         <app-changes-table class="w-full" [historyData]="chartHistory" [item]="currencyItem" [currentUnit]="currentSupportCurrencyId()" />
                     }
                     @else {
-                        <span class="relative w-full block z-0 h-75 md:h-94 skeleton-base"></span>
+                        <span class="relative w-full block z-0 h-75 md:h-94 skeleton-base mb-6 lg:mb-10"></span>
                         <app-changes-table-skeleton class="w-full" />
                     }
                 }
             }
             @else {
-                <span class="relative w-full block z-0 h-75 md:h-94 skeleton-base"></span>
+                <span class="relative w-full block z-0 h-75 md:h-94 skeleton-base mb-6 lg:mb-10"></span>
                 <app-changes-table-skeleton class="w-full" />
             }
         </div>
