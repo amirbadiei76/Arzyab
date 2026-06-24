@@ -33,19 +33,22 @@
             <div class="flex flex-col-reverse md:flex-row w-full h-max gap-2 items-center justify-end">
               <!-- To -->
               <div #toBtn class="relative md:max-w-1/2 w-full 2xl:min-w-62 text-sm">
-                @if (dualList$ | async; as dual) {
-                  <button
-                    type="button"
-                    [disabled]="dual.second.length === 0"
-                    (click)="toggleToDropdown()"
-                    class="dropdown-button-base h-[49.6px]
-                        {{ dual.second.length === 0 ? 'min-h-[49.6px] skeleton-base z-0' : 'animate-none'}}"
-                  >
-                    <i [class.rotate-180]="toDropdownOpen()" class="bi bi-chevron-down dropdown-arrow-base"></i>
-                      @if (toItem$ | async; as to) {
-                        <app-search-item [isSearch]="false" [item]="to" />
-                      }
-                  </button>
+                @if (requestArray.isReady$ | async) {
+                  @if (dualList$ | async; as dual) {
+                    <button
+                      type="button"
+                      (click)="toggleToDropdown()"
+                      class="dropdown-button-base h-[49.6px]"
+                    >
+                      <i [class.rotate-180]="toDropdownOpen()" class="bi bi-chevron-down dropdown-arrow-base"></i>
+                        @if (toItem$ | async; as to) {
+                          <app-search-item [isSearch]="false" [item]="to" />
+                        }
+                    </button>
+                  }
+                }
+                @else {
+                  <span class="dropdown-button-base h-[49.6px] skeleton-base z-0"></span>
                 }
                   @if (toDropdownOpen()) {
                     <div class="absolute overflow-hidden flex flex-col z-[2] max-h-64 pt-2.5 w-full rounded-lg text-dark-text3 dark:text-light-text3 border border-light-text dark:border-dark-text bg-light-text dark:bg-dark-text">
@@ -101,19 +104,24 @@
               </div>
               <!-- From -->
               <div #fromBtn class="relative md:max-w-1/2 w-full 2xl:min-w-62 text-sm">
-                @if (dualList$ | async; as dual) {
-                  <button
-                      type="button"
-                      [disabled]="dual.second.length === 0"
-                      (click)="toggleFromeDropdown()"
-                      class="dropdown-button-base h-[49.6px]
-                          {{ dual.second.length === 0 ? 'min-h-[49.6px] skeleton-base z-0' : 'animate-none'}}"
-                  >
-                    <i [class.rotate-180]="fromDropdownOpen()" class="bi text-xs bi-chevron-down transition-transform"></i>
-                      @if (fromItem$ | async; as from) {
-                        <app-search-item [isSearch]="false" [item]="from" />
-                      }
-                  </button>
+                @if (requestArray.isReady$ | async) {
+                  @if (dualList$ | async; as dual) {
+                    <button
+                        type="button"
+                        [disabled]="dual.second.length === 0"
+                        (click)="toggleFromeDropdown()"
+                        class="dropdown-button-base h-[49.6px]
+                            {{ dual.second.length === 0 ? 'min-h-[49.6px] skeleton-base z-0' : 'animate-none'}}"
+                    >
+                      <i [class.rotate-180]="fromDropdownOpen()" class="bi text-xs bi-chevron-down transition-transform"></i>
+                        @if (fromItem$ | async; as from) {
+                          <app-search-item [isSearch]="false" [item]="from" />
+                        }
+                    </button>
+                  }
+                }
+                @else {
+                  <span class="dropdown-button-base h-[49.6px] skeleton-base z-0"></span>
                 }
                   @if (fromDropdownOpen()) {
                     <div class="absolute overflow-hidden flex flex-col z-[2] max-h-64 pt-2.5 w-full rounded-lg text-dark-text3 dark:text-light-text3 border border-light-text dark:border-dark-text bg-light-text dark:bg-dark-text">
@@ -158,44 +166,53 @@
             <div class="w-full text-right">
               <p class="text-dark-text3 dark:text-light-text3 text-xs md:text-sm mb-3">مقدار مورد نظر را وارد کنید</p>
               <div class="relative w-full">
-                @if (fromItem$ | async; as from) {
-                  <p class="input-unit-base">{{from.shortedName}}</p>
+                @if (requestArray.isReady$ | async) {
+                  @if (fromItem$ | async; as from) {
+                    <p class="input-unit-base">{{from.shortedName}}</p>
+                  }
+                  <input
+                    autocomplete="off"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                    maxlength="16"
+                    [value]="inputValue() || 1"
+                    (input)="onInputChange($event)"
+                    type="text"
+                    commafyNumber
+                    [allowDecimal]="true"
+                    class="input-base rtl"
+                  >
                 }
-                <input
-                  autocomplete="off"
-                  autocorrect="off"
-                  autocapitalize="off"
-                  spellcheck="false"
-                  maxlength="16"
-                  [value]="inputValue() || 1"
-                  (input)="onInputChange($event)"
-                  type="text"
-                  commafyNumber
-                  [allowDecimal]="true"
-                  class="input-base rtl"
-                >
+                @else {
+                  <span class="input-base h-[49.6px] skeleton-base z-0"></span>
+                }
               </div>
             </div>
         </div>
         <div class="flex flex-col flex-1 border border-light-border2 dark:border-dark-border2 p-2 md:p-4 rounded-lg leading-[180%] h-fit md:min-h-[286.4px]">
           <div class="w-full items-center justify-center rtl gap-1 flex xs:flex-row flex-col pb-2 md:py-3">
               <span class="flex items-center gap-1">
-                @if (dualList$ | async; as dual) {
+                @if (requestArray.isReady$ | async) {
                   <p class="text-dark font-bold dark:text-light text-sm md:text-base">{{ inputValue() || 1 }}</p>
-                  <span class="font-bold text-xs md:text-sm skeleton-base z-[2] {{ dual.first.length ? 'hidden' : 'block' }}" >item value</span>
+                  @if (fromItem$ | async; as from) {
+                    <p class="text-dark-text4 dark:text-light-text4 text-xs md:text-sm">{{ from.shortedName }}</p>
+                  }
                 }
-                @if (fromItem$ | async; as from) {
-                  <p class="text-dark-text4 dark:text-light-text4 text-xs md:text-sm">{{ from.shortedName }}</p>
+                @else {
+                  <span class="font-bold text-xs md:text-sm skeleton-base z-[2]" >item value</span>
                 }
                 <p class="text-dark-text dark:text-light-text text-xs md:text-sm">برابر است با:&nbsp;</p>
               </span>
               <span class="flex items-center gap-1">
-                @if (dualList$ | async; as dual) {
+                @if (requestArray.isReady$ | async) {
                   <p class="text-dark font-bold dark:text-light text-sm md:text-base" >{{ calculateOutput$ | async }}</p>
-                  <span class="font-bold text-xs md:text-sm skeleton-base z-[2] {{ dual.first.length ? 'hidden' : 'block' }}" >item value</span>
+                  @if (toItem$ | async; as to) {
+                    <p class="text-dark-text4 dark:text-light-text4 text-xs md:text-sm">{{ to.shortedName }}</p>
+                  }
                 }
-                @if (toItem$ | async; as to) {
-                  <p class="text-dark-text4 dark:text-light-text4 text-xs md:text-sm">{{ to.shortedName }}</p>
+                @else {
+                  <span class="font-bold text-xs md:text-sm skeleton-base z-[2]">item value</span>
                 }
               </span>
           </div>
@@ -205,15 +222,17 @@
             <p class="text-dark-text2 dark:text-light-text2 text-xs leaading-[180%] col-span-4 md:col-span-3">قیمت تومانی</p>
             <p class="text-dark-text2 dark:text-light-text2 text-xs leaading-[180%] col-span-3">قیمت دلاری</p>
           </span>
-          @if (fromItem$ | async; as fromItem) {
-            <app-converter-item class="w-full mb-1" [currencyItem]="fromItem" />
+          @if (requestArray.isReady$ | async) {
+            @if (fromItem$ | async; as fromItem) {
+              <app-converter-item class="w-full mb-1" [currencyItem]="fromItem" />
+            }
+            @if (toItem$ | async; as toItem) {
+              <app-converter-item class="w-full" [currencyItem]="toItem" />
+            }
           }
-          @if (toItem$ | async; as toItem) {
-            <app-converter-item class="w-full" [currencyItem]="toItem" />
-          }
-          @if (dualList$ | async; as dual) {
-            <app-converter-item-skeleton class="w-full mb-1 z-[3] {{ dual.first.length ? 'hidden' : 'block' }}" />
-            <app-converter-item-skeleton class="w-full z-[3] {{ dual.first.length ? 'hidden' : 'block' }}" />
+          @else {
+            <app-converter-item-skeleton class="w-full mb-1 z-[3]" />
+            <app-converter-item-skeleton class="w-full z-[3]" />
           }
         </div>
     </div>
