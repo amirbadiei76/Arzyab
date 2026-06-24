@@ -649,7 +649,7 @@ export class ChartComponent {
       this.initChart(processedData);
       this.lineSeries?.applyOptions({ visible: false })
       // this.chartReady.set(true);
-      if (this.candlestickSeries) this.chartIsReadySubject.next(true)
+      this.chartIsReadySubject.next(true)
       
       fromEvent(document, 'click')
       .subscribe((event) => {
