@@ -1,7 +1,7 @@
 <div class="px-5 py-4 rounded-2xl lg:border lg:border-light-border2 lg:dark:border-dark-border2 mt-0 lg:mt-28">
-    <p class="leading-[180%] dark:text-white text-dark text-sm lg:text-base text-right mb-3">وضعیت {{currentSelected?.faGroupName}} در یک نگاه</p>
+    <p class="leading-[180%] text-sm lg:text-base text-right mb-3 skeleton-base text-transparent">وضعیت در یک نگاه</p>
     <div class="flex flex-row justify-between lg:flex-col mb-3 lg:mb-6">
-        <div class="overflow-hidden flex flex-row-reverse mb-0 lg:mb-3 {{ currentSelected?.faGroupName === 'بازارهای ارزی' ? 'hidden' : 'flex' }}">
+        <div class="overflow-hidden flex-row-reverse mb-0 lg:mb-3 flex">
             @for (currency of supportedCurrencies; track currency.id) {
                 <div
                     class="border {{ currency.id === 0 ? 'border-l-0 rounded-r-semi border-dark-text2 dark:border-light-text2' : 'border-r-0 rounded-l-semi border-dark-text2 dark:border-light-text2' }} w-15 md:w-20 lg:w-1/2 h-12 flex justify-center px-1 items-center cursor-pointer">

@@ -144,9 +144,7 @@
                 }
             }
             @else {
-                @if (currencyItem$ | async; as currencyItem) {
-                    <app-currency-overview-skeleton class="w-full h-full" [currentSelected]="currencyItem"/>
-                }
+                <app-currency-overview-skeleton class="w-full h-full" [currentSelected]="currencyItem"/>
             }
         </aside>
     }

@@ -9,7 +9,6 @@ import { CurrencyItem } from '../../../../interfaces/data.types';
   styleUrl: './currency-overview-skeleton.component.css'
 })
 export class CurrencyOverviewSkeletonComponent {
-  @Input() currentSelected?: CurrencyItem;
 
   supportedCurrencies = [
     {
