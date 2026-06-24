@@ -13,6 +13,7 @@ import { NotificationService } from '../../services/notification.service';
 
 import { toObservable } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EmptyItemComponent } from '../../components/not-shared/home/empty-item/empty-item.component';
 
 
 enum SortingType {
@@ -27,7 +28,7 @@ interface SubtitleType {
 @Component({
   standalone: true,
   selector: 'app-home',
-  imports: [CurrencyItemComponent, NgIf, StarIconComponent, CommonModule],
+  imports: [CurrencyItemComponent, NgIf, StarIconComponent, EmptyItemComponent, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
