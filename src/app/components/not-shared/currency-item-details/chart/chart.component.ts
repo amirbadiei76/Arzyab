@@ -205,7 +205,7 @@ export class ChartComponent {
     if (interval === '1D') return data;
   
     const map = new Map<string, RawData>();
-    
+  
     for (const c of data) {
       const key = this.getBucketKey(new Date(c.ts).getTime(), interval);
   
@@ -541,6 +541,8 @@ export class ChartComponent {
     const mainDollarValueChanes = this.currentValue()!.price_dollar_rl.dp;
     const mainPoundValueChanes = this.currentValue()!.price_gbp.dp;
 
+    this.chartIsReadySubject.next(true);
+
     this.chart.subscribeCrosshairMove(param => {
       if (param.time) {
         const price = param.seriesData.get(this.candlestickSeries!) as CandleData;
@@ -616,7 +618,7 @@ export class ChartComponent {
     if (data.candles.length > 0) {
         this.updateHeader(data.candles[data.candles.length - 1], data.volumes[data.volumes.length - 1]);
     }
-    this.chartIsReadySubject.next(true);
+
   }
 
   updateHeader(priceData: CandleData, volumeData: VolumeData) {
@@ -648,6 +650,8 @@ export class ChartComponent {
       const processedData = this.parseData(this.historyData() as RawData[]);
       this.initChart(processedData);
       this.lineSeries?.applyOptions({ visible: false })
+      // this.chartReady.set(true);
+      // this.chartIsReadySubject.next(true);
       
       fromEvent(document, 'click')
       .subscribe((event) => {
