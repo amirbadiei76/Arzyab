@@ -532,8 +532,6 @@ export class ChartComponent {
     });
     this.lineSeries.setData(data.lineVolumes);
 
-    this.chartIsReadySubject.next(true)
-    
     const resizeObserver = new ResizeObserver(entries => {
       if (entries.length === 0 || entries[0].target !== this.chartContainer.nativeElement) { return; }
       const newRect = entries[0].contentRect;
@@ -618,7 +616,8 @@ export class ChartComponent {
     if (data.candles.length > 0) {
         this.updateHeader(data.candles[data.candles.length - 1], data.volumes[data.volumes.length - 1]);
     }
-
+    
+    this.chartIsReadySubject.next(true)
   }
 
   updateHeader(priceData: CandleData, volumeData: VolumeData) {
