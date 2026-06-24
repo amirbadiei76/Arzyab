@@ -531,7 +531,9 @@ export class ChartComponent {
       lineWidth: 2,
     });
     this.lineSeries.setData(data.lineVolumes);
-
+    
+    this.chartIsReadySubject.next(true);
+    
     const resizeObserver = new ResizeObserver(entries => {
       if (entries.length === 0 || entries[0].target !== this.chartContainer.nativeElement) { return; }
       const newRect = entries[0].contentRect;
@@ -648,8 +650,6 @@ export class ChartComponent {
       const processedData = this.parseData(this.historyData() as RawData[]);
       this.initChart(processedData);
       this.lineSeries?.applyOptions({ visible: false })
-      // this.chartReady.set(true);
-      this.chartIsReadySubject.next(true);
       
       fromEvent(document, 'click')
       .subscribe((event) => {
