@@ -541,8 +541,6 @@ export class ChartComponent {
     const mainDollarValueChanes = this.currentValue()!.price_dollar_rl.dp;
     const mainPoundValueChanes = this.currentValue()!.price_gbp.dp;
 
-    this.chartIsReadySubject.next(true);
-
     this.chart.subscribeCrosshairMove(param => {
       if (param.time) {
         const price = param.seriesData.get(this.candlestickSeries!) as CandleData;
@@ -651,7 +649,7 @@ export class ChartComponent {
       this.initChart(processedData);
       this.lineSeries?.applyOptions({ visible: false })
       // this.chartReady.set(true);
-      // this.chartIsReadySubject.next(true);
+      this.chartIsReadySubject.next(true)
       
       fromEvent(document, 'click')
       .subscribe((event) => {
