@@ -23,10 +23,11 @@ import { PercentProgressSkeletonComponent } from '../../components/not-shared/cu
 import { ItemInfoSkeletonComponent } from '../../components/not-shared/currency-item-details/item-info-skeleton/item-info-skeleton.component';
 import { CurrencyOverviewSkeletonComponent } from '../../components/not-shared/currency-item-details/currency-overview-skeleton/currency-overview-skeleton.component';
 import { BreadcrumbSkeletonComponent } from '../../components/shared/breadcrumb-skeleton/breadcrumb-skeleton.component';
+import { ChangesTableSkeletonComponent } from '../../components/not-shared/currency-item-details/changes-table-skeleton/changes-table-skeleton.component';
 
 @Component({
   selector: 'app-currency-item-details',
-  imports: [BreadcrumbComponent, BreadcrumbSkeletonComponent, FormsModule, CommonModule, ItemInfoComponent, ItemInfoSkeletonComponent, NotFoundBoxComponent, PercentProgressComponent, PercentProgressSkeletonComponent, SearchItemComponent, ChangesTableComponent, CurrencyOverviewComponent, CurrencyOverviewSkeletonComponent, ChartComponent],
+  imports: [BreadcrumbComponent, BreadcrumbSkeletonComponent, FormsModule, CommonModule, ItemInfoComponent, ItemInfoSkeletonComponent, NotFoundBoxComponent, PercentProgressComponent, PercentProgressSkeletonComponent, SearchItemComponent, ChangesTableComponent, ChangesTableSkeletonComponent, CurrencyOverviewComponent, CurrencyOverviewSkeletonComponent, ChartComponent],
   templateUrl: './currency-item-details.component.html',
   styleUrl: './currency-item-details.component.css'
 })
