@@ -115,12 +115,13 @@ export class ChartComponent {
   constructor() {
     
     const processedData = this.parseData(this.historyData() as RawData[]);
-    this.initChart(processedData);
+    const chart = this.initChart(processedData);
 
     this.candlestickSeries?.setData(processedData.candles as any[])
     this.volumeSeries?.setData(processedData.volumes as any[])
     this.lineSeries?.setData(processedData.lineVolumes as any[]);
     this.lineSeries?.applyOptions({ visible: false });
+    if (chart) this.chartIsReadySubject.next(true)
 
     effect(() => {
       const data = this.historyData();
@@ -158,8 +159,9 @@ export class ChartComponent {
   ngOnChanges() {
     if (this.historyData() && !this.chart) {
       const processedData = this.parseData(this.historyData() as RawData[]);
-      this.initChart(processedData);
+      const chart = this.initChart(processedData);
       this.lineSeries?.applyOptions({ visible: false })
+      if (chart) this.chartIsReadySubject.next(true)
     }
     else {
       this.candlestickSeries?.applyOptions({ visible: this.chartType() === 0 })
