@@ -115,13 +115,12 @@ export class ChartComponent {
   constructor() {
     
     const processedData = this.parseData(this.historyData() as RawData[]);
-    const chart = this.initChart(processedData);
+    this.initChart(processedData);
 
     this.candlestickSeries?.setData(processedData.candles as any[])
     this.volumeSeries?.setData(processedData.volumes as any[])
     this.lineSeries?.setData(processedData.lineVolumes as any[]);
     this.lineSeries?.applyOptions({ visible: false });
-    if (chart) this.chartIsReadySubject.next(true)
 
     effect(() => {
       const data = this.historyData();
@@ -159,9 +158,8 @@ export class ChartComponent {
   ngOnChanges() {
     if (this.historyData() && !this.chart) {
       const processedData = this.parseData(this.historyData() as RawData[]);
-      const chart = this.initChart(processedData);
+      this.initChart(processedData);
       this.lineSeries?.applyOptions({ visible: false })
-      if (chart) this.chartIsReadySubject.next(true)
     }
     else {
       this.candlestickSeries?.applyOptions({ visible: this.chartType() === 0 })
@@ -533,7 +531,7 @@ export class ChartComponent {
       lineWidth: 2,
     });
     this.lineSeries.setData(data.lineVolumes);
-    
+
     const resizeObserver = new ResizeObserver(entries => {
       if (entries.length === 0 || entries[0].target !== this.chartContainer.nativeElement) { return; }
       const newRect = entries[0].contentRect;
@@ -618,7 +616,7 @@ export class ChartComponent {
     if (data.candles.length > 0) {
         this.updateHeader(data.candles[data.candles.length - 1], data.volumes[data.volumes.length - 1]);
     }
-    return this.chart;
+
   }
 
   updateHeader(priceData: CandleData, volumeData: VolumeData) {
@@ -648,10 +646,10 @@ export class ChartComponent {
 
     if (typeof document !== 'undefined') {
       const processedData = this.parseData(this.historyData() as RawData[]);
-      const chart = this.initChart(processedData);
+      this.initChart(processedData);
       this.lineSeries?.applyOptions({ visible: false })
-      if (chart) this.chartIsReadySubject.next(true)
       // this.chartReady.set(true);
+      if (this.candlestickSeries) this.chartIsReadySubject.next(true)
       
       fromEvent(document, 'click')
       .subscribe((event) => {
