@@ -281,19 +281,27 @@
                 @if (calculatorType() === 0) {
                     <span class="w-full flex justify-start text-dark-text dark:text-light-text font-bold text-sm md:text-base gap-2 mb-1">
                         قیمت نهایی:&nbsp;
-                        @if (totalGoldValue$ | async; as totalGoldValue) {
-                            <p class="text-dark dark:text-light">{{ totalGoldValue }}</p>
-                            <p class="text-dark-text4 dark:text-light-text4">تومان</p>
+                        @if (requestClass.isReady$ | async) {
+                            @if (totalGoldValue$ | async; as totalGoldValue) {
+                                <p class="text-dark dark:text-light">{{ totalGoldValue }}</p>
+                                <p class="text-dark-text4 dark:text-light-text4">تومان</p>
+                            }
                         }
-                        <!-- <span class="skeleton-base {{ gram18Value() ? 'hidden' : 'block' }}">قیمت نهایی</span> -->
+                        @else {
+                            <span class="skeleton-base block">قیمت نهایی</span>
+                        }
                     </span>
                     <span class="w-full flex justify-start text-dark-text dark:text-light-text text-sm md:text-base gap-2 mb-1">
                         قیمت طلا:&nbsp;
-                        @if (mainGoldValue$ | async; as mainGoldValue) {
-                            <p class="text-dark font-bold dark:text-light text-xs md:text-sm">{{ mainGoldValue }}</p>
-                            <p class="text-dark-text4 dark:text-light-text4 text-xs md:text-sm">تومان</p>
+                        @if (requestClass.isReady$ | async) {
+                            @if (mainGoldValue$ | async; as mainGoldValue) {
+                                <p class="text-dark font-bold dark:text-light text-xs md:text-sm">{{ mainGoldValue }}</p>
+                                <p class="text-dark-text4 dark:text-light-text4 text-xs md:text-sm">تومان</p>
+                            }
                         }
-                        <!-- <span class="text-xs md:text-sm skeleton-base {{ gram18Value() ? 'hidden' : 'block' }}">قیمت طلا</span> -->
+                        @else {
+                            <span class="text-xs md:text-sm skeleton-base block">قیمت طلا</span>
+                        }
                     </span>
                     <span class="w-full flex justify-start text-dark-text dark:text-light-text text-sm md:text-base gap-2 mb-1">
                         اجرت:&nbsp;
