@@ -127,6 +127,10 @@
                         <app-chart class="w-full" [item]="currencyItem" [historyData]="chartHistory" [currentUnit]="currentSupportCurrencyId()" [chartType]="currentChartType()" />
                         <app-changes-table class="w-full" [historyData]="chartHistory" [item]="currencyItem" [currentUnit]="currentSupportCurrencyId()" />
                     }
+                    @else {
+                        <span class="relative w-full block z-0 h-75 md:h-94 skeleton-base"></span>
+                        <app-changes-table-skeleton class="w-full" />
+                    }
                 }
             }
             @else {
