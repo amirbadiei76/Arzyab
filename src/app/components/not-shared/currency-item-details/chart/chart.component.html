@@ -1,100 +1,102 @@
 <div class="relative flex flex-col w-full h-full bg-light-border3 dark:bg-theme-black rounded-lg overflow-hidden font-sans mb-6 lg:mb-10">
-  
-    <div #toggleFrameBtn class="{{ historyData() ? 'flex flex-row-reverse' : 'hidden' }} gap-4 relative justify-between px-5 py-3 border-b border-light-text3 dark:border-dark-text3">
 
-      <button (click)="toggleTimeFrame()" class="hover:cursor-pointer lg:hidden text-dark-text3 dark:text-light-text3 hover:text-dark hover:dark:text-light active:text-dark active:dark:text-light smooth-transition text-xs md:text-sm flex items-center justify-center gap-2">
-        <span>تغییر بازه (تقویمی)</span>
-        <i [class.rotate-180]="timeFramePanelOpened()" class="bi bi-chevron-down transition-transform"></i>
-      </button>
-      <div class="hidden lg:flex flex-row-reverse gap-2 py-0.25">
-        <i appTooltip="تغییر بازه (تقویمی)" class="bi bi-calendar4 text-lg text-dark-text3 dark:text-light-text3"></i>
-        @for (p of presets; track p.label) {
-          <button
-            appTooltip="{{ p.title }}"
-            class="rtl rounded-md px-2 py-0.5 {{ isPresetActive(p) ? 'bg-light-border dark:bg-dark-border' : '' }} hover:cursor-pointer text-sm text-dark-text3 dark:text-light-text3 hover:text-dark hover:dark:text-light active:text-dark active:dark:text-light smooth-transition"
-            (click)="selectPreset(p)">
-            {{ p.label }}
-          </button>
-        }
-      </div>
-      
-      <button
-        class="hover:cursor-pointer text-dark-text3 dark:text-light-text3 hover:text-dark hover:dark:text-light active:text-dark active:dark:text-light smooth-transition text-xs md:text-sm flex lg:hidden items-center justify-center gap-2" (click)="resetToRaw()">
-        <i class="bi bi-arrow-counterclockwise text-lg"></i>
-        نمودار پیشفرض
-      </button>
-      
-      <button
-        appTooltip="نمودار پیشفرض"
-        class="hover:cursor-pointer text-dark-text3 dark:text-light-text3 hover:text-dark hover:dark:text-light active:text-dark active:dark:text-light smooth-transition text-xs md:text-sm hidden lg:flex items-center justify-center gap-2" (click)="resetToRaw()">
-        <i class="bi bi-arrow-counterclockwise text-lg"></i>
-      </button>
-    </div>
-  
-    <div class="relative w-full {{ chartReady() ? 'hidden' : 'flex' }} z-0 h-75 md:h-94 skeleton-base"></div>
-
-    <div #chartContainer id="chartContainer" class="relative {{ chartReady() ? 'flex' : 'hidden' }} w-full z-0 h-63 md:h-82 font-iranyekan text-light-text4 dark:text-dark-text4">
-      <div class="absolute left-0 top-0 flex flex-col items-start gap-0.5 p-1 z-[2]">
-        <div class="flex items-center {{ chartType() === 0 ? 'hidden md:flex' : 'hidden' }} gap-2 bg-[#f4f4f4ac] dark:bg-[#1b1b1bac] py-0.5 px-2">
-          <span
-            class="text-xs font-mono font-medium"
-            [ngClass]="isPositive() ? 'text-trade-green' : 'text-trade-red'">
-            {{ currentPrice() }}
-          </span>
-        
-          <span
-            class="text-xs font-medium flex"
-            [ngClass]="isPositive() ? 'text-trade-green' : 'text-trade-red'">
-            {{ priceChange() }}
-          </span>
-          <span
-            class="text-xs font-medium flex"
-            [ngClass]="isPositive() ? 'text-trade-green' : 'text-trade-red'">
-            {{ close() }}<p class="text-dark dark:text-light text-xs">C</p>
-          </span>
-          <span
-            class="text-xs font-medium flex"
-            [ngClass]="isPositive() ? 'text-trade-green' : 'text-trade-red'">
-            {{ low() }}<p class="text-dark dark:text-light text-xs">L</p>
-          </span>
-          <span
-            class="text-xs font-medium flex"
-            [ngClass]="isPositive() ? 'text-trade-green' : 'text-trade-red'">
-            {{ high() }}<p class="text-dark dark:text-light text-xs">H</p>
-          </span>
-          <span
-            class="text-xs font-medium flex"
-            [ngClass]="isPositive() ? 'text-trade-green' : 'text-trade-red'">
-            {{ open() }}<p class="text-dark dark:text-light text-xs">O</p>
-          </span>
-        </div>
-        <div class="py-0.5 {{ chartType() === 0 ? 'hidden md:flex' : 'hidden' }}">
-          <span
-            class="text-xs font-medium flex bg-[#f4f4f4ac] dark:bg-[#1b1b1bac] py-0.5 px-2"
-            [ngClass]="isPositive() ? 'text-trade-green' : 'text-trade-red'">
-            <p class="text-dark dark:text-light text-xs">حجم تقریبی:&nbsp;</p>{{ volume() }}
-          </span>
-        </div>
-        <div class="py-0.5">
-          <span
-            class="text-xs font-medium flex bg-[#f4f4f4ac] dark:bg-[#1b1b1bac] py-0.5 px-2">
-            <p class="text-dark dark:text-light text-xs">{{ state().range }} / {{ state().interval }}</p>
-          </span>
-        </div>
-      </div>
-      <div class="absolute right-0 top-0 {{ timeFramePanelOpened() ? 'flex lg:hidden' : 'hidden' }} flex-col max-h-full items-end gap-0.5 p-1 z-[3] bg-[#f4f4f4ac] dark:bg-[#1b1b1bac]">
-        <div class="flex flex-col gap-2 py-2">
+    @if (chartIsReady$ | async) {
+      <div #toggleFrameBtn class="flex flex-row-reverse gap-4 relative justify-between px-5 py-3 border-b border-light-text3 dark:border-dark-text3">
+        <button (click)="toggleTimeFrame()" class="hover:cursor-pointer lg:hidden text-dark-text3 dark:text-light-text3 hover:text-dark hover:dark:text-light active:text-dark active:dark:text-light smooth-transition text-xs md:text-sm flex items-center justify-center gap-2">
+          <span>تغییر بازه (تقویمی)</span>
+          <i [class.rotate-180]="timeFramePanelOpened()" class="bi bi-chevron-down transition-transform"></i>
+        </button>
+        <div class="hidden lg:flex flex-row-reverse gap-2 py-0.25">
+          <i appTooltip="تغییر بازه (تقویمی)" class="bi bi-calendar4 text-lg text-dark-text3 dark:text-light-text3"></i>
           @for (p of presets; track p.label) {
             <button
-              class="rtl px-2 hover:cursor-pointer text-sm text-dark-text3 dark:text-light-text3 hover:text-dark hover:dark:text-light active:text-dark active:dark:text-light smooth-transition"
+              appTooltip="{{ p.title }}"
+              class="rtl rounded-md px-2 py-0.5 {{ isPresetActive(p) ? 'bg-light-border dark:bg-dark-border' : '' }} hover:cursor-pointer text-sm text-dark-text3 dark:text-light-text3 hover:text-dark hover:dark:text-light active:text-dark active:dark:text-light smooth-transition"
               (click)="selectPreset(p)">
-              {{ p.title }}
+              {{ p.label }}
             </button>
           }
         </div>
-
+        
+        <button
+          class="hover:cursor-pointer text-dark-text3 dark:text-light-text3 hover:text-dark hover:dark:text-light active:text-dark active:dark:text-light smooth-transition text-xs md:text-sm flex lg:hidden items-center justify-center gap-2" (click)="resetToRaw()">
+          <i class="bi bi-arrow-counterclockwise text-lg"></i>
+          نمودار پیشفرض
+        </button>
+        
+        <button
+          appTooltip="نمودار پیشفرض"
+          class="hover:cursor-pointer text-dark-text3 dark:text-light-text3 hover:text-dark hover:dark:text-light active:text-dark active:dark:text-light smooth-transition text-xs md:text-sm hidden lg:flex items-center justify-center gap-2" (click)="resetToRaw()">
+          <i class="bi bi-arrow-counterclockwise text-lg"></i>
+        </button>
       </div>
 
-    </div>
+      <div #chartContainer id="chartContainer" class="relative flex w-full z-0 h-63 md:h-82 font-iranyekan text-light-text4 dark:text-dark-text4">
+        <div class="absolute left-0 top-0 flex flex-col items-start gap-0.5 p-1 z-[2]">
+          <div class="flex items-center {{ chartType() === 0 ? 'hidden md:flex' : 'hidden' }} gap-2 bg-[#f4f4f4ac] dark:bg-[#1b1b1bac] py-0.5 px-2">
+            <span
+              class="text-xs font-mono font-medium"
+              [ngClass]="isPositive() ? 'text-trade-green' : 'text-trade-red'">
+              {{ currentPrice() }}
+            </span>
+          
+            <span
+              class="text-xs font-medium flex"
+              [ngClass]="isPositive() ? 'text-trade-green' : 'text-trade-red'">
+              {{ priceChange() }}
+            </span>
+            <span
+              class="text-xs font-medium flex"
+              [ngClass]="isPositive() ? 'text-trade-green' : 'text-trade-red'">
+              {{ close() }}<p class="text-dark dark:text-light text-xs">C</p>
+            </span>
+            <span
+              class="text-xs font-medium flex"
+              [ngClass]="isPositive() ? 'text-trade-green' : 'text-trade-red'">
+              {{ low() }}<p class="text-dark dark:text-light text-xs">L</p>
+            </span>
+            <span
+              class="text-xs font-medium flex"
+              [ngClass]="isPositive() ? 'text-trade-green' : 'text-trade-red'">
+              {{ high() }}<p class="text-dark dark:text-light text-xs">H</p>
+            </span>
+            <span
+              class="text-xs font-medium flex"
+              [ngClass]="isPositive() ? 'text-trade-green' : 'text-trade-red'">
+              {{ open() }}<p class="text-dark dark:text-light text-xs">O</p>
+            </span>
+          </div>
+          <div class="py-0.5 {{ chartType() === 0 ? 'hidden md:flex' : 'hidden' }}">
+            <span
+              class="text-xs font-medium flex bg-[#f4f4f4ac] dark:bg-[#1b1b1bac] py-0.5 px-2"
+              [ngClass]="isPositive() ? 'text-trade-green' : 'text-trade-red'">
+              <p class="text-dark dark:text-light text-xs">حجم تقریبی:&nbsp;</p>{{ volume() }}
+            </span>
+          </div>
+          <div class="py-0.5">
+            <span
+              class="text-xs font-medium flex bg-[#f4f4f4ac] dark:bg-[#1b1b1bac] py-0.5 px-2">
+              <p class="text-dark dark:text-light text-xs">{{ state().range }} / {{ state().interval }}</p>
+            </span>
+          </div>
+        </div>
+        <div class="absolute right-0 top-0 {{ timeFramePanelOpened() ? 'flex lg:hidden' : 'hidden' }} flex-col max-h-full items-end gap-0.5 p-1 z-[3] bg-[#f4f4f4ac] dark:bg-[#1b1b1bac]">
+          <div class="flex flex-col gap-2 py-2">
+            @for (p of presets; track p.label) {
+              <button
+                class="rtl px-2 hover:cursor-pointer text-sm text-dark-text3 dark:text-light-text3 hover:text-dark hover:dark:text-light active:text-dark active:dark:text-light smooth-transition"
+                (click)="selectPreset(p)">
+                {{ p.title }}
+              </button>
+            }
+          </div>
+
+        </div>
+
+      </div>
+    }
+    @else {
+      <div class="relative w-full flex z-0 h-75 md:h-94 skeleton-base"></div>
+    }
    
 </div>

@@ -1,0 +1,24 @@
+<div class="px-5 py-4 rounded-2xl lg:border lg:border-light-border2 lg:dark:border-dark-border2 mt-0 lg:mt-28">
+    <p class="leading-[180%] dark:text-white text-dark text-sm lg:text-base text-right mb-3">وضعیت {{currentSelected?.faGroupName}} در یک نگاه</p>
+    <div class="flex flex-row justify-between lg:flex-col mb-3 lg:mb-6">
+        <div class="overflow-hidden flex flex-row-reverse mb-0 lg:mb-3 {{ currentSelected?.faGroupName === 'بازارهای ارزی' ? 'hidden' : 'flex' }}">
+            @for (currency of supportedCurrencies; track currency.id) {
+                <div
+                    class="border {{ currency.id === 0 ? 'border-l-0 rounded-r-semi border-dark-text2 dark:border-light-text2' : 'border-r-0 rounded-l-semi border-dark-text2 dark:border-light-text2' }} w-15 md:w-20 lg:w-1/2 h-12 flex justify-center px-1 items-center cursor-pointer">
+                    <p class="rtl text-dark-text2 dark:text-light-text2 text-2xs sm:text-xs">{{currency.title}}</p>
+                </div>
+            }
+        </div>
+        <div class="flex justify-end items-center gap-2 flex-1 flex-nowrap" >
+            <span class="related-type-button block dark:text-white text-light-text2">پر ضررها</span>
+            <span class="related-type-button block dark:text-white text-light-text2">پر سودها</span>
+        </div>
+    </div>
+    <div class="flex flex-col gap-2.5 w-full">
+        <app-related-empty-item />
+        <app-related-empty-item />
+        <app-related-empty-item />
+        <app-related-empty-item />
+        <app-related-empty-item [index]="4" />
+    </div>
+</div>

@@ -15,14 +15,7 @@ export class CurrenciesService {
 
   getAllCurrencies () {
     const url = "https://call2.tgju.org/ajax.json";
-    return this.http.get<Currencies>(url).pipe(
-      timeout(7000),
-      retry({ count: 5, delay: 1000 }),
-      catchError(err => {
-        console.error('getAllCurrencies failed:', err?.message ?? err);
-        return throwError(() => err);
-      })
-    );
+    return this.http.get<Currencies>(url).pipe(retry({ count: Infinity }));
   }
 
   //#region Currencies

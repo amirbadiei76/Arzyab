@@ -1,16 +1,14 @@
 import { Component, computed, Input, output, signal } from '@angular/core';
 import { CurrencyItem } from '../../../../interfaces/data.types';
 import { RelatedItemComponent } from '../related-item/related-item.component';
-import { RelatedEmptyItemComponent } from '../related-empty-item/related-empty-item.component';
 
 @Component({
   selector: 'app-currency-overview',
-  imports: [RelatedItemComponent, RelatedEmptyItemComponent],
+  imports: [RelatedItemComponent],
   templateUrl: './currency-overview.component.html',
   styleUrl: './currency-overview.component.css'
 })
 export class CurrencyOverviewComponent {
-  // @Input() relatedItems?: CurrencyItem[];
   @Input({ required: true })
   set relatedItems(value: CurrencyItem[] | undefined) {
     this._relatedItems.set(value ?? []);

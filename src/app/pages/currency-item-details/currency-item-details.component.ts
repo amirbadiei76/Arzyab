@@ -8,7 +8,7 @@ import { NotificationService } from '../../services/notification.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { base_metal_title, coin_title, commodity_title, crypto_title, currency_title, dollar_unit, gold_title, precious_metal_title, toman_unit, world_title } from '../../constants/Values';
 import { SearchItemComponent } from '../../components/shared/search-item/search-item.component';
-import { combineLatest, distinctUntilChanged, filter, from, fromEvent, map, Observable, of, retry, shareReplay, switchMap, take, tap, throttleTime } from 'rxjs';
+import { BehaviorSubject, combineLatest, distinctUntilChanged, filter, from, fromEvent, map, Observable, of, retry, shareReplay, switchMap, take, tap, throttleTime } from 'rxjs';
 import { CurrencyOverviewComponent } from '../../components/not-shared/currency-item-details/currency-overview/currency-overview.component';
 import { commafy, dollarToToman, poundToDollar, poundToToman, priceToNumber, rialToDollar, rialToToman, trimDecimal } from '../../utils/CurrencyConverter';
 import { RawData } from '../../interfaces/chart.types';
@@ -19,10 +19,14 @@ import { PercentProgressComponent } from '../../components/not-shared/currency-i
 import { NotFoundBoxComponent } from '../../components/shared/not-found-box/not-found-box.component';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
+import { PercentProgressSkeletonComponent } from '../../components/not-shared/currency-item-details/percent-progress-skeleton/percent-progress-skeleton.component';
+import { ItemInfoSkeletonComponent } from '../../components/not-shared/currency-item-details/item-info-skeleton/item-info-skeleton.component';
+import { CurrencyOverviewSkeletonComponent } from '../../components/not-shared/currency-item-details/currency-overview-skeleton/currency-overview-skeleton.component';
+import { BreadcrumbSkeletonComponent } from '../../components/shared/breadcrumb-skeleton/breadcrumb-skeleton.component';
 
 @Component({
   selector: 'app-currency-item-details',
-  imports: [BreadcrumbComponent, FormsModule, CommonModule, ItemInfoComponent, NotFoundBoxComponent, PercentProgressComponent, SearchItemComponent, ChangesTableComponent, CurrencyOverviewComponent, ChartComponent],
+  imports: [BreadcrumbComponent, BreadcrumbSkeletonComponent, FormsModule, CommonModule, ItemInfoComponent, ItemInfoSkeletonComponent, NotFoundBoxComponent, PercentProgressComponent, PercentProgressSkeletonComponent, SearchItemComponent, ChangesTableComponent, CurrencyOverviewComponent, CurrencyOverviewSkeletonComponent, ChartComponent],
   templateUrl: './currency-item-details.component.html',
   styleUrl: './currency-item-details.component.css'
 })

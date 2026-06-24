@@ -7,7 +7,7 @@ import { dollar_unit, pound_unit, toman_unit } from '../../../../constants/Value
 import { commafy, dollarToToman, normalizeValue, poundToDollar, poundToToman, priceToNumber, rialToDollar, rialToToman, trimDecimal, valueToDollarChanges, valueToRialChanges } from '../../../../utils/CurrencyConverter';
 import { RequestArrayService } from '../../../../services/request-array.service';
 import { TooltipDirective } from '../../../../directives/tooltip.directive';
-import { from, fromEvent, map, shareReplay } from 'rxjs';
+import { BehaviorSubject, from, fromEvent, map, shareReplay } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 type RangeKey = '7D' | '1M' | '3M' | '6M' | '1Y' | 'All';
@@ -52,6 +52,10 @@ export class ChartComponent {
   private candlestickSeries: ISeriesApi<"Candlestick"> | null = null;
   private volumeSeries: ISeriesApi<"Histogram"> | null = null;
   private lineSeries: ISeriesApi<'Line'> | null = null;
+
+  
+  private chartIsReadySubject = new BehaviorSubject<boolean>(false);
+  chartIsReady$ = this.chartIsReadySubject.asObservable();
 
   currentValue = toSignal(from(this.requestService.mainData!)
   .pipe(
@@ -644,7 +648,8 @@ export class ChartComponent {
       const processedData = this.parseData(this.historyData() as RawData[]);
       this.initChart(processedData);
       this.lineSeries?.applyOptions({ visible: false })
-      this.chartReady.set(true);
+      // this.chartReady.set(true);
+      this.chartIsReadySubject.next(true);
       
       fromEvent(document, 'click')
       .subscribe((event) => {
