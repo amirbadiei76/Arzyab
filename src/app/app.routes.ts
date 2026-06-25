@@ -1,9 +1,10 @@
 import { Routes } from '@angular/router';
+import { RoutingShellComponent } from './pages/routing-shell/routing-shell.component';
 
 export const routes: Routes = [
     {
         path: '',
-        loadComponent: () => import('../app/pages/routing-shell/routing-shell.component').then(m => m.RoutingShellComponent),
+        component: RoutingShellComponent,
         children: [
             { path: '', pathMatch: 'full', loadComponent: () => import('../app/pages/home/home.component').then((home) => home.HomeComponent), title: 'ارزیاب | مرجع قیمت بازارها' },
             { path: 'gold-calculator', loadComponent: () => import('../app/pages/gold-calculator/gold-calculator.component').then((gold) => gold.GoldCalculatorComponent), title: 'ارزیاب | محاسبه‌گر طلا' },
