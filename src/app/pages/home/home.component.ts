@@ -688,7 +688,7 @@ export class HomeComponent {
             this.scrollCategoryToCenter(activeEl);
             setTimeout(() => {
               this.highlightReady.set(true);
-            }, 250);
+            }, 300);
           }
         });
       }
