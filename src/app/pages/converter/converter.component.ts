@@ -57,7 +57,6 @@ export class ConverterComponent {
     lastPriceInfo: undefined,
     realPrice: 1
   }
-  
 
   currentValue = toSignal(from(this.requestArray.mainData!)
   .pipe(
@@ -159,8 +158,6 @@ export class ConverterComponent {
   currencyType = signal(this.getInitialCurrencyType());
   currencyType$ = toObservable(this.currencyType)
   currencyDropdownOpen = signal(false)
-
-
   
 
   currencyTypes: ICurrencySelect[] = [
