@@ -231,73 +231,30 @@ export class ConverterComponent {
     shareReplay(1)
   );
 
-  /*
- syncFromTo$ = this.dualList$.pipe(
-    map(({ first, second }) => {
-
-      const defaultFrom = first?.[1];
-      const defaultTo = second?.[this.currencyType() === 2 ? 1 : 0];
-
-      if (!this.fromItemId()) {
-        this.fromItemId.set(defaultFrom?.id ?? '');
-      }
-
-      if (!this.toItemId()) {
-        this.toItemId.set(defaultTo?.id ?? '');
-      }
-
-      const currentFrom = first.find(item => item.id === this.fromItemId()) ?? defaultFrom;
-      const currentTo = second.find(item => item.id === this.toItemId()) ?? defaultTo;
-
-      this.fromItemSubject.next(currentFrom);
-      this.toItemSubject.next(currentTo);
-    })
-  );
-  */
- syncFromTo$ = this.dualList$.pipe(
-    filter(({ first, second }) => first.length > 0 && second.length > 0),
-    map(({ first, second }) => {
-      const defaultFrom = first?.[1];
-      const defaultTo = second?.[this.currencyType() === 2 ? 1 : 0];
-
-      if (!this.fromItemId()) {
-        this.fromItemId.set(defaultFrom?.id ?? '');
-      }
-
-      if (!this.toItemId()) {
-        this.toItemId.set(defaultTo?.id ?? '');
-      }
-
-      const currentFrom = first.find(item => item.id === this.fromItemId()) ?? defaultFrom;
-      const currentTo = second.find(item => item.id === this.toItemId()) ?? defaultTo;
-
-      this.fromItemSubject.next(currentFrom);
-      this.toItemSubject.next(currentTo);
-    })
-  );
-
   
-  /*
-  private initFromUrl$ = this.dualList$.pipe(
-    tap(({ first, second }) => {
-      const params = this.route.snapshot.queryParamMap;
-      const fromSlug = params.get('from');
-      const toSlug = params.get('to');
+ syncFromTo$ = this.dualList$.pipe(
+    map(({ first, second }) => {
 
-      if (fromSlug) {
-        const found = first.find(item => item.slugText === fromSlug);
-        if (found) this.fromItemId.set(found.id);
+      const defaultFrom = first?.[1];
+      const defaultTo = second?.[this.currencyType() === 2 ? 1 : 0];
+
+      if (!this.fromItemId()) {
+        this.fromItemId.set(defaultFrom?.id ?? '');
       }
-      if (toSlug) {
-        const found = second.find(item => item.slugText === toSlug);
-        if (found) this.toItemId.set(found.id);
+
+      if (!this.toItemId()) {
+        this.toItemId.set(defaultTo?.id ?? '');
       }
+
+      const currentFrom = first.find(item => item.id === this.fromItemId()) ?? defaultFrom;
+      const currentTo = second.find(item => item.id === this.toItemId()) ?? defaultTo;
+
+      this.fromItemSubject.next(currentFrom);
+      this.toItemSubject.next(currentTo);
     })
   );
-  */
- private initFromUrl$ = this.dualList$.pipe(
-    filter(({ first, second }) => first.length > 0 && second.length > 0),
-    take(1),
+  
+  private initFromUrl$ = this.dualList$.pipe(
     tap(({ first, second }) => {
       const params = this.route.snapshot.queryParamMap;
       const fromSlug = params.get('from');
