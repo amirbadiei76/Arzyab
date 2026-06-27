@@ -294,9 +294,9 @@ export class RequestArrayService {
 
 
         // add slug text
-        item.slugText = item.shortedName?.replace(/[\d()/\-\s]+/g, '_')
-        .replace(/_+/g, '_')
-        .replace(/^_+|_+$/g, '').toLocaleLowerCase();
+        item.slugText = item.shortedName?.replace(/[\d()/\-\s]+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-+|-+$/g, '').toLocaleLowerCase();
         item.faGroupName = faGroupName;
 
         // fix 24h changes problem
