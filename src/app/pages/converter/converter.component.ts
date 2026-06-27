@@ -12,6 +12,7 @@ import { commafy, commafyString, priceToNumber, trimDecimal, valueToDollarChange
 import { ConverterItemSkeletonComponent } from '../../components/not-shared/converter/converter-item-skeleton/converter-item-skeleton.component';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 type DualList = {
   first: CurrencyItem[];
@@ -32,6 +33,8 @@ export interface ICurrencySelect {
 })
 export class ConverterComponent {
   requestArray = inject(RequestArrayService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   fromTextToFilter = signal('');
   fromTextToFilter$ = toObservable(this.fromTextToFilter)
@@ -153,7 +156,7 @@ export class ConverterComponent {
   currentFromList = signal<CurrencyItem[]>([])
   currentToList = signal<CurrencyItem[]>([])
 
-  currencyType = signal(0);
+  currencyType = signal(this.getInitialCurrencyType());
   currencyType$ = toObservable(this.currencyType)
   currencyDropdownOpen = signal(false)
 
@@ -252,6 +255,25 @@ export class ConverterComponent {
       this.toItemSubject.next(currentTo);
     })
   );
+
+  
+
+  private initFromUrl$ = this.dualList$.pipe(
+    tap(({ first, second }) => {
+      const params = this.route.snapshot.queryParamMap;
+      const fromSlug = params.get('from');
+      const toSlug = params.get('to');
+
+      if (fromSlug) {
+        const found = first.find(item => item.slugText === fromSlug);
+        if (found) this.fromItemId.set(found.id);
+      }
+      if (toSlug) {
+        const found = second.find(item => item.slugText === toSlug);
+        if (found) this.toItemId.set(found.id);
+      }
+    })
+  );
   
 
   calculateOutput$ = combineLatest([
@@ -292,14 +314,41 @@ export class ConverterComponent {
     })
   );
 
+  private urlSync$ = combineLatest([
+    this.fromItem$,
+    this.toItem$,
+    this.currencyType$
+  ]).pipe(
+    tap(([from, to, type]) => {
+      if (!from || !to || typeof window === 'undefined') return;
+
+      this.router.navigate([], {
+        replaceUrl: true,
+        queryParams: {
+          type,
+          from: from.slugText,
+          to: to.slugText
+        }
+      });
+    })
+  );
+
   
   constructor(private meta: Meta) {
+    this.initFromUrl$.subscribe();
     this.syncFromTo$.subscribe();
+    this.urlSync$.subscribe();
 
     if (typeof window !== 'undefined') {      
       window.scrollTo(0, 0)
     }
 
+  }
+
+  private getInitialCurrencyType(): number {
+    const typeParam = this.route.snapshot.queryParamMap.get('type');
+    const parsed = typeParam !== null ? parseInt(typeParam, 10) : NaN;
+    return [0, 1, 2].includes(parsed) ? parsed : 0;
   }
 
   ngOnInit () {
