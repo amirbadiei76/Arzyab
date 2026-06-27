@@ -6,8 +6,8 @@
         <div class="overflow-hidden flex-row-reverse mb-0 lg:mb-3 flex">
             @for (currency of supportedCurrencies; track currency.id) {
                 <div
-                    class="border {{ currency.id === 0 ? 'border-l rounded-r-semi border-dark-text2 dark:border-light-text2' : 'border-r-0 rounded-l-semi border-dark-text2 dark:border-light-text2' }} w-15 md:w-20 lg:w-1/2 h-12 flex justify-center px-1 items-center">
-                    <p class="rtl text-dark-text2 dark:text-light-text2 text-2xs sm:text-xs">{{currency.title}}</p>
+                    class="border {{ currency.id === 0 ? 'border-l rounded-r-semi border-dark-text2 dark:border-light-text2' : 'border-r-0 rounded-l-semi border-dark-text2 dark:border-light-text2' }} w-15 md:w-20 lg:w-1/2 h-12 flex justify-center px-1 items-center cursor-none">
+                    <p class="rtl text-dark-text2 dark:text-light-text2 text-2xs sm:text-xs cursor-none">{{currency.title}}</p>
                 </div>
             }
         </div>
