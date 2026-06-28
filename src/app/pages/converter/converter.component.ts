@@ -337,6 +337,8 @@ export class ConverterComponent {
   constructor(private meta: Meta) {
     // this.initFromUrl$.subscribe();
     // this.urlSync$.subscribe();
+    this.initIrItem$.subscribe();
+    this.syncFromTo$.subscribe();
 
     if (typeof window !== 'undefined') {      
       window.scrollTo(0, 0)
@@ -351,7 +353,6 @@ export class ConverterComponent {
   }
 
   ngOnInit () {
-    this.syncFromTo$.subscribe();
     this.meta.updateTag({
       name: 'description',
       content: `مبدل ارز ارزیاب؛ تبدیل سریع و دقیق ارزهای معتبر با نرخ به‌روز بازار.`
