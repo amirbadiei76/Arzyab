@@ -14,7 +14,7 @@
         <p class="font-normal text-xs md:text-sm leading-[180%] {{(currencyItem()?.dollarChangeState === 'low') ? 'text-light-red-text dark:text-dark-red-text' : 'text-light-green-text dark:text-dark-green-text'}}">{{(currencyItem()?.dollarChangeState === 'low') ? '-' : '+'}}{{currencyItem()?.dollarChanges}}%</p>
     </div>
     
-    <div class="{{ currencyItem()?.shortedName === 'IRT' ? 'invisible' : '' }} text-right col-span-4 md:col-span-3">
+    <div [class.invisible]="isIrt()" class="text-right col-span-4 md:col-span-3">
         <span class="flex items-center justify-end">
             <p class="text-dark-text2 dark:text-light-text2 text-right font-normal text-2xs md:text-xs">IRT</p>
             <p class="dark:text-white text-dark text-xs md:text-sm font-normal ml-1">{{ currencyItem()?.tomanStringPrice }}</p>

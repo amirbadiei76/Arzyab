@@ -11,6 +11,7 @@ import { RouterLink } from '@angular/router';
 export class ConverterItemComponent {
   currencyItem = input<CurrencyItem>();
   groupName = computed(() => this.currencyItem()?.groupName.toLowerCase())
+  isIrt = computed(() => this.currencyItem()?.shortedName === 'IRT')
 
   constructor () {
 

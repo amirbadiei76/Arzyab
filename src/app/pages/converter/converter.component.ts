@@ -232,7 +232,28 @@ export class ConverterComponent {
   );
 
   
- syncFromTo$ = this.dualList$.pipe(
+  syncFromTo$ = this.dualList$.pipe(
+    filter(list => !!list.first.length && !!list.second.length), // فقط وقتی لیست‌ها پر شدند ادامه بده
+    tap(({ first, second }) => {
+    // استفاده از snapshot برای دریافت مقادیر اولیه
+    const params = this.route.snapshot.queryParamMap;
+    const fromSlug = params.get('from');
+    const toSlug = params.get('to');
+
+    // پیدا کردن آیتم‌ها بر اساس slug یا انتخاب پیش‌فرض
+    const foundFrom = first.find(item => item.slugText === fromSlug) || first[0];
+    const foundTo = second.find(item => item.slugText === toSlug) || second[1] || second[0];
+
+    // فقط اگر تغییر واقعی رخ داده، سیگنال‌ها را آپدیت کن (جلوگیری از Loop)
+    if (this.fromItemId() !== foundFrom.id) this.fromItemId.set(foundFrom.id);
+    if (this.toItemId() !== foundTo.id) this.toItemId.set(foundTo.id);
+
+    this.fromItemSubject.next(foundFrom);
+    this.toItemSubject.next(foundTo);
+    })
+  );
+  /*
+  syncFromTo$ = this.dualList$.pipe(
     map(({ first, second }) => {
 
       const defaultFrom = first?.[1];
@@ -253,6 +274,7 @@ export class ConverterComponent {
       this.toItemSubject.next(currentTo);
     })
   );
+  */
   
   private initFromUrl$ = this.dualList$.pipe(
     tap(({ first, second }) => {
@@ -332,7 +354,7 @@ export class ConverterComponent {
   
   constructor(private meta: Meta) {
     this.syncFromTo$.subscribe();
-    this.initFromUrl$.subscribe();
+    // this.initFromUrl$.subscribe();
     this.urlSync$.subscribe();
 
     if (typeof window !== 'undefined') {      
