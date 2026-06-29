@@ -9,12 +9,31 @@ import { catchError, retry, throwError, timeout } from 'rxjs';
 export class CurrenciesService {
 
   base_url: string = "https://raw.githubusercontent.com/";
+  call_subdomains: string[] = [
+    // 'call1',
+    'call2',
+    'call3',
+    'call4'
+  ];
+
+  make_random_str(rand_limit: number) {
+    let text = "";
+    const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (let i = 0; i < rand_limit; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+  }
+
   constructor(private http: HttpClient) {
     
   }
 
   getAllCurrencies () {
-    const url = "https://call2.tgju.org/ajax.json";
+    const call_subdomain  = this.call_subdomains[Math.floor(Math.random()*this.call_subdomains.length)];
+    // const url = "https://call2.tgju.org/ajax.json";
+    const url = 'https://' + call_subdomain + '.tgju.org/ajax.json?rev=' + this.make_random_str(60)
     return this.http.get<Currencies>(url).pipe(retry({ count: Infinity }));
   }
 
