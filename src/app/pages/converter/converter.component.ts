@@ -7,7 +7,7 @@ import { SearchItemComponent } from '../../components/shared/search-item/search-
 import { FormsModule } from '@angular/forms';
 import { CommafyNumberDirective } from '../../directives/commafy-number.directive';
 import { ConverterItemComponent } from '../../components/not-shared/converter/converter-item/converter-item.component';
-import { BehaviorSubject, combineLatest, debounceTime, filter, from, fromEvent, map, Observable, of, shareReplay, switchMap, take, tap, withLatestFrom } from 'rxjs';
+import { BehaviorSubject, combineLatest, debounceTime, filter, from, fromEvent, map, Observable, of, shareReplay, skip, switchMap, take, tap, withLatestFrom } from 'rxjs';
 import { commafy, commafyString, priceToNumber, trimDecimal, valueToDollarChanges } from '../../utils/CurrencyConverter';
 import { ConverterItemSkeletonComponent } from '../../components/not-shared/converter/converter-item-skeleton/converter-item-skeleton.component';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
@@ -62,38 +62,7 @@ export class ConverterComponent {
   .pipe(
     map((data) => data?.current),
     shareReplay(1)
-  ))
-
-  /*
-  private initIrItem$ = this.requestArray.mainData!
-    .pipe(
-    take(1),
-    tap(mainData => {
-      if (!mainData?.current) return;
-
-      const dollarChanges = (mainData.current.price_dollar_rl?.dt === 'low' ? -1 : 1) * (mainData.current.price_dollar_rl?.dp!);
-      const dollarValue = priceToNumber(mainData.current.price_dollar_rl?.p!);
-      const mainDollarValue = (1 / dollarValue).toFixed(8)
-      const dollarChangeState = valueToDollarChanges(0, dollarChanges);
-      
-      this.irItem.dollarChangeState = dollarChangeState >= 0 ? 'high' : 'low';
-      this.irItem.dollarChanges = trimDecimal(Math.abs(dollarChangeState)) + '';
-      this.irItem.dollarStringPrice = mainDollarValue;
-    }),
-    shareReplay(1)
-  );
-
-  mainCurrencyListWithIR$ = this.requestArray.mainCurrencyList.pipe(
-    map(list => {
-      const hasIR = list.some(item => item.id === this.irItem.id);
-  
-      return hasIR
-        ? list
-        : [this.irItem, ...list];
-    }),
-    shareReplay(1)
-  );
-  */
+  ));
 
   mainCurrencyListWithIR$ = combineLatest([
     this.requestArray.mainCurrencyList,
@@ -155,6 +124,7 @@ export class ConverterComponent {
   };
 
 
+  private isInitialized = false;
   @ViewChild('typesBtn') typesBtn?: ElementRef<HTMLDivElement>
   @ViewChild('fromBtn') fromBtn?: ElementRef<HTMLDivElement>
   @ViewChild('toBtn') toBtn?: ElementRef<HTMLDivElement>
@@ -199,29 +169,12 @@ export class ConverterComponent {
     },
   ]
 
-  // fromItemSubject = new BehaviorSubject<CurrencyItem | undefined>(undefined);
   fromDropdownOpen = signal(false);
-  // fromItem$ = this.fromItemSubject.asObservable()
   fromItemId = signal('')
   
-  // toItemSubject = new BehaviorSubject<CurrencyItem | undefined>(undefined);
   toDropdownOpen = signal(false);
-  // toItem$ = this.toItemSubject.asObservable()
   toItemId = signal('')
   
-
-  /*
-  dualList$ = this.initIrItem$.pipe(
-    switchMap(() =>
-      this.currencyType$.pipe(
-        switchMap(type =>
-          this.dualCategoryStreamMap[type] ?? of({ first: [], second: [] })
-        )
-      )
-    ),
-    shareReplay(1)
-  );
-  */
   dualList$ = this.currencyType$.pipe(
     switchMap(type => this.dualCategoryStreamMap[type] ?? of({ first: [], second: [] })),
     shareReplay(1)
@@ -283,48 +236,6 @@ export class ConverterComponent {
     shareReplay(1)
   );
   toItem = toSignal(this.toItem$);
-  
-  /*
- syncFromTo$ = this.dualList$.pipe(
-    map(({ first, second }) => {
-
-      const defaultFrom = first?.[1];
-      const defaultTo = second?.[this.currencyType() === 2 ? 1 : 0];
-
-      if (!this.fromItemId()) {
-        this.fromItemId.set(defaultFrom?.id ?? '');
-      }
-
-      if (!this.toItemId()) {
-        this.toItemId.set(defaultTo?.id ?? '');
-      }
-
-      const currentFrom = first.find(item => item.id === this.fromItemId()) ?? defaultFrom;
-      const currentTo = second.find(item => item.id === this.toItemId()) ?? defaultTo;
-
-      this.fromItemSubject.next(currentFrom);
-      this.toItemSubject.next(currentTo);
-    })
-  );
-  
-  private initFromUrl$ = this.dualList$.pipe(
-    tap(({ first, second }) => {
-      const params = this.route.snapshot.queryParamMap;
-      const fromSlug = params.get('from');
-      const toSlug = params.get('to');
-
-      if (fromSlug) {
-        const found = first.find(item => item.slugText === fromSlug);
-        if (found) this.fromItemId.set(found.id);
-      }
-      if (toSlug) {
-        const found = second.find(item => item.slugText === toSlug);
-        if (found) this.toItemId.set(found.id);
-      }
-    })
-  );
-  */
-  
 
   calculateOutput$ = combineLatest([
     this.inputValue$,
@@ -363,35 +274,8 @@ export class ConverterComponent {
       }
     })
   );
-
-  /*
-  private urlSync$ = combineLatest([
-    this.fromItem$,
-    this.toItem$,
-    this.currencyType$
-  ]).pipe(
-    tap(([from, to, type]) => {
-      if (!from || !to || typeof window === 'undefined') return;
-
-      this.router.navigate([], {
-        replaceUrl: true,
-        queryParams: {
-          type,
-          from: from.slugText,
-          to: to.slugText
-        }
-      });
-    })
-  );
-  */
-
   
   constructor(private meta: Meta) {
-    // this.initFromUrl$.subscribe();
-    // this.urlSync$.subscribe();
-    // this.initIrItem$.subscribe();
-    // this.syncFromTo$.subscribe();
-
     if (typeof window !== 'undefined') {      
       window.scrollTo(0, 0)
     }
@@ -410,24 +294,6 @@ export class ConverterComponent {
       content: `مبدل ارز ارزیاب؛ تبدیل سریع و دقیق ارزهای معتبر با نرخ به‌روز بازار.`
     });
 
-    /*
-    this.dualList$.pipe(take(1)).subscribe(({ first, second }) => {
-      const params = this.route.snapshot.queryParamMap;
-      const fromSlug = params.get('from');
-      const toSlug = params.get('to');
-
-      const defaultFrom = first?.[1];
-      const defaultTo = second?.[this.currencyType() === 2 ? 1 : 0];
-
-      console.log('ngOnInit default? f: ' + defaultFrom?.id + ', t: ' + defaultTo?.id)
-      const matchedFrom = first.find(i => i.slugText === fromSlug) ?? defaultFrom;
-      const matchedTo = second.find(i => i.slugText === toSlug) ?? defaultTo;
-
-      console.log('ngOnInit matched? f: ' + matchedFrom.slugText + ', t: ' + matchedTo.slugText)
-      if (matchedFrom) this.fromItemId.set(matchedFrom.id);
-      if (matchedTo) this.toItemId.set(matchedTo.id);
-    });
-    */
     this.rawListsReady$.pipe(
       switchMap(() => this.dualList$.pipe(take(1)))
     ).subscribe(({ first, second }) => {
@@ -443,6 +309,22 @@ export class ConverterComponent {
 
       if (matchedFrom) this.fromItemId.set(matchedFrom.id);
       if (matchedTo) this.toItemId.set(matchedTo.id);
+
+      this.isInitialized = true;
+    });
+
+    this.currencyType$.pipe(
+      skip(1)
+    ).subscribe(() => {
+      if (!this.isInitialized) return;
+
+      this.dualList$.pipe(take(1)).subscribe(({ first, second }) => {
+        const defaultFrom = first?.[1];
+        const defaultTo = second?.[this.currencyType() === 2 ? 1 : 0];
+
+        this.fromItemId.set(defaultFrom?.id ?? '');
+        this.toItemId.set(defaultTo?.id ?? '');
+      });
     });
 
     combineLatest([
