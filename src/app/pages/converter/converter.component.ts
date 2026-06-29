@@ -295,7 +295,10 @@ export class ConverterComponent {
     });
 
     this.rawListsReady$.pipe(
-      switchMap(() => this.dualList$.pipe(take(1)))
+      switchMap(() => this.dualList$.pipe(
+        filter(lists => lists.first.length > 0 && lists.second.length > 0),
+        take(1)
+      ))
     ).subscribe(({ first, second }) => {
       const params = this.route.snapshot.queryParamMap;
       const fromSlug = params.get('from');
