@@ -266,11 +266,13 @@ export class ConverterComponent {
     map(([{ first }, id]) => first.find(item => item.id === id)),
     shareReplay(1)
   );
+  fromItem = toSignal(this.fromItem$);
 
   toItem$ = combineLatest([this.dualList$, toObservable(this.toItemId)]).pipe(
     map(([{ second }, id]) => second.find(item => item.id === id)),
     shareReplay(1)
   );
+  toItem = toSignal(this.toItem$);
   
   /*
  syncFromTo$ = this.dualList$.pipe(

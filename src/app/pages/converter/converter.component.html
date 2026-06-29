@@ -195,8 +195,8 @@
               <span class="flex items-center gap-1">
                 @if (requestArray.isReady$ | async) {
                   <p class="text-dark font-bold dark:text-light text-sm md:text-base">{{ inputValue() || 1 }}</p>
-                  @if (fromItem$ | async; as from) {
-                    <p class="text-dark-text4 dark:text-light-text4 text-xs md:text-sm">{{ from.shortedName }}</p>
+                  @if (fromItem()) {
+                    <p class="text-dark-text4 dark:text-light-text4 text-xs md:text-sm">{{ fromItem()!.shortedName }}</p>
                   }
                 }
                 @else {
@@ -207,8 +207,8 @@
               <span class="flex items-center gap-1">
                 @if (requestArray.isReady$ | async) {
                   <p class="text-dark font-bold dark:text-light text-sm md:text-base" >{{ calculateOutput$ | async }}</p>
-                  @if (toItem$ | async; as to) {
-                    <p class="text-dark-text4 dark:text-light-text4 text-xs md:text-sm">{{ to.shortedName }}</p>
+                  @if (toItem()) {
+                    <p class="text-dark-text4 dark:text-light-text4 text-xs md:text-sm">{{ toItem()!.shortedName }}</p>
                   }
                 }
                 @else {
@@ -223,11 +223,11 @@
             <p class="text-dark-text2 dark:text-light-text2 text-xs leaading-[180%] col-span-3">قیمت دلاری</p>
           </span>
           @if (requestArray.isReady$ | async) {
-            @if (fromItem$ | async; as fromItem) {
-              <app-converter-item class="w-full mb-1" [currencyItem]="fromItem" />
+            @if (fromItem()) {
+              <app-converter-item class="w-full mb-1" [currencyItem]="fromItem()" />
             }
-            @if (toItem$ | async; as toItem) {
-              <app-converter-item class="w-full" [currencyItem]="toItem" />
+            @if (toItem()) {
+              <app-converter-item class="w-full" [currencyItem]="toItem()" />
             }
           }
           @else {
