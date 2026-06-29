@@ -7,7 +7,7 @@ import { SearchItemComponent } from '../../components/shared/search-item/search-
 import { FormsModule } from '@angular/forms';
 import { CommafyNumberDirective } from '../../directives/commafy-number.directive';
 import { ConverterItemComponent } from '../../components/not-shared/converter/converter-item/converter-item.component';
-import { BehaviorSubject, combineLatest, filter, from, fromEvent, map, Observable, of, shareReplay, switchMap, take, tap, withLatestFrom } from 'rxjs';
+import { BehaviorSubject, combineLatest, debounceTime, filter, from, fromEvent, map, Observable, of, shareReplay, switchMap, take, tap, withLatestFrom } from 'rxjs';
 import { commafy, commafyString, priceToNumber, trimDecimal, valueToDollarChanges } from '../../utils/CurrencyConverter';
 import { ConverterItemSkeletonComponent } from '../../components/not-shared/converter/converter-item-skeleton/converter-item-skeleton.component';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
@@ -51,7 +51,7 @@ export class ConverterComponent {
     filterNameEn: filter_main_currencies_en,
     faGroupName: currency_title,
     historyCallInfo: undefined,
-    id: "200",
+    id: "IRT_CUSTOM_ID_9999",
     slugText: 'irt',
     img: 'assets/images/country-flags/ir.svg',
     lastPriceInfo: undefined,
@@ -64,6 +64,7 @@ export class ConverterComponent {
     shareReplay(1)
   ))
 
+  /*
   private initIrItem$ = this.requestArray.mainData!
     .pipe(
     take(1),
@@ -82,7 +83,6 @@ export class ConverterComponent {
     shareReplay(1)
   );
 
-
   mainCurrencyListWithIR$ = this.requestArray.mainCurrencyList.pipe(
     map(list => {
       const hasIR = list.some(item => item.id === this.irItem.id);
@@ -90,6 +90,30 @@ export class ConverterComponent {
       return hasIR
         ? list
         : [this.irItem, ...list];
+    }),
+    shareReplay(1)
+  );
+  */
+
+  mainCurrencyListWithIR$ = combineLatest([
+    this.requestArray.mainCurrencyList,
+    this.requestArray.mainData!.pipe(filter(data => !!data?.current))
+  ]).pipe(
+    map(([list, mainData]) => {
+      const dollarChanges = (mainData!.current.price_dollar_rl?.dt === 'low' ? -1 : 1) * (mainData!.current.price_dollar_rl?.dp!);
+      const dollarValue = priceToNumber(mainData!.current.price_dollar_rl?.p!);
+      const mainDollarValue = (1 / dollarValue).toFixed(8);
+      const dollarChangeState = valueToDollarChanges(0, dollarChanges);
+     
+      const filledIrItem: CurrencyItem = {
+        ...this.irItem,
+        dollarChangeState: dollarChangeState >= 0 ? 'high' : 'low',
+        dollarChanges: trimDecimal(Math.abs(dollarChangeState)) + '',
+        dollarStringPrice: mainDollarValue
+      };
+
+      const hasIR = list.some(item => item.id === filledIrItem.id);
+      return hasIR ? list : [filledIrItem, ...list];
     }),
     shareReplay(1)
   );
@@ -177,15 +201,16 @@ export class ConverterComponent {
 
   fromItemSubject = new BehaviorSubject<CurrencyItem | undefined>(undefined);
   fromDropdownOpen = signal(false);
-  fromItem$ = this.fromItemSubject.asObservable()
+  // fromItem$ = this.fromItemSubject.asObservable()
   fromItemId = signal('')
   
   toItemSubject = new BehaviorSubject<CurrencyItem | undefined>(undefined);
   toDropdownOpen = signal(false);
-  toItem$ = this.toItemSubject.asObservable()
+  // toItem$ = this.toItemSubject.asObservable()
   toItemId = signal('')
   
 
+  /*
   dualList$ = this.initIrItem$.pipe(
     switchMap(() =>
       this.currencyType$.pipe(
@@ -194,6 +219,11 @@ export class ConverterComponent {
         )
       )
     ),
+    shareReplay(1)
+  );
+  */
+  dualList$ = this.currencyType$.pipe(
+    switchMap(type => this.dualCategoryStreamMap[type] ?? of({ first: [], second: [] })),
     shareReplay(1)
   );
 
@@ -232,6 +262,17 @@ export class ConverterComponent {
   );
 
   
+  fromItem$ = combineLatest([this.dualList$, toObservable(this.fromItemId)]).pipe(
+    map(([{ first }, id]) => first.find(item => item.id === id)),
+    shareReplay(1)
+  );
+
+  toItem$ = combineLatest([this.dualList$, toObservable(this.toItemId)]).pipe(
+    map(([{ second }, id]) => second.find(item => item.id === id)),
+    shareReplay(1)
+  );
+  
+  /*
  syncFromTo$ = this.dualList$.pipe(
     map(({ first, second }) => {
 
@@ -254,7 +295,6 @@ export class ConverterComponent {
     })
   );
   
-  /*
   private initFromUrl$ = this.dualList$.pipe(
     tap(({ first, second }) => {
       const params = this.route.snapshot.queryParamMap;
@@ -337,8 +377,8 @@ export class ConverterComponent {
   constructor(private meta: Meta) {
     // this.initFromUrl$.subscribe();
     // this.urlSync$.subscribe();
-    this.initIrItem$.subscribe();
-    this.syncFromTo$.subscribe();
+    // this.initIrItem$.subscribe();
+    // this.syncFromTo$.subscribe();
 
     if (typeof window !== 'undefined') {      
       window.scrollTo(0, 0)
@@ -356,6 +396,40 @@ export class ConverterComponent {
     this.meta.updateTag({
       name: 'description',
       content: `مبدل ارز ارزیاب؛ تبدیل سریع و دقیق ارزهای معتبر با نرخ به‌روز بازار.`
+    });
+
+     this.dualList$.pipe(take(1)).subscribe(({ first, second }) => {
+      const params = this.route.snapshot.queryParamMap;
+      const fromSlug = params.get('from');
+      const toSlug = params.get('to');
+
+      const defaultFrom = first?.[1];
+      const defaultTo = second?.[this.currencyType() === 2 ? 1 : 0];
+
+      const matchedFrom = first.find(i => i.slugText === fromSlug) ?? defaultFrom;
+      const matchedTo = second.find(i => i.slugText === toSlug) ?? defaultTo;
+
+      if (matchedFrom) this.fromItemId.set(matchedFrom.id);
+      if (matchedTo) this.toItemId.set(matchedTo.id);
+    });
+
+    combineLatest([
+      this.fromItem$.pipe(filter(item => !!item)),
+      this.toItem$.pipe(filter(item => !!item)),
+      this.currencyType$
+    ]).pipe(
+      debounceTime(50)
+    ).subscribe(([from, to, type]) => {
+      if (typeof window === 'undefined') return;
+
+      this.router.navigate([], {
+        replaceUrl: true,
+        queryParams: {
+          type,
+          from: from!.slugText,
+          to: to!.slugText
+        }
+      });
     });
   }
 
@@ -380,10 +454,10 @@ export class ConverterComponent {
   }
 
   selectCurrencyTypeDropdown (item: ICurrencySelect) {
-    this.fromItemId.set('');
-    this.toItemId.set('');
+    // this.fromItemId.set('');
+    // this.toItemId.set('');
     this.currencyType.set(item.id)
-    this.syncFromTo$.subscribe();
+    // this.syncFromTo$.subscribe();
     this.toggleCurrencyTypeDropdown()
   }
 
@@ -411,39 +485,51 @@ export class ConverterComponent {
     this.fromItemId.set(toId);
     this.toItemId.set(fromId);
 
-    this.syncFromTo$.pipe(take(1)).subscribe();
+    // this.syncFromTo$.pipe(take(1)).subscribe();
   }
 
   onSelectFromItem(slug: string) {
-    this.dualList$
-      .pipe(take(1))
-      .subscribe(items => {
-        const selected = items.first.find(item => item.slugText === slug);
+    // this.dualList$
+    //   .pipe(take(1))
+    //   .subscribe(items => {
+    //     const selected = items.first.find(item => item.slugText === slug);
 
-        if (selected) {
-          this.fromItemId.set(selected.id);
-        }
+    //     if (selected) {
+    //       this.fromItemId.set(selected.id);
+    //     }
 
-        this.syncFromTo$.pipe(take(1)).subscribe();
-      });
+    //     this.syncFromTo$.pipe(take(1)).subscribe();
+    //   });
+    this.dualList$.pipe(take(1)).subscribe(items => {
+      const selected = items.first.find(item => item.slugText === slug);
+      if (selected) {
+        this.fromItemId.set(selected.id);
+      }
+    });
 
     this.resetSearchInputs();
     this.toggleFromeDropdown();
   }
 
   onSelectToItem(slug: string) {
-    this.dualList$
-      .pipe(take(1))
-      .subscribe(items => {
+    // this.dualList$
+    //   .pipe(take(1))
+    //   .subscribe(items => {
 
-        const selected = items.second.find(item => item.slugText === slug);
+    //     const selected = items.second.find(item => item.slugText === slug);
 
-        if (selected) {
-          this.toItemId.set(selected.id);
-        }
+    //     if (selected) {
+    //       this.toItemId.set(selected.id);
+    //     }
 
-        this.syncFromTo$.pipe(take(1)).subscribe();
-      });
+    //     this.syncFromTo$.pipe(take(1)).subscribe();
+    //   });
+    this.dualList$.pipe(take(1)).subscribe(items => {
+      const selected = items.second.find(item => item.slugText === slug);
+      if (selected) {
+        this.toItemId.set(selected.id);
+      }
+    });
 
     this.resetSearchInputs();
     this.toggleToDropdown();
