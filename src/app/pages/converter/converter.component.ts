@@ -62,7 +62,7 @@ export class ConverterComponent {
   .pipe(
     map((data) => data?.current),
     shareReplay(1)
-  ));
+  ))
 
   mainCurrencyListWithIR$ = combineLatest([
     this.requestArray.mainCurrencyList,
@@ -87,13 +87,6 @@ export class ConverterComponent {
     shareReplay(1)
   );
 
-  cryptoList$ = combineLatest([
-    this.requestArray.cryptoList,
-  ]).pipe(
-    map(([list]) => list),
-    shareReplay(1)
-  )
-
 
   private dualCategoryStreamMap: Record<
     number,
@@ -110,8 +103,8 @@ export class ConverterComponent {
     ),
 
     1: combineLatest([
-      this.cryptoList$,
-      this.cryptoList$
+      this.requestArray.cryptoList,
+      this.requestArray.cryptoList
     ]).pipe(
       map(([list1, list2]) => ({
         first: list1,
@@ -121,7 +114,7 @@ export class ConverterComponent {
 
     2: combineLatest([
       this.mainCurrencyListWithIR$,
-      this.cryptoList$
+      this.requestArray.cryptoList
     ]).pipe(
       map(([mainList, cryptoList]) => ({
         first: cryptoList,
@@ -192,10 +185,7 @@ export class ConverterComponent {
     this.requestArray.cryptoList,
     this.requestArray.mainData!.pipe(filter(data => !!data?.current))
   ]).pipe(
-    filter(([mainList, cryptoList]) => {
-      console.log(mainList, cryptoList)
-      return mainList.length > 0 && cryptoList.length > 0
-    }),
+    filter(([mainList, cryptoList]) => mainList.length > 0 && cryptoList.length > 0),
     take(1),
     shareReplay(1)
   );
@@ -236,19 +226,13 @@ export class ConverterComponent {
 
   
   fromItem$ = combineLatest([this.dualList$, toObservable(this.fromItemId)]).pipe(
-    map(([{ first }, id]) => {
-      console.log(first, id, first.find(item => item.id === id))
-      return first.find(item => item.id === id)
-    }),
+    map(([{ first }, id]) => first.find(item => item.id === id)),
     shareReplay(1)
   );
   fromItem = toSignal(this.fromItem$);
 
   toItem$ = combineLatest([this.dualList$, toObservable(this.toItemId)]).pipe(
-    map(([{ second }, id]) => {
-      console.log(second, id, second.find(item => item.id === id))
-      return second.find(item => item.id === id)
-    }),
+    map(([{ second }, id]) => second.find(item => item.id === id)),
     shareReplay(1)
   );
   toItem = toSignal(this.toItem$);
@@ -319,10 +303,10 @@ export class ConverterComponent {
 
       const defaultFrom = first?.[1];
       const defaultTo = second?.[this.currencyType() === 2 ? 1 : 0];
-      console.log(defaultFrom, defaultTo)
+
       const matchedFrom = first.find(i => i.slugText === fromSlug) ?? defaultFrom;
       const matchedTo = second.find(i => i.slugText === toSlug) ?? defaultTo;
-      console.log(matchedFrom, matchedTo)
+
       if (matchedFrom) this.fromItemId.set(matchedFrom.id);
       if (matchedTo) this.toItemId.set(matchedTo.id);
 
@@ -337,8 +321,7 @@ export class ConverterComponent {
       this.dualList$.pipe(take(1)).subscribe(({ first, second }) => {
         const defaultFrom = first?.[1];
         const defaultTo = second?.[this.currencyType() === 2 ? 1 : 0];
-        
-        console.log(defaultFrom, defaultTo)
+
         this.fromItemId.set(defaultFrom?.id ?? '');
         this.toItemId.set(defaultTo?.id ?? '');
       });
