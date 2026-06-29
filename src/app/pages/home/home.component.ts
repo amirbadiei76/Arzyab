@@ -614,7 +614,6 @@ export class HomeComponent {
 
         const resolvedSub = sub || filter_overview_en;
       
-        // اگر مقدار با حالت فعلی یکسان است، کاری نکن (از تریگر تکراری/زائد جلوگیری می‌کند)
         if (category.title === this.currentCategory() && resolvedSub === this.currentSubCategory()) {
             return;
         }

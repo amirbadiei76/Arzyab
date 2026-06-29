@@ -199,12 +199,12 @@ export class ConverterComponent {
     },
   ]
 
-  fromItemSubject = new BehaviorSubject<CurrencyItem | undefined>(undefined);
+  // fromItemSubject = new BehaviorSubject<CurrencyItem | undefined>(undefined);
   fromDropdownOpen = signal(false);
   // fromItem$ = this.fromItemSubject.asObservable()
   fromItemId = signal('')
   
-  toItemSubject = new BehaviorSubject<CurrencyItem | undefined>(undefined);
+  // toItemSubject = new BehaviorSubject<CurrencyItem | undefined>(undefined);
   toDropdownOpen = signal(false);
   // toItem$ = this.toItemSubject.asObservable()
   toItemId = signal('')
@@ -224,6 +224,16 @@ export class ConverterComponent {
   */
   dualList$ = this.currencyType$.pipe(
     switchMap(type => this.dualCategoryStreamMap[type] ?? of({ first: [], second: [] })),
+    shareReplay(1)
+  );
+
+  private rawListsReady$ = combineLatest([
+    this.requestArray.mainCurrencyList,
+    this.requestArray.cryptoList,
+    this.requestArray.mainData!.pipe(filter(data => !!data?.current))
+  ]).pipe(
+    filter(([mainList, cryptoList]) => mainList.length > 0 && cryptoList.length > 0),
+    take(1),
     shareReplay(1)
   );
 
@@ -400,7 +410,27 @@ export class ConverterComponent {
       content: `مبدل ارز ارزیاب؛ تبدیل سریع و دقیق ارزهای معتبر با نرخ به‌روز بازار.`
     });
 
-     this.dualList$.pipe(take(1)).subscribe(({ first, second }) => {
+    /*
+    this.dualList$.pipe(take(1)).subscribe(({ first, second }) => {
+      const params = this.route.snapshot.queryParamMap;
+      const fromSlug = params.get('from');
+      const toSlug = params.get('to');
+
+      const defaultFrom = first?.[1];
+      const defaultTo = second?.[this.currencyType() === 2 ? 1 : 0];
+
+      console.log('ngOnInit default? f: ' + defaultFrom?.id + ', t: ' + defaultTo?.id)
+      const matchedFrom = first.find(i => i.slugText === fromSlug) ?? defaultFrom;
+      const matchedTo = second.find(i => i.slugText === toSlug) ?? defaultTo;
+
+      console.log('ngOnInit matched? f: ' + matchedFrom.slugText + ', t: ' + matchedTo.slugText)
+      if (matchedFrom) this.fromItemId.set(matchedFrom.id);
+      if (matchedTo) this.toItemId.set(matchedTo.id);
+    });
+    */
+    this.rawListsReady$.pipe(
+      switchMap(() => this.dualList$.pipe(take(1)))
+    ).subscribe(({ first, second }) => {
       const params = this.route.snapshot.queryParamMap;
       const fromSlug = params.get('from');
       const toSlug = params.get('to');
