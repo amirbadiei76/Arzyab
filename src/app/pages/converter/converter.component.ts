@@ -87,6 +87,13 @@ export class ConverterComponent {
     shareReplay(1)
   );
 
+  cryptoList$ = combineLatest([
+    this.requestArray.cryptoList,
+  ]).pipe(
+    map(([list]) => list),
+    shareReplay(1)
+  )
+
 
   private dualCategoryStreamMap: Record<
     number,
@@ -103,8 +110,8 @@ export class ConverterComponent {
     ),
 
     1: combineLatest([
-      this.requestArray.cryptoList,
-      this.requestArray.cryptoList
+      this.cryptoList$,
+      this.cryptoList$
     ]).pipe(
       map(([list1, list2]) => ({
         first: list1,
@@ -114,7 +121,7 @@ export class ConverterComponent {
 
     2: combineLatest([
       this.mainCurrencyListWithIR$,
-      this.requestArray.cryptoList
+      this.cryptoList$
     ]).pipe(
       map(([mainList, cryptoList]) => ({
         first: cryptoList,
