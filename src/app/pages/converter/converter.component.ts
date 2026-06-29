@@ -180,12 +180,41 @@ export class ConverterComponent {
     shareReplay(1)
   );
 
+  /*
   private rawListsReady$ = combineLatest([
     this.requestArray.mainCurrencyList,
     this.requestArray.cryptoList,
     this.requestArray.mainData!.pipe(filter(data => !!data?.current))
   ]).pipe(
     filter(([mainList, cryptoList]) => mainList.length > 0 && cryptoList.length > 0),
+    take(1),
+    shareReplay(1)
+  );
+  */
+ private rawListsReady$ = this.currencyType$.pipe(
+    switchMap(type => {
+      if (type === 0) {
+        return combineLatest([
+          this.requestArray.mainCurrencyList,
+          this.requestArray.mainData!.pipe(filter(data => !!data?.current))
+        ]).pipe(
+          filter(([mainList]) => mainList.length > 0)
+        );
+      }
+      if (type === 1) {
+        return this.requestArray.cryptoList.pipe(
+          filter(cryptoList => cryptoList.length > 0)
+        );
+      }
+      // type === 2
+      return combineLatest([
+        this.requestArray.mainCurrencyList,
+        this.requestArray.cryptoList,
+        this.requestArray.mainData!.pipe(filter(data => !!data?.current))
+      ]).pipe(
+        filter(([mainList, cryptoList]) => mainList.length > 0 && cryptoList.length > 0)
+      );
+    }),
     take(1),
     shareReplay(1)
   );
