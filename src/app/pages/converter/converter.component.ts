@@ -294,6 +294,22 @@ export class ConverterComponent {
       content: `مبدل ارز ارزیاب؛ تبدیل سریع و دقیق ارزهای معتبر با نرخ به‌روز بازار.`
     });
 
+    
+
+    this.currencyType$.pipe(
+      skip(1)
+    ).subscribe(() => {
+      if (!this.isInitialized) return;
+
+      this.dualList$.pipe(take(1)).subscribe(({ first, second }) => {
+        const defaultFrom = first?.[1];
+        const defaultTo = second?.[this.currencyType() === 2 ? 1 : 0];
+
+        this.fromItemId.set(defaultFrom?.id ?? '');
+        this.toItemId.set(defaultTo?.id ?? '');
+      });
+    });
+    
     this.rawListsReady$.pipe(
       switchMap(() => this.dualList$.pipe(
         filter(lists => lists.first.length > 0 && lists.second.length > 0),
@@ -314,20 +330,6 @@ export class ConverterComponent {
       if (matchedTo) this.toItemId.set(matchedTo.id);
 
       this.isInitialized = true;
-    });
-
-    this.currencyType$.pipe(
-      skip(1)
-    ).subscribe(() => {
-      if (!this.isInitialized) return;
-
-      this.dualList$.pipe(take(1)).subscribe(({ first, second }) => {
-        const defaultFrom = first?.[1];
-        const defaultTo = second?.[this.currencyType() === 2 ? 1 : 0];
-
-        this.fromItemId.set(defaultFrom?.id ?? '');
-        this.toItemId.set(defaultTo?.id ?? '');
-      });
     });
 
     combineLatest([
