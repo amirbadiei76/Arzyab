@@ -301,14 +301,14 @@ export class ConverterComponent {
       ))
     ).subscribe(({ first, second }) => {
       const params = this.route.snapshot.queryParamMap;
-      const fromSlug = params.get('from');
-      const toSlug = params.get('to');
+      const fromSlug = params.get('from')?.toLowerCase();
+      const toSlug = params.get('to')?.toLowerCase();
 
       const defaultFrom = first?.[1];
       const defaultTo = second?.[this.currencyType() === 2 ? 1 : 0];
 
-      const matchedFrom = first.find(i => i.slugText === fromSlug) ?? defaultFrom;
-      const matchedTo = second.find(i => i.slugText === toSlug) ?? defaultTo;
+      const matchedFrom = first.find(i => i.slugText?.toLowerCase() === fromSlug) ?? defaultFrom;
+      const matchedTo = second.find(i => i.slugText?.toLowerCase() === toSlug) ?? defaultTo;
 
       if (matchedFrom) this.fromItemId.set(matchedFrom.id);
       if (matchedTo) this.toItemId.set(matchedTo.id);
@@ -418,7 +418,7 @@ export class ConverterComponent {
     //     this.syncFromTo$.pipe(take(1)).subscribe();
     //   });
     this.dualList$.pipe(take(1)).subscribe(items => {
-      const selected = items.first.find(item => item.slugText === slug);
+      const selected = items.first.find(item => item.slugText?.toLowerCase() === slug.toLowerCase());
       if (selected) {
         this.fromItemId.set(selected.id);
       }
@@ -442,7 +442,7 @@ export class ConverterComponent {
     //     this.syncFromTo$.pipe(take(1)).subscribe();
     //   });
     this.dualList$.pipe(take(1)).subscribe(items => {
-      const selected = items.second.find(item => item.slugText === slug);
+      const selected = items.second.find(item => item.slugText?.toLowerCase() === slug.toLowerCase());
       if (selected) {
         this.toItemId.set(selected.id);
       }
