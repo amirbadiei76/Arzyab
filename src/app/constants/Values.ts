@@ -9,7 +9,7 @@ export const BASE_METALS_PREFIX = "Base-Metal";
 export const COMMODITY_PREFIX = "Commodity-Market";
 
 // main titles
-export const favories_title = 'دیده بان';
+export const favories_title = 'دیده‌بان';
 export const favories_title_en = 'favorites';
 export const currency_title = 'بازار ارز';
 export const gold_title = 'بازار طلا';

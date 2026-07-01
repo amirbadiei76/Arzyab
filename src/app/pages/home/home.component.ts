@@ -392,7 +392,7 @@ export class HomeComponent {
   }
 
   onFavAddItem = (id: string) => {
-    this.notificationService.show('با موفقیت به دیده بان اضافه شد')
+    this.notificationService.show('با موفقیت به دیده‌بان اضافه شد')
   }
 
   
@@ -412,7 +412,7 @@ export class HomeComponent {
   }
   
   onFavRemoveItem = (id: string) =>  {
-      this.notificationService.show('با موفقیت از دیده بان حذف شد')
+      this.notificationService.show('با موفقیت از دیده‌بان حذف شد')
 
       if (this.currentCategory() == favories_title) {
         this.itemToRemove.set(id)
