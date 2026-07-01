@@ -136,8 +136,11 @@ export class HomeComponent {
     }
   ]
 
+  // private initialCategoryTitle: string = this.resolveInitialCategoryTitle();
+  // private initialSubCategory: string = this.resolveInitialSubCategory();
+  // private initialSupportCurrencyId: number = this.getDefaultSupportCurrencyId(this.initialCategoryTitle);
   private initialCategoryTitle: string = this.resolveInitialCategoryTitle();
-  private initialSubCategory: string = this.resolveInitialSubCategory();
+  private initialSubCategory: string = this.resolveInitialSubCategory(this.initialCategoryTitle);
   private initialSupportCurrencyId: number = this.getDefaultSupportCurrencyId(this.initialCategoryTitle);
   highlightReady = signal(false);
   textToFilter = signal('')
@@ -467,17 +470,40 @@ export class HomeComponent {
   }
 
   private resolveInitialCategoryTitle(): string {
+    /*
     const cat = this.getQueryParam('cat');
     if (cat) {
         const category = this.categories.find(c => c.enTitle.toLowerCase() === cat.toLowerCase());
         if (category) return category.title;
     }
     return this.lastHomeState.currentCategory;
+    */
+    const cat = this.getQueryParam('cat');
+    if (cat) {
+        const category = this.getCategoryByEnTitle(cat);
+        return category ? category.title : currency_title;
+    }
+    return this.lastHomeState.currentCategory;
   }
 
-  private resolveInitialSubCategory(): string {
+  private resolveInitialSubCategory(categoryTitle: string): string {
+    /*
     const sub = this.getQueryParam('sub');
     return sub || this.lastHomeState.currentSubCategory;
+    */
+    const sub = this.getQueryParam('sub');
+    if (sub) {
+        return this.isValidSubCategory(categoryTitle, sub) ? sub : filter_overview_en;
+    }
+    return this.lastHomeState.currentSubCategory;
+  }
+
+  private isValidSubCategory(categoryTitle: string, subCategory: string): boolean {
+    if (subCategory === filter_overview_en) return true;
+    if (categoryTitle === favories_title) return true;
+
+    const category = this.categories.find(c => c.title === categoryTitle);
+    return !!category?.subtitles.some(s => s.en === subCategory);
   }
 
   private getDefaultSupportCurrencyId(category: string): number {
@@ -609,6 +635,7 @@ export class HomeComponent {
 
         if (!cat) return;
 
+        /*
         const category = this.categories.find(c => c.enTitle.toLowerCase() === cat.toLowerCase());
         if (!category) return;
 
@@ -619,6 +646,20 @@ export class HomeComponent {
         }
 
         this.setCurrentCategory(category.title, resolvedSub);
+        */
+        const category = this.getCategoryByEnTitle(cat);
+        const resolvedCategoryTitle = category ? category.title : currency_title;
+
+        const subIsValid = !sub || this.isValidSubCategory(resolvedCategoryTitle, sub);
+        const resolvedSub = sub && subIsValid ? sub : filter_overview_en;
+
+        if (resolvedCategoryTitle !== this.currentCategory() || resolvedSub !== this.currentSubCategory()) {
+            this.setCurrentCategory(resolvedCategoryTitle, resolvedSub);
+        }
+
+        if (typeof window !== 'undefined' && (!category || !subIsValid)) {
+            this.updateUrl();
+        }
     });
 
     if (typeof window !== 'undefined') {
