@@ -10,6 +10,13 @@ import { ConverterItemComponent } from '../../components/not-shared/converter/co
 import { toObservable } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { ConverterItemSkeletonComponent } from '../../components/not-shared/converter/converter-item-skeleton/converter-item-skeleton.component';
+import { ActivatedRoute, Router } from '@angular/router';
+
+const GOLD_MIN = 0;
+const GOLD_MAX = 5;
+
+const UNIT_MIN = 0;
+const UNIT_MAX = 4;
 
 interface CalculatorType {
   id: number,
@@ -36,7 +43,8 @@ interface OunceTypes extends CalculatorType {
   styleUrl: './gold-calculator.component.css'
 })
 export class GoldCalculatorComponent {
-  
+  route = inject(ActivatedRoute);
+  router = inject(Router);
   requestClass = inject(RequestArrayService)
 
   private goldValueSubject = new BehaviorSubject<string>('0');
@@ -284,16 +292,12 @@ export class GoldCalculatorComponent {
 
   constructor (private meta: Meta) {
       this.initFirstGoldValue();
-    
-
       effect(() => {
         if (this.calculatorType() === 1) this.calculateOunceTypes()
       })
-
-
   }
+
   initFirstOunceValue () {
-    
     this.weightValueSubject.next('1')
   }
 
@@ -304,6 +308,34 @@ export class GoldCalculatorComponent {
     this.wageValueSubject.next('7')
     this.taxValueSubject.next('10')
     this.profitType.set(0)
+  }
+
+  private normalizeQuery(type: number, gold: number | null, unit: number | null) {
+    if (type !== 0 && type !== 1) {
+      type = 0;
+    }
+
+    if (type === 0) {
+      if (gold == null || gold < 0 || gold > 5) {
+        gold = 0;
+      }
+
+      return {
+        type,
+        gold,
+        unit: null
+      };
+    }
+
+    if (unit == null || unit < 0 || unit > 4) {
+      unit = 0;
+    }
+
+    return {
+        type,
+        gold: null,
+        unit
+    };
   }
 
   calculateOunceTypes () {
@@ -415,6 +447,46 @@ export class GoldCalculatorComponent {
       name: 'description',
       content: `محاسبه‌گر قیمت طلا در ارزیاب؛ تبدیل انواع واحدهای طلا در ارزیاب؛ محاسبه قیمت طلای ۱۸ عیار، ۲۴ عیار و طلای آب‌شده بر اساس نرخ روز.`
     });
+
+    this.route.queryParamMap
+    .subscribe(params => {
+        const type = Number(params.get('type'));
+
+        const gold = params.get('gold') !== null
+            ? Number(params.get('gold'))
+            : null;
+
+        const unit = params.get('unit') !== null
+            ? Number(params.get('unit'))
+            : null;
+
+        const result = this.normalizeQuery(type, gold, unit);
+
+        this.calculatorType.set(result.type);
+
+        if (result.type === 0) {
+            this.currentGoldType.set(result.gold!);
+        } else {
+            this.currentOunceType.set(result.unit!);
+        }
+
+        if (result.type !== type || result.gold !== gold || result.unit !== unit) {
+          this.router.navigate([], {
+            relativeTo: this.route,
+            replaceUrl: true,
+            queryParams:
+              result.type === 0
+              ? {
+                  type: 0,
+                  gold: result.gold
+              }
+              : {
+                  type: 1,
+                  unit: result.unit
+              }
+          });
+        }
+    });
   }
 
   changeProfitType (value: number) {
@@ -446,6 +518,15 @@ export class GoldCalculatorComponent {
     if (this.currentOunceType() === 3) this.weightValueSubject.next('1,000')
     else if (this.currentOunceType() === 4) this.weightValueSubject.next('5')
     else this.weightValueSubject.next('1')
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      replaceUrl: true,
+      queryParams: {
+          type: 1,
+          unit: item.id
+      }
+    });
   }
 
   selectGoldType(item: GoldTypes) {
@@ -459,6 +540,15 @@ export class GoldCalculatorComponent {
     else {
       this.wageValueSubject.next('0')
     }
+
+    this.router.navigate([], {
+        relativeTo: this.route,
+        replaceUrl: true,
+        queryParams: {
+            type: 0,
+            gold: item.id
+        }
+    });
   }
 
   selectCalculatorType(item: CalculatorType) {
@@ -473,6 +563,21 @@ export class GoldCalculatorComponent {
       this.currentOunceType.set(0)
       this.initFirstOunceValue()
     }
+
+    this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams:
+            this.calculatorType() === 0
+            ? {
+                type: 0,
+                gold: 0
+            }
+            : {
+                type: 1,
+                unit: 0
+            },
+        replaceUrl: true
+    });
   }
 
 

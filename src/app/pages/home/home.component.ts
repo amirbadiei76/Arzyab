@@ -136,9 +136,6 @@ export class HomeComponent {
     }
   ]
 
-  // private initialCategoryTitle: string = this.resolveInitialCategoryTitle();
-  // private initialSubCategory: string = this.resolveInitialSubCategory();
-  // private initialSupportCurrencyId: number = this.getDefaultSupportCurrencyId(this.initialCategoryTitle);
   private initialCategoryTitle: string = this.resolveInitialCategoryTitle();
   private initialSubCategory: string = this.resolveInitialSubCategory(this.initialCategoryTitle);
   private initialSupportCurrencyId: number = this.getDefaultSupportCurrencyId(this.initialCategoryTitle);
@@ -470,14 +467,6 @@ export class HomeComponent {
   }
 
   private resolveInitialCategoryTitle(): string {
-    /*
-    const cat = this.getQueryParam('cat');
-    if (cat) {
-        const category = this.categories.find(c => c.enTitle.toLowerCase() === cat.toLowerCase());
-        if (category) return category.title;
-    }
-    return this.lastHomeState.currentCategory;
-    */
     const cat = this.getQueryParam('cat');
     if (cat) {
         const category = this.getCategoryByEnTitle(cat);
@@ -487,10 +476,6 @@ export class HomeComponent {
   }
 
   private resolveInitialSubCategory(categoryTitle: string): string {
-    /*
-    const sub = this.getQueryParam('sub');
-    return sub || this.lastHomeState.currentSubCategory;
-    */
     const sub = this.getQueryParam('sub');
     if (sub) {
         return this.isValidSubCategory(categoryTitle, sub) ? sub : filter_overview_en;
@@ -634,19 +619,6 @@ export class HomeComponent {
         const sub = params.get('sub');
 
         if (!cat) return;
-
-        /*
-        const category = this.categories.find(c => c.enTitle.toLowerCase() === cat.toLowerCase());
-        if (!category) return;
-
-        const resolvedSub = sub || filter_overview_en;
-      
-        if (category.title === this.currentCategory() && resolvedSub === this.currentSubCategory()) {
-            return;
-        }
-
-        this.setCurrentCategory(category.title, resolvedSub);
-        */
         const category = this.getCategoryByEnTitle(cat);
         const resolvedCategoryTitle = category ? category.title : currency_title;
 
