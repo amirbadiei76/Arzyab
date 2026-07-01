@@ -316,9 +316,10 @@ export class ConverterComponent {
       ))
     ).subscribe(({ first, second }) => {
       const params = this.route.snapshot.queryParamMap;
-      const fromSlug = params.get('from')?.toLowerCase();
-      const toSlug = params.get('to')?.toLowerCase();
+      const fromSlug = params.get('from')?.toLowerCase().trim();
+      const toSlug = params.get('to')?.toLowerCase().trim();
 
+      /*
       const defaultFrom = first?.[1];
       const defaultTo = second?.[this.currencyType() === 2 ? 1 : 0];
 
@@ -327,8 +328,41 @@ export class ConverterComponent {
 
       if (matchedFrom) this.fromItemId.set(matchedFrom.id);
       if (matchedTo) this.toItemId.set(matchedTo.id);
+      */
+      let fallbackTimerId: any;
 
-      this.isInitialized = true;
+      const matchedFrom = first.find(i => i.slugText?.toLowerCase() === fromSlug || i.shortedName?.toLowerCase() === fromSlug);
+      const matchedTo = second.find(i => i.slugText?.toLowerCase() === toSlug || i.shortedName?.toLowerCase() === toSlug);
+
+      const isMissingFrom = fromSlug && !matchedFrom;
+      const isMissingTo = toSlug && !matchedTo;
+
+      if (!isMissingFrom && !isMissingTo) {
+        if (fallbackTimerId) clearTimeout(fallbackTimerId);
+
+        const defaultFrom = first?.[1];
+        const defaultTo = second?.[this.currencyType() === 2 ? 1 : 0];
+
+        this.fromItemId.set(matchedFrom?.id ?? defaultFrom?.id);
+        this.toItemId.set(matchedTo?.id ?? defaultTo?.id);
+
+        this.isInitialized = true;
+      }
+      else {
+        if (!fallbackTimerId && typeof window !== 'undefined') {
+          fallbackTimerId = setTimeout(() => {
+            if (this.isInitialized) return;
+
+            const defaultFrom = first?.[1];
+            const defaultTo = second?.[this.currencyType() === 2 ? 1 : 0];
+
+            this.fromItemId.set(matchedFrom?.id ?? defaultFrom?.id);
+            this.toItemId.set(matchedTo?.id ?? defaultTo?.id);
+
+            this.isInitialized = true;
+          }, 500);
+        }
+      }
     });
 
     combineLatest([
