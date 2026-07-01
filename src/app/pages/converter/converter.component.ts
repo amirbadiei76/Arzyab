@@ -319,24 +319,13 @@ export class ConverterComponent {
       const fromSlug = params.get('from')?.toLowerCase().trim();
       const toSlug = params.get('to')?.toLowerCase().trim();
 
-      /*
-      const defaultFrom = first?.[1];
-      const defaultTo = second?.[this.currencyType() === 2 ? 1 : 0];
-
-      const matchedFrom = first.find(i => i.slugText?.toLowerCase() === fromSlug) ?? defaultFrom;
-      const matchedTo = second.find(i => i.slugText?.toLowerCase() === toSlug) ?? defaultTo;
-
-      if (matchedFrom) this.fromItemId.set(matchedFrom.id);
-      if (matchedTo) this.toItemId.set(matchedTo.id);
-      */
-      let fallbackTimerId: any;
-
       const matchedFrom = first.find(i => i.slugText?.toLowerCase() === fromSlug || i.shortedName?.toLowerCase() === fromSlug);
       const matchedTo = second.find(i => i.slugText?.toLowerCase() === toSlug || i.shortedName?.toLowerCase() === toSlug);
 
       const isMissingFrom = fromSlug && !matchedFrom;
       const isMissingTo = toSlug && !matchedTo;
 
+      let fallbackTimerId: any;
       if (!isMissingFrom && !isMissingTo) {
         if (fallbackTimerId) clearTimeout(fallbackTimerId);
 
