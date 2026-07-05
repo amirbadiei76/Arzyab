@@ -4,6 +4,16 @@ export interface RawData {
     l: string;
     ts: string;
 }
+
+export interface ChartData {
+    t: number[],
+    c: number[],
+    o: number[],
+    h: number[],
+    l: number[],
+    v?: number[],
+    s?: string
+}
   
 export interface CandleData {
     time: number;

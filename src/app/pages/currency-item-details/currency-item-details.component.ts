@@ -1,4 +1,4 @@
-import { Component, effect, ElementRef, inject, signal, ViewChild } from '@angular/core';
+import { Component, effect, ElementRef, inject, signal, ViewChild, input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumbComponent, BreadcrumbItem } from '../../components/shared/breadcrumb/breadcrumb.component';
 import { CurrencyItem, Current } from '../../interfaces/data.types';
@@ -11,7 +11,7 @@ import { SearchItemComponent } from '../../components/shared/search-item/search-
 import { BehaviorSubject, combineLatest, distinctUntilChanged, filter, from, fromEvent, map, Observable, of, retry, shareReplay, switchMap, take, tap, throttleTime } from 'rxjs';
 import { CurrencyOverviewComponent } from '../../components/not-shared/currency-item-details/currency-overview/currency-overview.component';
 import { commafy, dollarToToman, poundToDollar, poundToToman, priceToNumber, rialToDollar, rialToToman, trimDecimal } from '../../utils/CurrencyConverter';
-import { RawData } from '../../interfaces/chart.types';
+import { ChartData } from '../../interfaces/chart.types';
 import { ChartComponent } from '../../components/not-shared/currency-item-details/chart/chart.component';
 import { ChangesTableComponent } from '../../components/not-shared/currency-item-details/changes-table/changes-table.component';
 import { FormsModule, ValueChangeEvent } from '@angular/forms';
@@ -129,11 +129,25 @@ export class CurrencyItemDetailsComponent {
     })
   );
 
+  // chartHistory$ = this.currencyItem$.pipe(
+  //   filter((item): item is CurrencyItem => item !== null),
+  //   switchMap(item => {
+  //     if (!item.historyCallInfo) {
+  //       return of<ChartData>();
+  //     }
+
+  //     return item.historyCallInfo.pipe(
+  //       retry({ count: Infinity })
+  //     );
+  //   }),
+  //   shareReplay(1)
+  // );
+
   chartHistory$ = this.currencyItem$.pipe(
     filter((item): item is CurrencyItem => item !== null),
     switchMap(item => {
       if (!item.historyCallInfo) {
-        return of<RawData[]>([]);
+        return of<ChartData | null>(null);
       }
 
       return item.historyCallInfo.pipe(
@@ -142,7 +156,6 @@ export class CurrencyItemDetailsComponent {
     }),
     shareReplay(1)
   );
-
 
 
 
@@ -259,7 +272,7 @@ export class CurrencyItemDetailsComponent {
     shareReplay(1)
   );
   
-  historyData?: RawData[];
+  historyData? = input<ChartData>();
   currentChartType = signal(0);
 
   @ViewChild('itemList') itemList?: ElementRef<HTMLDivElement>;

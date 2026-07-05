@@ -2,13 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Currencies, Price } from '../interfaces/data.types';
 import { catchError, retry, throwError, timeout } from 'rxjs';
+import { ChartData } from '../interfaces/chart.types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CurrenciesService {
 
-  base_url: string = "https://raw.githubusercontent.com/";
+  base_url: string = "https://raw.githubusercontent.com";
+  history_base_url: string = "https://dashboard-api.tgju.org/v1/tv2/history?symbol=";
   call_subdomains: string[] = [
     // 'call1',
     'call2',
@@ -40,13 +42,13 @@ export class CurrenciesService {
   //#region Currencies
   //#region Main currencies
   getDollarRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_dollar_rl/latest.json";
+    const url = this.base_url + "price_dollar_rl/latest.json";
     return this.http.get<Price>(url)
   }
 
   getDollarRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_dollar_rl/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_dollar_rl";
+    return this.http.get<ChartData>(url)
   }
 
 
@@ -54,13 +56,13 @@ export class CurrenciesService {
 
 
   getEuroRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_eur/latest.json";
+    const url = this.base_url + "price_eur/latest.json";
     return this.http.get<Price>(url)
   }
 
   getEuroRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_eur/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_eur";
+    return this.http.get<ChartData>(url)
   }
 
 
@@ -68,13 +70,13 @@ export class CurrenciesService {
 
 
   getAedRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_aed/latest.json";
+    const url = this.base_url + "price_aed/latest.json";
     return this.http.get<Price>(url)
   }
 
   getAedRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_aed/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_aed";
+    return this.http.get<ChartData>(url)
   }
 
 
@@ -82,13 +84,13 @@ export class CurrenciesService {
 
   
   getGbpRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_gbp/latest.json";
+    const url = this.base_url + "price_gbp/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGbpRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_gbp/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_gbp";
+    return this.http.get<ChartData>(url)
   }
 
   
@@ -96,13 +98,13 @@ export class CurrenciesService {
 
   
   getTryRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_try/latest.json";
+    const url = this.base_url + "price_try/latest.json";
     return this.http.get<Price>(url)
   }
 
   getTryRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_try/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_try";
+    return this.http.get<ChartData>(url)
   }
 
   
@@ -111,13 +113,13 @@ export class CurrenciesService {
 
   
   getChfRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_chf/latest.json";
+    const url = this.base_url + "price_chf/latest.json";
     return this.http.get<Price>(url)
   }
 
   getChfRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_chf/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_chf";
+    return this.http.get<ChartData>(url)
   }
 
   
@@ -127,13 +129,13 @@ export class CurrenciesService {
 
   
   getCnyRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_cny/latest.json";
+    const url = this.base_url + "price_cny/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCnyRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_cny/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_cny";
+    return this.http.get<ChartData>(url)
   }
 
   
@@ -143,13 +145,13 @@ export class CurrenciesService {
 
   
   getJpyRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_jpy/latest.json";
+    const url = this.base_url + "price_jpy/latest.json";
     return this.http.get<Price>(url)
   }
 
   getJpyRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_jpy/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_jpy";
+    return this.http.get<ChartData>(url)
   }
   
 
@@ -160,13 +162,13 @@ export class CurrenciesService {
 
   
   getKrwRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_krw/latest.json";
+    const url = this.base_url + "price_krw/latest.json";
     return this.http.get<Price>(url)
   }
 
   getKrwRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_krw/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_krw";
+    return this.http.get<ChartData>(url)
   }
   
 
@@ -178,13 +180,13 @@ export class CurrenciesService {
 
   
   getCadRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_cad/latest.json";
+    const url = this.base_url + "price_cad/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCadRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_cad/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_cad";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -197,13 +199,13 @@ export class CurrenciesService {
 
   
   getAudRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_aud/latest.json";
+    const url = this.base_url + "price_aud/latest.json";
     return this.http.get<Price>(url)
   }
 
   getAudRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_aud/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_aud";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -217,13 +219,13 @@ export class CurrenciesService {
 
   
   getNzdRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_nzd/latest.json";
+    const url = this.base_url + "price_nzd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getNzdRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_nzd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_nzd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -237,13 +239,13 @@ export class CurrenciesService {
 
   
   getSgdRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_sgd/latest.json";
+    const url = this.base_url + "price_sgd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getSgdRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_sgd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_sgd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -257,13 +259,13 @@ export class CurrenciesService {
 
   
   getInrRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_inr/latest.json";
+    const url = this.base_url + "price_inr/latest.json";
     return this.http.get<Price>(url)
   }
 
   getInrRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_inr/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_inr";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -277,13 +279,13 @@ export class CurrenciesService {
 
   
   getPkrRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_pkr/latest.json";
+    const url = this.base_url + "price_pkr/latest.json";
     return this.http.get<Price>(url)
   }
 
   getPkrRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_pkr/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_pkr";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -297,13 +299,13 @@ export class CurrenciesService {
 
   
   getIqdRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_iqd/latest.json";
+    const url = this.base_url + "price_iqd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getIqdRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_iqd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_iqd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -317,13 +319,13 @@ export class CurrenciesService {
 
   
   getSypRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_syp/latest.json";
+    const url = this.base_url + "price_syp/latest.json";
     return this.http.get<Price>(url)
   }
 
   getSypRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_syp/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_syp";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -337,13 +339,13 @@ export class CurrenciesService {
 
   
   getAfnRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_afn/latest.json";
+    const url = this.base_url + "price_afn/latest.json";
     return this.http.get<Price>(url)
   }
 
   getAfnRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_afn/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_afn";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -357,13 +359,13 @@ export class CurrenciesService {
 
   
   getDkkRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_dkk/latest.json";
+    const url = this.base_url + "price_dkk/latest.json";
     return this.http.get<Price>(url)
   }
 
   getDkkRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_dkk/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_dkk";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -377,13 +379,13 @@ export class CurrenciesService {
 
   
   getSekRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_sek/latest.json";
+    const url = this.base_url + "price_sek/latest.json";
     return this.http.get<Price>(url)
   }
 
   getSekRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_sek/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_sek";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -397,13 +399,13 @@ export class CurrenciesService {
 
   
   getNokRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_nok/latest.json";
+    const url = this.base_url + "price_nok/latest.json";
     return this.http.get<Price>(url)
   }
 
   getNokRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_nok/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_nok";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -417,13 +419,13 @@ export class CurrenciesService {
 
   
   getSarRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_sar/latest.json";
+    const url = this.base_url + "price_sar/latest.json";
     return this.http.get<Price>(url)
   }
 
   getSarRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_sar/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_sar";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -437,13 +439,13 @@ export class CurrenciesService {
 
   
   getQarRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_qar/latest.json";
+    const url = this.base_url + "price_qar/latest.json";
     return this.http.get<Price>(url)
   }
 
   getQarRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_qar/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_qar";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -457,13 +459,13 @@ export class CurrenciesService {
 
   
   getOmrRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_omr/latest.json";
+    const url = this.base_url + "price_omr/latest.json";
     return this.http.get<Price>(url)
   }
 
   getOmrRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_omr/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_omr";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -477,13 +479,13 @@ export class CurrenciesService {
 
   
   getKwdRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_kwd/latest.json";
+    const url = this.base_url + "price_kwd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getKwdRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_kwd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_kwd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -497,13 +499,13 @@ export class CurrenciesService {
 
   
   getBhdRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_bhd/latest.json";
+    const url = this.base_url + "price_bhd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBhdRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_bhd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_bhd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -517,13 +519,13 @@ export class CurrenciesService {
 
   
   getMyrRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_myr/latest.json";
+    const url = this.base_url + "price_myr/latest.json";
     return this.http.get<Price>(url)
   }
 
   getMyrRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_myr/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_myr";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -537,13 +539,13 @@ export class CurrenciesService {
 
   
   getThbRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_thb/latest.json";
+    const url = this.base_url + "price_thb/latest.json";
     return this.http.get<Price>(url)
   }
 
   getThbRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_thb/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_thb";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -557,13 +559,13 @@ export class CurrenciesService {
 
   
   getHkdRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_hkd/latest.json";
+    const url = this.base_url + "price_hkd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getHkdRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_hkd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_hkd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -577,13 +579,13 @@ export class CurrenciesService {
 
   
   getRubRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_rub/latest.json";
+    const url = this.base_url + "price_rub/latest.json";
     return this.http.get<Price>(url)
   }
 
   getRubRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_rub/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_rub";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -597,13 +599,13 @@ export class CurrenciesService {
 
   
   getAznRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_azn/latest.json";
+    const url = this.base_url + "price_azn/latest.json";
     return this.http.get<Price>(url)
   }
 
   getAznRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_azn/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_azn";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -617,13 +619,13 @@ export class CurrenciesService {
 
   
   getAmdRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_amd/latest.json";
+    const url = this.base_url + "price_amd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getAmdRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_amd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_amd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -637,13 +639,13 @@ export class CurrenciesService {
 
   
   getGelRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_gel/latest.json";
+    const url = this.base_url + "price_gel/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGelRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_gel/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_gel";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -657,13 +659,13 @@ export class CurrenciesService {
 
   
   getKgsRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_kgs/latest.json";
+    const url = this.base_url + "price_kgs/latest.json";
     return this.http.get<Price>(url)
   }
 
   getKgsRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_kgs/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_kgs";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -677,13 +679,13 @@ export class CurrenciesService {
 
   
   getTjsRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_tjs/latest.json";
+    const url = this.base_url + "price_tjs/latest.json";
     return this.http.get<Price>(url)
   }
 
   getTjsRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_tjs/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_tjs";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -697,25 +699,25 @@ export class CurrenciesService {
 
   
   getTmtRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_tmt/latest.json";
+    const url = this.base_url + "price_tmt/latest.json";
     return this.http.get<Price>(url)
   }
 
   getTmtRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_tmt/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_tmt";
+    return this.http.get<ChartData>(url)
   }
   //#endregion
 
   //#region Other Currencies
   getAllRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_all/latest.json";
+    const url = this.base_url + "price_all/latest.json";
     return this.http.get<Price>(url)
   }
 
   getAllRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_all/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_all";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -729,13 +731,13 @@ export class CurrenciesService {
 
   
   getBbdRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_bbd/latest.json";
+    const url = this.base_url + "price_bbd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBbdRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_bbd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_bbd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -749,13 +751,13 @@ export class CurrenciesService {
 
   
   getBdtRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_bdt/latest.json";
+    const url = this.base_url + "price_bdt/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBdtRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_bdt/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_bdt";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -769,13 +771,13 @@ export class CurrenciesService {
 
   
   getBgnRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_bgn/latest.json";
+    const url = this.base_url + "price_bgn/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBgnRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_bgn/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_bgn";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -789,13 +791,13 @@ export class CurrenciesService {
 
   
   getBifRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_bif/latest.json";
+    const url = this.base_url + "price_bif/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBifRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_bif/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_bif";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -809,13 +811,13 @@ export class CurrenciesService {
 
   
   getBndRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_bnd/latest.json";
+    const url = this.base_url + "price_bnd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBndRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_bnd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_bnd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -829,13 +831,13 @@ export class CurrenciesService {
 
   
   getBsdRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_bsd/latest.json";
+    const url = this.base_url + "price_bsd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBsdRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_bsd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_bsd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -849,13 +851,13 @@ export class CurrenciesService {
 
   
   getBwpRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_bwp/latest.json";
+    const url = this.base_url + "price_bwp/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBwpRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_bwp/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_bwp";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -869,13 +871,13 @@ export class CurrenciesService {
 
   
   getBynRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_byn/latest.json";
+    const url = this.base_url + "price_byn/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBynRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_byn/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_byn";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -889,13 +891,13 @@ export class CurrenciesService {
 
   
   getBzdRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_bzd/latest.json";
+    const url = this.base_url + "price_bzd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBzdRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_bzd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_bzd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -909,13 +911,13 @@ export class CurrenciesService {
 
   
   getCupRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_cup/latest.json";
+    const url = this.base_url + "price_cup/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCupRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_cup/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_cup";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -929,13 +931,13 @@ export class CurrenciesService {
 
   
   getCzkRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_czk/latest.json";
+    const url = this.base_url + "price_czk/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCzkRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_czk/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_czk";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -949,13 +951,13 @@ export class CurrenciesService {
 
   
   getDjfRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_djf/latest.json";
+    const url = this.base_url + "price_djf/latest.json";
     return this.http.get<Price>(url)
   }
 
   getDjfRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_djf/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_djf";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -969,13 +971,13 @@ export class CurrenciesService {
 
   
   getDopRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_dop/latest.json";
+    const url = this.base_url + "price_dop/latest.json";
     return this.http.get<Price>(url)
   }
 
   getDopRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_dop/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_dop";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -989,13 +991,13 @@ export class CurrenciesService {
 
   
   getDzdRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_dzd/latest.json";
+    const url = this.base_url + "price_dzd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getDzdRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_dzd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_dzd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1009,13 +1011,13 @@ export class CurrenciesService {
 
   
   getEtbRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_etb/latest.json";
+    const url = this.base_url + "price_etb/latest.json";
     return this.http.get<Price>(url)
   }
 
   getEtbRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_etb/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_etb";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1029,13 +1031,13 @@ export class CurrenciesService {
 
   
   getGnfRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_gnf/latest.json";
+    const url = this.base_url + "price_gnf/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGnfRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_gnf/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_gnf";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1049,13 +1051,13 @@ export class CurrenciesService {
 
   
   getGtqRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_gtq/latest.json";
+    const url = this.base_url + "price_gtq/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGtqRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_gtq/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_gtq";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1069,13 +1071,13 @@ export class CurrenciesService {
 
   
   getGydRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_gyd/latest.json";
+    const url = this.base_url + "price_gyd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGydRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_gyd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_gyd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1089,13 +1091,13 @@ export class CurrenciesService {
 
   
   getHnlRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_hnl/latest.json";
+    const url = this.base_url + "price_hnl/latest.json";
     return this.http.get<Price>(url)
   }
 
   getHnlRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_hnl/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_hnl";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1109,13 +1111,13 @@ export class CurrenciesService {
 
   
   getHrkRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_hrk/latest.json";
+    const url = this.base_url + "price_hrk/latest.json";
     return this.http.get<Price>(url)
   }
 
   getHrkRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_hrk/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_hrk";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1129,13 +1131,13 @@ export class CurrenciesService {
 
   
   getHtgRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_htg/latest.json";
+    const url = this.base_url + "price_htg/latest.json";
     return this.http.get<Price>(url)
   }
 
   getHtgRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_htg/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_htg";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1149,13 +1151,13 @@ export class CurrenciesService {
 
   
   getIskRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_isk/latest.json";
+    const url = this.base_url + "price_isk/latest.json";
     return this.http.get<Price>(url)
   }
 
   getIskRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_isk/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_isk";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1169,13 +1171,13 @@ export class CurrenciesService {
 
   
   getJmdRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_jmd/latest.json";
+    const url = this.base_url + "price_jmd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getJmdRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_jmd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_jmd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1189,13 +1191,13 @@ export class CurrenciesService {
 
   
   getKesRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_kes/latest.json";
+    const url = this.base_url + "price_kes/latest.json";
     return this.http.get<Price>(url)
   }
 
   getKesRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_kes/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_kes";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1209,13 +1211,13 @@ export class CurrenciesService {
 
   
   getKhrRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_khr/latest.json";
+    const url = this.base_url + "price_khr/latest.json";
     return this.http.get<Price>(url)
   }
 
   getKhrRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_khr/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_khr";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1229,13 +1231,13 @@ export class CurrenciesService {
 
   
   getKmfRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_kmf/latest.json";
+    const url = this.base_url + "price_kmf/latest.json";
     return this.http.get<Price>(url)
   }
 
   getKmfRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_kmf/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_kmf";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1249,13 +1251,13 @@ export class CurrenciesService {
 
   
   getKztRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_kzt/latest.json";
+    const url = this.base_url + "price_kzt/latest.json";
     return this.http.get<Price>(url)
   }
 
   getKztRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_kzt/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_kzt";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1269,13 +1271,13 @@ export class CurrenciesService {
 
   
   getLakRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_lak/latest.json";
+    const url = this.base_url + "price_lak/latest.json";
     return this.http.get<Price>(url)
   }
 
   getLakRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_lak/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_lak";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1289,13 +1291,13 @@ export class CurrenciesService {
 
   
   getLbpRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_lbp/latest.json";
+    const url = this.base_url + "price_lbp/latest.json";
     return this.http.get<Price>(url)
   }
 
   getLbpRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_lbp/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_lbp";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1309,13 +1311,13 @@ export class CurrenciesService {
 
   
   getLkrRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_lkr/latest.json";
+    const url = this.base_url + "price_lkr/latest.json";
     return this.http.get<Price>(url)
   }
 
   getLkrRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_lkr/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_lkr";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1329,13 +1331,13 @@ export class CurrenciesService {
 
   
   getLrdRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_lrd/latest.json";
+    const url = this.base_url + "price_lrd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getLrdRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_lrd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_lrd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1349,13 +1351,13 @@ export class CurrenciesService {
 
   
   getLslRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_lsl/latest.json";
+    const url = this.base_url + "price_lsl/latest.json";
     return this.http.get<Price>(url)
   }
 
   getLslRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_lsl/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_lsl";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1369,13 +1371,13 @@ export class CurrenciesService {
 
   
   getLydRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_lyd/latest.json";
+    const url = this.base_url + "price_lyd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getLydRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_lyd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_lyd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1389,13 +1391,13 @@ export class CurrenciesService {
 
   
   getMadRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mad/latest.json";
+    const url = this.base_url + "price_mad/latest.json";
     return this.http.get<Price>(url)
   }
 
   getMadRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mad/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_mad";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1409,13 +1411,13 @@ export class CurrenciesService {
 
   
   getMdlRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mdl/latest.json";
+    const url = this.base_url + "price_mdl/latest.json";
     return this.http.get<Price>(url)
   }
 
   getMdlRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mdl/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_mdl";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1429,13 +1431,13 @@ export class CurrenciesService {
 
   
   getMgaRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mga/latest.json";
+    const url = this.base_url + "price_mga/latest.json";
     return this.http.get<Price>(url)
   }
 
   getMgaRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mga/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_mga";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1449,13 +1451,13 @@ export class CurrenciesService {
 
   
   getMkdRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mkd/latest.json";
+    const url = this.base_url + "price_mkd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getMkdRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mkd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_mkd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1469,13 +1471,13 @@ export class CurrenciesService {
 
   
   getMmkRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mmk/latest.json";
+    const url = this.base_url + "price_mmk/latest.json";
     return this.http.get<Price>(url)
   }
 
   getMmkRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mmk/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_mmk";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1489,13 +1491,13 @@ export class CurrenciesService {
 
   
   getMopRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mop/latest.json";
+    const url = this.base_url + "price_mop/latest.json";
     return this.http.get<Price>(url)
   }
 
   getMopRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mop/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_mop";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1509,13 +1511,13 @@ export class CurrenciesService {
 
   
   getMurRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mur/latest.json";
+    const url = this.base_url + "price_mur/latest.json";
     return this.http.get<Price>(url)
   }
 
   getMurRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mur/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_mur";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1529,13 +1531,13 @@ export class CurrenciesService {
 
   
   getMvrRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mvr/latest.json";
+    const url = this.base_url + "price_mvr/latest.json";
     return this.http.get<Price>(url)
   }
 
   getMvrRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mvr/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_mvr";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1549,13 +1551,13 @@ export class CurrenciesService {
 
   
   getMwkRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mwk/latest.json";
+    const url = this.base_url + "price_mwk/latest.json";
     return this.http.get<Price>(url)
   }
 
   getMwkRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mwk/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_mwk";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1569,13 +1571,13 @@ export class CurrenciesService {
 
   
   getMznRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mzn/latest.json";
+    const url = this.base_url + "price_mzn/latest.json";
     return this.http.get<Price>(url)
   }
 
   getMznRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mzn/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_mzn";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1589,13 +1591,13 @@ export class CurrenciesService {
 
   
   getNadRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_nad/latest.json";
+    const url = this.base_url + "price_nad/latest.json";
     return this.http.get<Price>(url)
   }
 
   getNadRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_nad/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_nad";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1609,13 +1611,13 @@ export class CurrenciesService {
 
   
   getNgnRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_ngn/latest.json";
+    const url = this.base_url + "price_ngn/latest.json";
     return this.http.get<Price>(url)
   }
 
   getNgnRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_ngn/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_ngn";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1629,13 +1631,13 @@ export class CurrenciesService {
 
   
   getNprRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_npr/latest.json";
+    const url = this.base_url + "price_npr/latest.json";
     return this.http.get<Price>(url)
   }
 
   getNprRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_npr/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_npr";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1649,13 +1651,13 @@ export class CurrenciesService {
 
   
   getPabRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_pab/latest.json";
+    const url = this.base_url + "price_pab/latest.json";
     return this.http.get<Price>(url)
   }
 
   getPabRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_pab/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_pab";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1669,13 +1671,13 @@ export class CurrenciesService {
 
   
   getPgkRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_pgk/latest.json";
+    const url = this.base_url + "price_pgk/latest.json";
     return this.http.get<Price>(url)
   }
 
   getPgkRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_pgk/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_pgk";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1689,13 +1691,13 @@ export class CurrenciesService {
 
   
   getPhpRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_php/latest.json";
+    const url = this.base_url + "price_php/latest.json";
     return this.http.get<Price>(url)
   }
 
   getPhpRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_php/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_php";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1709,13 +1711,13 @@ export class CurrenciesService {
 
   
   getRonRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_ron/latest.json";
+    const url = this.base_url + "price_ron/latest.json";
     return this.http.get<Price>(url)
   }
 
   getRonRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_ron/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_ron";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1729,13 +1731,13 @@ export class CurrenciesService {
 
   
   getRsdRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_rsd/latest.json";
+    const url = this.base_url + "price_rsd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getRsdRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_rsd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_rsd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1749,13 +1751,13 @@ export class CurrenciesService {
 
   
   getRwfRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_rwf/latest.json";
+    const url = this.base_url + "price_rwf/latest.json";
     return this.http.get<Price>(url)
   }
 
   getRwfRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_rwf/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_rwf";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1769,13 +1771,13 @@ export class CurrenciesService {
 
   
   getScrRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_scr/latest.json";
+    const url = this.base_url + "price_scr/latest.json";
     return this.http.get<Price>(url)
   }
 
   getScrRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_scr/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_scr";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1789,13 +1791,13 @@ export class CurrenciesService {
 
   
   getSdgRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_sdg/latest.json";
+    const url = this.base_url + "price_sdg/latest.json";
     return this.http.get<Price>(url)
   }
 
   getSdgRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_sdg/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_sdg";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1809,13 +1811,13 @@ export class CurrenciesService {
 
   
   getShpRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_shp/latest.json";
+    const url = this.base_url + "price_shp/latest.json";
     return this.http.get<Price>(url)
   }
 
   getShpRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_shp/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_shp";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1829,13 +1831,13 @@ export class CurrenciesService {
 
   
   getSosRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_sos/latest.json";
+    const url = this.base_url + "price_sos/latest.json";
     return this.http.get<Price>(url)
   }
 
   getSosRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_sos/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_sos";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1849,13 +1851,13 @@ export class CurrenciesService {
 
   
   getSvcRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_svc/latest.json";
+    const url = this.base_url + "price_svc/latest.json";
     return this.http.get<Price>(url)
   }
 
   getSvcRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_svc/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_svc";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1869,13 +1871,13 @@ export class CurrenciesService {
 
   
   getSzlRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_szl/latest.json";
+    const url = this.base_url + "price_szl/latest.json";
     return this.http.get<Price>(url)
   }
 
   getSzlRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_szl/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_szl";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1889,13 +1891,13 @@ export class CurrenciesService {
 
   
   getTndRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_tnd/latest.json";
+    const url = this.base_url + "price_tnd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getTndRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_tnd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_tnd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1909,13 +1911,13 @@ export class CurrenciesService {
 
   
   getTtdRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_ttd/latest.json";
+    const url = this.base_url + "price_ttd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getTtdRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_ttd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_ttd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1929,13 +1931,13 @@ export class CurrenciesService {
 
   
   getTzsRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_tzs/latest.json";
+    const url = this.base_url + "price_tzs/latest.json";
     return this.http.get<Price>(url)
   }
 
   getTzsRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_tzs/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_tzs";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1949,13 +1951,13 @@ export class CurrenciesService {
 
   
   getUgxRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_ugx/latest.json";
+    const url = this.base_url + "price_ugx/latest.json";
     return this.http.get<Price>(url)
   }
 
   getUgxRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_ugx/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_ugx";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1969,13 +1971,13 @@ export class CurrenciesService {
 
   
   getYerRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_yer/latest.json";
+    const url = this.base_url + "price_yer/latest.json";
     return this.http.get<Price>(url)
   }
 
   getYerRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_yer/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_yer";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -1989,13 +1991,13 @@ export class CurrenciesService {
 
   
   getZmwRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_zmw/latest.json";
+    const url = this.base_url + "price_zmw/latest.json";
     return this.http.get<Price>(url)
   }
 
   getZmwRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_zmw/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_zmw";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2009,13 +2011,13 @@ export class CurrenciesService {
 
   
   getGhsRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_ghs/latest.json";
+    const url = this.base_url + "price_ghs/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGhsRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_ghs/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_ghs";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2029,13 +2031,13 @@ export class CurrenciesService {
 
   
   getPenRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_pen/latest.json";
+    const url = this.base_url + "price_pen/latest.json";
     return this.http.get<Price>(url)
   }
 
   getPenRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_pen/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_pen";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2049,13 +2051,13 @@ export class CurrenciesService {
 
   
   getClpRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_clp/latest.json";
+    const url = this.base_url + "price_clp/latest.json";
     return this.http.get<Price>(url)
   }
 
   getClpRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_clp/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_clp";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2069,13 +2071,13 @@ export class CurrenciesService {
 
   
   getEgpRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_egp/latest.json";
+    const url = this.base_url + "price_egp/latest.json";
     return this.http.get<Price>(url)
   }
 
   getEgpRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_egp/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_egp";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2089,13 +2091,13 @@ export class CurrenciesService {
 
   
   getMxnRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mxn/latest.json";
+    const url = this.base_url + "price_mxn/latest.json";
     return this.http.get<Price>(url)
   }
 
   getMxnRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mxn/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_mxn";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2109,13 +2111,13 @@ export class CurrenciesService {
 
   
   getJodRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_jod/latest.json";
+    const url = this.base_url + "price_jod/latest.json";
     return this.http.get<Price>(url)
   }
 
   getJodRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_jod/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_jod";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2129,13 +2131,13 @@ export class CurrenciesService {
 
   
   getBrlRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_brl/latest.json";
+    const url = this.base_url + "price_brl/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBrlRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_brl/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_brl";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2149,13 +2151,13 @@ export class CurrenciesService {
 
   
   getUyuRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_uyu/latest.json";
+    const url = this.base_url + "price_uyu/latest.json";
     return this.http.get<Price>(url)
   }
 
   getUyuRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_uyu/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_uyu";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2169,13 +2171,13 @@ export class CurrenciesService {
 
   
   getCopRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_cop/latest.json";
+    const url = this.base_url + "price_cop/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCopRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_cop/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_cop";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2189,13 +2191,13 @@ export class CurrenciesService {
 
   
   getPlnRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_pln/latest.json";
+    const url = this.base_url + "price_pln/latest.json";
     return this.http.get<Price>(url)
   }
 
   getPlnRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_pln/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_pln";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2209,13 +2211,13 @@ export class CurrenciesService {
 
   
   getArsRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_ars/latest.json";
+    const url = this.base_url + "price_ars/latest.json";
     return this.http.get<Price>(url)
   }
 
   getArsRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_ars/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_ars";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2229,13 +2231,13 @@ export class CurrenciesService {
 
   
   getKydRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_kyd/latest.json";
+    const url = this.base_url + "price_kyd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getKydRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_kyd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_kyd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2249,13 +2251,13 @@ export class CurrenciesService {
 
   
   getHufRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_huf/latest.json";
+    const url = this.base_url + "price_huf/latest.json";
     return this.http.get<Price>(url)
   }
 
   getHufRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_huf/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_huf";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2269,13 +2271,13 @@ export class CurrenciesService {
 
   
   getPygRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_pyg/latest.json";
+    const url = this.base_url + "price_pyg/latest.json";
     return this.http.get<Price>(url)
   }
 
   getPygRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_pyg/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_pyg";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2289,13 +2291,13 @@ export class CurrenciesService {
 
   
   getUahRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_uah/latest.json";
+    const url = this.base_url + "price_uah/latest.json";
     return this.http.get<Price>(url)
   }
 
   getUahRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_uah/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_uah";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2309,13 +2311,13 @@ export class CurrenciesService {
 
   
   getZarRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_zar/latest.json";
+    const url = this.base_url + "price_zar/latest.json";
     return this.http.get<Price>(url)
   }
 
   getZarRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_zar/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_zar";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2329,13 +2331,13 @@ export class CurrenciesService {
 
   
   getNioRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_nio/latest.json";
+    const url = this.base_url + "price_nio/latest.json";
     return this.http.get<Price>(url)
   }
 
   getNioRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_nio/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_nio";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2349,13 +2351,13 @@ export class CurrenciesService {
 
   
   getFjdRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_fjd/latest.json";
+    const url = this.base_url + "price_fjd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getFjdRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_fjd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_fjd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2369,13 +2371,13 @@ export class CurrenciesService {
 
   
   getTwdRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_twd/latest.json";
+    const url = this.base_url + "price_twd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getTwdRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_twd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_twd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2389,13 +2391,13 @@ export class CurrenciesService {
 
   
   getUzsRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_uzs/latest.json";
+    const url = this.base_url + "price_uzs/latest.json";
     return this.http.get<Price>(url)
   }
 
   getUzsRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_uzs/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_uzs";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2409,13 +2411,13 @@ export class CurrenciesService {
 
   
   getIdrRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_idr/latest.json";
+    const url = this.base_url + "price_idr/latest.json";
     return this.http.get<Price>(url)
   }
 
   getIdrRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_idr/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_idr";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2429,13 +2431,13 @@ export class CurrenciesService {
 
   
   getXofRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_xof/latest.json";
+    const url = this.base_url + "price_xof/latest.json";
     return this.http.get<Price>(url)
   }
 
   getXofRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_xof/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_xof";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2449,13 +2451,13 @@ export class CurrenciesService {
 
   
   getXpfRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_xpf/latest.json";
+    const url = this.base_url + "price_xpf/latest.json";
     return this.http.get<Price>(url)
   }
 
   getXpfRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_xpf/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_xpf";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2469,13 +2471,13 @@ export class CurrenciesService {
 
   
   getVndRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_vnd/latest.json";
+    const url = this.base_url + "price_vnd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getVndRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_vnd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_vnd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2489,13 +2491,13 @@ export class CurrenciesService {
 
   
   getGmdRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_gmd/latest.json";
+    const url = this.base_url + "price_gmd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGmdRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_gmd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_gmd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2509,13 +2511,13 @@ export class CurrenciesService {
 
   
   getXafRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_xaf/latest.json";
+    const url = this.base_url + "price_xaf/latest.json";
     return this.http.get<Price>(url)
   }
 
   getXafRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_xaf/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_xaf";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2529,13 +2531,13 @@ export class CurrenciesService {
 
   
   getVuvRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_vuv/latest.json";
+    const url = this.base_url + "price_vuv/latest.json";
     return this.http.get<Price>(url)
   }
 
   getVuvRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_vuv/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_vuv";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2549,13 +2551,13 @@ export class CurrenciesService {
 
   
   getMroRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mro/latest.json";
+    const url = this.base_url + "price_mro/latest.json";
     return this.http.get<Price>(url)
   }
 
   getMroRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_mro/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_mro";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2569,13 +2571,13 @@ export class CurrenciesService {
 
   
   getAngRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_ang/latest.json";
+    const url = this.base_url + "price_ang/latest.json";
     return this.http.get<Price>(url)
   }
 
   getAngRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_ang/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_ang";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2589,13 +2591,13 @@ export class CurrenciesService {
 
   
   getStdRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_std/latest.json";
+    const url = this.base_url + "price_std/latest.json";
     return this.http.get<Price>(url)
   }
 
   getStdRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_std/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_std";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2609,13 +2611,13 @@ export class CurrenciesService {
 
   
   getXcdRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_xcd/latest.json";
+    const url = this.base_url + "price_xcd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getXcdRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_xcd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_xcd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2629,13 +2631,13 @@ export class CurrenciesService {
 
   
   getBamRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_bam/latest.json";
+    const url = this.base_url + "price_bam/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBamRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_bam/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_bam";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2649,13 +2651,13 @@ export class CurrenciesService {
 
   
   getBtnRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_btn/latest.json";
+    const url = this.base_url + "price_btn/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBtnRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_btn/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_btn";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2669,13 +2671,13 @@ export class CurrenciesService {
 
   
   getCdfRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_cdf/latest.json";
+    const url = this.base_url + "price_cdf/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCdfRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_cdf/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_cdf";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2689,13 +2691,13 @@ export class CurrenciesService {
 
   
   getCrcRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_crc/latest.json";
+    const url = this.base_url + "price_crc/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCrcRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_crc/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_crc";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2709,13 +2711,13 @@ export class CurrenciesService {
 
   
   getCveRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_cve/latest.json";
+    const url = this.base_url + "price_cve/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCveRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_cve/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_cve";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2729,13 +2731,13 @@ export class CurrenciesService {
 
   
   getBmdRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_bmd/latest.json";
+    const url = this.base_url + "price_bmd/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBmdRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_bmd/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_bmd";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2749,13 +2751,13 @@ export class CurrenciesService {
 
   
   getAwgRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_awg/latest.json";
+    const url = this.base_url + "price_awg/latest.json";
     return this.http.get<Price>(url)
   }
 
   getAwgRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_awg/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_awg";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2769,13 +2771,13 @@ export class CurrenciesService {
 
   
   getSllRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_sll/latest.json";
+    const url = this.base_url + "price_sll/latest.json";
     return this.http.get<Price>(url)
   }
 
   getSllRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_sll/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_sll";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2789,13 +2791,13 @@ export class CurrenciesService {
 
   
   getVefRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_vef/latest.json";
+    const url = this.base_url + "price_vef/latest.json";
     return this.http.get<Price>(url)
   }
 
   getVefRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_vef/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_vef";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2809,13 +2811,13 @@ export class CurrenciesService {
 
   
   getCypRlPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_cyp/latest.json";
+    const url = this.base_url + "price_cyp/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCypRlHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/price_cyp/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "price_cyp";
+    return this.http.get<ChartData>(url)
   }
 
   //#endregion
@@ -2825,13 +2827,13 @@ export class CurrenciesService {
 
   //#region Crypto
   getCryptoBtcPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-bitcoin/latest.json";
+    const url = this.base_url + "crypto-bitcoin/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoBtcHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-bitcoin/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-bitcoin";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2845,13 +2847,13 @@ export class CurrenciesService {
 
   
   getCryptoEthPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-ethereum/latest.json";
+    const url = this.base_url + "crypto-ethereum/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoEthHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-ethereum/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-ethereum";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2865,13 +2867,13 @@ export class CurrenciesService {
 
   
   getCryptoTetherPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-tether/latest.json";
+    const url = this.base_url + "crypto-tether/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoTetherHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-tether/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-tether";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2885,13 +2887,13 @@ export class CurrenciesService {
 
   
   getCryptoRipplePriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-ripple/latest.json";
+    const url = this.base_url + "crypto-ripple/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoRippleHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-ripple/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-ripple";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2905,13 +2907,13 @@ export class CurrenciesService {
 
   
   getCryptoBinanceCoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-binance-coin/latest.json";
+    const url = this.base_url + "crypto-binance-coin/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoBinanceCoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-binance-coin/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-binance-coin";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2925,13 +2927,13 @@ export class CurrenciesService {
 
   
   getCryptoSolanaPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-solana/latest.json";
+    const url = this.base_url + "crypto-solana/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoSolanaHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-solana/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-solana";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2945,13 +2947,13 @@ export class CurrenciesService {
 
   
   getCryptoDogecoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-dogecoin/latest.json";
+    const url = this.base_url + "crypto-dogecoin/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoDogecoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-dogecoin/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-dogecoin";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2965,13 +2967,13 @@ export class CurrenciesService {
 
   
   getCryptoUSDCoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-usd-coin/latest.json";
+    const url = this.base_url + "crypto-usd-coin/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoUSDCoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-usd-coin/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-usd-coin";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -2985,13 +2987,13 @@ export class CurrenciesService {
 
   
   getCryptoCardanoPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-cardano/latest.json";
+    const url = this.base_url + "crypto-cardano/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoCardanoHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-cardano/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-cardano";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3005,13 +3007,13 @@ export class CurrenciesService {
 
   
   getCryptoTronPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-tron/latest.json";
+    const url = this.base_url + "crypto-tron/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoTronHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-tron/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-tron";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3025,13 +3027,13 @@ export class CurrenciesService {
 
   
   getCryptoAvalanchePriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-avalanche/latest.json";
+    const url = this.base_url + "crypto-avalanche/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoAvalancheHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-avalanche/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-avalanche";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3045,13 +3047,13 @@ export class CurrenciesService {
 
   
   getCryptoShibaInuPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-shiba-inu/latest.json";
+    const url = this.base_url + "crypto-shiba-inu/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoShibaInuHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-shiba-inu/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-shiba-inu";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3065,13 +3067,13 @@ export class CurrenciesService {
 
   
   getCryptoPolkadotPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-polkadot/latest.json";
+    const url = this.base_url + "crypto-polkadot/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoPolkadotHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-polkadot/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-polkadot";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3085,13 +3087,13 @@ export class CurrenciesService {
 
   
   getCryptoBchPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-bitcoin-cash/latest.json";
+    const url = this.base_url + "crypto-bitcoin-cash/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoBchHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-bitcoin-cash/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-bitcoin-cash";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3105,13 +3107,13 @@ export class CurrenciesService {
 
   
   getCryptoUniPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-uniswap/latest.json";
+    const url = this.base_url + "crypto-uniswap/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoUniHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-uniswap/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-uniswap";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3125,13 +3127,13 @@ export class CurrenciesService {
 
   
   getCryptoLtcPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-litecoin/latest.json";
+    const url = this.base_url + "crypto-litecoin/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoLtcHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-litecoin/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-litecoin";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3145,13 +3147,13 @@ export class CurrenciesService {
 
   
   getCryptoFilPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-filecoin/latest.json";
+    const url = this.base_url + "crypto-filecoin/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoFilHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-filecoin/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-filecoin";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3165,13 +3167,13 @@ export class CurrenciesService {
 
   
   getCryptoAtomPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-cosmos/latest.json";
+    const url = this.base_url + "crypto-cosmos/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoAtomHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-cosmos/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-cosmos";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3185,13 +3187,13 @@ export class CurrenciesService {
 
   
   getCryptoClassicEthPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-ethereum-classic/latest.json";
+    const url = this.base_url + "crypto-ethereum-classic/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoClassicEthHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-ethereum-classic/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-ethereum-classic";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3205,13 +3207,13 @@ export class CurrenciesService {
 
   
   getCryptoStellarPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-stellar/latest.json";
+    const url = this.base_url + "crypto-stellar/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoStellarHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-stellar/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-stellar";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3225,13 +3227,13 @@ export class CurrenciesService {
 
   
   getCryptoFantomPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-fantom/latest.json";
+    const url = this.base_url + "crypto-fantom/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoFantomHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-fantom/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-fantom";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3245,13 +3247,13 @@ export class CurrenciesService {
 
   
   getCryptoElrondPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-elrond/latest.json";
+    const url = this.base_url + "crypto-elrond/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoElrondHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-elrond/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-elrond";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3265,13 +3267,13 @@ export class CurrenciesService {
 
   
   getCryptoMakerPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-maker/latest.json";
+    const url = this.base_url + "crypto-maker/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoMakerHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-maker/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-maker";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3285,13 +3287,13 @@ export class CurrenciesService {
 
   
   getCryptoEOSPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-eos/latest.json";
+    const url = this.base_url + "crypto-eos/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoEOSHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-eos/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-eos";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3305,13 +3307,13 @@ export class CurrenciesService {
 
   
   getCryptoBittorrentPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-bittorrent/latest.json";
+    const url = this.base_url + "crypto-bittorrent/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoBittorrentHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-bittorrent/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-bittorrent";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3325,13 +3327,13 @@ export class CurrenciesService {
 
   
   getCryptoFlowPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-flow/latest.json";
+    const url = this.base_url + "crypto-flow/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoFlowHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-flow/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-flow";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3345,13 +3347,13 @@ export class CurrenciesService {
 
   
   getCryptoGalaPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-gala/latest.json";
+    const url = this.base_url + "crypto-gala/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoGalaHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-gala/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-gala";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3365,13 +3367,13 @@ export class CurrenciesService {
 
   
   getCryptoSandboxPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-sandbox/latest.json";
+    const url = this.base_url + "crypto-sandbox/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoSandboxHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-sandbox/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-sandbox";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3385,13 +3387,13 @@ export class CurrenciesService {
 
   
   getCryptoPancakeSwapPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-pancakeswap/latest.json";
+    const url = this.base_url + "crypto-pancakeswap/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoPancakeSwapHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-pancakeswap/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-pancakeswap";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3405,13 +3407,13 @@ export class CurrenciesService {
 
   
   getCryptoDashPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-dash/latest.json";
+    const url = this.base_url + "crypto-dash/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoDashHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-dash/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-dash";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3425,13 +3427,13 @@ export class CurrenciesService {
 
   
   getCryptoMoneroPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-monero/latest.json";
+    const url = this.base_url + "crypto-monero/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoMoneroHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-monero/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-monero";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3445,13 +3447,13 @@ export class CurrenciesService {
 
   
   getCryptoChainlinkPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-chainlink/latest.json";
+    const url = this.base_url + "crypto-chainlink/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoChainlinkHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-chainlink/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-chainlink";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3465,13 +3467,13 @@ export class CurrenciesService {
 
   
   getCryptoCashaaPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-cashaa/latest.json";
+    const url = this.base_url + "crypto-cashaa/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoCashaaHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-cashaa/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-cashaa";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3485,13 +3487,13 @@ export class CurrenciesService {
 
   
   getCryptoTezosPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-tezos/latest.json";
+    const url = this.base_url + "crypto-tezos/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoTezosHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-tezos/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-tezos";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3505,13 +3507,13 @@ export class CurrenciesService {
 
   
   getCryptoLoopringPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-loopring-irc/latest.json";
+    const url = this.base_url + "crypto-loopring-irc/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoLoopringHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-loopring-irc/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-loopring-irc";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3525,13 +3527,13 @@ export class CurrenciesService {
 
   
   getCryptoDecredPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-decred/latest.json";
+    const url = this.base_url + "crypto-decred/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoDecredHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-decred/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-decred";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3545,13 +3547,13 @@ export class CurrenciesService {
 
   
   getCryptoWavesPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-waves/latest.json";
+    const url = this.base_url + "crypto-waves/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoWavesHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-waves/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-waves";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3565,13 +3567,13 @@ export class CurrenciesService {
 
   
   getCryptoZcashPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-zcash/latest.json";
+    const url = this.base_url + "crypto-zcash/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoZcashHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-zcash/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-zcash";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3585,13 +3587,13 @@ export class CurrenciesService {
 
   
   getCryptoNEMPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-nem/latest.json";
+    const url = this.base_url + "crypto-nem/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoNEMHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-nem/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-nem";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3605,13 +3607,13 @@ export class CurrenciesService {
 
   
   getCryptoNeoPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-neo/latest.json";
+    const url = this.base_url + "crypto-neo/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCryptoNeoHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/crypto-neo/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "crypto-neo";
+    return this.http.get<ChartData>(url)
   }
 
   //#endregion
@@ -3619,13 +3621,13 @@ export class CurrenciesService {
 
   //#region Gold
   getGeram18PriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/geram18/latest.json";
+    const url = this.base_url + "geram18/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGeram18HistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/geram18/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "geram18";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3639,13 +3641,13 @@ export class CurrenciesService {
 
   
   getGold740kPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gold_740k/latest.json";
+    const url = this.base_url + "gold_740k/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGold740kHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gold_740k/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gold_740k";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3659,13 +3661,13 @@ export class CurrenciesService {
 
   
   getGeram24PriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/geram24/latest.json";
+    const url = this.base_url + "geram24/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGeram24HistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/geram24/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "geram24";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3679,13 +3681,13 @@ export class CurrenciesService {
 
   
   getGoldMiniSizePriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gold_mini_size/latest.json";
+    const url = this.base_url + "gold_mini_size/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGoldMiniSizeHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gold_mini_size/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gold_mini_size";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3699,13 +3701,13 @@ export class CurrenciesService {
 
   
   getSilver925PriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/silver_925/latest.json";
+    const url = this.base_url + "silver_925/latest.json";
     return this.http.get<Price>(url)
   }
 
   getSilver925HistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/silver_925/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "silver_925";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3719,13 +3721,13 @@ export class CurrenciesService {
 
   
   getSilver999PriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/silver_999/latest.json";
+    const url = this.base_url + "silver_999/latest.json";
     return this.http.get<Price>(url)
   }
 
   getSilver999HistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/silver_999/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "silver_999";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3739,13 +3741,13 @@ export class CurrenciesService {
 
   
   getMesghalPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/mesghal/latest.json";
+    const url = this.base_url + "mesghal/latest.json";
     return this.http.get<Price>(url)
   }
 
   getMesghalHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/mesghal/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "mesghal";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3759,13 +3761,13 @@ export class CurrenciesService {
 
   
   getGold17PriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gold_17/latest.json";
+    const url = this.base_url + "gold_17/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGold17HistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gold_17/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gold_17";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3779,13 +3781,13 @@ export class CurrenciesService {
 
   
   getGold17TransferPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gold_17_transfer/latest.json";
+    const url = this.base_url + "gold_17_transfer/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGold17TransferHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gold_17_transfer/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gold_17_transfer";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3799,13 +3801,13 @@ export class CurrenciesService {
 
   
   getGold17CoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gold_17_coin/latest.json";
+    const url = this.base_url + "gold_17_coin/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGold17CoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gold_17_coin/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gold_17_coin";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3819,13 +3821,13 @@ export class CurrenciesService {
 
   
   getGoldFuturesPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gold_futures/latest.json";
+    const url = this.base_url + "gold_futures/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGoldFuturesHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gold_futures/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gold_futures";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3839,13 +3841,13 @@ export class CurrenciesService {
 
   
   getGoldMeltedWholesalePriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gold_melted_wholesale/latest.json";
+    const url = this.base_url + "gold_melted_wholesale/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGoldMeltedWholesaleHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gold_melted_wholesale/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gold_melted_wholesale";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3859,13 +3861,13 @@ export class CurrenciesService {
 
   
   getGoldMeltedUnderKiloPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gold_world_futures/latest.json";
+    const url = this.base_url + "gold_world_futures/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGoldMeltedUnderKiloHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gold_world_futures/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gold_world_futures";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3879,13 +3881,13 @@ export class CurrenciesService {
 
   
   getGoldGc3PriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc3/latest.json";
+    const url = this.base_url + "gc3/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGoldGc3HistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc3/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gc3";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3899,13 +3901,13 @@ export class CurrenciesService {
 
   
   getGoldGc1PriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc1/latest.json";
+    const url = this.base_url + "gc1/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGoldGc1HistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc1/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gc1";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3919,13 +3921,13 @@ export class CurrenciesService {
 
   
   getGoldGc11PriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc11/latest.json";
+    const url = this.base_url + "gc11/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGoldGc11HistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc11/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gc11";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3939,13 +3941,13 @@ export class CurrenciesService {
 
   
   getGoldGc10PriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc10/latest.json";
+    const url = this.base_url + "gc10/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGoldGc10HistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc10/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gc10";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3957,13 +3959,13 @@ export class CurrenciesService {
 
   
   getGoldGc22PriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc22/latest.json";
+    const url = this.base_url + "gc22/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGoldGc22HistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc22/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gc22";
+    return this.http.get<ChartData>(url)
   }
   
 
@@ -3975,13 +3977,13 @@ export class CurrenciesService {
 
   
   getGoldGc21PriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc21/latest.json";
+    const url = this.base_url + "gc21/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGoldGc21HistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc21/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gc21";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -3995,13 +3997,13 @@ export class CurrenciesService {
 
   
   getGoldGc20PriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc20/latest.json";
+    const url = this.base_url + "gc20/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGoldGc20HistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc20/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gc20";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4015,13 +4017,13 @@ export class CurrenciesService {
 
   
   getGoldGc12PriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc12/latest.json";
+    const url = this.base_url + "gc12/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGoldGc12HistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc12/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gc12";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4035,13 +4037,13 @@ export class CurrenciesService {
 
   
   getGoldGc34PriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc34/latest.json";
+    const url = this.base_url + "gc34/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGoldGc34HistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc34/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gc34";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4055,13 +4057,13 @@ export class CurrenciesService {
 
   
   getGoldGc35PriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc35/latest.json";
+    const url = this.base_url + "gc35/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGoldGc35HistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc35/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gc35";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4075,13 +4077,13 @@ export class CurrenciesService {
 
   
   getGoldGc36PriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc36/latest.json";
+    const url = this.base_url + "gc36/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGoldGc36HistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc36/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gc36";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4095,13 +4097,13 @@ export class CurrenciesService {
 
   
   getGoldGc37PriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc37/latest.json";
+    const url = this.base_url + "gc37/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGoldGc37HistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc37/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gc37";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4115,13 +4117,13 @@ export class CurrenciesService {
 
   
   getGoldGc38PriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc38/latest.json";
+    const url = this.base_url + "gc38/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGoldGc38HistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc38/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gc38";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4135,13 +4137,13 @@ export class CurrenciesService {
 
   
   getGoldGc39PriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc39/latest.json";
+    const url = this.base_url + "gc39/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGoldGc39HistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc39/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gc39";
+    return this.http.get<ChartData>(url)
   }
 
   
@@ -4150,13 +4152,13 @@ export class CurrenciesService {
 
   
   getGoldGc67PriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc67/latest.json";
+    const url = this.base_url + "gc67/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGoldGc67HistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc67/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gc67";
+    return this.http.get<ChartData>(url)
   }
 
   //#endregion
@@ -4164,13 +4166,13 @@ export class CurrenciesService {
 
   //#region Coin
   getImamiCoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/sekee/latest.json";
+    const url = this.base_url + "sekee/latest.json";
     return this.http.get<Price>(url)
   }
 
   getImamiCoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/sekee/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "sekee";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4184,13 +4186,13 @@ export class CurrenciesService {
 
   
   getBaharCoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/sekeb/latest.json";
+    const url = this.base_url + "sekeb/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBaharCoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/sekeb/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "sekeb";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4204,13 +4206,13 @@ export class CurrenciesService {
 
   
   getHalfCoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/nim/latest.json";
+    const url = this.base_url + "nim/latest.json";
     return this.http.get<Price>(url)
   }
 
   getHalfCoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/nim/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "nim";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4224,13 +4226,13 @@ export class CurrenciesService {
 
   
   getQuarterCoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/rob/latest.json";
+    const url = this.base_url + "rob/latest.json";
     return this.http.get<Price>(url)
   }
 
   getQuarterCoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/rob/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "rob";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4244,13 +4246,13 @@ export class CurrenciesService {
 
   
   getGramCoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gerami/latest.json";
+    const url = this.base_url + "gerami/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGramCoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gerami/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gerami";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4264,13 +4266,13 @@ export class CurrenciesService {
 
   
   getRetailImamiCoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/retail_sekee/latest.json";
+    const url = this.base_url + "retail_sekee/latest.json";
     return this.http.get<Price>(url)
   }
 
   getRetailImamiCoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/retail_sekee/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "retail_sekee";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4284,13 +4286,13 @@ export class CurrenciesService {
 
   
   getRetailBaharCoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/retail_sekeb/latest.json";
+    const url = this.base_url + "retail_sekeb/latest.json";
     return this.http.get<Price>(url)
   }
 
   getRetailBaharCoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/retail_sekeb/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "retail_sekeb";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4304,13 +4306,13 @@ export class CurrenciesService {
 
   
   getRetailHalfCoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/retail_nim/latest.json";
+    const url = this.base_url + "retail_nim/latest.json";
     return this.http.get<Price>(url)
   }
 
   getRetailHalfCoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/retail_nim/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "retail_nim";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4324,13 +4326,13 @@ export class CurrenciesService {
 
   
   getRetailQuarterCoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/retail_rob/latest.json";
+    const url = this.base_url + "retail_rob/latest.json";
     return this.http.get<Price>(url)
   }
 
   getRetailQuarterCoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/retail_rob/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "retail_rob";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4344,13 +4346,13 @@ export class CurrenciesService {
 
   
   getRetailGramCoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/retail_gerami/latest.json";
+    const url = this.base_url + "retail_gerami/latest.json";
     return this.http.get<Price>(url)
   }
 
   getRetailGramCoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/retail_gerami/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "retail_gerami";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4364,13 +4366,13 @@ export class CurrenciesService {
 
   
   getGc19CoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc19/latest.json";
+    const url = this.base_url + "gc19/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGc19CoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc19/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gc19";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4384,13 +4386,13 @@ export class CurrenciesService {
 
   
   getGc14CoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc14/latest.json";
+    const url = this.base_url + "gc14/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGc14CoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc14/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gc14";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4404,13 +4406,13 @@ export class CurrenciesService {
 
   
   getGc15CoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc15/latest.json";
+    const url = this.base_url + "gc15/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGc15CoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc15/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gc15";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4424,13 +4426,13 @@ export class CurrenciesService {
 
   
   getGc18CoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc18/latest.json";
+    const url = this.base_url + "gc18/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGc18CoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc18/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gc18";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4444,13 +4446,13 @@ export class CurrenciesService {
 
   
   getGc17CoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc17/latest.json";
+    const url = this.base_url + "gc17/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGc17CoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc17/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gc17";
+    return this.http.get<ChartData>(url)
   }
 
 
@@ -4461,13 +4463,13 @@ export class CurrenciesService {
 
   
   getGc16CoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc16/latest.json";
+    const url = this.base_url + "gc16/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGc16CoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gc16/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gc16";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4481,13 +4483,13 @@ export class CurrenciesService {
 
   
   getSekeeDownCoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/sekee_down/latest.json";
+    const url = this.base_url + "sekee_down/latest.json";
     return this.http.get<Price>(url)
   }
 
   getSekeeDownCoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/sekee_down/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "sekee_down";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4501,13 +4503,13 @@ export class CurrenciesService {
 
   
   getNimDownCoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/nim_down/latest.json";
+    const url = this.base_url + "nim_down/latest.json";
     return this.http.get<Price>(url)
   }
 
   getNimDownCoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/nim_down/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "nim_down";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4521,13 +4523,13 @@ export class CurrenciesService {
 
   
   getRobDownCoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/rob_down/latest.json";
+    const url = this.base_url + "rob_down/latest.json";
     return this.http.get<Price>(url)
   }
 
   getRobDownCoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/rob_down/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "rob_down";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4541,13 +4543,13 @@ export class CurrenciesService {
 
   
   getCoinBlubberPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/coin_blubber/latest.json";
+    const url = this.base_url + "coin_blubber/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCoinBlubberHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/coin_blubber/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "coin_blubber";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4561,13 +4563,13 @@ export class CurrenciesService {
 
   
   getBaharCoinBlubberPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/sekeb_blubber/latest.json";
+    const url = this.base_url + "sekeb_blubber/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBaharCoinBlubberHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/sekeb_blubber/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "sekeb_blubber";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4581,13 +4583,13 @@ export class CurrenciesService {
 
   
   getHalfCoinBlubberPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/nim_blubber/latest.json";
+    const url = this.base_url + "nim_blubber/latest.json";
     return this.http.get<Price>(url)
   }
 
   getHalfCoinBlubberHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/nim_blubber/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "nim_blubber";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4601,13 +4603,13 @@ export class CurrenciesService {
 
   
   getQuarterCoinBlubberPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/rob_blubber/latest.json";
+    const url = this.base_url + "rob_blubber/latest.json";
     return this.http.get<Price>(url)
   }
 
   getQuarterCoinBlubberHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/rob_blubber/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "rob_blubber";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4621,26 +4623,26 @@ export class CurrenciesService {
 
   
   getTrueValueOfCoinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/sekee_real/latest.json";
+    const url = this.base_url + "sekee_real/latest.json";
     return this.http.get<Price>(url)
   }
 
   getTrueValueOfCoinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/sekee_real/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "sekee_real";
+    return this.http.get<ChartData>(url)
   }
 
   //#endregion
 
   //#region World Markets
   getEurUsdAskPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/eur-usd-ask/latest.json";
+    const url = this.base_url + "eur-usd-ask/latest.json";
     return this.http.get<Price>(url)
   }
 
   getEurUsdAskHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/eur-usd-ask/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "eur-usd-ask";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4654,13 +4656,13 @@ export class CurrenciesService {
 
   
   getGbpUsdAskPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gbp-usd-ask/latest.json";
+    const url = this.base_url + "gbp-usd-ask/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGbpUsdAskHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/gbp-usd-ask/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "gbp-usd-ask";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4674,13 +4676,13 @@ export class CurrenciesService {
 
   
   getUsdJpyAskPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/usd-jpy-ask/latest.json";
+    const url = this.base_url + "usd-jpy-ask/latest.json";
     return this.http.get<Price>(url)
   }
 
   getUsdJpyAskHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/usd-jpy-ask/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "usd-jpy-ask";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4694,13 +4696,13 @@ export class CurrenciesService {
 
   
   getUsdChfAskPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/usd-chf-ask/latest.json";
+    const url = this.base_url + "usd-chf-ask/latest.json";
     return this.http.get<Price>(url)
   }
 
   getUsdChfAskHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/usd-chf-ask/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "usd-chf-ask";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4714,13 +4716,13 @@ export class CurrenciesService {
 
   
   getAudUsdAskPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/aud-usd-ask/latest.json";
+    const url = this.base_url + "aud-usd-ask/latest.json";
     return this.http.get<Price>(url)
   }
 
   getAudUsdAskHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/aud-usd-ask/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "aud-usd-ask";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4734,13 +4736,13 @@ export class CurrenciesService {
 
   
   getUsdCadAskPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/usd-cad-ask/latest.json";
+    const url = this.base_url + "usd-cad-ask/latest.json";
     return this.http.get<Price>(url)
   }
 
   getUsdCadAskHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/usd-cad-ask/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "usd-cad-ask";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4754,13 +4756,13 @@ export class CurrenciesService {
 
   
   getUsdNzdAskPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/usd-nzd-ask/latest.json";
+    const url = this.base_url + "usd-nzd-ask/latest.json";
     return this.http.get<Price>(url)
   }
 
   getUsdNzdAskHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/usd-nzd-ask/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "usd-nzd-ask";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4774,13 +4776,13 @@ export class CurrenciesService {
 
   
   getUsdTryAskPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/usd-try-ask/latest.json";
+    const url = this.base_url + "usd-try-ask/latest.json";
     return this.http.get<Price>(url)
   }
 
   getUsdTryAskHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/usd-try-ask/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "usd-try-ask";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4794,13 +4796,13 @@ export class CurrenciesService {
 
   
   getUsdSekAskPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/usd-sek-ask/latest.json";
+    const url = this.base_url + "usd-sek-ask/latest.json";
     return this.http.get<Price>(url)
   }
 
   getUsdSekAskHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/usd-sek-ask/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "usd-sek-ask";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4814,13 +4816,13 @@ export class CurrenciesService {
 
   
   getUsdSarAskPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/usd-sar-ask/latest.json";
+    const url = this.base_url + "usd-sar-ask/latest.json";
     return this.http.get<Price>(url)
   }
 
   getUsdSarAskHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/usd-sar-ask/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "usd-sar-ask";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4834,13 +4836,13 @@ export class CurrenciesService {
 
   
   getUsdKrwAskPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/usd-krw-ask/latest.json";
+    const url = this.base_url + "usd-krw-ask/latest.json";
     return this.http.get<Price>(url)
   }
 
   getUsdKrwAskHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/usd-krw-ask/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "usd-krw-ask";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4854,13 +4856,13 @@ export class CurrenciesService {
 
   
   getUsdCnyAskPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/usd-cny-ask/latest.json";
+    const url = this.base_url + "usd-cny-ask/latest.json";
     return this.http.get<Price>(url)
   }
 
   getUsdCnyAskHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/usd-cny-ask/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "usd-cny-ask";
+    return this.http.get<ChartData>(url)
   }
 
   //#endregion
@@ -4868,13 +4870,13 @@ export class CurrenciesService {
 
   //#region Precious Metals
   getGlobalGoldOnsPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/ons/latest.json";
+    const url = this.base_url + "ons/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGlobalGoldOnsHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/ons/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "ons";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4888,13 +4890,13 @@ export class CurrenciesService {
 
   
   getGlobalSilverOnsPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/silver/latest.json";
+    const url = this.base_url + "silver/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGlobalSilverOnsHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/silver/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "silver";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4908,13 +4910,13 @@ export class CurrenciesService {
 
   
   getGlobalPlatinumOnsPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/platinum/latest.json";
+    const url = this.base_url + "platinum/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGlobalPlatinumOnsHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/platinum/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "platinum";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4928,13 +4930,13 @@ export class CurrenciesService {
 
   
   getGlobalPalladiumOnsPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/palladium/latest.json";
+    const url = this.base_url + "palladium/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGlobalPalladiumOnsHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/palladium/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "palladium";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4948,13 +4950,13 @@ export class CurrenciesService {
 
   
   getGlobalRatioSilverPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/ratio_silver/latest.json";
+    const url = this.base_url + "ratio_silver/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGlobalRatioSilverHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/ratio_silver/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "ratio_silver";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4968,13 +4970,13 @@ export class CurrenciesService {
 
   
   getGlobalRatioPlatinumPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/ratio_platinum/latest.json";
+    const url = this.base_url + "ratio_platinum/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGlobalRatioPlatinumHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/ratio_platinum/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "ratio_platinum";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -4988,13 +4990,13 @@ export class CurrenciesService {
 
   
   getGlobalRatioPalladiumPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/ratio_palladium/latest.json";
+    const url = this.base_url + "ratio_palladium/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGlobalRatioPalladiumHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/ratio_palladium/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "ratio_palladium";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5008,13 +5010,13 @@ export class CurrenciesService {
 
   
   getGlobalRatioCrudeoilPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/ratio_crudeoil/latest.json";
+    const url = this.base_url + "ratio_crudeoil/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGlobalRatioCrudeoilHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/ratio_crudeoil/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "ratio_crudeoil";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5028,13 +5030,13 @@ export class CurrenciesService {
 
   
   getGlobalRatioDowJonesPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/ratio_dija/latest.json";
+    const url = this.base_url + "ratio_dija/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGlobalRatioDowJonesHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/ratio_dija/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "ratio_dija";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5048,13 +5050,13 @@ export class CurrenciesService {
 
   
   getGlobalRatioSP500PriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/ratio_sp500/latest.json";
+    const url = this.base_url + "ratio_sp500/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGlobalRatioSP500HistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/ratio_sp500/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "ratio_sp500";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5068,26 +5070,26 @@ export class CurrenciesService {
 
   
   getGlobalRatioHUIPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/ratio_hui/latest.json";
+    const url = this.base_url + "ratio_hui/latest.json";
     return this.http.get<Price>(url)
   }
 
   getGlobalRatioHUIHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/ratio_hui/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "ratio_hui";
+    return this.http.get<ChartData>(url)
   }
 
   //#endregion
 
   //#region Base Metals
   getBaseGlobalUSCopperPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/base_global_copper2/latest.json";
+    const url = this.base_url + "base_global_copper2/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBaseGlobalUSCopperHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/base_global_copper2/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "base_global_copper2";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5101,13 +5103,13 @@ export class CurrenciesService {
 
   
   getBaseGlobalTinPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/base_global_tin/latest.json";
+    const url = this.base_url + "base_global_tin/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBaseGlobalTinHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/base_global_tin/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "base_global_tin";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5121,13 +5123,13 @@ export class CurrenciesService {
 
   
   getBaseGlobalGBCopperPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/base_global_copper/latest.json";
+    const url = this.base_url + "base_global_copper/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBaseGlobalGBCopperHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/base_global_copper/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "base_global_copper";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5141,13 +5143,13 @@ export class CurrenciesService {
 
   
   getBaseGlobalNickelPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/base_global_nickel/latest.json";
+    const url = this.base_url + "base_global_nickel/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBaseGlobalNickelHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/base_global_nickel/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "base_global_nickel";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5161,13 +5163,13 @@ export class CurrenciesService {
 
   
   getBaseGlobalLeadPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/base_global_lead/latest.json";
+    const url = this.base_url + "base_global_lead/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBaseGlobalLeadHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/base_global_lead/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "base_global_lead";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5181,13 +5183,13 @@ export class CurrenciesService {
 
   
   getBaseGlobalZincPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/base_global_zinc/latest.json";
+    const url = this.base_url + "base_global_zinc/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBaseGlobalZincHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/base_global_zinc/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "base_global_zinc";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5201,13 +5203,13 @@ export class CurrenciesService {
 
   
   getBaseAluminumPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/base-us-aluminum/latest.json";
+    const url = this.base_url + "base-us-aluminum/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBaseAluminumHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/base-us-aluminum/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "base-us-aluminum";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5221,13 +5223,13 @@ export class CurrenciesService {
 
   
   getBaseUraniumPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/base-us-uranium/latest.json";
+    const url = this.base_url + "base-us-uranium/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBaseUraniumHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/base-us-uranium/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "base-us-uranium";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5241,13 +5243,13 @@ export class CurrenciesService {
 
   
   getBaseSteelCoilPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/base-us-steel-coil/latest.json";
+    const url = this.base_url + "base-us-steel-coil/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBaseSteelCoilHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/base-us-steel-coil/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "base-us-steel-coil";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5261,13 +5263,13 @@ export class CurrenciesService {
 
   
   getBaseIronOrePriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/base-us-iron-ore/latest.json";
+    const url = this.base_url + "base-us-iron-ore/latest.json";
     return this.http.get<Price>(url)
   }
 
   getBaseIronOreHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/base-us-iron-ore/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "base-us-iron-ore";
+    return this.http.get<ChartData>(url)
   }
 
   //#endregion
@@ -5275,13 +5277,13 @@ export class CurrenciesService {
 
   //#region Commodity Market
   getCommodityLondonWheatPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_london_wheat/latest.json";
+    const url = this.base_url + "commodity_london_wheat/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCommodityLondonWheatHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_london_wheat/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "commodity_london_wheat";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5295,13 +5297,13 @@ export class CurrenciesService {
 
   
   getCommodityUSWheatPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_us_wheat/latest.json";
+    const url = this.base_url + "commodity_us_wheat/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCommodityUSWheatHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_us_wheat/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "commodity_us_wheat";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5315,13 +5317,13 @@ export class CurrenciesService {
 
   
   getCommodityRoughRicePriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_rough_rice/latest.json";
+    const url = this.base_url + "commodity_rough_rice/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCommodityRoughRiceHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_rough_rice/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "commodity_rough_rice";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5335,13 +5337,13 @@ export class CurrenciesService {
 
   
   getCommodityOatsPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_oats/latest.json";
+    const url = this.base_url + "commodity_oats/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCommodityOatsHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_oats/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "commodity_oats";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5355,13 +5357,13 @@ export class CurrenciesService {
 
   
   getCommodityCornPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_us_corn/latest.json";
+    const url = this.base_url + "commodity_us_corn/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCommodityCornHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_us_corn/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "commodity_us_corn";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5375,13 +5377,13 @@ export class CurrenciesService {
 
   
   getCommoditySoybeansPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_us_soybeans/latest.json";
+    const url = this.base_url + "commodity_us_soybeans/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCommoditySoybeansHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_us_soybeans/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "commodity_us_soybeans";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5395,13 +5397,13 @@ export class CurrenciesService {
 
   
   getCommoditySoybeanOilPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_us_soybean_oil/latest.json";
+    const url = this.base_url + "commodity_us_soybean_oil/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCommoditySoybeanOilHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_us_soybean_oil/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "commodity_us_soybean_oil";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5415,13 +5417,13 @@ export class CurrenciesService {
 
   
   getCommoditySoybeanMealPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_us_soybean_meal/latest.json";
+    const url = this.base_url + "commodity_us_soybean_meal/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCommoditySoybeanMealHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_us_soybean_meal/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "commodity_us_soybean_meal";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5435,13 +5437,13 @@ export class CurrenciesService {
 
   
   getCommodityUSSugarPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_us_sugar_no11/latest.json";
+    const url = this.base_url + "commodity_us_sugar_no11/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCommodityUSSugarHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_us_sugar_no11/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "commodity_us_sugar_no11";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5455,13 +5457,13 @@ export class CurrenciesService {
 
   
   getCommodityLondonSugarPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_london_sugar/latest.json";
+    const url = this.base_url + "commodity_london_sugar/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCommodityLondonSugarHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_london_sugar/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "commodity_london_sugar";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5475,13 +5477,13 @@ export class CurrenciesService {
 
   
   getCommodityCottonPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_us_cotton_no_2/latest.json";
+    const url = this.base_url + "commodity_us_cotton_no_2/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCommodityCottonHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_us_cotton_no_2/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "commodity_us_cotton_no_2";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5495,13 +5497,13 @@ export class CurrenciesService {
 
   
   getCommodityUSCoffeePriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_us_coffee_c/latest.json";
+    const url = this.base_url + "commodity_us_coffee_c/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCommodityUSCoffeeHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_us_coffee_c/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "commodity_us_coffee_c";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5515,13 +5517,13 @@ export class CurrenciesService {
 
   
   getCommodityLondonCoffeePriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_london_coffee/latest.json";
+    const url = this.base_url + "commodity_london_coffee/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCommodityLondonCoffeeHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_london_coffee/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "commodity_london_coffee";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5535,13 +5537,13 @@ export class CurrenciesService {
 
   
   getCommodityUSCocoaPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_us_cocoa/latest.json";
+    const url = this.base_url + "commodity_us_cocoa/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCommodityUSCocoaHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_us_cocoa/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "commodity_us_cocoa";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5555,13 +5557,13 @@ export class CurrenciesService {
 
   
   getCommodityLondonCocoaPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_london_cocoa/latest.json";
+    const url = this.base_url + "commodity_london_cocoa/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCommodityLondonCocoaHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_london_cocoa/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "commodity_london_cocoa";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5575,13 +5577,13 @@ export class CurrenciesService {
 
   
   getCommodityLumberPriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_lumber/latest.json";
+    const url = this.base_url + "commodity_lumber/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCommodityLumberHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_lumber/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "commodity_lumber";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5595,13 +5597,13 @@ export class CurrenciesService {
 
   
   getCommodityOrangeJuicePriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_orange_juice/latest.json";
+    const url = this.base_url + "commodity_orange_juice/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCommodityOrangeJuiceHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_orange_juice/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "commodity_orange_juice";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5615,13 +5617,13 @@ export class CurrenciesService {
 
   
   getCommodityLiveCattlePriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_live_cattle/latest.json";
+    const url = this.base_url + "commodity_live_cattle/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCommodityLiveCattleHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_live_cattle/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "commodity_live_cattle";
+    return this.http.get<ChartData>(url)
   }
   
   
@@ -5635,13 +5637,13 @@ export class CurrenciesService {
 
   
   getCommodityFeedCattlePriceInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_feed_cattle/latest.json";
+    const url = this.base_url + "commodity_feed_cattle/latest.json";
     return this.http.get<Price>(url)
   }
 
   getCommodityFeedCattleHistoryInfo() {
-    const url = this.base_url + "/margani/pricedb/main/tgju/current/commodity_feed_cattle/history.json";
-    return this.http.get<Price[]>(url)
+    const url = this.history_base_url + "commodity_feed_cattle";
+    return this.http.get<ChartData>(url)
   }
 
   //#endregion

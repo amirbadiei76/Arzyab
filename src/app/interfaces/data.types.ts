@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
-import { RawData } from "./chart.types";
+import { ChartData } from "./chart.types";
 
 export interface Currencies {
     current: Current;
@@ -584,7 +584,7 @@ export interface Price {
 
 export interface CurrencyItem {
     id: string,
-    historyCallInfo?: Observable<RawData[]>;
+    historyCallInfo?: Observable<ChartData>;
     lastPriceInfo?: Price;
     title: string;
     filterName: string;

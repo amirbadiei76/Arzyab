@@ -1,5 +1,5 @@
 import { Component, computed, inject, input, Input, signal } from '@angular/core';
-import { RawData } from '../../../../interfaces/chart.types';
+import { ChartData, RawData } from '../../../../interfaces/chart.types';
 import { analyzeRange, filterByDays } from '../../../../utils/CurrencyChanges';
 import { CurrencyItem } from '../../../../interfaces/data.types';
 import { RequestArrayService } from '../../../../services/request-array.service';
@@ -29,8 +29,8 @@ export class ChangesTableComponent {
   // @Input() historyData?: RawData[];
   // @Input() item?: CurrencyItem;
   @Input({ required: true })
-  set historyData(value: RawData[] | undefined) {
-    this._historyData.set(value ?? []);
+  set historyData(value: ChartData | undefined) {
+    this._historyData.set(value ?? null);
   }
 
   @Input({ required: true })
@@ -38,19 +38,47 @@ export class ChangesTableComponent {
     this.currentItem.set(value);
   }
 
-  private _historyData = signal<RawData[]>([]);
+  private _historyData = signal<ChartData | null>(null);
   currentItem = signal<CurrencyItem | undefined>(undefined);
 
-  normalizeData = computed(() => {
+  // ChartData ستونی (آرایه‌های موازی t/o/h/l/c) رو به آرایه‌ای از PriceItem تبدیل می‌کنه —
+  // یعنی همون شکلی که filterByDays/analyzeRange توی CurrencyChanges.ts انتظارش رو دارن
+  // (p/h/l/ts رشته‌ای + date). چون analyzeRange در عمل فقط از item.p و item.date استفاده می‌کنه،
+  // h/l/ts فقط برای سازگاری با تایپ RawData پر می‌شن (که PriceItem ازش ساخته شده).
+  normalizeData = computed<PriceItem[]>(() => {
     const data = this._historyData();
-    if (!data.length) return [];
+    if (!data?.t?.length) return [];
 
-    return data.map((item: RawData) => ({
-      ...item,
-      date: new Date(item.ts)
-    }))
-    .sort((a, b) => a.date.getTime() - b.date.getTime());
+    const length = Math.min(
+      data.t.length,
+      data.o?.length ?? 0,
+      data.h?.length ?? 0,
+      data.l?.length ?? 0,
+      data.c?.length ?? 0,
+    );
+
+    const items: PriceItem[] = [];
+    for (let i = 0; i < length; i++) {
+      const unixSeconds = this.toUnixSeconds(data.t[i]);
+      const date = new Date(unixSeconds * 1000);
+
+      items.push({
+        p: String(data.c[i]),
+        h: String(data.h[i]),
+        l: String(data.l[i]),
+        ts: date.toISOString(),
+        date
+      });
+    }
+
+    return items.sort((a, b) => a.date.getTime() - b.date.getTime());
   })
+
+  // برخی APIها timestamp رو به میلی‌ثانیه می‌فرستن؛ این متد هر دو حالت رو پشتیبانی می‌کنه
+  // (دقیقاً همون منطقی که توی ChartComponent هم استفاده شد، برای هماهنگی بین دو کامپوننت)
+  private toUnixSeconds(t: number): number {
+    return t > 1e12 ? Math.floor(t / 1000) : t;
+  }
 
   currentUnit = input(0)
 

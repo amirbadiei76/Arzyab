@@ -1,10 +1,10 @@
 import { Component, effect, ElementRef, inject, input, Input, signal, ViewChild } from '@angular/core';
 import { createChart, IChartApi, ISeriesApi, ColorType, CrosshairMode, CandlestickSeries, HistogramSeries, LineSeries, LineStyle, PriceScaleMode } from 'lightweight-charts'
 import { CommonModule } from '@angular/common';
-import { CandleData, RawData, VolumeData } from '../../../../interfaces/chart.types';
+import { CandleData, ChartData, VolumeData } from '../../../../interfaces/chart.types';
 import { CurrencyItem } from '../../../../interfaces/data.types';
 import { dollar_unit, pound_unit, toman_unit } from '../../../../constants/Values';
-import { commafy, dollarToToman, normalizeValue, poundToDollar, poundToToman, priceToNumber, rialToDollar, rialToToman, trimDecimal, valueToDollarChanges, valueToRialChanges } from '../../../../utils/CurrencyConverter';
+import { commafy, dollarToToman, normalizeValue, poundToDollar, poundToToman, rialToDollar, rialToToman, trimDecimal, valueToDollarChanges, valueToRialChanges } from '../../../../utils/CurrencyConverter';
 import { RequestArrayService } from '../../../../services/request-array.service';
 import { TooltipDirective } from '../../../../directives/tooltip.directive';
 import { BehaviorSubject, from, fromEvent, map, shareReplay } from 'rxjs';
@@ -26,6 +26,18 @@ export interface ChartState {
   interval: IntervalKey;
 }
 
+// یک نقطه‌ی نرمال‌شده‌ی OHLC که از فرمت ستونی ChartData (آرایه‌های موازی t/o/h/l/c/v) ساخته می‌شه.
+// همه‌ی توابع filter/aggregate/parse داخل این کامپوننت روی همین شکل کار می‌کنن،
+// و تبدیل از/به ChartData فقط توی toOhlcPoints انجام می‌شه.
+interface OhlcPoint {
+  time: number; // یونیکس‌تایم بر حسب ثانیه (فرمتی که lightweight-charts می‌خواد)
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  volume?: number;
+}
+
 @Component({
   selector: 'app-chart',
   imports: [CommonModule, TooltipDirective],
@@ -34,7 +46,7 @@ export interface ChartState {
 })
 export class ChartComponent {
   requestService = inject(RequestArrayService)
-  historyData = input<RawData[] | null>(null);
+  historyData = input<ChartData | null>(null);
   item = input<CurrencyItem | null>(null);
 
   chartReady = signal(false);
@@ -114,7 +126,7 @@ export class ChartComponent {
 
   constructor() {
     
-    const processedData = this.parseData(this.historyData() as RawData[]);
+    const processedData = this.parseData(this.historyData());
     this.initChart(processedData);
 
     this.candlestickSeries?.setData(processedData.candles as any[])
@@ -129,7 +141,7 @@ export class ChartComponent {
       const chartType = this.chartType();
       const ready = this.chartReady();
 
-      const processed = this.parseData(data!);
+      const processed = this.parseData(data);
 
       this.candlestickSeries?.setData(processed.candles as any[])
       this.volumeSeries?.setData(processed.volumes as any[])
@@ -157,7 +169,7 @@ export class ChartComponent {
 
   ngOnChanges() {
     if (this.historyData() && !this.chart) {
-      const processedData = this.parseData(this.historyData() as RawData[]);
+      const processedData = this.parseData(this.historyData());
       this.initChart(processedData);
       this.lineSeries?.applyOptions({ visible: false })
     }
@@ -168,11 +180,11 @@ export class ChartComponent {
     }
   }
 
-  filterByRange(data: RawData[], range: RangeKey): RawData[] {
+  filterByRange(data: OhlcPoint[], range: RangeKey): OhlcPoint[] {
     if (range === 'All') return data;
   
     const now = Date.now();
-    const map: Record<RangeKey, number> = {
+    const rangeDaysMap: Record<RangeKey, number> = {
       '7D': 7,
       '1M': 30,
       '3M': 90,
@@ -181,12 +193,12 @@ export class ChartComponent {
       'All': 0
     };
   
-    const from = now - map[range] * 24 * 60 * 60 * 1000;
-    return data.filter(c => new Date(c.ts).getTime() >= from);
+    const from = now - rangeDaysMap[range] * 24 * 60 * 60 * 1000;
+    return data.filter(point => point.time * 1000 >= from);
   }
 
-  getBucketKey(time: number, interval: IntervalKey): string {
-    const d = new Date(time);
+  getBucketKey(unixSeconds: number, interval: IntervalKey): string {
+    const d = new Date(unixSeconds * 1000);
   
     if (interval === '1W') {
       const week = Math.floor(d.getTime() / (7 * 24 * 60 * 60 * 1000));
@@ -197,35 +209,39 @@ export class ChartComponent {
       return `${d.getFullYear()}-${d.getMonth()}`;
     }
   
-    return String(time);
+    return String(unixSeconds);
   }
 
-  aggregateCandles(data: RawData[], interval: IntervalKey): RawData[] {
+  aggregateCandles(data: OhlcPoint[], interval: IntervalKey): OhlcPoint[] {
   
     if (interval === '1D') return data;
   
-    const map = new Map<string, RawData>();
+    const bucketMap = new Map<string, OhlcPoint>();
   
-    for (const c of data) {
-      const key = this.getBucketKey(new Date(c.ts).getTime(), interval);
+    for (const point of data) {
+      const key = this.getBucketKey(point.time, interval);
   
-      if (!map.has(key)) {
-        map.set(key, { ...c });
+      if (!bucketMap.has(key)) {
+        bucketMap.set(key, { ...point });
         continue;
       }
   
-      const agg = map.get(key)!;
+      const agg = bucketMap.get(key)!;
   
-      agg.h = Math.max(priceToNumber(agg.h), priceToNumber(c.h)) + '';
-      agg.l = Math.max(priceToNumber(agg.l), priceToNumber(c.l)) + '';
-      agg.p = c.p;
-      agg.ts = c.ts;
+      // اولین نقطه‌ی هر بازه، open رو ست می‌کنه و دیگه دست نمی‌خوره (open واقعیِ همون بازه است)
+      agg.high = Math.max(agg.high, point.high);
+      agg.low = Math.min(agg.low, point.low); // قبلاً اشتباهاً Math.max بود، به min اصلاح شد
+      agg.close = point.close;
+      agg.time = point.time;
+      if (point.volume !== undefined) {
+        agg.volume = (agg.volume ?? 0) + point.volume;
+      }
     }
   
-    return Array.from(map.values());
+    return Array.from(bucketMap.values());
   }
 
-  applyPreset(data: RawData[], state: ChartState): RawData[] {
+  applyPreset(data: OhlcPoint[], state: ChartState): OhlcPoint[] {
     const ranged = this.filterByRange(data, state.range);
     if (!ranged) return []
     return this.aggregateCandles(ranged, state.interval);
@@ -249,208 +265,111 @@ export class ChartComponent {
     if (this.timeFramePanelOpened()) this.toggleTimeFrame()
   }
 
-  parseData(rawData: RawData[]): { candles: CandleData[], volumes: VolumeData[], lineVolumes: VolumeData[] } {
-    const sortedData = rawData?.sort((a, b) => new Date(a.ts).getTime() - new Date(b.ts).getTime());
-    const groupedData = this.applyPreset(sortedData, this.state())
+  // ChartData ستونی (t/o/h/l/c/v) رو به آرایه‌ای از نقاط OHLC تبدیل می‌کنه.
+  // طول نهایی از کوتاه‌ترین آرایه‌ی الزامی (t/o/h/l/c) گرفته می‌شه تا در صورت ناهم‌طول بودن، ایندکس نامعتبر نخونه.
+  private toOhlcPoints(chartData: ChartData | null): OhlcPoint[] {
+    if (!chartData?.t?.length) return [];
 
-    const uniqueMap = new Map();
-    groupedData?.forEach(item => {
-      const dateKey = item.ts.split(' ')[0];
-      uniqueMap.set(dateKey, item);
+    const length = Math.min(
+      chartData.t.length,
+      chartData.o?.length ?? 0,
+      chartData.h?.length ?? 0,
+      chartData.l?.length ?? 0,
+      chartData.c?.length ?? 0,
+    );
+
+    const points: OhlcPoint[] = [];
+    for (let i = 0; i < length; i++) {
+      points.push({
+        time: this.toUnixSeconds(chartData.t[i]),
+        open: chartData.o[i],
+        high: chartData.h[i],
+        low: chartData.l[i],
+        close: chartData.c[i],
+        volume: chartData.v ? chartData.v[i] : undefined
+      });
+    }
+    return points;
+  }
+
+  // برخی APIها timestamp رو به میلی‌ثانیه می‌فرستن؛ این متد هر دو حالت (ثانیه/میلی‌ثانیه) رو پشتیبانی می‌کنه.
+  // اگه مطمئنی API فعلی همیشه ثانیه می‌فرسته، می‌تونی این متد رو با `return t;` ساده کنی.
+  private toUnixSeconds(t: number): number {
+    return t > 1e12 ? Math.floor(t / 1000) : t;
+  }
+
+  private dayKey(unixSeconds: number): string {
+    const d = new Date(unixSeconds * 1000);
+    return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+  }
+
+  // بر اساس واحد نمایش فعلی (تومان/دلار) و واحد خودِ آیتم، تابع تبدیل مناسب رو برمی‌گردونه.
+  // توابع rialToToman/dollarToToman/... توی CurrencyConverter.ts ورودی رشته‌ای می‌خوان (چون داخلشون
+  // priceToNumber صدا زده می‌شه که replaceAll روی رشته اجرا می‌کنه)، برای همین اینجا با String(raw) صداشون می‌زنیم
+  // تا لازم نباشه CurrencyConverter.ts تغییر کنه.
+  private resolveConverter(): (raw: number) => number {
+    if (this.item()?.faGroupName === 'بازارهای ارزی') {
+      return (raw: number) => raw;
+    }
+
+    const currentValue = this.currentValue();
+
+    if (this.currentUnit() === 0) {
+      if (this.item()?.unit === toman_unit) return (raw: number) => rialToToman(String(raw));
+      if (this.item()?.unit === dollar_unit) return (raw: number) => dollarToToman(String(raw), currentValue!);
+      return (raw: number) => poundToToman(String(raw), currentValue!);
+    }
+
+    if (this.item()?.unit === toman_unit) return (raw: number) => rialToDollar(String(raw), currentValue!);
+    if (this.item()?.unit === dollar_unit) return (raw: number) => raw;
+    return (raw: number) => poundToDollar(String(raw), currentValue!);
+  }
+
+  parseData(chartData: ChartData | null): { candles: CandleData[], volumes: VolumeData[], lineVolumes: VolumeData[] } {
+    const points = this.toOhlcPoints(chartData);
+    if (!points.length) {
+      return { candles: [], volumes: [], lineVolumes: [] };
+    }
+
+    const sortedPoints = [...points].sort((a, b) => a.time - b.time);
+    const groupedPoints = this.applyPreset(sortedPoints, this.state());
+
+    const uniqueMap = new Map<string, OhlcPoint>();
+    groupedPoints?.forEach(point => {
+      uniqueMap.set(this.dayKey(point.time), point);
     });
-    const uniqueData = Array.from(uniqueMap.values()) as RawData[];
+    const uniquePoints = Array.from(uniqueMap.values());
 
     const candles: CandleData[] = [];
     const volumes: VolumeData[] = [];
     const lineVolumes: VolumeData[] = [];
 
-    for (let i = 0; i < uniqueData.length; i++) {
-      const current = uniqueData[i];
-      const prev = i > 0 ? candles[i - 1] : null;
+    const convert = this.resolveConverter();
 
+    for (const point of uniquePoints) {
+      const time = point.time;
+      const open = convert(point.open);
+      const high = convert(point.high);
+      const low = convert(point.low);
+      const close = convert(point.close);
 
-      if (this.item()?.faGroupName !== 'بازارهای ارزی') {
-        if (this.currentUnit() === 0) {
-          if (this.item()?.unit === toman_unit) {
-            const close = rialToToman(current.p);
-            const high = rialToToman(current.h);
-            const low = rialToToman(current.l);
-           
-            const open = prev ? prev.close : low;
-      
-            const time = new Date(current.ts).getTime() / 1000;
-      
-            candles.push({ time, open, high, low, close });
-      
-            const isUp = close >= open;
+      candles.push({ time, open, high, low, close });
 
-            const volume = normalizeValue(high, low, open, close)
+      const isUp = close >= open;
+      // اگه API واقعاً حجم بده (v) همون استفاده می‌شه، وگرنه مثل قبل از normalizeValue به‌عنوان پروکسی بصری استفاده می‌شه
+      const volumeValue = point.volume !== undefined ? point.volume : normalizeValue(high, low, open, close);
 
-            volumes.push({
-              time,
-              value: volume,
-              color: isUp ? this.upColor : this.downColor,
-            });
-            
-            lineVolumes.push({
-              time,
-              value: close,
-              color: '#00d890',
-            });
-          }
-          else if (this.item()?.unit === dollar_unit) {
-            const close = dollarToToman(current.p, this.currentValue()!);
-            const high = dollarToToman(current.h, this.currentValue()!);
-            const low = dollarToToman(current.l, this.currentValue()!);
-           
-            const open = prev ? prev.close : low;
-      
-            const time = new Date(current.ts).getTime() / 1000;
-      
-            candles.push({ time, open, high, low, close });
-      
-            const isUp = close >= open;
-            const volume = normalizeValue(high, low, open, close)
-           
-            volumes.push({
-              time,
-              value: volume,
-              color: isUp ? this.upColor : this.downColor,
-            });
-            lineVolumes.push({
-              time,
-              value: close,
-              color: '#00d890',
-            });
-          }
-          else {
-            const close = poundToToman(current.p, this.currentValue()!);
-            const high = poundToToman(current.h, this.currentValue()!);
-            const low = poundToToman(current.l, this.currentValue()!);
-           
-            const open = prev ? prev.close : low;
-      
-            const time = new Date(current.ts).getTime() / 1000;
-      
-            candles.push({ time, open, high, low, close });
-      
-            const isUp = close >= open;
-            const volume = normalizeValue(high, low, open, close)
-           
-            volumes.push({
-              time,
-              value: volume,
-              color: isUp ? this.upColor : this.downColor,
-            });
-            lineVolumes.push({
-              time,
-              value: close,
-              color: '#00d890',
-            });
-          }
-        }
-        else {
-          if (this.item()?.unit === toman_unit) {
-            const close = rialToDollar(current.p, this.currentValue()!);
-            const high = rialToDollar(current.h, this.currentValue()!);
-            const low = rialToDollar(current.l, this.currentValue()!);
-           
-            const open = prev ? prev.close : low;
-      
-            const time = new Date(current.ts).getTime() / 1000;
-      
-            candles.push({ time, open, high, low, close });
-      
-            const isUp = close >= open;
-            const volume = normalizeValue(high, low, open, close)
-           
-            volumes.push({
-              time,
-              value: volume,
-              color: isUp ? this.upColor : this.downColor,
-            });
-            lineVolumes.push({
-              time,
-              value: close,
-              color: '#00d890',
-            });
-          }
-          else if (this.item()?.unit === dollar_unit) {
-            const close = priceToNumber(current.p);
-            const high = priceToNumber(current.h)
-            const low = priceToNumber(current.l)
-           
-            const open = prev ? prev.close : low;
-      
-            const time = new Date(current.ts).getTime() / 1000;
-      
-            candles.push({ time, open, high, low, close });
-            const isUp = close >= open;
-            const volume = normalizeValue(high, low, open, close)
-           
-            volumes.push({
-              time,
-              value: volume,
-              color: isUp ? this.upColor : this.downColor,
-            });
-            lineVolumes.push({
-              time,
-              value: close,
-              color: '#00d890',
-            });
-          }
-          else {
-            const close = poundToDollar(current.p, this.currentValue()!);
-            const high = poundToDollar(current.h, this.currentValue()!);
-            const low = poundToDollar(current.l, this.currentValue()!);
-           
-            const open = prev ? prev.close : low;
-      
-            const time = new Date(current.ts).getTime() / 1000;
-      
-            candles.push({ time, open, high, low, close });
-      
-            const isUp = close >= open;
-            const volume = normalizeValue(high, low, open, close)
-           
-            volumes.push({
-              time,
-              value: volume,
-              color: isUp ? this.upColor : this.downColor,
-            });
-            lineVolumes.push({
-              time,
-              value: close,
-              color: '#00d890',
-            });
-          }
-        }
-      }
-      else {
-        const close = priceToNumber(current.p);
-        const high = priceToNumber(current.h);
-        const low = priceToNumber(current.l);
-       
-        const open = prev ? prev.close : low;
-  
-        const time = new Date(current.ts).getTime() / 1000;
-  
-        candles.push({ time, open, high, low, close });
-        const isUp = close >= open;
-        const volume = normalizeValue(high, low, open, close)
-       
-        volumes.push({
-          time,
-          value: volume,
-          color: isUp ? this.upColor : this.downColor,
-        });
-        
-        lineVolumes.push({
-          time,
-          value: close,
-          color: '#00d890',
-        });
-      }
+      volumes.push({
+        time,
+        value: volumeValue,
+        color: isUp ? this.upColor : this.downColor,
+      });
+
+      lineVolumes.push({
+        time,
+        value: close,
+        color: '#00d890',
+      });
     }
 
     return { candles, volumes, lineVolumes };
@@ -645,10 +564,9 @@ export class ChartComponent {
     }
 
     if (typeof document !== 'undefined') {
-      const processedData = this.parseData(this.historyData() as RawData[]);
+      const processedData = this.parseData(this.historyData());
       this.initChart(processedData);
       this.lineSeries?.applyOptions({ visible: false })
-      // this.chartReady.set(true);
       this.chartIsReadySubject.next(true)
       
       fromEvent(document, 'click')
