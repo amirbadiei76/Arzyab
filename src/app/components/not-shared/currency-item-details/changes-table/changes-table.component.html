@@ -1,11 +1,10 @@
 <div class="w-full flex flex-col mb-4 md:mb-6">
     <p class="leading-[180%] border-b px-[10%] border-b-light-text2 dark:border-b-dark-text2 pb-3 text-right text-sm font-medium lg:text-base text-dark-text4 dark:text-light-text4">تاریخچه قیمت</p>
-    
     <table class="w-full leading-[180%] flex flex-col">
         <thead class="border-b border-b-light-text4 dark:border-b-dark-text4 w-full flex-1 flex py-2.5">
             <tr class="w-full flex flex-1">
                 <td class="text-center w-1/3 dark:text-white text-dark leading-[180%] text-xs font-normal">تغییرات</td>
-                <td class="text-center w-1/3 dark:text-white text-dark leading-[180%] text-xs font-normal">{{ item?.faGroupName === 'بازارهای ارزی' ? 'نسبت' : 'قیمت' }} {{ item?.faGroupName !== 'بازارهای ارزی' ? (currentUnit() === 0 ? '(تومان)' : '(دلار)') : '' }}</td>
+                <td class="text-center w-1/3 dark:text-white text-dark leading-[180%] text-xs font-normal">{{ currentItem()?.faGroupName === 'بازارهای ارزی' ? 'نسبت' : 'قیمت' }} {{ currentItem()?.faGroupName !== 'بازارهای ارزی' ? (currentUnit() === 0 ? '(تومان)' : '(دلار)') : '' }}</td>
                 <td class="text-center w-1/3 dark:text-white text-dark leading-[180%] text-xs font-normal">روز</td>
             </tr>
         </thead>

@@ -1,7 +1,7 @@
 import { Component, effect, ElementRef, inject, input, Input, signal, ViewChild } from '@angular/core';
-import { createChart, IChartApi, ISeriesApi, ColorType, CrosshairMode, CandlestickSeries, HistogramSeries, LineSeries, LineStyle, PriceScaleMode } from 'lightweight-charts'
+import { createChart, IChartApi, ISeriesApi, ColorType, CrosshairMode, CandlestickSeries, HistogramSeries, LineSeries, LineStyle, PriceScaleMode, Time } from 'lightweight-charts'
 import { CommonModule } from '@angular/common';
-import { CandleData, ChartData, VolumeData } from '../../../../interfaces/chart.types';
+import { CandleData, ChartData, ChartState, IntervalKey, OhlcPoint, Preset, RangeKey, VolumeData } from '../../../../interfaces/chart.types';
 import { CurrencyItem } from '../../../../interfaces/data.types';
 import { dollar_unit, pound_unit, toman_unit } from '../../../../constants/Values';
 import { commafy, dollarToToman, normalizeValue, poundToDollar, poundToToman, rialToDollar, rialToToman, trimDecimal, valueToDollarChanges, valueToRialChanges } from '../../../../utils/CurrencyConverter';
@@ -9,34 +9,6 @@ import { RequestArrayService } from '../../../../services/request-array.service'
 import { TooltipDirective } from '../../../../directives/tooltip.directive';
 import { BehaviorSubject, from, fromEvent, map, shareReplay } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
-
-type RangeKey = '7D' | '1M' | '3M' | '6M' | '1Y' | 'All';
-type IntervalKey = '1D' | '1W' | '1M';
-
-export interface Preset {
-  key: string;
-  label: string;
-  title: string;
-  range: RangeKey;
-  interval: IntervalKey;
-}
-
-export interface ChartState {
-  range: RangeKey;
-  interval: IntervalKey;
-}
-
-// یک نقطه‌ی نرمال‌شده‌ی OHLC که از فرمت ستونی ChartData (آرایه‌های موازی t/o/h/l/c/v) ساخته می‌شه.
-// همه‌ی توابع filter/aggregate/parse داخل این کامپوننت روی همین شکل کار می‌کنن،
-// و تبدیل از/به ChartData فقط توی toOhlcPoints انجام می‌شه.
-interface OhlcPoint {
-  time: number; // یونیکس‌تایم بر حسب ثانیه (فرمتی که lightweight-charts می‌خواد)
-  open: number;
-  high: number;
-  low: number;
-  close: number;
-  volume?: number;
-}
 
 @Component({
   selector: 'app-chart',
@@ -228,9 +200,8 @@ export class ChartComponent {
   
       const agg = bucketMap.get(key)!;
   
-      // اولین نقطه‌ی هر بازه، open رو ست می‌کنه و دیگه دست نمی‌خوره (open واقعیِ همون بازه است)
       agg.high = Math.max(agg.high, point.high);
-      agg.low = Math.min(agg.low, point.low); // قبلاً اشتباهاً Math.max بود، به min اصلاح شد
+      agg.low = Math.min(agg.low, point.low);
       agg.close = point.close;
       agg.time = point.time;
       if (point.volume !== undefined) {
@@ -265,8 +236,6 @@ export class ChartComponent {
     if (this.timeFramePanelOpened()) this.toggleTimeFrame()
   }
 
-  // ChartData ستونی (t/o/h/l/c/v) رو به آرایه‌ای از نقاط OHLC تبدیل می‌کنه.
-  // طول نهایی از کوتاه‌ترین آرایه‌ی الزامی (t/o/h/l/c) گرفته می‌شه تا در صورت ناهم‌طول بودن، ایندکس نامعتبر نخونه.
   private toOhlcPoints(chartData: ChartData | null): OhlcPoint[] {
     if (!chartData?.t?.length) return [];
 
@@ -292,8 +261,6 @@ export class ChartComponent {
     return points;
   }
 
-  // برخی APIها timestamp رو به میلی‌ثانیه می‌فرستن؛ این متد هر دو حالت (ثانیه/میلی‌ثانیه) رو پشتیبانی می‌کنه.
-  // اگه مطمئنی API فعلی همیشه ثانیه می‌فرسته، می‌تونی این متد رو با `return t;` ساده کنی.
   private toUnixSeconds(t: number): number {
     return t > 1e12 ? Math.floor(t / 1000) : t;
   }
@@ -303,10 +270,6 @@ export class ChartComponent {
     return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
   }
 
-  // بر اساس واحد نمایش فعلی (تومان/دلار) و واحد خودِ آیتم، تابع تبدیل مناسب رو برمی‌گردونه.
-  // توابع rialToToman/dollarToToman/... توی CurrencyConverter.ts ورودی رشته‌ای می‌خوان (چون داخلشون
-  // priceToNumber صدا زده می‌شه که replaceAll روی رشته اجرا می‌کنه)، برای همین اینجا با String(raw) صداشون می‌زنیم
-  // تا لازم نباشه CurrencyConverter.ts تغییر کنه.
   private resolveConverter(): (raw: number) => number {
     if (this.item()?.faGroupName === 'بازارهای ارزی') {
       return (raw: number) => raw;
@@ -394,7 +357,7 @@ export class ChartComponent {
       },
       timeScale: {
         borderColor: 'rgba(197, 203, 206, 0.2)',
-        timeVisible: true,
+        timeVisible: false,
         tickMarkFormatter: (time: number) => {
           const date = new Date(time * 1000);
 
@@ -404,6 +367,22 @@ export class ChartComponent {
           if (date.getMonth() === 0 && day === 1) return `${year}`;
           if (day === 1) return `${month}`
           return `${day}`;
+        }
+      },
+      localization: {
+        locale: 'fa-IR',
+        timeFormatter: (time: Time) => {
+          if (typeof time === 'number') {
+            const date = new Date(time * 1000).toLocaleString('fa-IR', {
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+            });
+            return (
+              date
+            );
+          }
+          return null;
         }
       },
       crosshair: {
