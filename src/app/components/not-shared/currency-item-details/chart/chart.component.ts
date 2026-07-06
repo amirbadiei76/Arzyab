@@ -123,7 +123,7 @@ export class ChartComponent {
       this.lineSeries?.applyOptions({ priceFormat: { precision: unit === 1 ? 4 : 2 } })
 
       if (this.presetChanged()) {
-        if (!this.isPresetActive(this.presets[this.presets.length - 1])) this.chart?.timeScale().fitContent();
+        if (!this.isPresetActive(this.presets[this.presets.length - 1]) || !this.isPresetActive(this.INITIAL_PRESET)) this.chart?.timeScale().fitContent();
         else this.chart?.timeScale().resetTimeScale();
         this.presetChanged.set(false);
       }
