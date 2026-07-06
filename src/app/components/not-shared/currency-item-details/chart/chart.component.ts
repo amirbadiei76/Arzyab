@@ -123,7 +123,8 @@ export class ChartComponent {
       this.lineSeries?.applyOptions({ priceFormat: { precision: unit === 1 ? 4 : 2 } })
 
       if (this.presetChanged()) {
-        this.chart?.timeScale().fitContent();
+        if (!this.isPresetActive(this.presets[this.presets.length - 1])) this.chart?.timeScale().fitContent();
+        else this.chart?.timeScale().resetTimeScale();
         this.chart?.priceScale('right').applyOptions({ autoScale: true })
         this.presetChanged.set(false);
       }
@@ -378,9 +379,7 @@ export class ChartComponent {
               month: '2-digit',
               day: '2-digit',
             });
-            return (
-              date
-            );
+            return date;
           }
           return null;
         }
