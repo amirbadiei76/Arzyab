@@ -197,6 +197,7 @@ html[data-mode="system"] .theme-icon-system { display: block !important; }
 
     --leading-4.\5: 1.125rem;
     --radius-semi: 0.625rem;
+    --breakpoint-xs: 468px;
 }
 
 @utility related-type-button {

@@ -125,9 +125,9 @@ export class ChartComponent {
       if (this.presetChanged()) {
         if (!this.isPresetActive(this.presets[this.presets.length - 1])) this.chart?.timeScale().fitContent();
         else this.chart?.timeScale().resetTimeScale();
-        this.chart?.priceScale('right').applyOptions({ autoScale: true })
         this.presetChanged.set(false);
       }
+      this.chart?.priceScale('right').applyOptions({ autoScale: true })
     });
   }
 
