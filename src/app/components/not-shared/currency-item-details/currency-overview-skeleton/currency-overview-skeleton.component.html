@@ -1,19 +1,19 @@
 <div class="px-5 py-4 rounded-2xl lg:border lg:border-light-border2 lg:dark:border-dark-border2 mt-0 lg:mt-28">
-    <span class="w-full block text-right mb-3">
-        <span class="leading-[180%] text-sm lg:text-base text-right skeleton-base text-transparent">وضعیت در یک نگاه</span>
+    <span class="w-full flex items-center justify-end mb-3">
+        <p class="skeleton-base my-1 h-[20.8px] lg:h-6 w-[113px] lg:w-[129px]"></p>
     </span>
     <div class="flex flex-row justify-between lg:flex-col mb-3 lg:mb-6">
         <div class="overflow-hidden flex-row-reverse mb-0 lg:mb-3 flex">
             @for (currency of supportedCurrencies; track currency.id) {
                 <div
-                    class="border {{ currency.id === 0 ? 'border-l rounded-r-semi border-dark-text2 dark:border-light-text2' : 'border-r-0 rounded-l-semi border-dark-text2 dark:border-light-text2' }} w-15 md:w-20 lg:w-1/2 h-12 flex justify-center px-1 items-center cursor-none">
-                    <p class="rtl text-dark-text2 dark:text-light-text2 text-2xs sm:text-xs cursor-none">{{currency.title}}</p>
+                    class="border {{ currency.id === 0 ? 'border-l rounded-r-semi border-dark-text2 dark:border-light-text2' : 'border-r-0 rounded-l-semi border-dark-text2 dark:border-light-text2' }} w-15 md:w-20 lg:w-1/2 h-12 flex justify-center px-1 items-center cursor-default">
+                    <p class="rtl text-dark-text2 dark:text-light-text2 text-2xs sm:text-xs cursor-default">{{currency.title}}</p>
                 </div>
             }
         </div>
         <div class="flex justify-end items-center gap-2 flex-1 flex-nowrap" >
-            <span class="related-type-button text-center block dark:text-white text-light-text2 cursor-none">پر ضررها</span>
-            <span class="related-type-button text-center block dark:text-white text-light-text2 cursor-none">پر سودها</span>
+            <span class="related-type-button text-center block dark:text-white text-light-text2 cursor-default">پر ضررها</span>
+            <span class="related-type-button text-center block dark:text-white text-light-text2 cursor-default">پر سودها</span>
         </div>
     </div>
     <div class="flex flex-col gap-2.5 w-full">
