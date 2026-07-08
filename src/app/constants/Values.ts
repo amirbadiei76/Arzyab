@@ -11,7 +11,7 @@ export const COMMODITY_PREFIX = "Commodity-Market";
 // main titles
 export const favories_title = 'دیده‌بان';
 export const favories_title_en = 'favorites';
-export const currency_title = 'بازار ارز';
+export const currency_title = 'بازار ارز و دلار';
 export const gold_title = 'بازار طلا';
 export const coin_title = 'بازار سکه';
 export const crypto_title = 'ارز دیجیتال';
