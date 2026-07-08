@@ -34,7 +34,6 @@ export class CurrenciesService {
 
   getAllCurrencies () {
     const call_subdomain  = this.call_subdomains[Math.floor(Math.random()*this.call_subdomains.length)];
-    // const url = "https://call2.tgju.org/ajax.json";
     const url = 'https://' + call_subdomain + '.tgju.org/ajax.json?rev=' + this.make_random_str(60)
     return this.http.get<Currencies>(url).pipe(retry({ count: Infinity }));
   }
@@ -2819,6 +2818,104 @@ export class CurrenciesService {
     const url = this.history_base_url + "price_cyp";
     return this.http.get<ChartData>(url)
   }
+
+
+
+  // Dollar Market
+  getNimaUSDBuyPriceInfo() {
+    const url = this.base_url + "ice_transfer_usd_buy/latest.json";
+    return this.http.get<Price>(url)
+  }
+
+  getNimaUSDBuyHistoryInfo() {
+    const url = this.history_base_url + "nima_buy_usd";
+    return this.http.get<ChartData>(url)
+  }
+
+
+
+
+  
+  getEXUsdSellPriceInfo() {
+    const url = this.base_url + "exusd_sell/latest.json";
+    return this.http.get<Price>(url)
+  }
+
+  getEXUsdSellHistoryInfo() {
+    const url = this.history_base_url + "exusd_sell";
+    return this.http.get<ChartData>(url)
+  }
+  
+
+
+  
+
+
+  
+  getAfghanUsdPriceInfo() {
+    const url = this.base_url + "afghan_usd/latest.json";
+    return this.http.get<Price>(url)
+  }
+
+  getAfghanUsdHistoryInfo() {
+    const url = this.history_base_url + "afghan_usd";
+    return this.http.get<ChartData>(url)
+  }
+
+
+
+
+
+  
+  getNimaUSDSellPriceInfo() {
+    const url = this.base_url + "ice_transfer_usd_sell/latest.json";
+    return this.http.get<Price>(url)
+  }
+
+  getNimaUSDSellHistoryInfo() {
+    const url = this.history_base_url + "nima_sell_usd";
+    return this.http.get<ChartData>(url)
+  }
+
+
+
+
+  
+
+
+
+  
+  getIceUSDPriceInfo() {
+    const url = this.base_url + "ice_usd/latest.json";
+    return this.http.get<Price>(url)
+  }
+
+  getIceUSDHistoryInfo() {
+    const url = this.history_base_url + "ice_usd";
+    return this.http.get<ChartData>(url)
+  }
+
+  
+
+
+
+
+  
+
+
+
+  
+  getSoleymaniUSDPriceInfo() {
+    const url = this.base_url + "ice_usd/latest.json";
+    return this.http.get<Price>(url)
+  }
+
+  getSoleymaniUSDHistoryInfo() {
+    const url = this.history_base_url + "price_dollar_soleymani";
+    return this.http.get<ChartData>(url)
+  }
+
+
 
   //#endregion
 

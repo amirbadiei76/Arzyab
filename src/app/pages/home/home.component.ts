@@ -1,7 +1,7 @@
 import { afterNextRender, Component, computed, effect, ElementRef, inject, signal, ViewChild, WritableSignal } from '@angular/core';
 import { CurrencyItem } from '../../interfaces/data.types';
 import { CurrencyItemComponent } from '../../components/not-shared/home/currency-item/currency-item.component';
-import { base_metal_title, BASE_METALS_PREFIX, COIN_PREFIX, coin_title, COMMODITY_PREFIX, commodity_title, CRYPTO_PREFIX, crypto_title, currency_title, dollar_unit, favories_title, favories_title_en, filter_agricultural_products, filter_agricultural_products_en, filter_animal_products, filter_animal_products_en, filter_coin_blubber, filter_coin_blubber_en, filter_coin_cash, filter_coin_cash_en, filter_coin_exchange, filter_coin_exchange_en, filter_coin_retail, filter_coin_retail_en, filter_crop_yields, filter_crop_yields_en, filter_cryptocurrency, filter_etf, filter_etf_en, filter_global_base_metals, filter_global_base_metals_en, filter_global_ounces, filter_global_ounces_en, filter_gold, filter_gold_en, filter_gold_vs_other, filter_gold_vs_other_en, filter_main_currencies, filter_main_currencies_en, filter_melted, filter_melted_en, filter_mesghal, filter_mesghal_en, filter_other_coins, filter_other_coins_en, filter_other_currencies, filter_other_currencies_en, filter_overview, filter_overview_en, filter_pair_currencies, filter_silver, filter_silver_en, filter_us_base_metals, filter_us_base_metals_en, GOLD_PREFIX, gold_title, MAIN_CURRENCY_PREFIX, precious_metal_title, PRECIOUS_METALS_PREFIX, toman_unit, WORLD_MARKET_PREFIX, world_title } from '../../constants/Values';
+import { base_metal_title, BASE_METALS_PREFIX, COIN_PREFIX, coin_title, COMMODITY_PREFIX, commodity_title, CRYPTO_PREFIX, crypto_title, currency_title, dollar_unit, favories_title, favories_title_en, filter_agricultural_products, filter_agricultural_products_en, filter_animal_products, filter_animal_products_en, filter_coin_blubber, filter_coin_blubber_en, filter_coin_cash, filter_coin_cash_en, filter_coin_exchange, filter_coin_exchange_en, filter_coin_retail, filter_coin_retail_en, filter_crop_yields, filter_crop_yields_en, filter_cryptocurrency, filter_dollar_market, filter_dollar_market_en, filter_etf, filter_etf_en, filter_global_base_metals, filter_global_base_metals_en, filter_global_ounces, filter_global_ounces_en, filter_gold, filter_gold_en, filter_gold_vs_other, filter_gold_vs_other_en, filter_main_currencies, filter_main_currencies_en, filter_melted, filter_melted_en, filter_mesghal, filter_mesghal_en, filter_other_coins, filter_other_coins_en, filter_other_currencies, filter_other_currencies_en, filter_overview, filter_overview_en, filter_pair_currencies, filter_silver, filter_silver_en, filter_us_base_metals, filter_us_base_metals_en, GOLD_PREFIX, gold_title, MAIN_CURRENCY_PREFIX, precious_metal_title, PRECIOUS_METALS_PREFIX, toman_unit, WORLD_MARKET_PREFIX, world_title } from '../../constants/Values';
 import { StarIconComponent } from '../../components/shared/star-icon/star-icon.component';
 import { CommonModule, NgIf } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
@@ -53,7 +53,8 @@ export class HomeComponent {
       subtitles: [
         {fa: filter_overview, en: filter_overview_en},
         {fa: filter_main_currencies, en: filter_main_currencies_en},
-        {fa: filter_other_currencies, en: filter_other_currencies_en}
+        {fa: filter_other_currencies, en: filter_other_currencies_en},
+        {fa: filter_dollar_market, en: filter_dollar_market_en}
       ] 
     },
     {
@@ -216,7 +217,7 @@ export class HomeComponent {
       )
     ),
     map(({ list, subCategory }) => {
-      const filteredList = (subCategory !== filter_overview_en) ? [...list].filter(item => item.filterNameEn == subCategory) : list;
+      const filteredList = (subCategory !== filter_overview_en) ? [...list].filter(item => item.filterNames.find(filter => filter.enName == subCategory)) : list;
       return filteredList
     })
   )
@@ -238,7 +239,7 @@ export class HomeComponent {
       )
     ),
     map(({ list, titleSort, priceSort, change24hSort, subCategory, textToFilter }) => {
-      const groupedList = (subCategory !== filter_overview_en) ? [...list].filter(item => item.filterNameEn == subCategory) : list;
+      const groupedList = (subCategory !== filter_overview_en) ? [...list].filter(item => item.filterNames.find((filter) => filter.enName == subCategory)) : list;
 
       const trimedText = textToFilter.trim()
       const filteredList = trimedText ? [...groupedList].filter(item => item.title.toLowerCase().includes(trimedText) || item.shortedName?.toLowerCase().includes(trimedText)) : groupedList;
@@ -425,20 +426,49 @@ export class HomeComponent {
 
 
   initializeFavFilters() {
-    const favSubCategoryList: SubtitleType[] = [{fa: filter_overview, en: filter_overview_en}]
-    this.reqestClass?.favList.subscribe((items) => {
+    // const favSubCategoryList: SubtitleType[] = [{fa: filter_overview, en: filter_overview_en}]
+    // this.reqestClass?.favList.subscribe((items) => {
+    //   items.forEach(item => {
+    //     const exists = favSubCategoryList.some(x => item.filterNames.includes({name: x.fa, enName: x.en}));
+    //     if (!exists) {
+    //       favSubCategoryList.push({
+    //         fa: item.filterNames,
+    //         en: item.filterNameEn
+    //       });
+    //     }
+
+    //   });
+    // })
+    // this.categories[0].subtitles = favSubCategoryList;
+    const favSubCategoryList: SubtitleType[] = [
+      {
+        fa: filter_overview,
+        en: filter_overview_en
+      }
+    ];
+
+    this.reqestClass?.favList.subscribe(items => {
       items.forEach(item => {
-        const exists = favSubCategoryList.some(x => x.en === item.filterNameEn);
-        if (!exists) {
-          favSubCategoryList.push({
-            fa: item.filterName,
-            en: item.filterNameEn
-          });
-        }
+
+        item.filterNames.forEach(filter => {
+
+          const exists = favSubCategoryList.some(
+            x => x.en === filter.enName
+          );
+
+          if (!exists) {
+            favSubCategoryList.push({
+              fa: filter.name,
+              en: filter.enName
+            });
+          }
+
+        });
 
       });
-    })
-    this.categories[0].subtitles = favSubCategoryList;
+
+      this.categories[0].subtitles = favSubCategoryList;
+    });
   }
 
   filterByCategory (name: string) {

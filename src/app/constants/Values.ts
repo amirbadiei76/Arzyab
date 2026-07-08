@@ -29,6 +29,8 @@ export const filter_main_currencies = "ارزهای اصلی";
 export const filter_main_currencies_en = "main-currencies";
 export const filter_other_currencies = "سایر ارزها";
 export const filter_other_currencies_en = "other-currencies";
+export const filter_dollar_market = "بازار دلار";
+export const filter_dollar_market_en = "dollar-market";
 
 export const filter_cryptocurrency = "رمزارز";
 export const filter_cryptocurrency_en = "crypto";
