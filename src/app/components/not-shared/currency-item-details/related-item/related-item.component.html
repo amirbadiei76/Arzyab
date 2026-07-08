@@ -25,7 +25,7 @@
                     <p class="text-dark dark:text-white text-xs font-normal leading-[180%] {{ item?.faGroupName === 'بازارهای ارزی' ? 'hidden' : 'block' }}">{{currentUnit() === 0 ? 'تومان' : 'دلار'}}</p>
                     <p class="text-dark dark:text-white text-xs font-normal leading-[180%]">{{currentUnit() === 0 ? item?.tomanStringPrice : item?.dollarStringPrice}}</p>
                 </div>
-                <p class="line-clamp-1 text-ellipsis text-dark-text2 dark:text-light-text2 text-right text-xs font-normal leading-[180%]  {{item?.filterName === 'سکه در بورس' ? 'text-right rtl': ''}}">{{item?.shortedName}}</p>
+                <p class="line-clamp-1 text-ellipsis text-dark-text2 dark:text-light-text2 text-right text-xs font-normal leading-[180%]  {{ isGoldExchange() ? 'text-right rtl': ''}}">{{item?.shortedName}}</p>
             </div>
         </div>
         <img draggable="false" loading="lazy" decoding="async" class="w-11 h-11 rounded-full object-cover ml-2.5" src={{item?.img}} alt={{item?.title}}>

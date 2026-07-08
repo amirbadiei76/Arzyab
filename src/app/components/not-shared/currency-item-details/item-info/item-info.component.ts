@@ -34,4 +34,9 @@ export class ItemInfoComponent {
       this.notificationService.show('با موفقیت از دیده بان حذف شد')
       this.requestArray?.removeFromFavorite(this.item?.id!)
     }
+
+    
+    isGoldExchange() {
+      return this.item?.filterNames.includes(this.item.filterNames.find(item => item.name == 'سکه در بورس')!)
+    }
 }

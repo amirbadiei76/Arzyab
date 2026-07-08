@@ -19,4 +19,8 @@ export class RelatedItemComponent {
     // this.router.navigate()
     window.scrollTo(0, 0)
   }
+
+  isGoldExchange() {
+    return this.item?.filterNames.includes(this.item.filterNames.find(item => item.name == 'سکه در بورس')!)
+  }
 }
