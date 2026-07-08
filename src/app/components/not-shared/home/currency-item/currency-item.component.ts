@@ -58,4 +58,8 @@ export class CurrencyItemComponent {
     window.scrollTo(0, 0)
   }
 
+  isGoldExchange () {
+    return this.currencyItem?.filterNames.includes(this.currencyItem.filterNames.find(item => item.name == 'سکه در بورس')!)
+  }
+
 }
