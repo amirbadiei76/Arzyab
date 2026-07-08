@@ -1972,7 +1972,7 @@ export class RequestArrayService {
         historyCallInfo: this.currencyService.getNimaUSDSellHistoryInfo(),
         lastPriceInfo: current.ice_transfer_usd_sell,
         title: "دلار (نیما/فروش)",
-        shortedName: "Sana Transfer USD Sell",
+        shortedName: "Nima USD Sell",
         filterNames: [{name: filter_dollar_market, enName: filter_dollar_market_en}],
         groupName: MAIN_CURRENCY_PREFIX,
         unit: toman_unit,
