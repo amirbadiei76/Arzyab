@@ -1,28 +1,80 @@
 <div class="flex flex-col md:flex-row items-end w-full md:w-auto mb-2 md:mb-0">
-    <div class="flex md:flex-col flex-row justify-between md:justify-start w-full md:w-auto mb-2 md:mb-0">
-        <p class="text-right text-xs font-normal text-dark-text4 dark:text-light-text4 leading-[180%]">کمترین {{ currencyItem?.faGroupName === 'بازارهای ارزی' ? 'نسبت' : 'قیمت' }}</p>
-        <p class="text-xs font-normal text-dark-text4 dark:text-light-text4 leading-[180%] block md:hidden">بیشترین {{ currencyItem?.faGroupName === 'بازارهای ارزی' ? 'نسبت' : 'قیمت' }}</p>
-        <div class="items-center gap-1.25 hidden md:flex">
-            <p class="text-2xs font-normal text-dark-text4 dark:text-light-text4 leading-[180%] {{ currencyItem?.faGroupName === 'بازارهای ارزی' ? 'hidden' : 'inline-block' }}">{{ currentSupportCurrencyId() === 0 ? 'تومان' : 'دلار' }}</p>
-            <p class="dark:text-white text-dark text-sm md:text-xs lg:text-sm font-normal leading-[180%]">{{ currentMinPrice() }}</p>
-        </div>
+  <div
+    class="flex md:flex-col flex-row justify-between md:justify-start w-full md:w-auto mb-2 md:mb-0"
+  >
+    <p
+      class="text-right text-xs font-normal text-dark-text4 dark:text-light-text4 leading-[180%]"
+    >
+      کمترین
+      {{ currencyItem?.faGroupName === "بازارهای ارزی" ? "نسبت" : "قیمت" }}
+    </p>
+    <p
+      class="text-xs font-normal text-dark-text4 dark:text-light-text4 leading-[180%] block md:hidden"
+    >
+      بیشترین
+      {{ currencyItem?.faGroupName === "بازارهای ارزی" ? "نسبت" : "قیمت" }}
+    </p>
+    <div class="items-center gap-1.25 hidden md:flex">
+      <p
+        class="text-2xs font-normal text-dark-text4 dark:text-light-text4 leading-[180%] {{
+          currencyItem?.faGroupName === 'بازارهای ارزی'
+            ? 'hidden'
+            : 'inline-block'
+        }}"
+      >
+        {{ currentSupportCurrencyId() === 0 ? "تومان" : "دلار" }}
+      </p>
+      <p
+        class="dark:text-white text-dark text-sm md:text-xs lg:text-sm font-normal leading-[180%]"
+      >
+        {{ currentMinPrice() }}
+      </p>
     </div>
-    <div class="w-full md:w-50 h-2 md:mx-2 rounded-2xl bg-light-border4 overflow-hidden dark:bg-dark-border4 mb-2">
-        <div
-            [style.width]="currentPercentMinMax()"
-            class="h-full flex smooth-transition justify-start bg-dark-border5 dark:bg-light-border5 rounded-2xl">
-            
-        </div>
+  </div>
+  <div
+    class="w-full md:w-50 h-2 md:mx-2 rounded-2xl bg-light-border4 dark:bg-dark-border4 overflow-hidden mb-2"
+  >
+    <div
+      [style.width]="currentPercentMinMax()"
+      class="h-full flex smooth-transition justify-start bg-dark-border5 dark:bg-light-border5 rounded-2xl"
+    ></div>
+  </div>
+  <div
+    class="flex md:flex-col flex-row justify-between md:justify-start w-full md:w-auto mb-2 md:mb-0"
+  >
+    <p
+      class="text-xs font-normal text-dark-text4 dark:text-light-text4 leading-[180%] hidden md:block"
+    >
+      بیشترین
+      {{ currencyItem?.faGroupName === "بازارهای ارزی" ? "نسبت" : "قیمت" }}
+    </p>
+    <div class="flex items-center gap-1.25 md:hidden">
+      <p
+        class="text-2xs font-normal text-dark-text4 dark:text-light-text4 leading-[180%] {{
+          currencyItem?.faGroupName === 'بازارهای ارزی' ? 'hidden' : 'flex'
+        }}"
+      >
+        {{ currentSupportCurrencyId() === 0 ? "تومان" : "دلار" }}
+      </p>
+      <p
+        class="text-sm md:text-xs lg:text-sm font-normal leading-[180%] dark:text-white text-dark"
+      >
+        {{ currentMinPrice() }}
+      </p>
     </div>
-    <div class="flex md:flex-col flex-row justify-between md:justify-start w-full md:w-auto mb-2 md:mb-0">
-        <p class="text-xs font-normal text-dark-text4 dark:text-light-text4 leading-[180%] hidden md:block">بیشترین {{ currencyItem?.faGroupName === 'بازارهای ارزی' ? 'نسبت' : 'قیمت' }}</p>
-        <div class="flex items-center gap-1.25 md:hidden">
-            <p class="text-2xs font-normal text-dark-text4 dark:text-light-text4 leading-[180%] {{ currencyItem?.faGroupName === 'بازارهای ارزی' ? 'hidden' : 'flex' }}">{{ currentSupportCurrencyId() === 0 ? 'تومان' : 'دلار' }}</p>
-            <p class="text-sm md:text-xs lg:text-sm font-normal leading-[180%] dark:text-white text-dark">{{ currentMinPrice() }}</p>
-        </div>
-        <div class="flex items-center gap-1.25">
-            <p class="text-2xs font-normal text-dark-text4 dark:text-light-text4 leading-[180%] {{ currencyItem?.faGroupName === 'بازارهای ارزی' ? 'hidden' : 'flex' }}">{{ currentSupportCurrencyId() === 0 ? 'تومان' : 'دلار' }}</p>
-            <p class="text-sm md:text-xs lg:text-sm font-normal leading-[180%] dark:text-white text-dark">{{ currentMaxPrice() }}</p>
-        </div>
+    <div class="flex items-center gap-1.25">
+      <p
+        class="text-2xs font-normal text-dark-text4 dark:text-light-text4 leading-[180%] {{
+          currencyItem?.faGroupName === 'بازارهای ارزی' ? 'hidden' : 'flex'
+        }}"
+      >
+        {{ currentSupportCurrencyId() === 0 ? "تومان" : "دلار" }}
+      </p>
+      <p
+        class="text-sm md:text-xs lg:text-sm font-normal leading-[180%] dark:text-white text-dark"
+      >
+        {{ currentMaxPrice() }}
+      </p>
     </div>
+  </div>
 </div>

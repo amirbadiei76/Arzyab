@@ -375,6 +375,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000000",
         historyCallInfo: this.currencyService.getDollarRlHistoryInfo(),
+        symbol: 'price_dollar_rl',
         lastPriceInfo: current.price_dollar_rl,
         title: "دلار آمریکا",
         shortedName: "USD",
@@ -386,6 +387,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000001",
         historyCallInfo: this.currencyService.getEuroRlHistoryInfo(),
+        symbol: 'price_eur',
         lastPriceInfo: current.price_eur,
         title: "یورو",
         shortedName: "EUR",
@@ -397,6 +399,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000002",
         historyCallInfo: this.currencyService.getAedRlHistoryInfo(),
+        symbol: 'price_aed',
         lastPriceInfo: current.price_aed,
         title: "درهم امارات",
         shortedName: "AED",
@@ -408,6 +411,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000003",
         historyCallInfo: this.currencyService.getGbpRlHistoryInfo(),
+        symbol: 'price_gbp',
         lastPriceInfo: current.price_gbp,
         title: "پوند انگلیس",
         shortedName: "GBP",
@@ -419,6 +423,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000004",
         historyCallInfo: this.currencyService.getTryRlHistoryInfo(),
+        symbol: 'price_try',
         lastPriceInfo: current.price_try,
         title: "لیر ترکیه",
         shortedName: "TRY",
@@ -430,6 +435,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000005",
         historyCallInfo: this.currencyService.getChfRlHistoryInfo(),
+        symbol: 'price_chf',
         lastPriceInfo: current.price_chf,
         title: "فرانک سوییس",
         shortedName: "CHF",
@@ -441,6 +447,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000006",
         historyCallInfo: this.currencyService.getCnyRlHistoryInfo(),
+        symbol: 'price_cny',
         lastPriceInfo: current.price_cny,
         title: "یوان چین",
         shortedName: "CNY",
@@ -452,6 +459,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000007",
         historyCallInfo: this.currencyService.getJpyRlHistoryInfo(),
+        symbol: 'price_jpy',
         lastPriceInfo: current.price_jpy,
         title: "ین ژاپن (100 ین)",
         shortedName: "JPY",
@@ -463,6 +471,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000008",
         historyCallInfo: this.currencyService.getKrwRlHistoryInfo(),
+        symbol: 'price_krw',
         lastPriceInfo: current.price_krw,
         title: "وون کره جنوبی",
         shortedName: "KRW",
@@ -474,6 +483,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000009",
         historyCallInfo: this.currencyService.getCadRlHistoryInfo(),
+        symbol: 'price_cad',
         lastPriceInfo: current.price_cad,
         title: "دلار کانادا",
         shortedName: "CAD",
@@ -485,6 +495,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000010",
         historyCallInfo: this.currencyService.getAudRlHistoryInfo(),
+        symbol: 'price_aud',
         lastPriceInfo: current.price_aud,
         title: "دلار استرالیا",
         shortedName: "AUD",
@@ -496,6 +507,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000011",
         historyCallInfo: this.currencyService.getNzdRlHistoryInfo(),
+        symbol: 'price_aud',
         lastPriceInfo: current.price_nzd,
         title: "دلار نیوزلند",
         shortedName: "NZD",
@@ -507,6 +519,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000012",
         historyCallInfo: this.currencyService.getSgdRlHistoryInfo(),
+        symbol: 'price_sgd',
         lastPriceInfo: current.price_sgd,
         title: "دلار سنگاپور",
         shortedName: "SGD",
@@ -518,6 +531,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000013",
         historyCallInfo: this.currencyService.getInrRlHistoryInfo(),
+        symbol: 'price_inr',
         lastPriceInfo: current.price_inr,
         title: "روپیه هند",
         shortedName: "INR",
@@ -529,6 +543,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000014",
         historyCallInfo: this.currencyService.getPkrRlHistoryInfo(),
+        symbol: 'price_pkr',
         lastPriceInfo: current.price_pkr,
         title: "روپیه پاکستان",
         shortedName: "PKR",
@@ -540,6 +555,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000015",
         historyCallInfo: this.currencyService.getIqdRlHistoryInfo(),
+        symbol: 'price_iqd',
         lastPriceInfo: current.price_iqd,
         title: "دینار عراق",
         shortedName: "IQD",
@@ -551,6 +567,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000016",
         historyCallInfo: this.currencyService.getSypRlHistoryInfo(),
+        symbol: 'price_syp',
         lastPriceInfo: current.price_syp,
         title: "پوند سوریه",
         shortedName: "SYP",
@@ -562,6 +579,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000017",
         historyCallInfo: this.currencyService.getAfnRlHistoryInfo(),
+        symbol: 'price_afn',
         lastPriceInfo: current.price_afn,
         title: "افغانی افغانستان",
         shortedName: "AFN",
@@ -573,6 +591,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000018",
         historyCallInfo: this.currencyService.getDkkRlHistoryInfo(),
+        symbol: 'price_dkk',
         lastPriceInfo: current.price_dkk,
         title: "کرون دانمارک",
         shortedName: "DKK",
@@ -584,6 +603,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000019",
         historyCallInfo: this.currencyService.getSekRlHistoryInfo(),
+        symbol: 'price_sek',
         lastPriceInfo: current.price_sek,
         title: "کرون سوئد",
         shortedName: "SEK",
@@ -595,6 +615,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000020",
         historyCallInfo: this.currencyService.getNokRlHistoryInfo(),
+        symbol: 'price_nok',
         lastPriceInfo: current.price_nok,
         title: "کرون نروژ",
         shortedName: "NOK",
@@ -606,6 +627,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000021",
         historyCallInfo: this.currencyService.getSarRlHistoryInfo(),
+        symbol: 'price_sar',
         lastPriceInfo: current.price_sar,
         title: "ريال عربستان",
         shortedName: "SAR",
@@ -617,6 +639,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000022",
         historyCallInfo: this.currencyService.getQarRlHistoryInfo(),
+        symbol: 'price_qar',
         lastPriceInfo: current.price_qar,
         title: "ريال قطر",
         shortedName: "QAR",
@@ -628,6 +651,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000023",
         historyCallInfo: this.currencyService.getOmrRlHistoryInfo(),
+        symbol: 'price_omr',
         lastPriceInfo: current.price_omr,
         title: "ريال عمان",
         shortedName: "OMR",
@@ -639,6 +663,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000024",
         historyCallInfo: this.currencyService.getKwdRlHistoryInfo(),
+        symbol: 'price_kwd',
         lastPriceInfo: current.price_kwd,
         title: "دینار کویت",
         shortedName: "KWD",
@@ -650,6 +675,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000025",
         historyCallInfo: this.currencyService.getBhdRlHistoryInfo(),
+        symbol: 'price_bhd',
         lastPriceInfo: current.price_bhd,
         title: "دینار بحرین",
         shortedName: "BHD",
@@ -661,6 +687,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000026",
         historyCallInfo: this.currencyService.getMyrRlHistoryInfo(),
+        symbol: 'price_myr',
         lastPriceInfo: current.price_myr,
         title: "رینگیت مالزی",
         shortedName: "MYR",
@@ -672,6 +699,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000027",
         historyCallInfo: this.currencyService.getThbRlHistoryInfo(),
+        symbol: 'price_thb',
         lastPriceInfo: current.price_thb,
         title: "بات تایلند",
         shortedName: "THB",
@@ -683,6 +711,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000028",
         historyCallInfo: this.currencyService.getHkdRlHistoryInfo(),
+        symbol: 'price_hkd',
         lastPriceInfo: current.price_hkd,
         title: "دلار هنگ کنگ",
         shortedName: "HKD",
@@ -694,6 +723,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000029",
         historyCallInfo: this.currencyService.getRubRlHistoryInfo(),
+        symbol: 'price_rub',
         lastPriceInfo: current.price_rub,
         title: "روبل روسیه",
         shortedName: "RUB",
@@ -705,6 +735,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000030",
         historyCallInfo: this.currencyService.getAznRlHistoryInfo(),
+        symbol: 'price_azn',
         lastPriceInfo: current.price_azn,
         title: "منات آذربایجان",
         shortedName: "AZN",
@@ -716,6 +747,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000031",
         historyCallInfo: this.currencyService.getAmdRlHistoryInfo(),
+        symbol: 'price_amd',
         lastPriceInfo: current.price_amd,
         title: "درام ارمنستان",
         shortedName: "AMD",
@@ -727,6 +759,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000032",
         historyCallInfo: this.currencyService.getGelRlHistoryInfo(),
+        symbol: 'price_gel',
         lastPriceInfo: current.price_gel,
         title: "لاری گرجستان",
         shortedName: "GEL",
@@ -738,6 +771,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000033",
         historyCallInfo: this.currencyService.getKgsRlHistoryInfo(),
+        symbol: 'price_kgs',
         lastPriceInfo: current.price_kgs,
         title: "سوم قرقیزستان",
         shortedName: "KGS",
@@ -749,6 +783,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000034",
         historyCallInfo: this.currencyService.getTjsRlHistoryInfo(),
+        symbol: 'price_tjs',
         lastPriceInfo: current.price_tjs,
         title: "سامانی تاجیکستان",
         shortedName: "TJS",
@@ -760,6 +795,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000035",
         historyCallInfo: this.currencyService.getTmtRlHistoryInfo(),
+        symbol: 'price_tmt',
         lastPriceInfo: current.price_tmt,
         title: "منات ترکمنستان",
         shortedName: "TMT",
@@ -775,6 +811,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000036",
         historyCallInfo: this.currencyService.getAllRlHistoryInfo(),
+        symbol: 'price_all',
         lastPriceInfo: current.price_all,
         title: "لک آلبانی",
         shortedName: "ALL",
@@ -786,6 +823,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000037",
         historyCallInfo: this.currencyService.getBbdRlHistoryInfo(),
+        symbol: 'price_bbd',
         lastPriceInfo: current.price_bbd,
         title: "دلار باربادوس",
         shortedName: "BBD",
@@ -797,6 +835,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000038",
         historyCallInfo: this.currencyService.getBdtRlHistoryInfo(),
+        symbol: 'price_bdt',
         lastPriceInfo: current.price_bdt,
         title: "تاکا بنگلادش",
         shortedName: "BDT",
@@ -808,6 +847,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000039",
         historyCallInfo: this.currencyService.getBgnRlHistoryInfo(),
+        symbol: 'price_bgn',
         lastPriceInfo: current.price_bgn,
         title: "لو بلغارستان",
         shortedName: "BGN",
@@ -819,6 +859,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000040",
         historyCallInfo: this.currencyService.getBifRlHistoryInfo(),
+        symbol: 'price_bif',
         lastPriceInfo: current.price_bif,
         title: "فرانک بوروندی",
         shortedName: "BIF",
@@ -830,6 +871,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000041",
         historyCallInfo: this.currencyService.getBndRlHistoryInfo(),
+        symbol: 'price_bnd',
         lastPriceInfo: current.price_bnd,
         title: "دلار بورونئی",
         shortedName: "BHD",
@@ -841,6 +883,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000042",
         historyCallInfo: this.currencyService.getBsdRlHistoryInfo(),
+        symbol: 'price_bsd',
         lastPriceInfo: current.price_bsd,
         title: "دلار باهاماس",
         shortedName: "BSD",
@@ -852,6 +895,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000043",
         historyCallInfo: this.currencyService.getBwpRlHistoryInfo(),
+        symbol: 'price_bwp',
         lastPriceInfo: current.price_bwp,
         title: "پوله بوتسوانا",
         shortedName: "BWP",
@@ -863,6 +907,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000044",
         historyCallInfo: this.currencyService.getBynRlHistoryInfo(),
+        symbol: 'price_byn',
         lastPriceInfo: current.price_byn,
         title: "روبل بلاروس",
         shortedName: "BYN",
@@ -874,6 +919,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000045",
         historyCallInfo: this.currencyService.getBzdRlHistoryInfo(),
+        symbol: 'price_bzd',
         lastPriceInfo: current.price_bzd,
         title: "دلار بلیز",
         shortedName: "BZD",
@@ -885,6 +931,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000046",
         historyCallInfo: this.currencyService.getCupRlHistoryInfo(),
+        symbol: 'price_cup',
         lastPriceInfo: current.price_cup,
         title: "پزوی کوبا",
         shortedName: "CUP",
@@ -896,6 +943,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000047",
         historyCallInfo: this.currencyService.getCzkRlHistoryInfo(),
+        symbol: 'price_czk',
         lastPriceInfo: current.price_czk,
         title: "کرون چک",
         shortedName: "CZK",
@@ -907,6 +955,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000048",
         historyCallInfo: this.currencyService.getDjfRlHistoryInfo(),
+        symbol: 'price_djf',
         lastPriceInfo: current.price_djf,
         title: "فرانک جیبوتی",
         shortedName: "DJF",
@@ -918,6 +967,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000049",
         historyCallInfo: this.currencyService.getDopRlHistoryInfo(),
+        symbol: 'price_dop',
         lastPriceInfo: current.price_dop,
         title: "پزوی دومینیکن",
         shortedName: "DOP",
@@ -929,6 +979,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000050",
         historyCallInfo: this.currencyService.getDzdRlHistoryInfo(),
+        symbol: 'price_dzd',
         lastPriceInfo: current.price_dzd,
         title: "دینار الجزایر",
         shortedName: "DZD",
@@ -940,6 +991,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000051",
         historyCallInfo: this.currencyService.getEtbRlHistoryInfo(),
+        symbol: 'price_etb',
         lastPriceInfo: current.price_etb,
         title: "بیر اتیوپی",
         shortedName: "ETB",
@@ -951,6 +1003,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000052",
         historyCallInfo: this.currencyService.getGnfRlHistoryInfo(),
+        symbol: 'price_gnf',
         lastPriceInfo: current.price_gnf,
         title: "فرانک گینه",
         shortedName: "GNF",
@@ -962,6 +1015,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000053",
         historyCallInfo: this.currencyService.getGtqRlHistoryInfo(),
+        symbol: 'price_gtq',
         lastPriceInfo: current.price_gtq,
         title: "گواتزال گواتمالا",
         shortedName: "GTQ",
@@ -973,6 +1027,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000054",
         historyCallInfo: this.currencyService.getGydRlHistoryInfo(),
+        symbol: 'price_gyd',
         lastPriceInfo: current.price_gyd,
         title: "دلار گویان",
         shortedName: "GYD",
@@ -984,6 +1039,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000055",
         historyCallInfo: this.currencyService.getHnlRlHistoryInfo(),
+        symbol: 'price_hnl',
         lastPriceInfo: current.price_hnl,
         title: "لمپیرا هندوراس",
         shortedName: "HNL",
@@ -995,6 +1051,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000056",
         historyCallInfo: this.currencyService.getHrkRlHistoryInfo(),
+        symbol: 'price_hrk',
         lastPriceInfo: current.price_hrk,
         title: "کونا (یورو) کرواسی",
         shortedName: "HRK",
@@ -1006,6 +1063,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000057",
         historyCallInfo: this.currencyService.getHtgRlHistoryInfo(),
+        symbol: 'price_htg',
         lastPriceInfo: current.price_htg,
         title: "گورده هائیتی",
         shortedName: "HTG",
@@ -1017,6 +1075,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000058",
         historyCallInfo: this.currencyService.getIskRlHistoryInfo(),
+        symbol: 'price_isk',
         lastPriceInfo: current.price_isk,
         title: "کرونا ایسلند",
         shortedName: "ISK",
@@ -1028,6 +1087,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000059",
         historyCallInfo: this.currencyService.getJmdRlHistoryInfo(),
+        symbol: 'price_jmd',
         lastPriceInfo: current.price_jmd,
         title: "دلار جامائیکا",
         shortedName: "JMD",
@@ -1039,6 +1099,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000060",
         historyCallInfo: this.currencyService.getKesRlHistoryInfo(),
+        symbol: 'price_kes',
         lastPriceInfo: current.price_kes,
         title: "شیلینگ کنیا",
         shortedName: "KES",
@@ -1050,6 +1111,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000061",
         historyCallInfo: this.currencyService.getKhrRlHistoryInfo(),
+        symbol: 'price_khr',
         lastPriceInfo: current.price_khr,
         title: "ریل کامبوج",
         shortedName: "KHR",
@@ -1061,6 +1123,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000062",
         historyCallInfo: this.currencyService.getKmfRlHistoryInfo(),
+        symbol: 'price_kmf',
         lastPriceInfo: current.price_kmf,
         title: "فرانک کومور",
         shortedName: "KMF",
@@ -1072,6 +1135,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000063",
         historyCallInfo: this.currencyService.getKztRlHistoryInfo(),
+        symbol: 'price_kzt',
         lastPriceInfo: current.price_kzt,
         title: "تنگه قزاقستان",
         shortedName: "KZT",
@@ -1083,6 +1147,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000064",
         historyCallInfo: this.currencyService.getLakRlHistoryInfo(),
+        symbol: 'price_lak',
         lastPriceInfo: current.price_lak,
         title: "کیپ لائوس",
         shortedName: "LAK",
@@ -1094,6 +1159,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000065",
         historyCallInfo: this.currencyService.getLbpRlHistoryInfo(),
+        symbol: 'price_lbp',
         lastPriceInfo: current.price_lbp,
         title: "پوند لبنان",
         shortedName: "LBP",
@@ -1105,6 +1171,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000066",
         historyCallInfo: this.currencyService.getLkrRlHistoryInfo(),
+        symbol: 'price_lkr',
         lastPriceInfo: current.price_lkr,
         title: "روپیه سریلانکا",
         shortedName: "LKR",
@@ -1116,6 +1183,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000067",
         historyCallInfo: this.currencyService.getLrdRlHistoryInfo(),
+        symbol: 'price_lrd',
         lastPriceInfo: current.price_lrd,
         title: "دلار لیبریا",
         shortedName: "LRD",
@@ -1127,6 +1195,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000068",
         historyCallInfo: this.currencyService.getLslRlHistoryInfo(),
+        symbol: 'price_lsl',
         lastPriceInfo: current.price_lsl,
         title: "لوتی لسوتو",
         shortedName: "LSL",
@@ -1138,6 +1207,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000069",
         historyCallInfo: this.currencyService.getLydRlHistoryInfo(),
+        symbol: 'price_lyd',
         lastPriceInfo: current.price_lyd,
         title: "دینار لیبی",
         shortedName: "LYD",
@@ -1149,6 +1219,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000070",
         historyCallInfo: this.currencyService.getMadRlHistoryInfo(),
+        symbol: 'price_mad',
         lastPriceInfo: current.price_mad,
         title: "درهم مراکش",
         shortedName: "MAD",
@@ -1160,6 +1231,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000071",
         historyCallInfo: this.currencyService.getMgaRlHistoryInfo(),
+        symbol: 'price_mga',
         lastPriceInfo: current.price_mga,
         title: "آریاری ماداگاسکار",
         shortedName: "MGA",
@@ -1171,6 +1243,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000072",
         historyCallInfo: this.currencyService.getMkdRlHistoryInfo(),
+        symbol: 'price_mkd',
         lastPriceInfo: current.price_mkd,
         title: "دینار مقدونیه",
         shortedName: "MKD",
@@ -1182,6 +1255,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000073",
         historyCallInfo: this.currencyService.getMmkRlHistoryInfo(),
+        symbol: 'price_mmk',
         lastPriceInfo: current.price_mmk,
         title: "کیات میانمار",
         shortedName: "MMK",
@@ -1193,6 +1267,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000074",
         historyCallInfo: this.currencyService.getMopRlHistoryInfo(),
+        symbol: 'price_mop',
         lastPriceInfo: current.price_mop,
         title: "پاتاکا ماکائو",
         shortedName: "MOP",
@@ -1204,6 +1279,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000075",
         historyCallInfo: this.currencyService.getMurRlHistoryInfo(),
+        symbol: 'price_mur',
         lastPriceInfo: current.price_mur,
         title: "روپیه موریس",
         shortedName: "MUR",
@@ -1215,6 +1291,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000076",
         historyCallInfo: this.currencyService.getMvrRlHistoryInfo(),
+        symbol: 'price_mvr',
         lastPriceInfo: current.price_mvr,
         title: "روفیا مالدیو",
         shortedName: "MVR",
@@ -1226,6 +1303,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000077",
         historyCallInfo: this.currencyService.getMwkRlHistoryInfo(),
+        symbol: 'price_mwk',
         lastPriceInfo: current.price_mwk,
         title: "کواچا مالاوی",
         shortedName: "MWK",
@@ -1237,6 +1315,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000078",
         historyCallInfo: this.currencyService.getMznRlHistoryInfo(),
+        symbol: 'price_mzn',
         lastPriceInfo: current.price_mzn,
         title: "متیکال موزامبیک",
         shortedName: "MZN",
@@ -1248,6 +1327,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000079",
         historyCallInfo: this.currencyService.getNadRlHistoryInfo(),
+        symbol: 'price_nad',
         lastPriceInfo: current.price_nad,
         title: "دلار نامیبیا",
         shortedName: "NAD",
@@ -1259,6 +1339,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000080",
         historyCallInfo: this.currencyService.getNgnRlHistoryInfo(),
+        symbol: 'price_ngn',
         lastPriceInfo: current.price_ngn,
         title: "نیرا نیجریه",
         shortedName: "NGN",
@@ -1270,6 +1351,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000081",
         historyCallInfo: this.currencyService.getNprRlHistoryInfo(),
+        symbol: 'price_npr',
         lastPriceInfo: current.price_npr,
         title: "روپیه نپال",
         shortedName: "NPR",
@@ -1281,6 +1363,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000082",
         historyCallInfo: this.currencyService.getPabRlHistoryInfo(),
+        symbol: 'price_pab',
         lastPriceInfo: current.price_pab,
         title: "بالبوآ پاناما",
         shortedName: "PAB",
@@ -1292,6 +1375,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000083",
         historyCallInfo: this.currencyService.getPgkRlHistoryInfo(),
+        symbol: 'price_pgk',
         lastPriceInfo: current.price_pgk,
         title: "کینا پاپوا گینه نو",
         shortedName: "PGK",
@@ -1303,6 +1387,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000084",
         historyCallInfo: this.currencyService.getPhpRlHistoryInfo(),
+        symbol: 'price_php',
         lastPriceInfo: current.price_php,
         title: "پزوی فیلیپین",
         shortedName: "PHP",
@@ -1314,6 +1399,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000085",
         historyCallInfo: this.currencyService.getRonRlHistoryInfo(),
+        symbol: 'price_ron',
         lastPriceInfo: current.price_ron,
         title: "لئو رومانی",
         shortedName: "RON",
@@ -1325,6 +1411,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000086",
         historyCallInfo: this.currencyService.getRsdRlHistoryInfo(),
+        symbol: 'price_rsd',
         lastPriceInfo: current.price_rsd,
         title: "دینار صربستان",
         shortedName: "RSD",
@@ -1336,6 +1423,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000087",
         historyCallInfo: this.currencyService.getRwfRlHistoryInfo(),
+        symbol: 'price_rwf',
         lastPriceInfo: current.price_rwf,
         title: "فرانک رواندا",
         shortedName: "RWF",
@@ -1347,6 +1435,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000088",
         historyCallInfo: this.currencyService.getScrRlHistoryInfo(),
+        symbol: 'price_scr',
         lastPriceInfo: current.price_scr,
         title: "روپیه سیشل",
         shortedName: "SCR",
@@ -1358,6 +1447,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000089",
         historyCallInfo: this.currencyService.getSdgRlHistoryInfo(),
+        symbol: 'price_sdg',
         lastPriceInfo: current.price_sdg,
         title: "پوند سودان",
         shortedName: "SDG",
@@ -1369,6 +1459,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000090",
         historyCallInfo: this.currencyService.getShpRlHistoryInfo(),
+        symbol: 'price_shp',
         lastPriceInfo: current.price_shp,
         title: "پوند سینت هلینا",
         shortedName: "SHP",
@@ -1380,6 +1471,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000091",
         historyCallInfo: this.currencyService.getSosRlHistoryInfo(),
+        symbol: 'price_sos',
         lastPriceInfo: current.price_sos,
         title: "شیلینگ سومالی",
         shortedName: "SOS",
@@ -1391,6 +1483,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000092",
         historyCallInfo: this.currencyService.getSvcRlHistoryInfo(),
+        symbol: 'price_svc',
         lastPriceInfo: current.price_svc,
         title: "کولون السالوادور",
         shortedName: "SVC",
@@ -1402,6 +1495,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000093",
         historyCallInfo: this.currencyService.getSzlRlHistoryInfo(),
+        symbol: 'price_szl',
         lastPriceInfo: current.price_szl,
         title: "لیلانگی سوازیلند",
         shortedName: "SZL",
@@ -1413,6 +1507,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000094",
         historyCallInfo: this.currencyService.getTndRlHistoryInfo(),
+        symbol: 'price_tnd',
         lastPriceInfo: current.price_tnd,
         title: "دینار تونس",
         shortedName: "TND",
@@ -1424,6 +1519,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000095",
         historyCallInfo: this.currencyService.getTtdRlHistoryInfo(),
+        symbol: 'price_ttd',
         lastPriceInfo: current.price_ttd,
         title: "دلار ترینیداد و توباگو",
         shortedName: "TTD",
@@ -1435,6 +1531,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000096",
         historyCallInfo: this.currencyService.getTzsRlHistoryInfo(),
+        symbol: 'price_tzs',
         lastPriceInfo: current.price_tzs,
         title: "شیلینگ تانزانیا",
         shortedName: "TZS",
@@ -1446,6 +1543,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000097",
         historyCallInfo: this.currencyService.getUgxRlHistoryInfo(),
+        symbol: 'price_ugx',
         lastPriceInfo: current.price_ugx,
         title: "شیلینگ اوگاندا",
         shortedName: "UGX",
@@ -1457,6 +1555,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000098",
         historyCallInfo: this.currencyService.getYerRlHistoryInfo(),
+        symbol: 'price_yer',
         lastPriceInfo: current.price_yer,
         title: "ريال یمن",
         shortedName: "YER",
@@ -1468,6 +1567,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000099",
         historyCallInfo: this.currencyService.getZmwRlHistoryInfo(),
+        symbol: 'price_zmw',
         lastPriceInfo: current.price_zmw,
         title: "کواچا زامبیا",
         shortedName: "ZMW",
@@ -1479,6 +1579,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000100",
         historyCallInfo: this.currencyService.getGhsRlHistoryInfo(),
+        symbol: 'price_ghs',
         lastPriceInfo: current.price_ghs,
         title: "سدی غنا",
         shortedName: "GHS",
@@ -1490,6 +1591,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000101",
         historyCallInfo: this.currencyService.getPenRlHistoryInfo(),
+        symbol: 'price_pen',
         lastPriceInfo: current.price_pen,
         title: "سول پرو",
         shortedName: "PEN",
@@ -1501,6 +1603,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000102",
         historyCallInfo: this.currencyService.getClpRlHistoryInfo(),
+        symbol: 'price_clp',
         lastPriceInfo: current.price_clp,
         title: "پزوی شیلی",
         shortedName: "CLP",
@@ -1512,6 +1615,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000103",
         historyCallInfo: this.currencyService.getEgpRlHistoryInfo(),
+        symbol: 'price_egp',
         lastPriceInfo: current.price_egp,
         title: "پوند مصر",
         shortedName: "EGP",
@@ -1523,6 +1627,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000104",
         historyCallInfo: this.currencyService.getMxnRlHistoryInfo(),
+        symbol: 'price_mxn',
         lastPriceInfo: current.price_mxn,
         title: "پزوی مکزیک",
         shortedName: "MXN",
@@ -1534,6 +1639,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000105",
         historyCallInfo: this.currencyService.getJodRlHistoryInfo(),
+        symbol: 'price_jod',
         lastPriceInfo: current.price_jod,
         title: "دینار اردن",
         shortedName: "JOD",
@@ -1545,6 +1651,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000106",
         historyCallInfo: this.currencyService.getBrlRlHistoryInfo(),
+        symbol: 'price_brl',
         lastPriceInfo: current.price_brl,
         title: "رئال برزیل",
         shortedName: "BRL",
@@ -1556,6 +1663,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000107",
         historyCallInfo: this.currencyService.getUyuRlHistoryInfo(),
+        symbol: 'price_uyu',
         lastPriceInfo: current.price_uyu,
         title: "پزوی اوروگوئه",
         shortedName: "UYU",
@@ -1567,6 +1675,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000108",
         historyCallInfo: this.currencyService.getCopRlHistoryInfo(),
+        symbol: 'price_cop',
         lastPriceInfo: current.price_cop,
         title: "پزوی کلمبیا",
         shortedName: "COP",
@@ -1578,6 +1687,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000109",
         historyCallInfo: this.currencyService.getPlnRlHistoryInfo(),
+        symbol: 'price_pln',
         lastPriceInfo: current.price_pln,
         title: "زلوتی لهستان",
         shortedName: "PLN",
@@ -1589,6 +1699,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000110",
         historyCallInfo: this.currencyService.getArsRlHistoryInfo(),
+        symbol: 'price_ars',
         lastPriceInfo: current.price_ars,
         title: "پزوی آرژانتین",
         shortedName: "ARS",
@@ -1600,6 +1711,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000111",
         historyCallInfo: this.currencyService.getKydRlHistoryInfo(),
+        symbol: 'price_kyd',
         lastPriceInfo: current.price_kyd,
         title: "دلار جزایر کیمن",
         shortedName: "KYD",
@@ -1611,6 +1723,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000112",
         historyCallInfo: this.currencyService.getHufRlHistoryInfo(),
+        symbol: 'price_huf',
         lastPriceInfo: current.price_huf,
         title: "فورینت مجارستان",
         shortedName: "HUF",
@@ -1622,6 +1735,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000113",
         historyCallInfo: this.currencyService.getPygRlHistoryInfo(),
+        symbol: 'price_pyg',
         lastPriceInfo: current.price_pyg,
         title: "گورانی پاراکوئه",
         shortedName: "PYG",
@@ -1633,6 +1747,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000114",
         historyCallInfo: this.currencyService.getUahRlHistoryInfo(),
+        symbol: 'price_uah',
         lastPriceInfo: current.price_uah,
         title: "هریونیا اوکراین",
         shortedName: "UAH",
@@ -1644,6 +1759,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000115",
         historyCallInfo: this.currencyService.getZarRlHistoryInfo(),
+        symbol: 'price_zar',
         lastPriceInfo: current.price_zar,
         title: "رند آفریقای جنوبی",
         shortedName: "ZAR",
@@ -1655,6 +1771,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000116",
         historyCallInfo: this.currencyService.getNioRlHistoryInfo(),
+        symbol: 'price_nio',
         lastPriceInfo: current.price_nio,
         title: "کوردوبا نیکاراگوئه",
         shortedName: "NIO",
@@ -1666,6 +1783,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000117",
         historyCallInfo: this.currencyService.getFjdRlHistoryInfo(),
+        symbol: 'price_fjd',
         lastPriceInfo: current.price_fjd,
         title: "دلار فیجی",
         shortedName: "FJD",
@@ -1677,6 +1795,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000118",
         historyCallInfo: this.currencyService.getTwdRlHistoryInfo(),
+        symbol: 'price_twd',
         lastPriceInfo: current.price_twd,
         title: "دلار تایوان",
         shortedName: "TWD",
@@ -1688,6 +1807,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000119",
         historyCallInfo: this.currencyService.getUzsRlHistoryInfo(),
+        symbol: 'price_uzs',
         lastPriceInfo: current.price_uzs,
         title: "سوم ازبکستان (10000)",
         shortedName: "UZS",
@@ -1699,6 +1819,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000120",
         historyCallInfo: this.currencyService.getIdrRlHistoryInfo(),
+        symbol: 'price_idr',
         lastPriceInfo: current.price_idr,
         title: "روپیه اندونزی",
         shortedName: "IDR",
@@ -1710,6 +1831,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000121",
         historyCallInfo: this.currencyService.getXofRlHistoryInfo(),
+        symbol: 'price_xof',
         lastPriceInfo: current.price_xof,
         title: "فرانک آفریقای غربی",
         shortedName: "XOF",
@@ -1721,6 +1843,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000122",
         historyCallInfo: this.currencyService.getXpfRlHistoryInfo(),
+        symbol: 'price_xpf',
         lastPriceInfo: current.price_xpf,
         title: "فرانک اقیانوسیه",
         shortedName: "XPF",
@@ -1732,6 +1855,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000123",
         historyCallInfo: this.currencyService.getVndRlHistoryInfo(),
+        symbol: 'price_vnd',
         lastPriceInfo: current.price_vnd,
         title: "دونگ ویتنام",
         shortedName: "VND",
@@ -1743,6 +1867,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000124",
         historyCallInfo: this.currencyService.getGmdRlHistoryInfo(),
+        symbol: 'price_gmd',
         lastPriceInfo: current.price_gmd,
         title: "دلاسی گامبیا",
         shortedName: "GMD",
@@ -1754,6 +1879,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000125",
         historyCallInfo: this.currencyService.getXafRlHistoryInfo(),
+        symbol: 'price_xaf',
         lastPriceInfo: current.price_xaf,
         title: "فرانک آفریقای مرکزی",
         shortedName: "XAF",
@@ -1765,6 +1891,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000126",
         historyCallInfo: this.currencyService.getVuvRlHistoryInfo(),
+        symbol: 'price_vuv',
         lastPriceInfo: current.price_vuv,
         title: "وانواتو واتو",
         shortedName: "VUV",
@@ -1776,6 +1903,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000127",
         historyCallInfo: this.currencyService.getMroRlHistoryInfo(),
+        symbol: 'price_mro',
         lastPriceInfo: current.price_mro,
         title: "اوگویا موریتانا",
         shortedName: "MRO",
@@ -1787,6 +1915,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000128",
         historyCallInfo: this.currencyService.getAngRlHistoryInfo(),
+        symbol: 'price_ang',
         lastPriceInfo: current.price_ang,
         title: "آنتیل گیلدر هلند",
         shortedName: "ANG",
@@ -1798,6 +1927,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000129",
         historyCallInfo: this.currencyService.getStdRlHistoryInfo(),
+        symbol: 'price_std',
         lastPriceInfo: current.price_std,
         title: "دوبرا سائوتومه و پرنسیپ",
         shortedName: "STD",
@@ -1809,6 +1939,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000130",
         historyCallInfo: this.currencyService.getXcdRlHistoryInfo(),
+        symbol: 'price_xcd',
         lastPriceInfo: current.price_xcd,
         title: "دلار کارائیب شرقی",
         shortedName: "XCD",
@@ -1820,6 +1951,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000131",
         historyCallInfo: this.currencyService.getBamRlHistoryInfo(),
+        symbol: 'price_bam',
         lastPriceInfo: current.price_bam,
         title: "مارک بوسنی و هرزگوین",
         shortedName: "BAM",
@@ -1831,6 +1963,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000132",
         historyCallInfo: this.currencyService.getBtnRlHistoryInfo(),
+        symbol: 'price_btn',
         lastPriceInfo: current.price_btn,
         title: "نگولتروم بوتان",
         shortedName: "BTN",
@@ -1842,6 +1975,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000133",
         historyCallInfo: this.currencyService.getCdfRlHistoryInfo(),
+        symbol: 'price_cdf',
         lastPriceInfo: current.price_cdf,
         title: "فرانک کنگو",
         shortedName: "CDF",
@@ -1853,6 +1987,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000134",
         historyCallInfo: this.currencyService.getCrcRlHistoryInfo(),
+        symbol: 'price_crc',
         lastPriceInfo: current.price_crc,
         title: "کولون کاستاریکا",
         shortedName: "CRC",
@@ -1864,6 +1999,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000135",
         historyCallInfo: this.currencyService.getCveRlHistoryInfo(),
+        symbol: 'price_cve',
         lastPriceInfo: current.price_cve,
         title: "اسکودوی کیپ ورد",
         shortedName: "CVE",
@@ -1875,6 +2011,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000136",
         historyCallInfo: this.currencyService.getBmdRlHistoryInfo(),
+        symbol: 'price_bmd',
         lastPriceInfo: current.price_bmd,
         title: "دلار برمودا",
         shortedName: "BMD",
@@ -1886,6 +2023,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000137",
         historyCallInfo: this.currencyService.getAwgRlHistoryInfo(),
+        symbol: 'price_awg',
         lastPriceInfo: current.price_awg,
         title: "فلورین آروبا",
         shortedName: "AWG",
@@ -1897,6 +2035,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000138",
         historyCallInfo: this.currencyService.getSllRlHistoryInfo(),
+        symbol: 'price_sll',
         lastPriceInfo: current.price_sll,
         title: "لئون سیرالئون",
         shortedName: "SLL",
@@ -1908,6 +2047,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000139",
         historyCallInfo: this.currencyService.getVefRlHistoryInfo(),
+        symbol: 'price_vef',
         lastPriceInfo: current.price_vef,
         title: "بولیوار ونزوئلا",
         shortedName: "VEF",
@@ -1919,6 +2059,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000140",
         historyCallInfo: this.currencyService.getCypRlHistoryInfo(),
+        symbol: 'price_cyp',
         lastPriceInfo: current.price_cyp,
         title: "پوند (یورو) قبرس",
         shortedName: "CYP",
@@ -1932,6 +2073,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000142",
         historyCallInfo: this.currencyService.getNimaUSDBuyHistoryInfo(),
+        symbol: 'ice_transfer_usd_buy',
         lastPriceInfo: current.ice_transfer_usd_buy,
         title: "دلار (نیما/خرید)",
         shortedName: "Nima USD Buy",
@@ -1945,6 +2087,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000143",
         historyCallInfo: this.currencyService.getEXUsdSellHistoryInfo(),
+        symbol: 'exusd_sell',
         lastPriceInfo: current.exusd_sell,
         title: "دلار توافقی",
         shortedName: "Negotiated USD",
@@ -1957,6 +2100,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000144",
         historyCallInfo: this.currencyService.getAfghanUsdHistoryInfo(),
+        symbol: 'afghan_usd',
         lastPriceInfo: current.afghan_usd,
         title: "دلار هرات",
         shortedName: "Herat USD",
@@ -1970,6 +2114,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000146",
         historyCallInfo: this.currencyService.getNimaUSDSellHistoryInfo(),
+        symbol: 'ice_transfer_usd_sell',
         lastPriceInfo: current.ice_transfer_usd_sell,
         title: "دلار (نیما/فروش)",
         shortedName: "Nima USD Sell",
@@ -1984,6 +2129,7 @@ export class RequestArrayService {
     mainCurrencyList.push({
         id: "1000147",
         historyCallInfo: this.currencyService.getIceUSDHistoryInfo(),
+        symbol: 'ice_usd',
         lastPriceInfo: current.ice_usd,
         title: "دلار (بازار متشکل ارزی)",
         shortedName: "Exchange Market USD",
@@ -2003,6 +2149,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000141",
         historyCallInfo: this.currencyService.getCryptoBtcHistoryInfo(),
+        symbol: 'crypto-bitcoin',
         lastPriceInfo: current["crypto-bitcoin"],
         title: "بیت کوین",
         shortedName: "BTC",
@@ -2014,6 +2161,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000142",
         historyCallInfo: this.currencyService.getCryptoEthHistoryInfo(),
+        symbol: 'crypto-ethereum',
         lastPriceInfo: current["crypto-ethereum"],
         title: "اتریوم",
         shortedName: "ETH",
@@ -2025,6 +2173,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000143",
         historyCallInfo: this.currencyService.getCryptoTetherHistoryInfo(),
+        symbol: 'crypto-tether',
         lastPriceInfo: current["crypto-tether"],
         title: "تتر",
         shortedName: "USDT",
@@ -2036,6 +2185,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000144",
         historyCallInfo: this.currencyService.getCryptoBinanceCoinHistoryInfo(),
+        symbol: 'crypto-binance-coin',
         lastPriceInfo: current["crypto-binance-coin"],
         title: "بایننس کوین",
         shortedName: "BNB",
@@ -2047,6 +2197,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000145",
         historyCallInfo: this.currencyService.getCryptoSolanaHistoryInfo(),
+        symbol: 'crypto-solana',
         lastPriceInfo: current["crypto-solana"],
         title: "سولانا",
         shortedName: "SOL",
@@ -2058,6 +2209,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000146",
         historyCallInfo: this.currencyService.getCryptoUSDCoinHistoryInfo(),
+        symbol: 'crypto-usd-coin',
         lastPriceInfo: current["crypto-usd-coin"],
         title: "یو اس دی کوین",
         shortedName: "USDC",
@@ -2069,6 +2221,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000147",
         historyCallInfo: this.currencyService.getCryptoRippleHistoryInfo(),
+        symbol: 'crypto-ripple',
         lastPriceInfo: current["crypto-ripple"],
         title: "ریپل",
         shortedName: "XRP",
@@ -2080,6 +2233,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000148",
         historyCallInfo: this.currencyService.getCryptoCardanoHistoryInfo(),
+        symbol: 'crypto-cardano',
         lastPriceInfo: current["crypto-cardano"],
         title: "کاردانو",
         shortedName: "ADA",
@@ -2091,6 +2245,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000149",
         historyCallInfo: this.currencyService.getCryptoDogecoinHistoryInfo(),
+        symbol: 'crypto-dogecoin',
         lastPriceInfo: current["crypto-dogecoin"],
         title: "دوج کوین",
         shortedName: "DOGE",
@@ -2102,6 +2257,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000150",
         historyCallInfo: this.currencyService.getCryptoAvalancheHistoryInfo(),
+        symbol: 'crypto-avalanche',
         lastPriceInfo: current["crypto-avalanche"],
         title: "آوالانچ",
         shortedName: "AVAX",
@@ -2113,6 +2269,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000151",
         historyCallInfo: this.currencyService.getCryptoShibaInuHistoryInfo(),
+        symbol: 'crypto-shiba-inu',
         lastPriceInfo: current["crypto-shiba-inu"],
         title: "شیبا اینو",
         shortedName: "SHIB",
@@ -2124,6 +2281,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000152",
         historyCallInfo: this.currencyService.getCryptoPolkadotHistoryInfo(),
+        symbol: 'crypto-polkadot',
         lastPriceInfo: current["crypto-polkadot"],
         title: "پولکا دات",
         shortedName: "DOT",
@@ -2135,6 +2293,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000153",
         historyCallInfo: this.currencyService.getCryptoTronHistoryInfo(),
+        symbol: 'crypto-tron',
         lastPriceInfo: current["crypto-tron"],
         title: "ترون",
         shortedName: "TRX",
@@ -2146,6 +2305,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000154",
         historyCallInfo: this.currencyService.getCryptoBchHistoryInfo(),
+        symbol: 'crypto-bitcoin-cash',
         lastPriceInfo: current["crypto-bitcoin-cash"],
         title: "بیت کوین کش",
         shortedName: "BCH",
@@ -2157,6 +2317,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000155",
         historyCallInfo: this.currencyService.getCryptoUniHistoryInfo(),
+        symbol: 'crypto-uniswap',
         lastPriceInfo: current["crypto-uniswap"],
         title: "یونی سواپ",
         shortedName: "UNI",
@@ -2168,6 +2329,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000156",
         historyCallInfo: this.currencyService.getCryptoLtcHistoryInfo(),
+        symbol: 'crypto-litecoin',
         lastPriceInfo: current["crypto-litecoin"],
         title: "لایت کوین",
         shortedName: "LTC",
@@ -2179,6 +2341,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000157",
         historyCallInfo: this.currencyService.getCryptoFilHistoryInfo(),
+        symbol: 'crypto-filecoin',
         lastPriceInfo: current["crypto-filecoin"],
         title: "فایل کوین",
         shortedName: "FIL",
@@ -2190,6 +2353,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000158",
         historyCallInfo: this.currencyService.getCryptoAtomHistoryInfo(),
+        symbol: 'crypto-cosmos',
         lastPriceInfo: current["crypto-cosmos"],
         title: "اتم (کازماز)",
         shortedName: "ATOM",
@@ -2201,6 +2365,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000159",
         historyCallInfo: this.currencyService.getCryptoClassicEthHistoryInfo(),
+        symbol: 'crypto-ethereum-classic',
         lastPriceInfo: current["crypto-ethereum-classic"],
         title: "اتریوم کلاسیک",
         shortedName: "ETC",
@@ -2212,6 +2377,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000160",
         historyCallInfo: this.currencyService.getCryptoStellarHistoryInfo(),
+        symbol: 'crypto-stellar',
         lastPriceInfo: current["crypto-stellar"],
         title: "استلار",
         shortedName: "XLM",
@@ -2223,6 +2389,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000161",
         historyCallInfo: this.currencyService.getCryptoFantomHistoryInfo(),
+        symbol: 'crypto-fantom',
         lastPriceInfo: current["crypto-fantom"],
         title: "فانتوم",
         shortedName: "FTM",
@@ -2234,6 +2401,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000162",
         historyCallInfo: this.currencyService.getCryptoElrondHistoryInfo(),
+        symbol: 'crypto-elrond',
         lastPriceInfo: current["crypto-elrond"],
         title: "الروند",
         shortedName: "EGLD",
@@ -2245,6 +2413,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000163",
         historyCallInfo: this.currencyService.getCryptoMakerHistoryInfo(),
+        symbol: 'crypto-maker',
         lastPriceInfo: current["crypto-maker"],
         title: "میکر",
         shortedName: "MKR",
@@ -2256,6 +2425,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000164",
         historyCallInfo: this.currencyService.getCryptoEOSHistoryInfo(),
+        symbol: 'crypto-eos',
         lastPriceInfo: current["crypto-eos"],
         title: "ایوس",
         shortedName: "EOS",
@@ -2267,6 +2437,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000165",
         historyCallInfo: this.currencyService.getCryptoBittorrentHistoryInfo(),
+        symbol: 'crypto-bittorrent',
         lastPriceInfo: current["crypto-bittorrent"],
         title: "بیت تورنت",
         shortedName: "BTT",
@@ -2278,6 +2449,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000166",
         historyCallInfo: this.currencyService.getCryptoFlowHistoryInfo(),
+        symbol: 'crypto-flow',
         lastPriceInfo: current["crypto-flow"],
         title: "فلو",
         shortedName: "FLOW",
@@ -2289,6 +2461,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000167",
         historyCallInfo: this.currencyService.getCryptoGalaHistoryInfo(),
+        symbol: 'crypto-gala',
         lastPriceInfo: current["crypto-gala"],
         title: "گالا",
         shortedName: "GALA",
@@ -2300,6 +2473,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000168",
         historyCallInfo: this.currencyService.getCryptoSandboxHistoryInfo(),
+        symbol: 'crypto-sandbox',
         lastPriceInfo: current["crypto-sandbox"],
         title: "د سندباکس",
         shortedName: "SAND",
@@ -2311,6 +2485,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000169",
         historyCallInfo: this.currencyService.getCryptoPancakeSwapHistoryInfo(),
+        symbol: 'crypto-pancakeswap',
         lastPriceInfo: current["crypto-pancakeswap"],
         title: "پنکیک سواپ",
         shortedName: "CAKE",
@@ -2322,6 +2497,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000170",
         historyCallInfo: this.currencyService.getCryptoDashHistoryInfo(),
+        symbol: 'crypto-dash',
         lastPriceInfo: current["crypto-dash"],
         title: "دش",
         shortedName: "DASH",
@@ -2333,6 +2509,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000171",
         historyCallInfo: this.currencyService.getCryptoMoneroHistoryInfo(),
+        symbol: 'crypto-monero',
         lastPriceInfo: current["crypto-monero"],
         title: "مونرو",
         shortedName: "XMR",
@@ -2344,6 +2521,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000172",
         historyCallInfo: this.currencyService.getCryptoChainlinkHistoryInfo(),
+        symbol: 'crypto-chainlink',
         lastPriceInfo: current["crypto-chainlink"],
         title: "چین لینک (بلاک چین)",
         shortedName: "LINK",
@@ -2355,6 +2533,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000173",
         historyCallInfo: this.currencyService.getCryptoCashaaHistoryInfo(),
+        symbol: 'crypto-cashaa',
         lastPriceInfo: current["crypto-cashaa"],
         title: "کاشا",
         shortedName: "CAS",
@@ -2366,6 +2545,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000174",
         historyCallInfo: this.currencyService.getCryptoTezosHistoryInfo(),
+        symbol: 'crypto-tezos',
         lastPriceInfo: current["crypto-tezos"],
         title: "تزوس",
         shortedName: "XTZ",
@@ -2377,6 +2557,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000175",
         historyCallInfo: this.currencyService.getCryptoLoopringHistoryInfo(),
+        symbol: 'crypto-loopring-irc',
         lastPriceInfo: current["crypto-loopring-irc"],
         title: "لوپرینگ",
         shortedName: "LRC",
@@ -2388,6 +2569,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000176",
         historyCallInfo: this.currencyService.getCryptoDecredHistoryInfo(),
+        symbol: 'crypto-decred',
         lastPriceInfo: current["crypto-decred"],
         title: "دیکرید",
         shortedName: "DCR",
@@ -2399,6 +2581,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000177",
         historyCallInfo: this.currencyService.getCryptoWavesHistoryInfo(),
+        symbol: 'crypto-waves',
         lastPriceInfo: current["crypto-waves"],
         title: "ویوز",
         shortedName: "WAVES",
@@ -2410,6 +2593,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000178",
         historyCallInfo: this.currencyService.getCryptoZcashHistoryInfo(),
+        symbol: 'crypto-zcash',
         lastPriceInfo: current["crypto-zcash"],
         title: "زد کش",
         shortedName: "ZEC",
@@ -2421,6 +2605,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000179",
         historyCallInfo: this.currencyService.getCryptoNEMHistoryInfo(),
+        symbol: 'crypto-nem',
         lastPriceInfo: current["crypto-nem"],
         title: "نیو اکونومی",
         shortedName: "XEM",
@@ -2432,6 +2617,7 @@ export class RequestArrayService {
     cryptoList.push({
         id: "2000180",
         historyCallInfo: this.currencyService.getCryptoNeoHistoryInfo(),
+        symbol: 'crypto-neo',
         lastPriceInfo: current["crypto-neo"],
         title: "نئو",
         shortedName: "NEO",
@@ -2450,6 +2636,7 @@ export class RequestArrayService {
     worldMarketList.push({
         id: "3000181",
         historyCallInfo: this.currencyService.getEurUsdAskHistoryInfo(),
+        symbol: 'eur-usd-ask',
         lastPriceInfo: current["eur-usd-ask"],
         title: "یورو / دلار آمریکا",
         shortedName: "EUR/USD Ask",
@@ -2460,6 +2647,7 @@ export class RequestArrayService {
     worldMarketList.push({
         id: "3000182",
         historyCallInfo: this.currencyService.getGbpUsdAskHistoryInfo(),
+        symbol: 'gbp-usd-ask',
         lastPriceInfo: current["gbp-usd-ask"],
         title: "پوند انگلیس / دلار آمریکا",
         shortedName: "GBP/USD Ask",
@@ -2470,6 +2658,7 @@ export class RequestArrayService {
     worldMarketList.push({
         id: "3000183",
         historyCallInfo: this.currencyService.getUsdJpyAskHistoryInfo(),
+        symbol: 'gbp-usd-ask',
         lastPriceInfo: current["gbp-usd-ask"],
         title: "دلار آمریکا / ین ژاپن",
         shortedName: "USD/JPY Ask",
@@ -2480,6 +2669,7 @@ export class RequestArrayService {
     worldMarketList.push({
         id: "3000184",
         historyCallInfo: this.currencyService.getUsdChfAskHistoryInfo(),
+        symbol: 'usd-chf-ask',
         lastPriceInfo: current["usd-chf-ask"],
         title: "دلار آمریکا / فرانک سوییس",
         shortedName: "USD/CHF Ask",
@@ -2490,6 +2680,7 @@ export class RequestArrayService {
     worldMarketList.push({
         id: "3000185",
         historyCallInfo: this.currencyService.getAudUsdAskHistoryInfo(),
+        symbol: 'aud-usd-ask',
         lastPriceInfo: current["aud-usd-ask"],
         title: "دلار استرالیا / دلار آمریکا",
         shortedName: "AUD/USD Ask",
@@ -2500,6 +2691,7 @@ export class RequestArrayService {
     worldMarketList.push({
         id: "3000186",
         historyCallInfo: this.currencyService.getUsdCadAskHistoryInfo(),
+        symbol: 'usd-cad-ask',
         lastPriceInfo: current["usd-cad-ask"],
         title: "دلار آمریکا / دلار کانادا",
         shortedName: "USD/CAD Ask",
@@ -2510,6 +2702,7 @@ export class RequestArrayService {
     worldMarketList.push({
         id: "3000187",
         historyCallInfo: this.currencyService.getUsdNzdAskHistoryInfo(),
+        symbol: 'usd-nzd-ask',
         lastPriceInfo: current["usd-nzd-ask"],
         title: "دلار آمریکا / دلار نیوزلند",
         shortedName: "USD/NZD Ask",
@@ -2520,6 +2713,7 @@ export class RequestArrayService {
     worldMarketList.push({
         id: "3000188",
         historyCallInfo: this.currencyService.getUsdTryAskHistoryInfo(),
+        symbol: 'usd-try-ask',
         lastPriceInfo: current["usd-try-ask"],
         title: "دلار آمریکا / لیر ترکیه",
         shortedName: "USD/TRY Ask",
@@ -2530,6 +2724,7 @@ export class RequestArrayService {
     worldMarketList.push({
         id: "3000189",
         historyCallInfo: this.currencyService.getUsdSekAskHistoryInfo(),
+        symbol: 'usd-sek-ask',
         lastPriceInfo: current["usd-sek-ask"],
         title: "دلار آمریکا / کرون سوئد",
         shortedName: "USD/SEK Ask",
@@ -2540,6 +2735,7 @@ export class RequestArrayService {
     worldMarketList.push({
         id: "3000190",
         historyCallInfo: this.currencyService.getUsdSarAskHistoryInfo(),
+        symbol: 'usd-sar-ask',
         lastPriceInfo: current["usd-sar-ask"],
         title: "دلار آمریکا / ريال عربستان",
         shortedName: "USD/SAR Ask",
@@ -2550,6 +2746,7 @@ export class RequestArrayService {
     worldMarketList.push({
         id: "3000191",
         historyCallInfo: this.currencyService.getUsdKrwAskHistoryInfo(),
+        symbol: 'usd-krw-ask',
         lastPriceInfo: current["usd-krw-ask"],
         title: "دلار آمریکا / وون کره جنوبی",
         shortedName: "USD/KRW Ask",
@@ -2560,6 +2757,7 @@ export class RequestArrayService {
     worldMarketList.push({
         id: "3000192",
         historyCallInfo: this.currencyService.getUsdCnyAskHistoryInfo(),
+        symbol: 'usd-cny-ask',
         lastPriceInfo: current["usd-cny-ask"],
         title: "دلار آمریکا / یوان چین",
         shortedName: "USD/CNY Ask",
@@ -2578,6 +2776,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000193",
         historyCallInfo: this.currencyService.getImamiCoinHistoryInfo(),
+        symbol: 'sekee',
         lastPriceInfo: current.sekee,
         title: "سکه امامی",
         shortedName: "Imami Coin",
@@ -2589,6 +2788,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000194",
         historyCallInfo: this.currencyService.getBaharCoinHistoryInfo(),
+        symbol: 'sekeb',
         lastPriceInfo: current.sekeb,
         title: "سکه بهار آزادی",
         shortedName: "Bahar Coin",
@@ -2600,6 +2800,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000195",
         historyCallInfo: this.currencyService.getHalfCoinHistoryInfo(),
+        symbol: 'nim',
         lastPriceInfo: current.nim,
         title: "نیم سکه",
         shortedName: "Half Coin",
@@ -2611,6 +2812,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000196",
         historyCallInfo: this.currencyService.getQuarterCoinHistoryInfo(),
+        symbol: 'rob',
         lastPriceInfo: current.rob,
         title: "ربع سکه",
         shortedName: "Quarter Coin",
@@ -2622,6 +2824,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000197",
         historyCallInfo: this.currencyService.getGramCoinHistoryInfo(),
+        symbol: 'gerami',
         lastPriceInfo: current.gerami,
         title: "سکه گرمی",
         shortedName: "Gram Coin",
@@ -2636,6 +2839,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000198",
         historyCallInfo: this.currencyService.getRetailImamiCoinHistoryInfo(),
+        symbol: 'retail_sekee',
         lastPriceInfo: current.retail_sekee,
         title: "سکه امامی تک فروشی",
         shortedName: "Retail Imami Coin",
@@ -2647,6 +2851,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000199",
         historyCallInfo: this.currencyService.getRetailBaharCoinHistoryInfo(),
+        symbol: 'retail_sekeb',
         lastPriceInfo: current.retail_sekeb,
         title: "سکه بهار آزادی تک فروشی",
         shortedName: "Retail Bahar Coin",
@@ -2658,6 +2863,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000200",
         historyCallInfo: this.currencyService.getRetailHalfCoinHistoryInfo(),
+        symbol: 'retail_nim',
         lastPriceInfo: current.retail_nim,
         title: "نیم سکه تک فروشی",
         shortedName: "Retail Half Coin",
@@ -2669,6 +2875,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000201",
         historyCallInfo: this.currencyService.getRetailQuarterCoinHistoryInfo(),
+        symbol: 'retail_rob',
         lastPriceInfo: current.retail_rob,
         title: "ربع سکه تک فروشی",
         shortedName: "Retail Quarter Coin",
@@ -2680,6 +2887,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000202",
         historyCallInfo: this.currencyService.getRetailGramCoinHistoryInfo(),
+        symbol: 'retail_gerami',
         lastPriceInfo: current.retail_gerami,
         title: "سکه گرمی تک فروشی",
         shortedName: "Retail Gram Coin",
@@ -2694,6 +2902,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000203",
         historyCallInfo: this.currencyService.getCoinBlubberHistoryInfo(),
+        symbol: 'coin_blubber',
         lastPriceInfo: current.coin_blubber,
         title: "حباب سکه امامی",
         shortedName: "Coin Blubber",
@@ -2705,6 +2914,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000204",
         historyCallInfo: this.currencyService.getBaharCoinBlubberHistoryInfo(),
+        symbol: 'sekeb_blubber',
         lastPriceInfo: current.sekeb_blubber,
         title: "حباب سکه بهار آزادی",
         shortedName: "Imami Coin Blubber",
@@ -2716,6 +2926,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000205",
         historyCallInfo: this.currencyService.getHalfCoinBlubberHistoryInfo(),
+        symbol: 'nim_blubber',
         lastPriceInfo: current.nim_blubber,
         title: "حباب نیم سکه",
         shortedName: "Half Coin Blubber",
@@ -2727,6 +2938,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000206",
         historyCallInfo: this.currencyService.getQuarterCoinBlubberHistoryInfo(),
+        symbol: 'rob_blubber',
         lastPriceInfo: current.rob_blubber,
         title: "حباب ربع سکه",
         shortedName: "Quarter Coin Blubber",
@@ -2738,6 +2950,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000207",
         historyCallInfo: this.currencyService.getTrueValueOfCoinHistoryInfo(),
+        symbol: 'sekee_real',
         lastPriceInfo: current.sekee_real,
         title: "ارزش واقعی سکه",
         shortedName: "Quarter Coin Blubber",
@@ -2752,6 +2965,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000208",
         historyCallInfo: this.currencyService.getGc19CoinHistoryInfo(),
+        symbol: 'gc19',
         lastPriceInfo: current.gc19,
         title: "تمام سکه بانک صادرات",
         shortedName: "تمام سکه طرح جدید 0310 صادرات",
@@ -2763,6 +2977,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000209",
         historyCallInfo: this.currencyService.getGc14CoinHistoryInfo(),
+        symbol: 'gc14',
         lastPriceInfo: current.gc14,
         title: "تمام سکه بانک ملت",
         shortedName: "تمام سکه طرح جدید 0211 ملت",
@@ -2774,6 +2989,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000210",
         historyCallInfo: this.currencyService.getGc15CoinHistoryInfo(),
+        symbol: 'gc15',
         lastPriceInfo: current.gc15,
         title: "تمام سکه بانک رفاه",
         shortedName: "تمام سکه طرح جدید 0312 رفاه",
@@ -2785,6 +3001,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000211",
         historyCallInfo: this.currencyService.getGc18CoinHistoryInfo(),
+        symbol: 'gc18',
         lastPriceInfo: current.gc18,
         title: "تمام سکه بانک آینده",
         shortedName: "تمام سکه طرح جدید 0411 آینده",
@@ -2796,6 +3013,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000212",
         historyCallInfo: this.currencyService.getGc17CoinHistoryInfo(),
+        symbol: 'gc17',
         lastPriceInfo: current.gc17,
         title: "تمام سکه بانک سامان",
         shortedName: "تمام سکه طرح جدید 0412 سامان",
@@ -2807,6 +3025,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000213",
         historyCallInfo: this.currencyService.getGc16CoinHistoryInfo(),
+        symbol: 'gc16',
         lastPriceInfo: current.gc16,
         title: "تمام سکه بانک مرکزی",
         shortedName: "تمام سکه طرح جدید 001 مرکزی",
@@ -2821,6 +3040,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000214",
         historyCallInfo: this.currencyService.getSekeeDownCoinHistoryInfo(),
+        symbol: 'sekee_down',
         lastPriceInfo: current.sekee_down,
         title: "تمام سکه (قبل 86)",
         shortedName: "Bahar Coin Down",
@@ -2832,6 +3052,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000215",
         historyCallInfo: this.currencyService.getNimDownCoinHistoryInfo(),
+        symbol: 'nim_down',
         lastPriceInfo: current.nim_down,
         title: "نیم سکه (قبل 86)",
         shortedName: "Half Coin Down",
@@ -2843,6 +3064,7 @@ export class RequestArrayService {
     coinList.push({
         id: "4000216",
         historyCallInfo: this.currencyService.getRobDownCoinHistoryInfo(),
+        symbol: 'rob_down',
         lastPriceInfo: current.rob_down,
         title: "ربع سکه (قبل 86)",
         shortedName: "Quarter Coin Down",
@@ -2862,6 +3084,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000217",
         historyCallInfo: this.currencyService.getGeram18HistoryInfo(),
+        symbol: 'geram18',
         lastPriceInfo: current.geram18,
         title: "طلای 18 عیار / 750",
         shortedName: "Gram Gold 18",
@@ -2873,6 +3096,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000218",
         historyCallInfo: this.currencyService.getGold740kHistoryInfo(),
+        symbol: 'gold_740k',
         lastPriceInfo: current.gold_740k,
         title: "طلای 18 عیار / 740",
         shortedName: "Gold 740k",
@@ -2884,6 +3108,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000219",
         historyCallInfo: this.currencyService.getGeram24HistoryInfo(),
+        symbol: 'geram24',
         lastPriceInfo: current.geram24,
         title: "طلای 24 عیار",
         shortedName: "Gram Gold 24",
@@ -2895,6 +3120,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000220",
         historyCallInfo: this.currencyService.getGoldMiniSizeHistoryInfo(),
+        symbol: 'gold_mini_size',
         lastPriceInfo: current.gold_mini_size,
         title: "طلای دست دوم",
         shortedName: "Gold Mini Size",
@@ -2909,6 +3135,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000221",
         historyCallInfo: this.currencyService.getSilver925HistoryInfo(),
+        symbol: 'silver_925',
         lastPriceInfo: current.silver_925,
         title: "گرم نقره 925",
         shortedName: "Silver 925",
@@ -2920,6 +3147,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000222",
         historyCallInfo: this.currencyService.getSilver999HistoryInfo(),
+        symbol: 'silver_999',
         lastPriceInfo: current.silver_999,
         title: "گرم نقره 999",
         shortedName: "Silver 999",
@@ -2934,6 +3162,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000223",
         historyCallInfo: this.currencyService.getMesghalHistoryInfo(),
+        symbol: 'mesghal',
         lastPriceInfo: current.mesghal,
         title: "مثقال طلا",
         shortedName: "Mesghal",
@@ -2945,6 +3174,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000224",
         historyCallInfo: this.currencyService.getGold17HistoryInfo(),
+        symbol: 'gold_17',
         lastPriceInfo: current.gold_17,
         title: "مثقال / بدون حباب",
         shortedName: "Mesghal / Global Gold",
@@ -2956,6 +3186,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000225",
         historyCallInfo: this.currencyService.getGold17TransferHistoryInfo(),
+        symbol: 'gold_17_transfer',
         lastPriceInfo: current.gold_17_transfer,
         title: "حباب آبشده",
         shortedName: "Mesghal / Transfer",
@@ -2967,6 +3198,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000226",
         historyCallInfo: this.currencyService.getGold17CoinHistoryInfo(),
+        symbol: 'gold_17_coin',
         lastPriceInfo: current.gold_17_coin,
         title: "مثقال / بر مبنای سکه",
         shortedName: "Mesghal / Coin base",
@@ -2981,6 +3213,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000227",
         historyCallInfo: this.currencyService.getGoldFuturesHistoryInfo(),
+        symbol: 'gold_futures',
         lastPriceInfo: current.gold_futures,
         title: "آبشده نقدی",
         shortedName: "Gold Futures",
@@ -2992,6 +3225,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000228",
         historyCallInfo: this.currencyService.getGoldMeltedWholesaleHistoryInfo(),
+        symbol: 'gold_melted_wholesale',
         lastPriceInfo: current.gold_melted_wholesale,
         title: "آبشده بنکداری",
         shortedName: "Gold melted wholesale",
@@ -3003,6 +3237,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000229",
         historyCallInfo: this.currencyService.getGoldMeltedUnderKiloHistoryInfo(),
+        symbol: 'gold_world_futures',
         lastPriceInfo: current.gold_world_futures,
         title: "آبشده کمتر از کیلو",
         shortedName: "Gold melted under kilo",
@@ -3018,6 +3253,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000230",
         historyCallInfo: this.currencyService.getGoldGc3HistoryInfo(),
+        symbol: 'gc3',
         lastPriceInfo: current.gc3,
         title: "صندوق طلای عیار",
         shortedName: "Ayar Gold ETF",
@@ -3041,6 +3277,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000231",
         historyCallInfo: this.currencyService.getGoldGc67HistoryInfo(),
+        symbol: 'gc67',
         lastPriceInfo: current.gc67,
         title: "صندوق طلای قیراط",
         shortedName: "Ghirat Gold ETF",
@@ -3052,6 +3289,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000232",
         historyCallInfo: this.currencyService.getGoldGc11HistoryInfo(),
+        symbol: 'gc11',
         lastPriceInfo: current.gc11,
         title: "صندوق طلای زر",
         shortedName: "Zar Gold ETF",
@@ -3063,6 +3301,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000233",
         historyCallInfo: this.currencyService.getGoldGc10HistoryInfo(),
+        symbol: 'gc10',
         lastPriceInfo: current.gc10,
         title: "صندوق طلای گوهر",
         shortedName: "Gohar Gold ETF",
@@ -3074,6 +3313,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000234",
         historyCallInfo: this.currencyService.getGoldGc22HistoryInfo(),
+        symbol: 'gc22',
         lastPriceInfo: current.gc22,
         title: "صندوق طلای گنج",
         shortedName: "Ganj Gold ETF",
@@ -3085,6 +3325,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000235",
         historyCallInfo: this.currencyService.getGoldGc21HistoryInfo(),
+        symbol: 'gc21',
         lastPriceInfo: current.gc21,
         title: "صندوق طلای نفیس",
         shortedName: "Nafis Gold ETF",
@@ -3096,6 +3337,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000236",
         historyCallInfo: this.currencyService.getGoldGc20HistoryInfo(),
+        symbol: 'gc20',
         lastPriceInfo: current.gc20,
         title: "صندوق طلای نهال",
         shortedName: "Nahal Gold ETF",
@@ -3107,6 +3349,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000237",
         historyCallInfo: this.currencyService.getGoldGc12HistoryInfo(),
+        symbol: 'gc12',
         lastPriceInfo: current.gc12,
         title: "صندوق طلای کهربا",
         shortedName: "Kahroba Gold ETF",
@@ -3118,6 +3361,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000238",
         historyCallInfo: this.currencyService.getGoldGc34HistoryInfo(),
+        symbol: 'gc34',
         lastPriceInfo: current.gc34,
         title: "صندوق طلای زرفام",
         shortedName: "Zarfam Gold ETF",
@@ -3129,6 +3373,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000239",
         historyCallInfo: this.currencyService.getGoldGc35HistoryInfo(),
+        symbol: 'gc35',
         lastPriceInfo: current.gc35,
         title: "صندوق طلای مثقال",
         shortedName: "Mesghal Gold ETF",
@@ -3140,6 +3385,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000240",
         historyCallInfo: this.currencyService.getGoldGc36HistoryInfo(),
+        symbol: 'gc36',
         lastPriceInfo: current.gc36,
         title: "صندوق طلای آلتون",
         shortedName: "Alton Gold ETF",
@@ -3151,6 +3397,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000241",
         historyCallInfo: this.currencyService.getGoldGc37HistoryInfo(),
+        symbol: 'gc37',
         lastPriceInfo: current.gc37,
         title: "صندوق طلای تابش",
         shortedName: "Tabesh Gold ETF",
@@ -3162,6 +3409,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000242",
         historyCallInfo: this.currencyService.getGoldGc38HistoryInfo(),
+        symbol: 'gc38',
         lastPriceInfo: current.gc38,
         title: "صندوق طلای جواهر",
         shortedName: "Javaher Gold ETF",
@@ -3173,6 +3421,7 @@ export class RequestArrayService {
     goldList.push({
         id: "5000243",
         historyCallInfo: this.currencyService.getGoldGc39HistoryInfo(),
+        symbol: 'gc39',
         lastPriceInfo: current.gc39,
         title: "صندوق طلای ناب",
         shortedName: "Naab Gold ETF",
@@ -3193,6 +3442,7 @@ export class RequestArrayService {
     preciousMetalList.push({
         id: "6000244",
         historyCallInfo: this.currencyService.getGlobalGoldOnsHistoryInfo(),
+        symbol: 'ons',
         lastPriceInfo: current.ons,
         title: "اونس طلا",
         shortedName: "Gold Ounce",
@@ -3204,6 +3454,7 @@ export class RequestArrayService {
     preciousMetalList.push({
         id: "6000245",
         historyCallInfo: this.currencyService.getGlobalSilverOnsHistoryInfo(),
+        symbol: 'silver',
         lastPriceInfo: current.silver,
         title: "اونس نقره",
         shortedName: "Silver Ounce",
@@ -3215,6 +3466,7 @@ export class RequestArrayService {
     preciousMetalList.push({
         id: "6000246",
         historyCallInfo: this.currencyService.getGlobalPlatinumOnsHistoryInfo(),
+        symbol: 'platinum',
         lastPriceInfo: current.platinum,
         title: "اونس پلاتین",
         shortedName: "Platinum Ounce",
@@ -3226,6 +3478,7 @@ export class RequestArrayService {
     preciousMetalList.push({
         id: "6000247",
         historyCallInfo: this.currencyService.getGlobalPalladiumOnsHistoryInfo(),
+        symbol: 'palladium',
         lastPriceInfo: current.palladium,
         title: "اونس پالادیوم",
         shortedName: "Palladium Ounce",
@@ -3240,6 +3493,7 @@ export class RequestArrayService {
     preciousMetalList.push({
         id: "6000248",
         historyCallInfo: this.currencyService.getGlobalRatioSilverHistoryInfo(),
+        symbol: 'ratio_silver',
         lastPriceInfo: current.ratio_silver,
         title: "برابری طلا / نقره",
         shortedName: "Gold / Silver Ratio",
@@ -3251,6 +3505,7 @@ export class RequestArrayService {
     preciousMetalList.push({
         id: "6000249",
         historyCallInfo: this.currencyService.getGlobalRatioPlatinumHistoryInfo(),
+        symbol: 'ratio_platinum',
         lastPriceInfo: current.ratio_platinum,
         title: "برابری طلا / پلاتین",
         shortedName: "Gold / Platinum Ratio",
@@ -3262,6 +3517,7 @@ export class RequestArrayService {
     preciousMetalList.push({
         id: "6000250",
         historyCallInfo: this.currencyService.getGlobalRatioPalladiumHistoryInfo(),
+        symbol: 'ratio_palladium',
         lastPriceInfo: current.ratio_palladium,
         title: "برابری طلا / پالادیوم",
         shortedName: "Gold / Palladium Ratio",
@@ -3273,6 +3529,7 @@ export class RequestArrayService {
     preciousMetalList.push({
         id: "6000251",
         historyCallInfo: this.currencyService.getGlobalRatioCrudeoilHistoryInfo(),
+        symbol: 'ratio_crudeoil',
         lastPriceInfo: current.ratio_crudeoil,
         title: "برابری طلا / نفت خام",
         shortedName: "Gold / Crude Oil Ratio",
@@ -3284,6 +3541,7 @@ export class RequestArrayService {
     preciousMetalList.push({
         id: "6000252",
         historyCallInfo: this.currencyService.getGlobalRatioDowJonesHistoryInfo(),
+        symbol: 'ratio_dija',
         lastPriceInfo: current.ratio_dija,
         title: "برابری طلا / داوجونز",
         shortedName: "Gold / Dow Jones Ratio",
@@ -3295,6 +3553,7 @@ export class RequestArrayService {
     preciousMetalList.push({
         id: "6000253",
         historyCallInfo: this.currencyService.getGlobalRatioSP500HistoryInfo(),
+        symbol: 'ratio_sp500',
         lastPriceInfo: current.ratio_sp500,
         title: "برابری طلا / شاخص استاندارد و پورز 500",
         shortedName: "Gold / SP 500 Ratio",
@@ -3306,6 +3565,7 @@ export class RequestArrayService {
     preciousMetalList.push({
         id: "6000254",
         historyCallInfo: this.currencyService.getGlobalRatioHUIHistoryInfo(),
+        symbol: 'ratio_hui',
         lastPriceInfo: current.ratio_hui,
         title: "برابری طلا / شاخص بازارهای مالی (HUI)",
         shortedName: "Gold / HUI Index Ratio",
@@ -3325,6 +3585,7 @@ export class RequestArrayService {
     baseMetalList.push({
         id: "7000255",
         historyCallInfo: this.currencyService.getBaseGlobalUSCopperHistoryInfo(),
+        symbol: 'base_global_copper2',
         lastPriceInfo: current.base_global_copper2,
         title: "مس (آمریکا)",
         shortedName: "Copper (US)",
@@ -3336,6 +3597,7 @@ export class RequestArrayService {
     baseMetalList.push({
         id: "7000256",
         historyCallInfo: this.currencyService.getBaseGlobalGBCopperHistoryInfo(),
+        symbol: 'base_global_copper',
         lastPriceInfo: current.base_global_copper,
         title: "مس (لندن)",
         shortedName: "Copper (London)",
@@ -3347,6 +3609,7 @@ export class RequestArrayService {
     baseMetalList.push({
         id: "7000257",
         historyCallInfo: this.currencyService.getBaseGlobalTinHistoryInfo(),
+        symbol: 'base_global_tin',
         lastPriceInfo: current.base_global_tin,
         title: "قلع",
         shortedName: "Tin",
@@ -3358,6 +3621,7 @@ export class RequestArrayService {
     baseMetalList.push({
         id: "7000258",
         historyCallInfo: this.currencyService.getBaseGlobalNickelHistoryInfo(),
+        symbol: 'base_global_nickel',
         lastPriceInfo: current.base_global_nickel,
         title: "نیکل",
         shortedName: "Nickel",
@@ -3369,6 +3633,7 @@ export class RequestArrayService {
     baseMetalList.push({
         id: "7000259",
         historyCallInfo: this.currencyService.getBaseGlobalLeadHistoryInfo(),
+        symbol: 'base_global_lead',
         lastPriceInfo: current.base_global_lead,
         title: "سرب",
         shortedName: "Lead",
@@ -3380,6 +3645,7 @@ export class RequestArrayService {
     baseMetalList.push({
         id: "7000260",
         historyCallInfo: this.currencyService.getBaseGlobalZincHistoryInfo(),
+        symbol: 'base_global_zinc',
         lastPriceInfo: current.base_global_zinc,
         title: "روی",
         shortedName: "Zinc",
@@ -3395,6 +3661,7 @@ export class RequestArrayService {
     baseMetalList.push({
         id: "7000261",
         historyCallInfo: this.currencyService.getBaseAluminumHistoryInfo(),
+        symbol: 'base-us-aluminum',
         lastPriceInfo: current["base-us-aluminum"],
         title: "آلومینیوم",
         shortedName: "Aluminum",
@@ -3406,6 +3673,7 @@ export class RequestArrayService {
     baseMetalList.push({
         id: "7000262",
         historyCallInfo: this.currencyService.getBaseUraniumHistoryInfo(),
+        symbol: 'base-us-uranium',
         lastPriceInfo: current["base-us-uranium"],
         title: "اورانیوم",
         shortedName: "Uranium",
@@ -3417,6 +3685,7 @@ export class RequestArrayService {
     baseMetalList.push({
         id: "7000263",
         historyCallInfo: this.currencyService.getBaseSteelCoilHistoryInfo(),
+        symbol: 'base-us-steel-coil',
         lastPriceInfo: current["base-us-steel-coil"],
         title: "فولاد",
         shortedName: "Steel",
@@ -3428,6 +3697,7 @@ export class RequestArrayService {
     baseMetalList.push({
         id: "7000264",
         historyCallInfo: this.currencyService.getBaseIronOreHistoryInfo(),
+        symbol: 'base-us-iron-ore',
         lastPriceInfo: current["base-us-iron-ore"],
         title: "سنگ آهن 62%",
         shortedName: "Iron ore 62%",
@@ -3447,6 +3717,7 @@ export class RequestArrayService {
     commodityList.push({
         id: "8000265",
         historyCallInfo: this.currencyService.getCommodityUSWheatHistoryInfo(),
+        symbol: 'commodity_us_wheat',
         lastPriceInfo: current.commodity_us_wheat,
         title: "گندم (آمریکا)",
         shortedName: "Wheat (US)",
@@ -3458,6 +3729,7 @@ export class RequestArrayService {
     commodityList.push({
         id: "8000266",
         historyCallInfo: this.currencyService.getCommodityLondonWheatHistoryInfo(),
+        symbol: 'commodity_london_wheat',
         lastPriceInfo: current.commodity_london_wheat,
         title: "گندم (لندن)",
         shortedName: "Wheat (London)",
@@ -3469,6 +3741,7 @@ export class RequestArrayService {
     commodityList.push({
         id: "8000267",
         historyCallInfo: this.currencyService.getCommodityCornHistoryInfo(),
+        symbol: 'commodity_us_corn',
         lastPriceInfo: current.commodity_us_corn,
         title: "ذرت",
         shortedName: "Corn",
@@ -3480,6 +3753,7 @@ export class RequestArrayService {
     commodityList.push({
         id: "8000268",
         historyCallInfo: this.currencyService.getCommodityOatsHistoryInfo(),
+        symbol: 'commodity_oats',
         lastPriceInfo: current.commodity_oats,
         title: "جو",
         shortedName: "Oats",
@@ -3491,6 +3765,7 @@ export class RequestArrayService {
     commodityList.push({
         id: "8000269",
         historyCallInfo: this.currencyService.getCommodityRoughRiceHistoryInfo(),
+        symbol: 'commodity_rough_rice',
         lastPriceInfo: current.commodity_rough_rice,
         title: "برنج",
         shortedName: "Rough Rice",
@@ -3502,6 +3777,7 @@ export class RequestArrayService {
     commodityList.push({
         id: "8000270",
         historyCallInfo: this.currencyService.getCommoditySoybeansHistoryInfo(),
+        symbol: 'commodity_us_soybeans',
         lastPriceInfo: current.commodity_us_soybeans,
         title: "سویا",
         shortedName: "Soybean",
@@ -3513,6 +3789,7 @@ export class RequestArrayService {
     commodityList.push({
         id: "8000271",
         historyCallInfo: this.currencyService.getCommoditySoybeanMealHistoryInfo(),
+        symbol: 'commodity_us_soybean_meal',
         lastPriceInfo: current.commodity_us_soybean_meal,
         title: "کنجاله سویا",
         shortedName: "Soybean Meal",
@@ -3524,6 +3801,7 @@ export class RequestArrayService {
     commodityList.push({
         id: "8000272",
         historyCallInfo: this.currencyService.getCommoditySoybeanOilHistoryInfo(),
+        symbol: 'commodity_us_soybean_oil',
         lastPriceInfo: current.commodity_us_soybean_oil,
         title: "روغن سویا",
         shortedName: "Soybean Oil",
@@ -3539,6 +3817,7 @@ export class RequestArrayService {
     commodityList.push({
         id: "8000273",
         historyCallInfo: this.currencyService.getCommodityUSSugarHistoryInfo(),
+        symbol: 'commodity_us_sugar_no11',
         lastPriceInfo: current.commodity_us_sugar_no11,
         title: "شکر (آمریکا)",
         shortedName: "Sugar (US)",
@@ -3550,6 +3829,7 @@ export class RequestArrayService {
     commodityList.push({
         id: "8000274",
         historyCallInfo: this.currencyService.getCommodityLondonSugarHistoryInfo(),
+        symbol: 'commodity_london_sugar',
         lastPriceInfo: current.commodity_london_sugar,
         title: "شکر (لندن)",
         shortedName: "Sugar (London)",
@@ -3561,6 +3841,7 @@ export class RequestArrayService {
     commodityList.push({
         id: "8000275",
         historyCallInfo: this.currencyService.getCommodityUSCoffeeHistoryInfo(),
+        symbol: 'commodity_us_coffee_c',
         lastPriceInfo: current.commodity_us_coffee_c,
         title: "قهوه (آمریکا)",
         shortedName: "Coffee (US)",
@@ -3572,6 +3853,7 @@ export class RequestArrayService {
     commodityList.push({
         id: "8000276",
         historyCallInfo: this.currencyService.getCommodityLondonCoffeeHistoryInfo(),
+        symbol: 'commodity_london_coffee',
         lastPriceInfo: current.commodity_london_coffee,
         title: "قهوه (لندن)",
         shortedName: "Coffee (London)",
@@ -3583,6 +3865,7 @@ export class RequestArrayService {
     commodityList.push({
         id: "8000277",
         historyCallInfo: this.currencyService.getCommodityUSCocoaHistoryInfo(),
+        symbol: 'commodity_us_cocoa',
         lastPriceInfo: current.commodity_us_cocoa,
         title: "کاکائو (آمریکا)",
         shortedName: "Cocoa (US)",
@@ -3594,6 +3877,7 @@ export class RequestArrayService {
     commodityList.push({
         id: "8000278",
         historyCallInfo: this.currencyService.getCommodityLondonCocoaHistoryInfo(),
+        symbol: 'commodity_london_cocoa',
         lastPriceInfo: current.commodity_london_cocoa,
         title: "کاکائو (لندن)",
         shortedName: "Cocoa (London)",
@@ -3605,6 +3889,7 @@ export class RequestArrayService {
     commodityList.push({
         id: "8000279",
         historyCallInfo: this.currencyService.getCommodityLumberHistoryInfo(),
+        symbol: 'commodity_lumber',
         lastPriceInfo: current.commodity_lumber,
         title: "الوار",
         shortedName: "Lumber",
@@ -3616,6 +3901,7 @@ export class RequestArrayService {
     commodityList.push({
         id: "8000280",
         historyCallInfo: this.currencyService.getCommodityCottonHistoryInfo(),
+        symbol: 'commodity_us_cotton_no_2',
         lastPriceInfo: current.commodity_us_cotton_no_2,
         title: "پنبه",
         shortedName: "Cotton",
@@ -3627,6 +3913,7 @@ export class RequestArrayService {
     commodityList.push({
         id: "8000281",
         historyCallInfo: this.currencyService.getCommodityOrangeJuiceHistoryInfo(),
+        symbol: 'parsermarket%40e02e1367cd06401c3d77b114847cca05',
         lastPriceInfo: current['parsermarket@e02e1367cd06401c3d77b114847cca05'],
         title: "آب پرتقال",
         shortedName: "Orange Juice",
@@ -3641,6 +3928,7 @@ export class RequestArrayService {
     commodityList.push({
         id: "8000282",
         historyCallInfo: this.currencyService.getCommodityLiveCattleHistoryInfo(),
+        symbol: 'commodity_live_cattle',
         lastPriceInfo: current.commodity_live_cattle,
         title: "گوشت گاو (1 کیلوگرم)",
         shortedName: "Beef (1 Kilogram)",
@@ -3652,6 +3940,7 @@ export class RequestArrayService {
     commodityList.push({
         id: "8000283",
         historyCallInfo: this.currencyService.getCommodityFeedCattleHistoryInfo(),
+        symbol: 'commodity_feed_cattle',
         lastPriceInfo: current.commodity_feed_cattle,
         title: "فیدر گاو",
         shortedName: "Cattle feeder",

@@ -1,44 +1,115 @@
-<div class="w-full flex flex-col mb-4 md:mb-6">
-    <p class="leading-[180%] border-b px-[10%] border-b-light-text2 dark:border-b-dark-text2 pb-3 text-right text-sm font-medium lg:text-base text-dark-text4 dark:text-light-text4">تاریخچه قیمت</p>
-    <table class="w-full leading-[180%] flex flex-col">
-        <thead class="border-b border-b-light-text4 dark:border-b-dark-text4 w-full flex-1 flex py-2.5">
-            <tr class="w-full flex flex-1">
-                <td class="text-center w-1/3 dark:text-white text-dark leading-[180%] text-xs font-normal">تغییرات</td>
-                <td class="text-center w-1/3 dark:text-white text-dark leading-[180%] text-xs font-normal">{{ currentItem()?.faGroupName === 'بازارهای ارزی' ? 'نسبت' : 'قیمت' }} {{ currentItem()?.faGroupName !== 'بازارهای ارزی' ? (currentUnit() === 0 ? '(تومان)' : '(دلار)') : '' }}</td>
-                <td class="text-center w-1/3 dark:text-white text-dark leading-[180%] text-xs font-normal">روز</td>
-            </tr>
-        </thead>
+<div class="w-full flex flex-col mb-6 lg:mb-10">
+  <p
+    class="leading-[180%] border-b px-[10%] border-b-light-text2 dark:border-b-dark-text2 pb-3 text-right text-sm font-medium lg:text-base text-dark-text4 dark:text-light-text4"
+  >
+    تاریخچه قیمت
+  </p>
+  <table class="w-full leading-[180%] flex flex-col">
+    <thead
+      class="border-b border-b-light-text4 dark:border-b-dark-text4 w-full flex-1 flex py-2.5"
+    >
+      <tr class="w-full flex flex-1">
+        <td
+          class="text-center w-1/3 dark:text-white text-dark leading-[180%] text-xs font-normal"
+        >
+          تغییرات
+        </td>
+        <td
+          class="text-center w-1/3 dark:text-white text-dark leading-[180%] text-xs font-normal"
+        >
+          {{ currentItem()?.faGroupName === "بازارهای ارزی" ? "نسبت" : "قیمت" }}
+          {{
+            currentItem()?.faGroupName !== "بازارهای ارزی"
+              ? currentUnit() === 0
+                ? "(تومان)"
+                : "(دلار)"
+              : ""
+          }}
+        </td>
+        <td
+          class="text-center w-1/3 dark:text-white text-dark leading-[180%] text-xs font-normal"
+        >
+          روز
+        </td>
+      </tr>
+    </thead>
 
-        <tbody class="w-full flex flex-col">
-            <tr class="w-full flex flex-1 border-b py-1 border-b-light-border2 dark:border-b-dark-border2">
-                @if (currentItem()?.faGroupName === 'بازارهای ارزی') {
-                    <td class="table-item-base {{(currentItem()?.rialChangeState === 'low') ? 'text-light-red-text dark:text-dark-red-text' : 'text-light-green-text dark:text-dark-green-text'}}">{{(currentItem()?.rialChangeState === 'low') ? '-' : '+'}}{{currentItem()?.lastPriceInfo?.dp}}%</td>
-                    <td class="table-item-base dark:text-light-text4 text-dark-text4">{{currentItem()?.lastPriceInfo?.p}}</td>
-                } 
-                @else {
-                    @if (currentUnit() === 0) {
-                        <td class="table-item-base {{(currentItem()?.rialChangeState === 'low') ? 'text-light-red-text dark:text-dark-red-text' : 'text-light-green-text dark:text-dark-green-text'}}">{{(currentItem()?.rialChangeState === 'low') ? '-' : '+'}}{{currentItem()?.rialChanges}}%</td>
-                        <td class="table-item-base dark:text-light-text4 text-dark-text4">{{currentItem()?.tomanStringPrice}}</td>
-                    }
-                    @else {
-                        <td class="table-item-base {{(currentItem()?.dollarChangeState === 'low') ? 'text-light-red-text dark:text-dark-red-text' : 'text-light-green-text dark:text-dark-green-text'}}">{{(currentItem()?.dollarChangeState === 'low') ? '-' : '+'}}{{currentItem()?.dollarChanges}}%</td>
-                        <td class="table-item-base dark:text-light-text4 text-dark-text4">{{currentItem()?.dollarStringPrice}}</td>
-                    }
-                }
-                <td class="table-item-base dark:text-white text-dark">امروز</td>
-            </tr>
-            @for (range of ranges(); track range.days) {
-                <tr class="w-full flex flex-1 border-b py-1 border-b-light-border2 dark:border-b-dark-border2">
-                    @if (range.percent) {
-                        <td class="table-item-base {{(range?.direction === 'low') ? 'text-light-red-text dark:text-dark-red-text' : 'text-light-green-text dark:text-dark-green-text'}}">{{ (range?.direction === 'low') ? '-' : '+' }}{{ range.percent }}%</td>
-                    }
-                    @else {
-                        <td class="table-item-base dark:text-white text-dark">-</td>
-                    }
-                    <td class="table-item-base dark:text-light-text4 text-dark-text4">{{ range.avg ? range.avg : '-' }}</td>
-                    <td class="table-item-base dark:text-white text-dark rtl">{{ range.days }} روز</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <tbody class="w-full flex flex-col">
+      <tr
+        class="w-full flex flex-1 border-b py-1 border-b-light-border2 dark:border-b-dark-border2"
+      >
+        @if (currentItem()?.faGroupName === "بازارهای ارزی") {
+          <td
+            class="table-item-base {{
+              currentItem()?.rialChangeState === 'low'
+                ? 'text-light-red-text dark:text-dark-red-text'
+                : 'text-light-green-text dark:text-dark-green-text'
+            }}"
+          >
+            {{ currentItem()?.rialChangeState === "low" ? "-" : "+"
+            }}{{ currentItem()?.lastPriceInfo?.dp }}%
+          </td>
+          <td class="table-item-base dark:text-light-text4 text-dark-text4">
+            {{ currentItem()?.lastPriceInfo?.p }}
+          </td>
+        } @else {
+          @if (currentUnit() === 0) {
+            <td
+              class="table-item-base {{
+                currentItem()?.rialChangeState === 'low'
+                  ? 'text-light-red-text dark:text-dark-red-text'
+                  : 'text-light-green-text dark:text-dark-green-text'
+              }}"
+            >
+              {{ currentItem()?.rialChangeState === "low" ? "-" : "+"
+              }}{{ currentItem()?.rialChanges }}%
+            </td>
+            <td class="table-item-base dark:text-light-text4 text-dark-text4">
+              {{ currentItem()?.tomanStringPrice }}
+            </td>
+          } @else {
+            <td
+              class="table-item-base {{
+                currentItem()?.dollarChangeState === 'low'
+                  ? 'text-light-red-text dark:text-dark-red-text'
+                  : 'text-light-green-text dark:text-dark-green-text'
+              }}"
+            >
+              {{ currentItem()?.dollarChangeState === "low" ? "-" : "+"
+              }}{{ currentItem()?.dollarChanges }}%
+            </td>
+            <td class="table-item-base dark:text-light-text4 text-dark-text4">
+              {{ currentItem()?.dollarStringPrice }}
+            </td>
+          }
+        }
+        <td class="table-item-base dark:text-white text-dark">امروز</td>
+      </tr>
+      @for (range of ranges(); track range.days) {
+        <tr
+          class="w-full flex flex-1 border-b py-1 border-b-light-border2 dark:border-b-dark-border2"
+        >
+          @if (range.percent) {
+            <td
+              class="table-item-base {{
+                range?.direction === 'low'
+                  ? 'text-light-red-text dark:text-dark-red-text'
+                  : 'text-light-green-text dark:text-dark-green-text'
+              }}"
+            >
+              {{ range?.direction === "low" ? "-" : "+" }}{{ range.percent }}%
+            </td>
+          } @else {
+            <td class="table-item-base dark:text-white text-dark">-</td>
+          }
+          <td class="table-item-base dark:text-light-text4 text-dark-text4">
+            {{ range.avg ? range.avg : "-" }}
+          </td>
+          <td class="table-item-base dark:text-white text-dark rtl">
+            {{ range.days }} روز
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
 </div>

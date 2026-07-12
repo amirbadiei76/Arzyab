@@ -1,103 +1,296 @@
-<div class="my-6 leading-[180%] flex-1 justify-center md:justify-between flex w-full px-4 py-3 bg-light-text dark:bg-dark-text rounded-lg {{ item ? 'block' : 'hidden' }}">
-    
-    <!-- Mobile -->
-    <div class="flex md:hidden flex-col w-full">
-        <div class="flex justify-between w-full">
-            <div>
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none" viewBox="0 0 24 24"
-                    class="min-w-6 h-6 cursor-pointer ml-1 {{ item?.isFav ? 'fill-yellow-star' : 'fill-dark-text4' }}"
-                    (click)="item?.isFav ? removeFromFav($event) : addToFav($event)"
-                >
-                    <path
-                        d="m13.73 3.51 1.76 3.52c.24.49.88.96 1.42 1.05l3.19.53c2.04.34 2.52 1.82 1.05 3.28l-2.48 2.48c-.42.42-.65 1.23-.52 1.81l.71 3.07c.56 2.43-.73 3.37-2.88 2.1l-2.99-1.77c-.54-.32-1.43-.32-1.98 0l-2.99 1.77c-2.14 1.27-3.44.32-2.88-2.1l.71-3.07c.13-.58-.1-1.39-.52-1.81l-2.48-2.48c-1.46-1.46-.99-2.94 1.05-3.28l3.19-.53c.53-.09 1.17-.56 1.41-1.05l1.76-3.52c.96-1.91 2.52-1.91 3.47 0">
-                    </path>
-                </svg>
-            </div>
-            <div class="flex">
-                <div class="flex flex-wrap-reverse items-center justify-end">
-                    <p class="text-xs font-normal align-middle leading-4 dark:text-light-text4 text-dark-text4 {{ isGoldExchange() ? 'hidden' : '' }}">({{item?.shortedName}})</p>
-                    <h2 class="text-base font-medium dark:text-white text-right text-dark-text leading-[180%] ml-1">{{item?.title}}</h2>
-                </div>
-                <img loading="lazy" decoding="async" class="w-8 h-8 md:w-23 md:h-23 rounded-full object-cover ml-2" src={{item?.img}} alt={{item?.title}}>
-            </div>
+<div
+  class="my-6 leading-[180%] flex-1 justify-center md:justify-between flex w-full px-4 py-3 bg-light-text dark:bg-dark-text rounded-lg {{
+    item ? 'block' : 'hidden'
+  }}"
+>
+  <!-- Mobile -->
+  <div class="flex md:hidden flex-col w-full">
+    <div class="flex justify-between w-full">
+      <div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          class="min-w-6 h-6 cursor-pointer ml-1 {{
+            item?.isFav ? 'fill-yellow-star' : 'fill-dark-text4'
+          }}"
+          (click)="item?.isFav ? removeFromFav($event) : addToFav($event)"
+        >
+          <path
+            d="m13.73 3.51 1.76 3.52c.24.49.88.96 1.42 1.05l3.19.53c2.04.34 2.52 1.82 1.05 3.28l-2.48 2.48c-.42.42-.65 1.23-.52 1.81l.71 3.07c.56 2.43-.73 3.37-2.88 2.1l-2.99-1.77c-.54-.32-1.43-.32-1.98 0l-2.99 1.77c-2.14 1.27-3.44.32-2.88-2.1l.71-3.07c.13-.58-.1-1.39-.52-1.81l-2.48-2.48c-1.46-1.46-.99-2.94 1.05-3.28l3.19-.53c.53-.09 1.17-.56 1.41-1.05l1.76-3.52c.96-1.91 2.52-1.91 3.47 0"
+          ></path>
+        </svg>
+      </div>
+      <div class="flex">
+        <div class="flex flex-wrap-reverse items-center justify-end">
+          <p
+            class="text-xs font-normal align-middle leading-4 dark:text-light-text4 text-dark-text4 {{
+              isGoldExchange() ? 'hidden' : ''
+            }}"
+          >
+            ({{ item?.shortedName }})
+          </p>
+          <h2
+            class="text-base font-medium dark:text-white text-right text-dark-text leading-[180%] ml-1"
+          >
+            {{ item?.title }}
+          </h2>
         </div>
-        <div class="flex mt-2 justify-between w-full">
-            @if (item?.faGroupName === 'بازارهای ارزی') {
-                <p class="font-normal text-sm leading-[180%] {{(item?.lastPriceInfo?.dt === 'low') ? 'text-light-red-text dark:text-dark-red-text' : 'text-light-green-text dark:text-dark-green-text'}}">{{(item?.lastPriceInfo?.dt === 'low') ? '-' : '+'}}{{item?.lastPriceInfo?.dp}}%</p>
-            }
-            @else {
-                <p class="font-normal text-sm leading-[180%] {{(item?.rialChangeState === 'low') ? 'text-light-red-text dark:text-dark-red-text' : 'text-light-green-text dark:text-dark-green-text'}}">{{(item?.rialChangeState === 'low') ? '-' : '+'}}{{item?.rialChanges}}%</p>
-            }
-            <div class="flex items-center">
-                <p class="dark:text-light-text4 text-dark-text4 text-2xs leading-[180%] {{ item?.faGroupName === 'بازارهای ارزی' ? 'hidden' : '' }}">تومان</p>
-                <p class="dark:text-white text-dark text-sm font-normal leading-[180%] ml-1">{{ item?.faGroupName !== 'بازارهای ارزی' ? item?.tomanStringPrice : item?.lastPriceInfo?.p}}</p>
-            </div>
-        </div>
-        
-        <div
-            class="{{item?.faGroupName === 'بازارهای ارزی' || item?.shortedName == 'USD' || item?.shortedName == 'USDT' ? 'hidden' : 'flex'}} mt-2 justify-between w-full"
-            >
-            <p class="font-normal text-xs leading-[180%] {{(item?.dollarChangeState === 'low') ? 'text-light-red-text dark:text-dark-red-text' : 'text-light-green-text dark:text-dark-green-text'}}">{{(item?.dollarChangeState === 'low') ? '-' : '+'}}{{item?.dollarChanges}}%</p>
-            <div class="flex items-center">
-                <p class="dark:text-light-text4 text-dark-text4 text-xs font-normal leading-[180%]">دلار</p>
-                <p class="dark:text-white text-dark leading-[180%] text-xs font-normal align-middle ml-1">{{item?.dollarStringPrice}}</p>
-            </div>
-        </div>
-        
-        <div class="mt-2 justify-between w-full {{item?.unit === 'پوند' ? 'flex' : 'hidden'}}">
-            <p class="font-normal text-xs leading-[180%] {{(item?.lastPriceInfo?.dt === 'low') ? 'text-light-red-text dark:text-dark-red-text' : 'text-light-green-text dark:text-dark-green-text'}}">{{(item?.lastPriceInfo?.dt === 'low') ? '-' : '+'}}{{item?.lastPriceInfo?.dp}}%</p>
-            <div class="flex items-center">
-                <p class="dark:text-light-text4 text-dark-text4 text-xs font-normal leading-[180%]">پوند</p>
-                <p class="dark:text-white text-dark leading-[180%] text-xs font-normal align-middle ml-1">{{item?.lastPriceInfo?.p}}</p>
-            </div>
-        </div>
+        <img
+          loading="lazy"
+          decoding="async"
+          class="w-8 h-8 md:w-23 md:h-23 rounded-full object-cover ml-2"
+          src="{{ item?.img }}"
+          alt="{{ item?.title }}"
+        />
+      </div>
     </div>
-    
-    <!-- Desktop -->
-    <div class="hidden md:flex flex-col justify-center">
-        <div class="flex flex-nowrap leading-[180%] text-base font-medium">
-            <p class="dark:text-white text-dark leading-[180%] {{ item?.faGroupName === 'بازارهای ارزی' ? 'hidden' : 'block' }}">تومان</p>
-            <p class="dark:text-white text-dark mx-4 leading-[180%]">{{item?.faGroupName === 'بازارهای ارزی' ? item?.lastPriceInfo?.p : item?.tomanStringPrice}}</p>
-            @if (item?.faGroupName === 'بازارهای ارزی') {
-                <p class="font-normal mx-4 leading-[180%] {{(item?.rialChangeState === 'low') ? 'text-light-red-text dark:text-dark-red-text' : 'text-light-green-text dark:text-dark-green-text'}}">{{(item?.lastPriceInfo?.dt === 'low') ? '-' : '+'}}{{item?.lastPriceInfo?.dp}}%</p>
-            }
-            @else { 
-                <p class="font-normal mx-4 leading-[180%] {{(item?.rialChangeState === 'low') ? 'text-light-red-text dark:text-dark-red-text' : 'text-light-green-text dark:text-dark-green-text'}}">{{(item?.rialChangeState === 'low') ? '-' : '+'}}{{item?.rialChanges}}%</p>
-            }
-        </div>
+    <div class="flex mt-2 justify-between w-full">
+      @if (item?.faGroupName === "بازارهای ارزی") {
+        <p
+          class="font-normal text-sm leading-[180%] {{
+            item?.lastPriceInfo?.dt === 'low'
+              ? 'text-light-red-text dark:text-dark-red-text'
+              : 'text-light-green-text dark:text-dark-green-text'
+          }}"
+        >
+          {{ item?.lastPriceInfo?.dt === "low" ? "-" : "+"
+          }}{{ item?.lastPriceInfo?.dp }}%
+        </p>
+      } @else {
+        <p
+          class="font-normal text-sm leading-[180%] {{
+            item?.rialChangeState === 'low'
+              ? 'text-light-red-text dark:text-dark-red-text'
+              : 'text-light-green-text dark:text-dark-green-text'
+          }}"
+        >
+          {{ item?.rialChangeState === "low" ? "-" : "+"
+          }}{{ item?.rialChanges }}%
+        </p>
+      }
+      <div class="flex items-center">
+        <p
+          class="dark:text-light-text4 text-dark-text4 text-2xs leading-[180%] {{
+            item?.faGroupName === 'بازارهای ارزی' ? 'hidden' : ''
+          }}"
+        >
+          تومان
+        </p>
+        <p
+          class="dark:text-white text-dark text-sm font-normal leading-[180%] ml-1"
+        >
+          {{
+            item?.faGroupName !== "بازارهای ارزی"
+              ? item?.tomanStringPrice
+              : item?.lastPriceInfo?.p
+          }}
+        </p>
+      </div>
+    </div>
 
-        <div class="flex flex-nowrap leading-[180%] items-center text-base font-medium {{item?.unit === 'پوند' ? 'mt-2 items-center' : 'mt-3'}} {{item?.faGroupName === 'بازارهای ارزی' || item?.shortedName == 'USD' || item?.shortedName == 'USDT' ? 'invisible' : 'visible'}}">
-            <p class="dark:text-light-text4 text-dark-text4 leading-[180%] text-xs align-middle">دلار</p>
-            <p class="dark:text-white text-dark mx-4 leading-[180%] text-xs align-middle">{{item?.dollarStringPrice}}</p>
-            <p class="font-normal mx-4 leading-[180%] {{(item?.dollarChangeState === 'low') ? 'text-light-red-text dark:text-dark-red-text' : 'text-light-green-text dark:text-dark-green-text'}}">{{(item?.dollarChangeState === 'low') ? '-' : '+'}}{{item?.dollarChanges}}%</p>
-        </div>
-        <div class="flex-nowrap leading-[180%] text-base items-center font-medium {{item?.unit === 'پوند' ? 'flex mt-1 items-center' : 'hidden'}}">
-            <p class="dark:text-light-text4 text-dark-text4 leading-[180%] text-xs align-middle">پوند</p>
-            <p class="dark:text-white text-dark mx-4 leading-[180%] text-xs align-middle">{{item?.lastPriceInfo?.p}}</p>
-            <p class="font-normal mx-4 leading-[180%] {{(item?.lastPriceInfo?.dt === 'low') ? 'text-light-red-text dark:text-dark-red-text' : 'text-light-green-text dark:text-dark-green-text'}}">{{(item?.lastPriceInfo?.dt === 'low') ? '-' : '+'}}{{item?.lastPriceInfo?.dp}}%</p>
-        </div>
+    <div
+      class="{{
+        item?.faGroupName === 'بازارهای ارزی' ||
+        item?.shortedName == 'USD' ||
+        item?.shortedName == 'USDT'
+          ? 'hidden'
+          : 'flex'
+      }} mt-2 justify-between w-full"
+    >
+      <p
+        class="font-normal text-xs leading-[180%] {{
+          item?.dollarChangeState === 'low'
+            ? 'text-light-red-text dark:text-dark-red-text'
+            : 'text-light-green-text dark:text-dark-green-text'
+        }}"
+      >
+        {{ item?.dollarChangeState === "low" ? "-" : "+"
+        }}{{ item?.dollarChanges }}%
+      </p>
+      <div class="flex items-center">
+        <p
+          class="dark:text-light-text4 text-dark-text4 text-xs font-normal leading-[180%]"
+        >
+          دلار
+        </p>
+        <p
+          class="dark:text-white text-dark leading-[180%] text-xs font-normal align-middle ml-1"
+        >
+          {{ item?.dollarStringPrice }}
+        </p>
+      </div>
     </div>
 
-    <div class="hidden md:flex justify-end items-center">
-        <div class="flex flex-col justify-center">
-            <h2 class="text-xl dark:text-white text-right rtl text-dark-text mr-1 text-ellipsis line-clamp-2 font-medium leading-[180%]">{{item?.title}}</h2>
-            <div class="flex justify-end mt-2 leading-[180%]">
-                <p class="text-xl dark:text-light-text4 text-dark-text4 text-ellipsis line-clamp-1 {{ isGoldExchange() ? 'text-right rtl' : '' }}">{{item?.shortedName}}</p>
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none" viewBox="0 0 24 24"
-                    class="min-w-6 h-6 cursor-pointer ml-1 {{ item?.isFav ? 'fill-yellow-star' : 'fill-dark-text4' }}"
-                    (click)="item?.isFav ? removeFromFav($event) : addToFav($event)"
-                >
-                    <path
-                        d="m13.73 3.51 1.76 3.52c.24.49.88.96 1.42 1.05l3.19.53c2.04.34 2.52 1.82 1.05 3.28l-2.48 2.48c-.42.42-.65 1.23-.52 1.81l.71 3.07c.56 2.43-.73 3.37-2.88 2.1l-2.99-1.77c-.54-.32-1.43-.32-1.98 0l-2.99 1.77c-2.14 1.27-3.44.32-2.88-2.1l.71-3.07c.13-.58-.1-1.39-.52-1.81l-2.48-2.48c-1.46-1.46-.99-2.94 1.05-3.28l3.19-.53c.53-.09 1.17-.56 1.41-1.05l1.76-3.52c.96-1.91 2.52-1.91 3.47 0">
-                    </path>
-                </svg>
-            </div>
-        </div>
-        <img draggable="false" loading="lazy" decoding="async" class="w-8 h-8 md:w-23 md:h-23 rounded-full object-cover ml-2" src={{item?.img}} alt={{item?.title}}>
+    <div
+      class="mt-2 justify-between w-full {{
+        item?.unit === 'پوند' ? 'flex' : 'hidden'
+      }}"
+    >
+      <p
+        class="font-normal text-xs leading-[180%] {{
+          item?.lastPriceInfo?.dt === 'low'
+            ? 'text-light-red-text dark:text-dark-red-text'
+            : 'text-light-green-text dark:text-dark-green-text'
+        }}"
+      >
+        {{ item?.lastPriceInfo?.dt === "low" ? "-" : "+"
+        }}{{ item?.lastPriceInfo?.dp }}%
+      </p>
+      <div class="flex items-center">
+        <p
+          class="dark:text-light-text4 text-dark-text4 text-xs font-normal leading-[180%]"
+        >
+          پوند
+        </p>
+        <p
+          class="dark:text-white text-dark leading-[180%] text-xs font-normal align-middle ml-1"
+        >
+          {{ item?.lastPriceInfo?.p }}
+        </p>
+      </div>
     </div>
-    
+  </div>
+
+  <!-- Desktop -->
+  <div class="hidden md:flex flex-col justify-center">
+    <div class="flex flex-nowrap leading-[180%] text-base font-medium">
+      <p
+        class="dark:text-white text-dark leading-[180%] {{
+          item?.faGroupName === 'بازارهای ارزی' ? 'hidden' : 'block'
+        }}"
+      >
+        تومان
+      </p>
+      <p class="dark:text-white text-dark mx-4 leading-[180%]">
+        {{
+          item?.faGroupName === "بازارهای ارزی"
+            ? item?.lastPriceInfo?.p
+            : item?.tomanStringPrice
+        }}
+      </p>
+      @if (item?.faGroupName === "بازارهای ارزی") {
+        <p
+          class="font-normal mx-4 leading-[180%] {{
+            item?.rialChangeState === 'low'
+              ? 'text-light-red-text dark:text-dark-red-text'
+              : 'text-light-green-text dark:text-dark-green-text'
+          }}"
+        >
+          {{ item?.lastPriceInfo?.dt === "low" ? "-" : "+"
+          }}{{ item?.lastPriceInfo?.dp }}%
+        </p>
+      } @else {
+        <p
+          class="font-normal mx-4 leading-[180%] {{
+            item?.rialChangeState === 'low'
+              ? 'text-light-red-text dark:text-dark-red-text'
+              : 'text-light-green-text dark:text-dark-green-text'
+          }}"
+        >
+          {{ item?.rialChangeState === "low" ? "-" : "+"
+          }}{{ item?.rialChanges }}%
+        </p>
+      }
+    </div>
+
+    <div
+      class="flex flex-nowrap leading-[180%] items-center text-base font-medium {{
+        item?.unit === 'پوند' ? 'mt-2 items-center' : 'mt-3'
+      }} {{
+        item?.faGroupName === 'بازارهای ارزی' ||
+        item?.shortedName == 'USD' ||
+        item?.shortedName == 'USDT'
+          ? 'invisible'
+          : 'visible'
+      }}"
+    >
+      <p
+        class="dark:text-light-text4 text-dark-text4 leading-[180%] text-xs align-middle"
+      >
+        دلار
+      </p>
+      <p
+        class="dark:text-white text-dark mx-4 leading-[180%] text-xs align-middle"
+      >
+        {{ item?.dollarStringPrice }}
+      </p>
+      <p
+        class="font-normal mx-4 leading-[180%] {{
+          item?.dollarChangeState === 'low'
+            ? 'text-light-red-text dark:text-dark-red-text'
+            : 'text-light-green-text dark:text-dark-green-text'
+        }}"
+      >
+        {{ item?.dollarChangeState === "low" ? "-" : "+"
+        }}{{ item?.dollarChanges }}%
+      </p>
+    </div>
+    <div
+      class="flex-nowrap leading-[180%] text-base items-center font-medium {{
+        item?.unit === 'پوند' ? 'flex mt-1 items-center' : 'hidden'
+      }}"
+    >
+      <p
+        class="dark:text-light-text4 text-dark-text4 leading-[180%] text-xs align-middle"
+      >
+        پوند
+      </p>
+      <p
+        class="dark:text-white text-dark mx-4 leading-[180%] text-xs align-middle"
+      >
+        {{ item?.lastPriceInfo?.p }}
+      </p>
+      <p
+        class="font-normal mx-4 leading-[180%] {{
+          item?.lastPriceInfo?.dt === 'low'
+            ? 'text-light-red-text dark:text-dark-red-text'
+            : 'text-light-green-text dark:text-dark-green-text'
+        }}"
+      >
+        {{ item?.lastPriceInfo?.dt === "low" ? "-" : "+"
+        }}{{ item?.lastPriceInfo?.dp }}%
+      </p>
+    </div>
+  </div>
+
+  <div class="hidden md:flex justify-end items-center">
+    <div class="flex flex-col justify-center">
+      <h2
+        class="text-xl dark:text-white text-right rtl text-dark-text mr-1 text-ellipsis line-clamp-2 font-medium leading-[180%]"
+      >
+        {{ item?.title }}
+      </h2>
+      <div class="flex justify-end mt-2 leading-[180%]">
+        <p
+          class="text-xl dark:text-light-text4 text-dark-text4 text-ellipsis line-clamp-1 {{
+            isGoldExchange() ? 'text-right rtl' : ''
+          }}"
+        >
+          {{ item?.shortedName }}
+        </p>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          class="min-w-6 h-6 cursor-pointer ml-1 {{
+            item?.isFav ? 'fill-yellow-star' : 'fill-dark-text4'
+          }}"
+          (click)="item?.isFav ? removeFromFav($event) : addToFav($event)"
+        >
+          <path
+            d="m13.73 3.51 1.76 3.52c.24.49.88.96 1.42 1.05l3.19.53c2.04.34 2.52 1.82 1.05 3.28l-2.48 2.48c-.42.42-.65 1.23-.52 1.81l.71 3.07c.56 2.43-.73 3.37-2.88 2.1l-2.99-1.77c-.54-.32-1.43-.32-1.98 0l-2.99 1.77c-2.14 1.27-3.44.32-2.88-2.1l.71-3.07c.13-.58-.1-1.39-.52-1.81l-2.48-2.48c-1.46-1.46-.99-2.94 1.05-3.28l3.19-.53c.53-.09 1.17-.56 1.41-1.05l1.76-3.52c.96-1.91 2.52-1.91 3.47 0"
+          ></path>
+        </svg>
+      </div>
+    </div>
+    <img
+      draggable="false"
+      loading="lazy"
+      decoding="async"
+      class="w-8 h-8 md:w-23 md:h-23 rounded-full object-cover ml-2"
+      src="{{ item?.img }}"
+      alt="{{ item?.title }}"
+    />
+  </div>
 </div>

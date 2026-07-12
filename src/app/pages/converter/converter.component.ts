@@ -50,6 +50,7 @@ export class ConverterComponent {
     filterNames: [{name: filter_main_currencies, enName: filter_main_currencies_en}],
     faGroupName: currency_title,
     historyCallInfo: undefined,
+    symbol: 'irt',
     id: "IRT_CUSTOM_ID_9999",
     slugText: 'irt',
     img: 'assets/images/country-flags/ir.svg',

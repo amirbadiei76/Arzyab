@@ -884,7 +884,8 @@ export interface CurrencyItem {
     historyCallInfo?: Observable<ChartData>;
     lastPriceInfo?: Price;
     title: string;
-    filterNames: ItemFilterType[]
+    filterNames: ItemFilterType[];
+    symbol: string;
     mainTitle?: string;
     unit?: string;
     shortedName?: string;

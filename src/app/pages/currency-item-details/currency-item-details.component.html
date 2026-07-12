@@ -1,158 +1,300 @@
-<main class="w-full min-h-[var(--screen-height)] bg-light2 dark:bg-dark2 flex px-4 pt-20 pb-6 lg:px-18 lg:pb-8 lg:pt-24 lg:flex-row-reverse xl:pt-29 xl:px-41 xl:pb-16 flex-col flex-nowrap justify-between items-start">
-    
-    @if (canShowItem()) {
-        <div class="z-[2] w-full lg:w-[69%] flex flex-col flex-nowrap justify-end items-end content-center">
-            @if (requestArray.isReady$ | async; as ready) {
-                @if (breadCrumbItems$ | async; as breadCrumbItems) {
-                    <app-breadcrumb [items]="breadCrumbItems" />
-                }
+<main
+  class="w-full min-h-[var(--screen-height)] bg-light2 dark:bg-dark2 flex px-4 pt-20 pb-6 lg:px-18 lg:pb-8 lg:pt-24 lg:flex-row-reverse xl:pt-29 xl:px-41 xl:pb-16 flex-col flex-nowrap justify-between items-start"
+>
+  @if (canShowItem()) {
+    <div
+      class="z-[2] w-full lg:w-[69%] flex flex-col flex-nowrap justify-end items-end content-center"
+    >
+      @if (requestArray.isReady$ | async; as ready) {
+        @if (breadCrumbItems$ | async; as breadCrumbItems) {
+          <app-breadcrumb [items]="breadCrumbItems" />
+        }
+      } @else {
+        <app-breadcrumb-skeleton />
+      }
+      <div class="w-full flex justify-between items-center gap-2">
+        <button
+          (click)="sharePage()"
+          class="flex justify-center items-center text-xs md:text-sm transition text-dark-text dark:text-light-text smooth-transition ease-out gap-2 h-12 hover:cursor-pointer rounded-semi px-2 border-transparent bg-light-border2 dark:bg-dark-border border hover:border-light-text2 hover:dark:border-dark-text2 active:border-light-text2 active:dark:border-dark-text2"
+        >
+          <i class="bi bi-share-fill"></i>
+          اشتراک
+        </button>
+        <div
+          #inputContainer
+          class="relative w-full sm:w-[60%] md:w-[75%] xl:w-[55%]"
+        >
+          <div class="relative text-xs sm:text-sm leading-5 h-12">
+            <svg
+              viewBox="0 -0.24 28.423 28.423"
+              class="absolute right-0 top-1/2 -translate-1/2 w-5 h-5 fill-dark-border5 dark:fill-dark-text2"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                id="Path_215"
+                data-name="Path 215"
+                d="M14.953,2.547A12.643,12.643,0,1,0,27.6,15.19,12.649,12.649,0,0,0,14.953,2.547Zm0,2A10.643,10.643,0,1,1,4.31,15.19,10.648,10.648,0,0,1,14.953,4.547Z"
+                transform="translate(-2.31 -2.547)"
+                fill-rule="evenodd"
+              />
+              <path
+                id="Path_216"
+                data-name="Path 216"
+                d="M30.441,28.789l-6.276-6.276a1,1,0,1,0-1.414,1.414L29.027,30.2a1,1,0,1,0,1.414-1.414Z"
+                transform="translate(-2.31 -2.547)"
+                fill-rule="evenodd"
+              />
+            </svg>
+            <input
+              #searchInput
+              type="text"
+              id="searchInput"
+              name="searchInput"
+              [value]="textToFilter()"
+              (focus)="inputFocus()"
+              (input)="filterList($event)"
+              class="rtl transition smooth-transition ease-out pl-[2.5rem] peer pr-[2.7rem] rounded-semi outline-none border-transparent bg-light-border2 dark:bg-dark-border border focus:border-green-btn hover:not-focus:border-light-text2 hover:not-focus:dark:border-dark-text2 active:not-focus:border-light-text2 active:not-focus:dark:border-dark-text2 h-full text-dark-text dark:text-light-text w-full text-right select-none"
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck="false"
+              placeholder=" "
+            />
+            <i
+              (click)="removeInput()"
+              class="bi bi-x-circle-fill peer-[:not(:placeholder-shown)]:flex hidden hover:cursor-pointer text-light-text2 dark:text-dark-text2 absolute top-1/2 -translate-y-1/2 left-4"
+            ></i>
+            @if (itemFaGroupName$ | async; as itemFaGroupName) {
+              <p
+                class="absolute text-dark-border5 dark:text-dark-text2 top-1/2 -translate-y-1/2 right-[2.7rem] pointer-events-none peer-[:not(:placeholder-shown)]:hidden"
+              >
+                عنوان را در {{ itemFaGroupName }} جستجو کنید
+              </p>
             }
-            @else {
-                <app-breadcrumb-skeleton />
-            }
-            <div class="w-full flex justify-between items-center gap-2">
-                <button (click)="sharePage()" class="flex justify-center items-center text-xs md:text-sm transition text-dark-text dark:text-light-text smooth-transition ease-out gap-2 h-12 hover:cursor-pointer rounded-semi px-2 border-transparent bg-light-border2 dark:bg-dark-border border hover:border-light-text2 hover:dark:border-dark-text2 active:border-light-text2 active:dark:border-dark-text2">
-                    <i class="bi bi-share-fill"></i>
-                    اشتراک
-                </button>
-                <div #inputContainer class="relative w-full sm:w-[60%] md:w-[75%] xl:w-[55%]">
-                    <div class="relative text-xs sm:text-sm leading-5 h-12">
-                        <svg
-                            viewBox="0 -0.24 28.423 28.423" class="absolute right-0 top-1/2 -translate-1/2 w-5 h-5 fill-dark-border5 dark:fill-dark-text2" xmlns="http://www.w3.org/2000/svg">
-                            <path id="Path_215" data-name="Path 215" d="M14.953,2.547A12.643,12.643,0,1,0,27.6,15.19,12.649,12.649,0,0,0,14.953,2.547Zm0,2A10.643,10.643,0,1,1,4.31,15.19,10.648,10.648,0,0,1,14.953,4.547Z" transform="translate(-2.31 -2.547)" fill-rule="evenodd"/>
-                            <path id="Path_216" data-name="Path 216" d="M30.441,28.789l-6.276-6.276a1,1,0,1,0-1.414,1.414L29.027,30.2a1,1,0,1,0,1.414-1.414Z" transform="translate(-2.31 -2.547)" fill-rule="evenodd"/>
-                        </svg>
-                        <input
-                            #searchInput type="text" id="searchInput" name="searchInput"
-                            [value]="textToFilter()"
-                            (focus)="inputFocus()"
-                            (input)="filterList($event)"
-                            class="rtl transition smooth-transition ease-out pl-[2.5rem] peer pr-[2.7rem] rounded-semi outline-none border-transparent bg-light-border2 dark:bg-dark-border border focus:border-green-btn hover:not-focus:border-light-text2 hover:not-focus:dark:border-dark-text2 active:not-focus:border-light-text2 active:not-focus:dark:border-dark-text2 h-full text-dark-text dark:text-light-text w-full text-right select-none"
-                            autocomplete="off"
-                            autocorrect="off"
-                            autocapitalize="off"
-                            spellcheck="false"
-                            placeholder=" "
-                        >
-                        <i (click)="removeInput()" class="bi bi-x-circle-fill peer-[:not(:placeholder-shown)]:flex hidden hover:cursor-pointer text-light-text2 dark:text-dark-text2 absolute top-1/2 -translate-y-1/2 left-4"></i>
-                        @if (itemFaGroupName$ | async; as itemFaGroupName) {
-                            <p class="absolute text-dark-border5 dark:text-dark-text2 top-1/2 -translate-y-1/2 right-[2.7rem] pointer-events-none peer-[:not(:placeholder-shown)]:hidden">عنوان را در {{itemFaGroupName}} جستجو کنید</p>
-                        }
-                    </div>
-                    
-                    <div
-                        #itemList class="absolute overflow-hidden p-5 hidden w-full z-[2] max-h-86 flex-col top-12 rounded-semi bg-light-border2 dark:bg-dark-border">
-                        @if (currentFilteredList$ | async; as currentFilteredList) {
-                            <div class="flex flex-col justify-start items-end scroll-hide overflow-y-scroll {{ !currentFilteredList?.length ? 'gap-0' : 'gap-4'}}">
-                            
-                                @for (currentItem of currentFilteredList; track currentItem.id) {
-                                    <app-search-item class="w-full" (itemSelected)="onItemSelect($event)" [item]="currentItem" />
-                                }
-                                @if (!currentFilteredList?.length) {
-                                    @if (itemFaGroupName$ | async; as itemFaGroupName) {
-                                        <p class="rtl flex flex-row-reverse gap-2 items-center pointer-events-none text-xs md:text-sm text-dark-text dark:text-light-text">
-                                            موردی در {{itemFaGroupName}} پیدا نشد.
-                                            <svg class="h-7 w-7 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108.67 122.88">
-                                                <path fill-rule="evenodd" d="M25.14,53.37a2.77,2.77,0,0,0,0,5.54H45.25a2.77,2.77,0,0,0,0-5.54Zm60.48-36.9,6.66,6.69-8,8.14,8,8.14L85.61,46.1l-8-8.09-8,8.1L63,39.43l8-8.14-8-8.15,6.67-6.65,8,8.08,8-8.1ZM77.77,0A30.91,30.91,0,0,1,91,58.82v57.69a6.38,6.38,0,0,1-6.37,6.37H6.37A6.38,6.38,0,0,1,0,116.51V22.4A6.38,6.38,0,0,1,6.37,16h44.3A30.89,30.89,0,0,1,77.77,0Zm7.78,60.81A30.92,30.92,0,0,1,48.32,21.52H6.37a.9.9,0,0,0-.63.26.92.92,0,0,0-.26.63V116.5a.89.89,0,0,0,.89.89H84.65a.9.9,0,0,0,.63-.26.92.92,0,0,0,.26-.63V60.81ZM25.14,92.22a2.74,2.74,0,0,0,0,5.48H63.61a2.74,2.74,0,1,0,0-5.48Zm0-19.41a2.74,2.74,0,0,0,0,5.48H63.61a2.74,2.74,0,0,0,0-5.48Z"/>
-                                            </svg>
-                                        <p>
-                                    }
-                                }
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div>
-            @if (requestArray.isReady$ | async) {
-                @if (currencyItem$ | async; as currencyItem) {
-                    <app-item-info class="w-full" [item]="currencyItem" />
-                }
-            }
-            @else {
-                <app-item-info-skeleton class="w-full z-[2] block" />
-            }
-            <div class="w-full flex justify-end flex-col md:flex-row md:justify-between items-center md:mb-7">
-                @if (requestArray.isReady$ | async) {
-                    @if (currencyItem$ | async; as currencyItem) {
-                        @if (priceInfo$ | async; as priceInfo) {
-                            <app-percent-progress
-                                class="w-full"
-                                [currencyItem]="currencyItem"
-                                [currentSupportCurrencyId]="currentSupportCurrencyId()"
-                                [currentMinPrice]="priceInfo.min"
-                                [currentMaxPrice]="priceInfo.max"
-                                [currentPercentMinMax]="priceInfo.percent"
-                            />
-                        }
-                    }
-                }
-                @else {
-                    <app-percent-progress-skeleton class="w-full z-[2] block" />
-                }
+          </div>
 
-
-                <div class="flex p-0 justify-between md:justify-start md:p-2 md:rounded-lg gap-0 md:gap-4 md:border md:border-light-text4 md:dark:border-dark-text4 my-2 w-full md:w-auto">
-                    <div (click)="onChartTypeChange(1)" class="flex hover:cursor-pointer justify-center items-center py-2.5 md:py-0 flex-1/2 gap-2 md:gap-0 md:flex-auto md:border-b-0 border-b {{ currentChartType() === 1 ? 'border-b-green-btn text-green-btn' : 'border-b-dark-text4 text-dark-text4' }} ">
-                        <p class="block md:hidden text-sm font-normal smooth-transition ease-in-out transition-all leading-[180%]">نمودار خطی</p>
-                        <svg 
-                            style="transform: scaleX(-1);"
-                            viewBox="0 0 24 24"
-                            class="w-6 h-6 fill-none smooth-transition ease-in-out {{ currentChartType() === 1 ? 'text-green-btn' : 'text-dark-text4' }}"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M3 9L9.65533 13.7538C9.85422 13.8959 10.1267 13.8733 10.2995 13.7005L13.7005 10.2995C13.8733 10.1267 14.1458 10.1041 14.3447 10.2462L21 15M6 21H18C19.6569 21 21 19.6569 21 18V6C21 4.34315 19.6569 3 18 3H6C4.34315 3 3 4.34315 3 6V18C3 19.6569 4.34315 21 6 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-
-                    <div (click)="onChartTypeChange(0)" class="flex hover:cursor-pointer justify-center items-center py-2.5 md:py-0 flex-1/2 gap-2 md:gap-0 md:flex-auto md:border-b-0 border-b {{ currentChartType() === 0 ? 'border-b-green-btn text-green-btn' : 'border-b-dark-text4 text-dark-text4' }}">
-                        <p class="block md:hidden text-sm smooth-transition ease-in-out leading-[180%]">نمودار کندلی</p>
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="w-6 h-6 fill-none smooth-transition ease-in-out {{ currentChartType() === 0 ? 'text-green-btn' : 'text-dark-text4' }}"
-                            >
-                            <path d="M16 10V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M12 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M8 13L8 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-
-            @if (requestArray.isReady$ | async) {
-                @if (currencyItem$ | async; as currencyItem) {
-                    @if (chartHistory$ | async; as chartHistory) {
-                        <app-chart class="w-full" [item]="currencyItem" [historyData]="chartHistory" [currentUnit]="currentSupportCurrencyId()" [chartType]="currentChartType()" />
-                        <app-changes-table class="w-full" [historyData]="chartHistory" [item]="currencyItem" [currentUnit]="currentSupportCurrencyId()" />
-                    }
-                    @else {
-                        <span class="relative w-full block z-0 h-75 md:h-94 skeleton-base mb-6 lg:mb-10"></span>
-                        <app-changes-table-skeleton class="w-full" />
-                    }
+          <div
+            #itemList
+            class="absolute overflow-hidden p-5 hidden w-full z-[2] max-h-86 flex-col top-12 rounded-semi bg-light-border2 dark:bg-dark-border"
+          >
+            @if (currentFilteredList$ | async; as currentFilteredList) {
+              <div
+                class="flex flex-col justify-start items-end scroll-hide overflow-y-scroll {{
+                  !currentFilteredList?.length ? 'gap-0' : 'gap-4'
+                }}"
+              >
+                @for (
+                  currentItem of currentFilteredList;
+                  track currentItem.id
+                ) {
+                  <app-search-item
+                    class="w-full"
+                    (itemSelected)="onItemSelect($event)"
+                    [item]="currentItem"
+                  />
                 }
+                @if (!currentFilteredList?.length) {
+                  @if (itemFaGroupName$ | async; as itemFaGroupName) {
+                    <p
+                      class="rtl flex flex-row-reverse gap-2 items-center pointer-events-none text-xs md:text-sm text-dark-text dark:text-light-text"
+                    >
+                      موردی در {{ itemFaGroupName }} پیدا نشد.
+                      <svg
+                        class="h-7 w-7 fill-current"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 108.67 122.88"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M25.14,53.37a2.77,2.77,0,0,0,0,5.54H45.25a2.77,2.77,0,0,0,0-5.54Zm60.48-36.9,6.66,6.69-8,8.14,8,8.14L85.61,46.1l-8-8.09-8,8.1L63,39.43l8-8.14-8-8.15,6.67-6.65,8,8.08,8-8.1ZM77.77,0A30.91,30.91,0,0,1,91,58.82v57.69a6.38,6.38,0,0,1-6.37,6.37H6.37A6.38,6.38,0,0,1,0,116.51V22.4A6.38,6.38,0,0,1,6.37,16h44.3A30.89,30.89,0,0,1,77.77,0Zm7.78,60.81A30.92,30.92,0,0,1,48.32,21.52H6.37a.9.9,0,0,0-.63.26.92.92,0,0,0-.26.63V116.5a.89.89,0,0,0,.89.89H84.65a.9.9,0,0,0,.63-.26.92.92,0,0,0,.26-.63V60.81ZM25.14,92.22a2.74,2.74,0,0,0,0,5.48H63.61a2.74,2.74,0,1,0,0-5.48Zm0-19.41a2.74,2.74,0,0,0,0,5.48H63.61a2.74,2.74,0,0,0,0-5.48Z"
+                        />
+                      </svg>
+                    </p>
+
+                    <p></p>
+                  }
+                }
+              </div>
             }
-            @else {
-                <span class="relative w-full block z-0 h-75 md:h-94 skeleton-base mb-6 lg:mb-10"></span>
-                <app-changes-table-skeleton class="w-full" />
-            }
+          </div>
         </div>
+      </div>
+      @if (requestArray.isReady$ | async) {
+        @if (currencyItem$ | async; as currencyItem) {
+          <app-item-info class="w-full" [item]="currencyItem" />
+        }
+      } @else {
+        <app-item-info-skeleton class="w-full z-[2] block" />
+      }
+      <div
+        class="w-full flex justify-end flex-col md:flex-row md:justify-between items-center md:mb-7"
+      >
+        @if (requestArray.isReady$ | async) {
+          @if (currencyItem$ | async; as currencyItem) {
+            @if (priceInfo$ | async; as priceInfo) {
+              <app-percent-progress
+                class="w-full"
+                [currencyItem]="currencyItem"
+                [currentSupportCurrencyId]="currentSupportCurrencyId()"
+                [currentMinPrice]="priceInfo.min"
+                [currentMaxPrice]="priceInfo.max"
+                [currentPercentMinMax]="priceInfo.percent"
+              />
+            }
+          }
+        } @else {
+          <app-percent-progress-skeleton class="w-full z-[2] block" />
+        }
 
-        <aside class="w-full lg:w-[27%] flex flex-col flex-nowrap justify-start items-end content-center">
-            @if (requestArray.isReady$ | async) {
-                @if (currencyItem$ | async; as currencyItem) {
-                    @if (currentCategoryItems$ | async; as currentCategoryItems) {
-                        <app-currency-overview class="w-full h-full" [currentSelected]="currencyItem" (currentUnit)="onCurrencyUnitChange($event)" [relatedItems]="currentCategoryItems" />
-                    }
-                }
-            }
-            @else {
-                <app-currency-overview-skeleton class="w-full h-full"/>
-            }
-        </aside>
-    }
-    @else {
-        <app-not-found-box class="w-full" />
-    }
+        <div
+          class="flex p-0 justify-between md:justify-start md:p-2 md:rounded-lg gap-0 md:gap-4 md:border md:border-light-text4 md:dark:border-dark-text4 my-2 w-full md:w-auto"
+        >
+          <div
+            (click)="onChartTypeChange(1)"
+            class="flex hover:cursor-pointer justify-center items-center py-2.5 md:py-0 flex-1/2 gap-2 md:gap-0 md:flex-auto md:border-b-0 border-b {{
+              currentChartType() === 1
+                ? 'border-b-green-btn text-green-btn'
+                : 'border-b-dark-text4 text-dark-text4'
+            }} "
+          >
+            <p
+              class="block md:hidden text-sm font-normal smooth-transition ease-in-out transition-all leading-[180%]"
+            >
+              نمودار خطی
+            </p>
+            <svg
+              style="transform: scaleX(-1)"
+              viewBox="0 0 24 24"
+              class="w-6 h-6 fill-none smooth-transition ease-in-out {{
+                currentChartType() === 1 ? 'text-green-btn' : 'text-dark-text4'
+              }}"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M3 9L9.65533 13.7538C9.85422 13.8959 10.1267 13.8733 10.2995 13.7005L13.7005 10.2995C13.8733 10.1267 14.1458 10.1041 14.3447 10.2462L21 15M6 21H18C19.6569 21 21 19.6569 21 18V6C21 4.34315 19.6569 3 18 3H6C4.34315 3 3 4.34315 3 6V18C3 19.6569 4.34315 21 6 21Z"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+
+          <div
+            (click)="onChartTypeChange(0)"
+            class="flex hover:cursor-pointer justify-center items-center py-2.5 md:py-0 flex-1/2 gap-2 md:gap-0 md:flex-auto md:border-b-0 border-b {{
+              currentChartType() === 0
+                ? 'border-b-green-btn text-green-btn'
+                : 'border-b-dark-text4 text-dark-text4'
+            }}"
+          >
+            <p
+              class="block md:hidden text-sm smooth-transition ease-in-out leading-[180%]"
+            >
+              نمودار کندلی
+            </p>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-6 h-6 fill-none smooth-transition ease-in-out {{
+                currentChartType() === 0 ? 'text-green-btn' : 'text-dark-text4'
+              }}"
+            >
+              <path
+                d="M16 10V17"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M12 7V17"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <rect
+                x="3"
+                y="3"
+                width="18"
+                height="18"
+                rx="2"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M8 13L8 17"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      @if (requestArray.isReady$ | async) {
+        @if (currencyItem$ | async; as currencyItem) {
+          @if (chartHistory$ | async; as chartHistory) {
+            <app-chart
+              class="w-full"
+              [item]="currencyItem"
+              [historyData]="chartHistory"
+              [currentUnit]="currentSupportCurrencyId()"
+              [chartType]="currentChartType()"
+            />
+            <app-changes-table
+              class="w-full"
+              [historyData]="chartHistory"
+              [item]="currencyItem"
+              [currentUnit]="currentSupportCurrencyId()"
+            />
+          } @else {
+            <span
+              class="relative w-full block z-0 h-75 md:h-94 skeleton-base mb-6 lg:mb-10"
+            ></span>
+            <app-changes-table-skeleton class="w-full" />
+          }
+        }
+      } @else {
+        <span
+          class="relative w-full block z-0 h-75 md:h-94 skeleton-base mb-6 lg:mb-10"
+        ></span>
+        <app-changes-table-skeleton class="w-full" />
+      }
+      @if (currencyItem$ | async) {
+        <app-ai-analysis
+          class="w-full"
+          [currentPrice]="currencyItemSignal()!"
+        ></app-ai-analysis>
+      }
+    </div>
+
+    <aside
+      class="w-full lg:w-[27%] flex flex-col flex-nowrap justify-start items-end content-center"
+    >
+      @if (requestArray.isReady$ | async) {
+        @if (currencyItem$ | async; as currencyItem) {
+          @if (currentCategoryItems$ | async; as currentCategoryItems) {
+            <app-currency-overview
+              class="w-full h-full"
+              [currentSelected]="currencyItem"
+              (currentUnit)="onCurrencyUnitChange($event)"
+              [relatedItems]="currentCategoryItems"
+            />
+          }
+        }
+      } @else {
+        <app-currency-overview-skeleton class="w-full h-full" />
+      }
+    </aside>
+  } @else {
+    <app-not-found-box class="w-full" />
+  }
 </main>

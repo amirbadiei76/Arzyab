@@ -5699,7 +5699,7 @@ export class CurrenciesService {
   }
 
   getCommodityOrangeJuiceHistoryInfo() {
-    const url = this.history_base_url + "commodity_orange_juice";
+    const url = this.history_base_url + "parsermarket%40e02e1367cd06401c3d77b114847cca05";
     return this.http.get<ChartData>(url)
   }
   

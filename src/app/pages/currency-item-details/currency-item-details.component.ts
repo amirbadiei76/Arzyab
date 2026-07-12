@@ -24,10 +24,11 @@ import { ItemInfoSkeletonComponent } from '../../components/not-shared/currency-
 import { CurrencyOverviewSkeletonComponent } from '../../components/not-shared/currency-item-details/currency-overview-skeleton/currency-overview-skeleton.component';
 import { BreadcrumbSkeletonComponent } from '../../components/shared/breadcrumb-skeleton/breadcrumb-skeleton.component';
 import { ChangesTableSkeletonComponent } from '../../components/not-shared/currency-item-details/changes-table-skeleton/changes-table-skeleton.component';
+import { AiAnalysisComponent } from '../../components/not-shared/currency-item-details/ai-analysis/ai-analysis.component';
 
 @Component({
   selector: 'app-currency-item-details',
-  imports: [BreadcrumbComponent, BreadcrumbSkeletonComponent, FormsModule, CommonModule, ItemInfoComponent, ItemInfoSkeletonComponent, NotFoundBoxComponent, PercentProgressComponent, PercentProgressSkeletonComponent, SearchItemComponent, ChangesTableComponent, ChangesTableSkeletonComponent, CurrencyOverviewComponent, CurrencyOverviewSkeletonComponent, ChartComponent],
+  imports: [BreadcrumbComponent, AiAnalysisComponent, BreadcrumbSkeletonComponent, FormsModule, CommonModule, ItemInfoComponent, ItemInfoSkeletonComponent, NotFoundBoxComponent, PercentProgressComponent, PercentProgressSkeletonComponent, SearchItemComponent, ChangesTableComponent, ChangesTableSkeletonComponent, CurrencyOverviewComponent, CurrencyOverviewSkeletonComponent, ChartComponent],
   templateUrl: './currency-item-details.component.html',
   styleUrl: './currency-item-details.component.css'
 })
@@ -66,6 +67,8 @@ export class CurrencyItemDetailsComponent {
     ),
     shareReplay(1)
   );
+
+  currencyItemSignal = toSignal(this.currencyItem$)
 
   currentValue = this.requestArray.mainData!
   .pipe(
@@ -149,7 +152,7 @@ export class CurrencyItemDetailsComponent {
       if (!item.historyCallInfo) {
         return of<ChartData | null>(null);
       }
-
+      
       return item.historyCallInfo.pipe(
         retry({ count: Infinity })
       );
